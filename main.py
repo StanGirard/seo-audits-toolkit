@@ -127,14 +127,20 @@ def main(website, domain):
     #nx.draw(g, nodelist=d.keys(), node_size=[v * 20 for v in d.values()], with_labels=True,font_size=4)
     #(g, with_labels=True, font_size=4, nodelist=d.keys(), node_size=[20 * pow(v,1.2) for v in d.values()])
     #node_size=[20 * pow(v,1.01) for v in d.values()]
-    pos = nx.kamada_kawai_layout(g)
     
     
     #nx.draw(g, pos=pos, nodelist=d.keys(), node_size=[v * 20 for v in d.values()], font_size=4)
-    nx.draw(g, pos=pos, arrows=True,width=0.1,node_size=bigger_nodes)
 
-    nx.draw_networkx_labels(g, pos=pos, font_size=7)
-    plt.savefig(domain + '.png', dpi=2000)
+    #pos = nx.kamada_kawai_layout(g)
+    size = g.number_of_nodes()
+    print("SIZE")
+    print(size)
+    plt.figure(num=None, figsize=(30 * math.ceil(math.sqrt(size) / 8), 20 * math.ceil(math.sqrt(size)/ 8 )), dpi=100, facecolor='w', edgecolor='k')
+    pos = nx.nx_agraph.graphviz_layout(g)
+    nx.draw(g, pos=pos, arrows=True, width=0.1, node_size=1200, \
+    node_color='lightblue', linewidths=0.25, font_size=10, with_labels=True)
+    
+    plt.savefig(domain + '.png')
     plt.show()
     #print(find_all_urls_single_page(website,soup))
     #print_all_headers(headings)
@@ -142,4 +148,5 @@ def main(website, domain):
     #print_all_headers_count(headings)
 
 if __name__ == "__main__":
-    main("https://primates.dev", "primates.dev")
+    main("https://mosquitoraptor.com", "mosquitoraptor.com")
+    #main("https://primates.dev", "primates.dev")

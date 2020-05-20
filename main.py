@@ -15,7 +15,7 @@ from bokeh.models.graphs import NodesAndLinkedEdges, EdgesAndLinkedNodes
 from bokeh.layouts import gridplot
 import numpy as np
 import seaborn as sns
-palette = sns.cubehelix_palette(99)
+palette = sns.color_palette("hls", 99)
 pal_hex_lst = palette.as_hex()
 
 

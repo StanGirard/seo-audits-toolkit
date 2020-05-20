@@ -4,7 +4,7 @@ import math
 from bs4 import BeautifulSoup
 import urllib.parse
 import networkx as nx
-
+from operator import itemgetter
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -99,9 +99,7 @@ def add_edge(list_urls, url, domain):
 
                 if url_joined.startswith("https://" + domain) or url_joined.startswith("http://" + domain):
                     if url_joined not in list_urls[extract_path(url)] :
-                        #print("Going down in " + url_joined)
                         list_urls[extract_path(url)].append(extract_path(url_joined))
-                        #print(list_urls[extract_path(url)])
                         
                         add_edge(list_urls, url_joined, domain)
             return list_urls
@@ -109,48 +107,38 @@ def add_edge(list_urls, url, domain):
     return list_urls
     
     
-        
-
-
-def main(website, domain):
-    #soup = request_parse(website)
-    #headings = find_all_headings(soup)
-    print("Adding Edges")
-    urls = add_edge({}, website, domain)
+def generate_graph_internal_link(website):
+    domain = urllib.parse.urlparse(website).netloc
+    urls = add_edge({}, website,domain )
     
     g = nx.Graph(urls)
-    
-
-    #nx.draw(g, with_labels=True)
-    #nx.draw(g)
     d = dict(g.degree)
-    #nx.draw(g, nodelist=d.keys(), node_size=[v * 20 for v in d.values()], with_labels=True,font_size=4)
-    #(g, with_labels=True, font_size=4, nodelist=d.keys(), node_size=[20 * pow(v,1.2) for v in d.values()])
-    #node_size=[20 * pow(v,1.01) for v in d.values()]
-    
-    
-    #nx.draw(g, pos=pos, nodelist=d.keys(), node_size=[v * 20 for v in d.values()], font_size=4)
-
-    #pos = nx.kamada_kawai_layout(g)
     size = g.number_of_nodes()
-    print("SIZE")
-    print(size)
-    plt.figure(num=None, figsize=(30 * math.ceil(math.sqrt(size) / 8), 20 * math.ceil(math.sqrt(size)/ 8 )), dpi=100, facecolor='w', edgecolor='k')
-    #pos = nx.nx_agraph.graphviz_layout(g)
+    print(g.degree)
+    max_connection = max(d.values())
     
-    nodi_size = [((math.sqrt(v) / 6) * 2000) for v in d.values()]
+    colors = [i[1]/ max_connection for i in g.degree]
+
+
+    plt.figure(num=None, figsize=(30 * math.ceil(math.sqrt(size) / 8), 20 * math.ceil(math.sqrt(size)/ 8 )), dpi=100, facecolor='w', edgecolor='k')    
+    nodi_size = [((math.sqrt(v) / 6) * 3000) for v in d.values()]
     pos = nx.nx_agraph.graphviz_layout(g)
-    #print(nodi_size)
+    
     nx.draw(g, pos=pos, arrows=True, width=0.1, node_size=nodi_size, \
-    node_color='lightblue', linewidths=0.25, font_size=10, with_labels=True, scale = math.ceil(math.sqrt(g.number_of_nodes()) / 8))
+    node_color=colors, linewidths=0.25, font_size=10, with_labels=True, scale = math.ceil(math.sqrt(g.number_of_nodes()) / 8))
     
     plt.savefig(domain + '.png')
-    plt.show()
+    plt.show()        
+
+
+def main(website):
+    generate_graph_internal_link(website)
     #print(find_all_urls_single_page(website,soup))
     #print_all_headers(headings)
     #print_specific_header(headings, "h2")
     #print_all_headers_count(headings)
 
 if __name__ == "__main__":
-    #main("https://www.padok.fr", "www.padok.fr")
-    main("https://primates.dev", "primates.dev")
+    #main("https://www.padok.fr")
+    main("https://souslapluie.fr")
+    #main("https://primates.dev")

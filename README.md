@@ -1,1 +1,3 @@
 # SEOToolkit
+
+![](example.png)

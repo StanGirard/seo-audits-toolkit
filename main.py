@@ -9,10 +9,14 @@ import matplotlib.pyplot as plt
 from bokeh.io import output_file, show
 from bokeh.plotting import figure, from_networkx
 from bokeh.models import (BoxZoomTool, Circle, HoverTool,
-                          MultiLine, Plot, Range1d, ResetTool)
+                          MultiLine, Plot, Range1d, ResetTool, LinearColorMapper)
 from bokeh.palettes import Spectral4, Spectral8
 from bokeh.models.graphs import NodesAndLinkedEdges, EdgesAndLinkedNodes
 from bokeh.layouts import gridplot
+import numpy as np
+import seaborn as sns
+palette = sns.cubehelix_palette(99)
+pal_hex_lst = palette.as_hex()
 
 
 
@@ -141,6 +145,17 @@ def generate_graph_internal_link_interactive(website):
     urls = add_edge({}, website,domain )
     
     g = nx.Graph(urls)
+
+    d = dict(g.degree)
+    maxi = max(d.values())
+    node_size = {k:math.ceil(math.sqrt(int(v)) / 5) * 15 for k,v in d.items()}
+    node_color = {k:math.ceil((v / maxi) * 99 ) for k, v  in d.items()}
+    mapper = LinearColorMapper(palette=pal_hex_lst, low=0, high=99)
+    print(node_color)
+    #print(node_size)
+    nx.set_node_attributes(g, d, 'connection')
+    nx.set_node_attributes(g, node_size, "node_size")
+    nx.set_node_attributes(g, node_color, "node_color")
     
 
     
@@ -152,7 +167,7 @@ def generate_graph_internal_link_interactive(website):
     
     
     graph = from_networkx(g,nx.spring_layout, scale=2)
-    node_hover_tool = HoverTool(tooltips=[("index", "@index")])
+    node_hover_tool = HoverTool(tooltips=[("urls", "@index"), ("Connection", "@connection")])
     plot.add_tools(node_hover_tool, BoxZoomTool(), ResetTool())
     plot.toolbar.active_scroll = "auto"
 
@@ -160,22 +175,16 @@ def generate_graph_internal_link_interactive(website):
 
 
     
-    graph.node_renderer.hover_glyph = Circle(
-        size=20,
-        fill_color=Spectral4[1]
-    )
+    graph.node_renderer.hover_glyph = Circle(size=20,fill_color=Spectral4[1])
 
     
-    graph.edge_renderer.hover_glyph = MultiLine(
-        line_color=Spectral8[6],
-        line_width=1
-    )
+    graph.edge_renderer.hover_glyph = MultiLine(line_color=Spectral8[6],line_width=1)
 
     # graph.selection_policy = NodesAndLinkedEdges()
     # graph.inspection_policy = EdgesAndLinkedNodes()
 
     graph.edge_renderer.glyph = MultiLine( line_alpha=0.8, line_width=0.1)
-    graph.node_renderer.glyph = Circle(size=15, fill_color=Spectral4[0])
+    graph.node_renderer.glyph = Circle(size='node_size', fill_color={'field': 'node_color', 'transform': mapper})
 
     graph.inspection_policy = NodesAndLinkedEdges()
     
@@ -193,6 +202,6 @@ def main(website):
     #print_all_headers_count(headings)
 
 if __name__ == "__main__":
-    main("https://www.padok.fr")
+    #main("https://www.padok.fr")
     #main("https://souslapluie.fr")
-    #main("https://primates.dev")
+    main("https://primates.dev")

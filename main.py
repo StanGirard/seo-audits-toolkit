@@ -6,7 +6,13 @@ import urllib.parse
 import networkx as nx
 from operator import itemgetter
 import matplotlib.pyplot as plt
-import numpy as np
+from bokeh.io import output_file, show
+from bokeh.plotting import figure, from_networkx
+from bokeh.models import (BoxZoomTool, Circle, HoverTool,
+                          MultiLine, Plot, Range1d, ResetTool)
+from bokeh.palettes import Spectral4, Spectral8
+from bokeh.models.graphs import NodesAndLinkedEdges, EdgesAndLinkedNodes
+from bokeh.layouts import gridplot
 
 
 
@@ -130,15 +136,63 @@ def generate_graph_internal_link(website):
     plt.savefig(domain + '.png')
     plt.show()        
 
+def generate_graph_internal_link_interactive(website):
+    domain = urllib.parse.urlparse(website).netloc
+    urls = add_edge({}, website,domain )
+    
+    g = nx.Graph(urls)
+    
+
+    
+    plot = figure(title="Maillage Interne " + domain, plot_width=1200, plot_height=800,
+            x_range=Range1d(-1.1, 1.1), y_range=Range1d(-1.1, 1.1))
+    p = gridplot([[plot]], sizing_mode='stretch_both')
+
+
+    
+    
+    graph = from_networkx(g,nx.spring_layout, scale=2)
+    node_hover_tool = HoverTool(tooltips=[("index", "@index")])
+    plot.add_tools(node_hover_tool, BoxZoomTool(), ResetTool())
+    plot.toolbar.active_scroll = "auto"
+
+    
+
+
+    
+    graph.node_renderer.hover_glyph = Circle(
+        size=20,
+        fill_color=Spectral4[1]
+    )
+
+    
+    graph.edge_renderer.hover_glyph = MultiLine(
+        line_color=Spectral8[6],
+        line_width=1
+    )
+
+    # graph.selection_policy = NodesAndLinkedEdges()
+    # graph.inspection_policy = EdgesAndLinkedNodes()
+
+    graph.edge_renderer.glyph = MultiLine( line_alpha=0.8, line_width=0.1)
+    graph.node_renderer.glyph = Circle(size=15, fill_color=Spectral4[0])
+
+    graph.inspection_policy = NodesAndLinkedEdges()
+    
+    plot.renderers.append(graph)
+
+    output_file(domain + ".html")
+    show(p)
+   
 
 def main(website):
-    generate_graph_internal_link(website)
+    generate_graph_internal_link_interactive(website)
     #print(find_all_urls_single_page(website,soup))
     #print_all_headers(headings)
     #print_specific_header(headings, "h2")
     #print_all_headers_count(headings)
 
 if __name__ == "__main__":
-    #main("https://www.padok.fr")
-    main("https://souslapluie.fr")
+    main("https://www.padok.fr")
+    #main("https://souslapluie.fr")
     #main("https://primates.dev")

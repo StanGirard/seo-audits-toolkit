@@ -136,11 +136,13 @@ def main(website, domain):
     print("SIZE")
     print(size)
     plt.figure(num=None, figsize=(30 * math.ceil(math.sqrt(size) / 8), 20 * math.ceil(math.sqrt(size)/ 8 )), dpi=100, facecolor='w', edgecolor='k')
+    #pos = nx.nx_agraph.graphviz_layout(g)
+    
+    nodi_size = [((math.sqrt(v) / 6) * 2000) for v in d.values()]
     pos = nx.nx_agraph.graphviz_layout(g)
-    nodi_size = [((math.sqrt(v) / 8) * 2000) for v in d.values()]
     #print(nodi_size)
     nx.draw(g, pos=pos, arrows=True, width=0.1, node_size=nodi_size, \
-    node_color='lightblue', linewidths=0.25, font_size=10, with_labels=True)
+    node_color='lightblue', linewidths=0.25, font_size=10, with_labels=True, scale = math.ceil(math.sqrt(g.number_of_nodes()) / 8))
     
     plt.savefig(domain + '.png')
     plt.show()
@@ -150,5 +152,5 @@ def main(website, domain):
     #print_all_headers_count(headings)
 
 if __name__ == "__main__":
-    main("https://www.padok.fr", "www.padok.fr")
-    #main("https://primates.dev", "primates.dev")
+    #main("https://www.padok.fr", "www.padok.fr")
+    main("https://primates.dev", "primates.dev")

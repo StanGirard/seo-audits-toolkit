@@ -148,7 +148,7 @@ def generate_graph_internal_link_interactive(website):
 
     d = dict(g.degree)
     maxi = max(d.values())
-    node_size = {k:math.ceil(v/maxi) * 30 for k,v in d.items()}
+    node_size = {k:math.ceil(math.sqrt(int(v)) / 8) * 30 for k,v in d.items()}
     node_color = {k:math.ceil((v / maxi) * 99 ) for k, v  in d.items()}
     mapper = LinearColorMapper(palette=pal_hex_lst, low=0, high=99)
     #print(node_color)
@@ -202,6 +202,6 @@ def main(website):
     #print_all_headers_count(headings)
 
 if __name__ == "__main__":
-    #main("https://www.padok.fr")
+    main("https://www.padok.fr")
     #main("https://souslapluie.fr")
-    main("https://primates.dev")
+    #main("https://primates.dev")

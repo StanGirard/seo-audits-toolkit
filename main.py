@@ -148,10 +148,10 @@ def generate_graph_internal_link_interactive(website):
 
     d = dict(g.degree)
     maxi = max(d.values())
-    node_size = {k:math.ceil(math.sqrt(int(v)) / 5) * 15 for k,v in d.items()}
+    node_size = {k:math.ceil(v/maxi) * 30 for k,v in d.items()}
     node_color = {k:math.ceil((v / maxi) * 99 ) for k, v  in d.items()}
     mapper = LinearColorMapper(palette=pal_hex_lst, low=0, high=99)
-    print(node_color)
+    #print(node_color)
     #print(node_size)
     nx.set_node_attributes(g, d, 'connection')
     nx.set_node_attributes(g, node_size, "node_size")

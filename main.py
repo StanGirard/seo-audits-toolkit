@@ -9,10 +9,12 @@ import matplotlib.pyplot as plt
 from bokeh.io import output_file, show
 from bokeh.plotting import figure, from_networkx
 from bokeh.models import (BoxZoomTool, Circle, HoverTool,
-                          MultiLine, Plot, Range1d, ResetTool, LinearColorMapper)
-from bokeh.palettes import Spectral4, Spectral8
+                          MultiLine, Plot, Range1d, ResetTool, LinearColorMapper, ColorBar)
+from bokeh.models import ColumnDataSource, DataTable, DateFormatter, TableColumn
+from bokeh.transform import linear_cmap
+from bokeh.palettes import Spectral4, Spectral8, Spectral6
 from bokeh.models.graphs import NodesAndLinkedEdges, EdgesAndLinkedNodes
-from bokeh.layouts import gridplot
+from bokeh.layouts import gridplot, widgetbox, row
 import numpy as np
 import seaborn as sns
 palette = sns.color_palette("hls", 99)
@@ -147,12 +149,23 @@ def generate_graph_internal_link_interactive(website):
     g = nx.Graph(urls)
 
     d = dict(g.degree)
+
+    ## Adding table
+    table = dict(url=[k for k,v in d.items()], count=[v for k,v in d.items()])
+    print(table)
+    source = ColumnDataSource(table)
+    columns = [
+        TableColumn(field="url", title="URL"),
+        TableColumn(field="count", title="Count"),
+    ]
+    data_table = DataTable(source=source, columns=columns, width=400, height_policy="max")
+    
+
+
     maxi = max(d.values())
     node_size = {k:max(5,math.ceil((v / maxi) * 30)) for k,v in d.items()}
-    node_color = {k:math.ceil((v / maxi) * 99 ) for k, v  in d.items()}
-    mapper = LinearColorMapper(palette=pal_hex_lst, low=0, high=99)
-    #print(node_color)
-    #print(node_size)
+    node_color = {k:v for k, v  in d.items()}
+    mapper = linear_cmap(field_name='node_color', palette=Spectral6 ,low=min(node_color.values()) ,high=max(node_color.values()))
     nx.set_node_attributes(g, d, 'connection')
     nx.set_node_attributes(g, node_size, "node_size")
     nx.set_node_attributes(g, node_color, "node_color")
@@ -160,8 +173,9 @@ def generate_graph_internal_link_interactive(website):
 
     
     plot = figure(title="Maillage Interne " + domain, plot_width=1200, plot_height=800,
-            x_range=Range1d(-1.1, 1.1), y_range=Range1d(-1.1, 1.1))
-    p = gridplot([[plot]], sizing_mode='stretch_both')
+            x_range=Range1d(-1.1, 1.1), y_range=Range1d(-1.1, 1.1), sizing_mode='stretch_both')
+    p = row([data_table, plot])
+
 
 
     
@@ -172,36 +186,30 @@ def generate_graph_internal_link_interactive(website):
     plot.toolbar.active_scroll = "auto"
 
     
-
-
-    
     graph.node_renderer.hover_glyph = Circle(size=20,fill_color=Spectral4[1])
-
-    
     graph.edge_renderer.hover_glyph = MultiLine(line_color=Spectral8[6],line_width=1)
-
-    # graph.selection_policy = NodesAndLinkedEdges()
-    # graph.inspection_policy = EdgesAndLinkedNodes()
-
     graph.edge_renderer.glyph = MultiLine( line_alpha=0.8, line_width=0.03)
-    graph.node_renderer.glyph = Circle(size='node_size', fill_color={'field': 'node_color', 'transform': mapper})
+    graph.node_renderer.glyph = Circle(size='node_size', fill_color=mapper)
 
-    graph.inspection_policy = NodesAndLinkedEdges()
     
+    
+    
+    graph.inspection_policy = NodesAndLinkedEdges()
+    color_bar = ColorBar(color_mapper=mapper['transform'], width=8,  location=(0,0))
+    plot.add_layout(color_bar, 'right')
     plot.renderers.append(graph)
-
-    output_file(domain + ".html")
+    #p = row([data_table, plot])
+    output_file("results/" + domain + ".html")
     show(p)
-   
+  
 
-def main(website):
-    generate_graph_internal_link_interactive(website)
+
+if __name__ == "__main__":
     #print(find_all_urls_single_page(website,soup))
     #print_all_headers(headings)
     #print_specific_header(headings, "h2")
     #print_all_headers_count(headings)
 
-if __name__ == "__main__":
-    main("https://www.padok.fr")
-    #main("https://souslapluie.fr")
-    #main("https://primates.dev")
+    #generate_graph_internal_link_interactive("https://www.padok.fr")
+    #generate_graph_internal_link_interactive("https://souslapluie.fr")
+    generate_graph_internal_link_interactive("https://primates.dev")

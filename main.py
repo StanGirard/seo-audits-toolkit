@@ -148,7 +148,7 @@ def generate_graph_internal_link_interactive(website):
 
     d = dict(g.degree)
     maxi = max(d.values())
-    node_size = {k:math.ceil(math.sqrt(int(v)) / 8) * 15 for k,v in d.items()}
+    node_size = {k:max(5,math.ceil((v / maxi) * 30)) for k,v in d.items()}
     node_color = {k:math.ceil((v / maxi) * 99 ) for k, v  in d.items()}
     mapper = LinearColorMapper(palette=pal_hex_lst, low=0, high=99)
     #print(node_color)
@@ -183,7 +183,7 @@ def generate_graph_internal_link_interactive(website):
     # graph.selection_policy = NodesAndLinkedEdges()
     # graph.inspection_policy = EdgesAndLinkedNodes()
 
-    graph.edge_renderer.glyph = MultiLine( line_alpha=0.8, line_width=0.1)
+    graph.edge_renderer.glyph = MultiLine( line_alpha=0.8, line_width=0.03)
     graph.node_renderer.glyph = Circle(size='node_size', fill_color={'field': 'node_color', 'transform': mapper})
 
     graph.inspection_policy = NodesAndLinkedEdges()

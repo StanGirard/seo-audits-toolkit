@@ -205,7 +205,7 @@ def interactive_graph():
             return render_template("bokeh.html", script=script, div=div, domain=domain, template="Flask" ,time=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"))
         else:
             print("STOPPED: " + str(stopped))
-            return "JOB IS ALREADY RUNNING. PLEASE WAIT AND REFRESH"
+            return "JOB IS ALREADY RUNNING. PLEASE WAIT AND REFRESH."
     conn.close()
         
 

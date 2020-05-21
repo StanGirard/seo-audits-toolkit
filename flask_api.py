@@ -169,7 +169,7 @@ def check_status_url(conn,urls, status):
         return True, False
 
 
-@app.route('/api/graph')
+@app.route('/')
 def interactive_graph():
     conn = create_connection("visited.db")
     with conn:

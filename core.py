@@ -162,7 +162,9 @@ def generate_graph_internal_link_interactive(website):
     
 
     #Generating node size and color
-    maxi = max(d.values()) + 1
+    maxi = 1
+    if len(d.values()) > 0:
+        maxi = max(d.values())
     node_size = {k:max(5,math.ceil((v / maxi) * 30)) for k,v in d.items()}
     node_color = {k:v for k, v  in d.items()}
     mapper = linear_cmap(field_name='node_color', palette=Spectral6 ,low=min(node_color.values()) ,high=max(node_color.values()))
@@ -221,7 +223,9 @@ def generate_graph_internal_link_interactive_api(website):
     
 
     #Generating node size and color
-    maxi = max(d.values()) + 1
+    maxi = 1
+    if len(d.values()) > 0:
+        maxi = max(d.values())
     node_size = {k:max(5,math.ceil((v / maxi) * 30)) for k,v in d.items()}
     node_color = {k:v for k, v  in d.items()}
     mapper = linear_cmap(field_name='node_color', palette=Spectral6 ,low=min(node_color.values()) ,high=max(node_color.values()))

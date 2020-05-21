@@ -8,4 +8,4 @@ if __name__ == "__main__":
 
     #generate_graph_internal_link_interactive("https://www.padok.fr")
     #generate_graph_internal_link_interactive("https://souslapluie.fr")
-    generate_graph_internal_link_interactive("https://primates.dev")
+    generate_graph_internal_link_interactive("https://www.trustedin.co")

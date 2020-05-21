@@ -146,8 +146,8 @@ def generate_graph_internal_link_interactive(website):
     domain = urllib.parse.urlparse(website).netloc
     urls = add_edge({}, website,domain )
     
+    ## Generating graph and dict of degrees
     g = nx.Graph(urls)
-
     d = dict(g.degree)
 
     ## Adding table
@@ -161,7 +161,7 @@ def generate_graph_internal_link_interactive(website):
     data_table = DataTable(source=source, columns=columns, width=400, height_policy="max")
     
 
-
+    #Generating node size and color
     maxi = max(d.values())
     node_size = {k:max(5,math.ceil((v / maxi) * 30)) for k,v in d.items()}
     node_color = {k:v for k, v  in d.items()}
@@ -198,7 +198,6 @@ def generate_graph_internal_link_interactive(website):
     color_bar = ColorBar(color_mapper=mapper['transform'], width=8,  location=(0,0))
     plot.add_layout(color_bar, 'right')
     plot.renderers.append(graph)
-    #p = row([data_table, plot])
     output_file("results/" + domain + ".html")
     show(p)
   

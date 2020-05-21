@@ -46,7 +46,7 @@ def insert_url_db(conn, result):
     cur = conn.cursor()
     print(result)
     cur.execute(sql, result)
-    con.commit()
+    conn.commit()
 
 def insert_running_db(conn, result):
     """
@@ -161,6 +161,9 @@ def check_status_url(conn,urls, status):
             print(urls[0][2])
             return True, True
         else:
+            print("HEHEHEHEHEHE")
+            print(urls[0][2])
+            print(status)
             return False, True
     else: 
         return True, False
@@ -183,23 +186,29 @@ def interactive_graph():
                 insert_running_db(conn, (urls, "RUNNING"))
 
             already_visited = select_visited(conn, urls)
-            if len(already_visited) == 1 and datetime.strptime(already_visited[0][2], '%m/%d/%Y, %H:%M:%S') + timedelta(hours = 5) > datetime.now() and relaunch != "True":
+            if len(already_visited) == 1 and datetime.strptime(already_visited[0][2], '%m/%d/%Y, %H:%M:%S') + timedelta(hours = 24) > datetime.now() and relaunch != "True":
                 print("ALREADY VISITED IN THE LAST 5 HOURS")
                 update_running_db(conn, ("STOPPED", urls))
+         
                 return render_template("bokeh.html", script=already_visited[0][3], div=already_visited[0][4], domain=urllib.parse.urlparse(already_visited[0][1]).netloc, template="Flask", time=datetime.strptime(already_visited[0][2], '%m/%d/%Y, %H:%M:%S'))
             plot, domain = generate_graph_internal_link_interactive_api(urls)
             script, div = components(plot)
 
-            if len(already_visited) == 1 and (datetime.strptime(already_visited[0][2], '%m/%d/%Y, %H:%M:%S') + timedelta(hours = 5) < datetime.now() or relaunch == "True") :
+            if len(already_visited) == 1 and (datetime.strptime(already_visited[0][2], '%m/%d/%Y, %H:%M:%S') + timedelta(hours = 24) < datetime.now() or relaunch == "True") :
                 print("ALREADY REGISTERED BUT UPDATING")
                 update_url_db(conn,(datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), script, div, urls))
             else:
                 print("FIRST TIME")
                 insert_url_db(conn,(urls, datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), script, div))
             update_running_db(conn, ("STOPPED", urls))
+            
             return render_template("bokeh.html", script=script, div=div, domain=domain, template="Flask" ,time=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"))
         else:
+            print("STOPPED: " + str(stopped))
             return "JOB IS ALREADY RUNNING. PLEASE WAIT AND REFRESH"
+    conn.close()
+        
+
 if __name__ == '__main__':
 
     conn = create_connection("visited.db")

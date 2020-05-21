@@ -212,7 +212,6 @@ def generate_graph_internal_link_interactive_api(website):
 
     ## Adding table
     table = dict(url=[k for k,v in d.items()], count=[v for k,v in d.items()])
-    print(table)
     source = ColumnDataSource(table)
     columns = [
         TableColumn(field="url", title="URL"),

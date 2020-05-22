@@ -1,6 +1,5 @@
 import sqlite3
 
-
 sql_create_projects_table = """ CREATE TABLE IF NOT EXISTS visited (
                                         id integer PRIMARY KEY,
                                         urls text NOT NULL,
@@ -32,6 +31,7 @@ def create_table(conn, create_table_sql):
 
 
 def insert_url_db(conn, result):
+
     sql = ''' INSERT INTO visited(urls,begin_date,script,div)
               VALUES(?,?,?,?) '''
     cur = conn.cursor()

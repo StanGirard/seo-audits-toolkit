@@ -97,8 +97,7 @@ def extract_path(url):
         return "/"
 
 def add_edge(list_urls, url, domain, maximum=500):
-    # print("Lenght:" + str(len(list_urls)))
-    # print(maximum)
+    
     if len(list_urls) > maximum:
         return list_urls
     if domain not in url:
@@ -146,69 +145,8 @@ def generate_graph_internal_link(website):
     plt.savefig(domain + '.png')
     plt.show()        
 
-def generate_graph_internal_link_interactive(website):
-    domain = urllib.parse.urlparse(website).netloc
-    urls = add_edge({}, website,domain )
-    
-    ## Generating graph and dict of degrees
-    g = nx.Graph(urls)
-    d = dict(g.degree)
 
-    ## Adding table
-    table = dict(url=[k for k,v in d.items()], count=[v for k,v in d.items()])
-    print(table)
-    source = ColumnDataSource(table)
-    columns = [
-        TableColumn(field="url", title="URL"),
-        TableColumn(field="count", title="Count"),
-    ]
-    data_table = DataTable(source=source, columns=columns, width=400, height_policy="max")
-    
-
-    #Generating node size and color
-    maxi = 1
-    if len(d.values()) > 0:
-        maxi = max(d.values())
-    node_size = {k:max(5,math.ceil((v / maxi) * 30)) for k,v in d.items()}
-    node_color = {k:v for k, v  in d.items()}
-    mapper = linear_cmap(field_name='node_color', palette=Spectral6 ,low=min(node_color.values()) ,high=max(node_color.values()))
-    nx.set_node_attributes(g, d, 'connection')
-    nx.set_node_attributes(g, node_size, "node_size")
-    nx.set_node_attributes(g, node_color, "node_color")
-    
-
-    
-    plot = figure(title="Maillage Interne " + domain, plot_width=1200, plot_height=800,
-            x_range=Range1d(-1.1, 1.1), y_range=Range1d(-1.1, 1.1), sizing_mode='stretch_both')
-    p = row([data_table, plot])
-
-
-
-    
-    
-    graph = from_networkx(g,nx.spring_layout, scale=2)
-    node_hover_tool = HoverTool(tooltips=[("urls", "@index"), ("Connection", "@connection")])
-    plot.add_tools(node_hover_tool, BoxZoomTool(), ResetTool())
-    plot.toolbar.active_scroll = "auto"
-
-    
-    graph.node_renderer.hover_glyph = Circle(size=20,fill_color=Spectral4[1])
-    graph.edge_renderer.hover_glyph = MultiLine(line_color=Spectral8[6],line_width=1)
-    graph.edge_renderer.glyph = MultiLine( line_alpha=0.8, line_width=0.03)
-    graph.node_renderer.glyph = Circle(size='node_size', fill_color=mapper)
-
-    
-    
-    
-    graph.inspection_policy = NodesAndLinkedEdges()
-    color_bar = ColorBar(color_mapper=mapper['transform'], width=8,  location=(0,0))
-    plot.add_layout(color_bar, 'right')
-    plot.renderers.append(graph)
-    output_file("results/" + domain + ".html")
-    show(p)
-    return p
-
-def generate_graph_internal_link_interactive_api(website, maximum):
+def generate_graph_internal_link_interactive(website, maximum):
     domain = urllib.parse.urlparse(website).netloc
     urls = add_edge({}, website,domain, maximum )
     

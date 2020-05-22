@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, request, render_template
 app = Flask(__name__)
-from seo.core import generate_graph_internal_link_interactive_api
+from seo.core import generate_graph_internal_link_interactive
 from bokeh.embed import components
 from seo import db, core
 from datetime import datetime, timedelta
@@ -12,7 +12,7 @@ def initialize_db(conn):
     db.update_running_db_stopped(conn)
 
 def update_or_insert_graph_in_db(conn,urls, maximum, update=False):
-    plot, domain = generate_graph_internal_link_interactive_api(urls, maximum)
+    plot, domain = generate_graph_internal_link_interactive(urls, maximum)
     script, div = components(plot)
     if update:
         db.update_url_db(conn,(datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), script, div, urls))

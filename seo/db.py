@@ -40,7 +40,6 @@ def insert_url_db(conn, result):
     sql = ''' INSERT INTO visited(urls,begin_date,script,div)
               VALUES(?,?,?,?) '''
     cur = conn.cursor()
-    print(result)
     cur.execute(sql, result)
     conn.commit()
 
@@ -54,7 +53,6 @@ def insert_running_db(conn, result):
     sql = ''' INSERT INTO running(urls,status_job)
               VALUES(?,?) '''
     cur = conn.cursor()
-    print(result)
     cur.execute(sql, result)
     conn.commit()
 
@@ -153,11 +151,8 @@ def check_status_url(conn,urls, status):
     urls = select_running(conn,urls)
     if len(urls) != 0:
         if urls[0][2] == status:
-            print(urls[0][2])
             return True, True
         else:
-            print(urls[0][2])
-            print(status)
             return False, True
     else: 
         return True, False

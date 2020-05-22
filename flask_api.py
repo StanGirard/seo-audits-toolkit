@@ -11,8 +11,10 @@ def initialize_db(conn):
     db.create_table(conn, db.sql_create_running_table)
     db.update_running_db_stopped(conn)
 
-def update_or_insert_graph_in_db(conn,urls, update=False):
-    plot, domain = generate_graph_internal_link_interactive_api(urls)
+def update_or_insert_graph_in_db(conn,urls, maximum, update=False):
+    print("MAXIMUM")
+    print(maximum)
+    plot, domain = generate_graph_internal_link_interactive_api(urls, maximum)
     script, div = components(plot)
     if update:
         db.update_url_db(conn,(datetime.now().strftime("%m/%d/%Y, %H:%M:%S"), script, div, urls))
@@ -32,9 +34,14 @@ def update_running_status(conn, urls, status="STOPPED", already_exists=True):
 
 
 
-def generate_interactive_graph(conn, urls, relaunch):
+def generate_interactive_graph(conn, urls, relaunch, maxi_urls):
     if urls is None:
             return "Empty Url paramaters"
+    maximum_urls = 500
+    if maxi_urls is not None:
+        print(maxi_urls)
+        print("HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHA")
+        maximum_urls = int(maxi_urls)
     stopped, already_exists = db.check_status_url(conn,urls, "STOPPED")
     if stopped == True:
 
@@ -53,11 +60,11 @@ def generate_interactive_graph(conn, urls, relaunch):
             
             # More than 24 hours or parameter redo is True
             if (datetime.strptime(already_visited[0][2], '%m/%d/%Y, %H:%M:%S') + timedelta(hours = 24) < datetime.now() or relaunch == "True") :
-                return update_or_insert_graph_in_db(conn,urls, True)
+                return update_or_insert_graph_in_db(conn,urls,  maximum_urls, True)
 
         # If first time
         else:
-            return update_or_insert_graph_in_db(conn,urls)
+            return update_or_insert_graph_in_db(conn,urls,maximum_urls)
     else:
         return "JOB IS ALREADY RUNNING. PLEASE WAIT AND REFRESH."
 
@@ -68,7 +75,8 @@ def interactive_graph():
     with conn:
         urls = request.args.get('url') #if key doesn't exist, returns None
         relaunch = request.args.get('redo')
-        return generate_interactive_graph(conn, urls, relaunch)
+        maxi_urls = request.args.get('max')
+        return generate_interactive_graph(conn, urls, relaunch, maxi_urls)
     conn.close()
         
 

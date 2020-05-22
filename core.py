@@ -96,7 +96,12 @@ def extract_path(url):
     except:
         return "/"
 
-def add_edge(list_urls, url, domain):
+def add_edge(list_urls, url, domain, maximum=500):
+    # print("Lenght:" + str(len(list_urls)))
+    # print(maximum)
+    if len(list_urls) > maximum:
+        print("MAX")
+        return list_urls
     if domain not in url:
         print(url + " not in domain")
         return
@@ -113,7 +118,7 @@ def add_edge(list_urls, url, domain):
                     if url_joined not in list_urls[extract_path(url)] :
                         list_urls[extract_path(url)].append(extract_path(url_joined))
                         
-                        add_edge(list_urls, url_joined, domain)
+                        add_edge(list_urls, url_joined, domain, maximum)
             return list_urls
         
     return list_urls
@@ -121,7 +126,7 @@ def add_edge(list_urls, url, domain):
     
 def generate_graph_internal_link(website):
     domain = urllib.parse.urlparse(website).netloc
-    urls = add_edge({}, website,domain )
+    urls = add_edge({}, website,domain)
     
     g = nx.Graph(urls)
     d = dict(g.degree)
@@ -204,9 +209,9 @@ def generate_graph_internal_link_interactive(website):
     show(p)
     return p
 
-def generate_graph_internal_link_interactive_api(website):
+def generate_graph_internal_link_interactive_api(website, maximum):
     domain = urllib.parse.urlparse(website).netloc
-    urls = add_edge({}, website,domain )
+    urls = add_edge({}, website,domain, maximum )
     
     ## Generating graph and dict of degrees
     g = nx.Graph(urls)

@@ -1,6 +1,6 @@
 # SEOToolkit
 
-![](example.png)
+![](examples/example.png)
 
 ## Installation
 

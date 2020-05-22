@@ -1,21 +1,19 @@
 import requests
-import re
 import math
 from bs4 import BeautifulSoup
 import urllib.parse
 import networkx as nx
-from operator import itemgetter
 import matplotlib.pyplot as plt
-from bokeh.io import output_file, show
+from bokeh.io import show
 from bokeh.plotting import figure, from_networkx
 from bokeh.models import (BoxZoomTool, Circle, HoverTool,
-                          MultiLine, Plot, Range1d, ResetTool, LinearColorMapper, ColorBar)
-from bokeh.models import ColumnDataSource, DataTable, DateFormatter, TableColumn
+                          MultiLine,  Range1d, ResetTool, LinearColorMapper, ColorBar,
+                          ColumnDataSource, DataTable, TableColumn)
 from bokeh.transform import linear_cmap
 from bokeh.palettes import Spectral4, Spectral8, Spectral6
-from bokeh.models.graphs import NodesAndLinkedEdges, EdgesAndLinkedNodes
-from bokeh.layouts import gridplot, widgetbox, row
-import numpy as np
+from bokeh.models.graphs import NodesAndLinkedEdges
+from bokeh.layouts import row
+
 import seaborn as sns
 palette = sns.color_palette("hls", 99)
 pal_hex_lst = palette.as_hex()

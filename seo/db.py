@@ -1,7 +1,5 @@
 import sqlite3
-import urllib.parse
 
-from datetime import datetime, timedelta
 
 sql_create_projects_table = """ CREATE TABLE IF NOT EXISTS visited (
                                         id integer PRIMARY KEY,
@@ -19,10 +17,11 @@ sql_create_running_table = """ CREATE TABLE IF NOT EXISTS running (
                                     ); """
 
 def create_table(conn, create_table_sql):
-    """ create a table from the create_table_sql statement
-    :param conn: Connection object
-    :param create_table_sql: a CREATE TABLE statement
-    :return:
+    """Create a table in the database
+
+    Arguments:
+        conn {Connection} -- Connection to the db
+        create_table_sql {String} -- Create script for the table
     """
     try:
         c = conn.cursor()
@@ -31,12 +30,6 @@ def create_table(conn, create_table_sql):
         print(e)
 
 def insert_url_db(conn, result):
-    """
-    Create a new project into the projects table
-    :param conn:
-    :param project:
-    :return: project id
-    """
     sql = ''' INSERT INTO visited(urls,begin_date,script,div)
               VALUES(?,?,?,?) '''
     cur = conn.cursor()
@@ -44,12 +37,6 @@ def insert_url_db(conn, result):
     conn.commit()
 
 def insert_running_db(conn, result):
-    """
-    Create a new project into the projects table
-    :param conn:
-    :param project:
-    :return: project id
-    """
     sql = ''' INSERT INTO running(urls,status_job)
               VALUES(?,?) '''
     cur = conn.cursor()
@@ -57,12 +44,6 @@ def insert_running_db(conn, result):
     conn.commit()
 
 def update_url_db(conn, task):
-    """
-    update priority, begin_date, and end date of a task
-    :param conn:
-    :param task:
-    :return: project id
-    """
     sql = ''' UPDATE visited
               SET
                   begin_date = ? ,
@@ -74,12 +55,6 @@ def update_url_db(conn, task):
     conn.commit()
 
 def update_running_db(conn, task):
-    """
-    update priority, begin_date, and end date of a task
-    :param conn:
-    :param task:
-    :return: project id
-    """
     sql = ''' UPDATE running
               SET
                   status_job = ?
@@ -90,12 +65,6 @@ def update_running_db(conn, task):
 
 def update_running_db_stopped(conn):
     task = ["STOPPED"]
-    """
-    update priority, begin_date, and end date of a task
-    :param conn:
-    :param task:
-    :return: project id
-    """
     sql = ''' UPDATE running
               SET
                   status_job = ? '''
@@ -105,12 +74,6 @@ def update_running_db_stopped(conn):
     conn.commit()
 
 def select_visited(conn, urls):
-    """
-    Query tasks by priority
-    :param conn: the Connection object
-    :param priority:
-    :return:
-    """
     cur = conn.cursor()
     cur.execute("SELECT * FROM visited WHERE urls=?", (urls,))
 
@@ -119,12 +82,6 @@ def select_visited(conn, urls):
     return row
 
 def select_running(conn, urls):
-    """
-    Query tasks by priority
-    :param conn: the Connection object
-    :param priority:
-    :return:
-    """
     cur = conn.cursor()
     cur.execute("SELECT * FROM running WHERE urls=?", (urls,))
 
@@ -133,11 +90,7 @@ def select_running(conn, urls):
     return row
 
 def create_connection(db_file):
-    """ create a database connection to the SQLite database
-        specified by db_file
-    :param db_file: database file
-    :return: Connection object or None
-    """
+
     conn = None
     try:
         conn = sqlite3.connect(db_file)

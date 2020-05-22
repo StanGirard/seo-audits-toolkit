@@ -6,7 +6,6 @@
 
 You need **Python3**
 
-
 ```Bash
 git clone https://github.com/StanGirard/SEOToolkit
 cd SEOToolkit
@@ -29,8 +28,8 @@ This will expose one endpoint:
 
 ### Parameters
 
-- `/api/graph?url=https://primates.dev` will crawl the website and respond with the graph as html
-- `/api/graph?url=https://primates.dev&redo=True` will force the crawling. Doesn't crawl if less than 24 hours
-- `/api/graph?url=https://primates.dev&max=10` stops after visiting 10 pages. (Default=500)
+-  `/api/graph?url=https://primates.dev` will crawl the website and respond with the graph as html
+-  `/api/graph?url=https://primates.dev&redo=True` will force the crawling. Doesn't crawl if less than 24 hours
+-  `/api/graph?url=https://primates.dev&max=10` stops after visiting 10 pages. (Default=500)
 
 Have fun ! 

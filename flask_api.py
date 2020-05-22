@@ -6,6 +6,7 @@ from seo.core import generate_graph_internal_link_interactive
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
+
 def initialize_db(conn):
     db.create_table(conn, db.sql_create_projects_table)
     db.create_table(conn, db.sql_create_running_table)

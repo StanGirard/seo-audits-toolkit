@@ -16,6 +16,7 @@ sql_create_running_table = """ CREATE TABLE IF NOT EXISTS running (
                                         
                                     ); """
 
+
 def create_table(conn, create_table_sql):
     """Create a table in the database
 
@@ -29,6 +30,7 @@ def create_table(conn, create_table_sql):
     except sqlite3.Error as e:
         print(e)
 
+
 def insert_url_db(conn, result):
     sql = ''' INSERT INTO visited(urls,begin_date,script,div)
               VALUES(?,?,?,?) '''
@@ -36,12 +38,14 @@ def insert_url_db(conn, result):
     cur.execute(sql, result)
     conn.commit()
 
+
 def insert_running_db(conn, result):
     sql = ''' INSERT INTO running(urls,status_job)
               VALUES(?,?) '''
     cur = conn.cursor()
     cur.execute(sql, result)
     conn.commit()
+
 
 def update_url_db(conn, task):
     sql = ''' UPDATE visited
@@ -54,6 +58,7 @@ def update_url_db(conn, task):
     cur.execute(sql, task)
     conn.commit()
 
+
 def update_running_db(conn, task):
     sql = ''' UPDATE running
               SET
@@ -63,15 +68,17 @@ def update_running_db(conn, task):
     cur.execute(sql, task)
     conn.commit()
 
+
 def update_running_db_stopped(conn):
     task = ["STOPPED"]
     sql = ''' UPDATE running
               SET
                   status_job = ? '''
-              
+
     cur = conn.cursor()
     cur.execute(sql, task)
     conn.commit()
+
 
 def select_visited(conn, urls):
     cur = conn.cursor()
@@ -81,6 +88,7 @@ def select_visited(conn, urls):
 
     return row
 
+
 def select_running(conn, urls):
     cur = conn.cursor()
     cur.execute("SELECT * FROM running WHERE urls=?", (urls,))
@@ -88,6 +96,7 @@ def select_running(conn, urls):
     row = cur.fetchall()
 
     return row
+
 
 def create_connection(db_file):
 
@@ -100,12 +109,13 @@ def create_connection(db_file):
 
     return conn
 
-def check_status_url(conn,urls, status):
-    urls = select_running(conn,urls)
+
+def check_status_url(conn, urls, status):
+    urls = select_running(conn, urls)
     if len(urls) != 0:
         if urls[0][2] == status:
             return True, True
         else:
             return False, True
-    else: 
+    else:
         return True, False

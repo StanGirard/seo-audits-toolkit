@@ -100,7 +100,6 @@ def add_edge(list_urls, url, domain, maximum=500):
     # print("Lenght:" + str(len(list_urls)))
     # print(maximum)
     if len(list_urls) > maximum:
-        print("MAX")
         return list_urls
     if domain not in url:
         print(url + " not in domain")

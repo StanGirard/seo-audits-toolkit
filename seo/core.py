@@ -13,7 +13,6 @@ from bokeh.transform import linear_cmap
 from bokeh.palettes import Spectral4, Spectral8, Spectral6
 from bokeh.models.graphs import NodesAndLinkedEdges
 from bokeh.layouts import row
-
 import seaborn as sns
 palette = sns.color_palette("hls", 99)
 pal_hex_lst = palette.as_hex()

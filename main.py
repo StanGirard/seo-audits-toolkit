@@ -1,4 +1,4 @@
-from core import generate_graph_internal_link_interactive 
+from seo.core import generate_graph_internal_link_interactive 
 
 if __name__ == "__main__":
     #print(find_all_urls_single_page(website,soup))

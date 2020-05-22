@@ -1,8 +1,8 @@
 from flask import Flask, render_template, jsonify, request, render_template
 app = Flask(__name__)
-from core import generate_graph_internal_link_interactive_api
+from seo.core import generate_graph_internal_link_interactive_api
 from bokeh.embed import components
-import db
+from seo import db, core
 from datetime import datetime, timedelta
 import urllib.parse
 
@@ -12,8 +12,6 @@ def initialize_db(conn):
     db.update_running_db_stopped(conn)
 
 def update_or_insert_graph_in_db(conn,urls, maximum, update=False):
-    print("MAXIMUM")
-    print(maximum)
     plot, domain = generate_graph_internal_link_interactive_api(urls, maximum)
     script, div = components(plot)
     if update:

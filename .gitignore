@@ -1,4 +1,4 @@
-./visited.db
+visited.db
 *.pyc
 *.db
 main.html

@@ -32,4 +32,9 @@ This will expose one endpoint:
 -  `/api/graph?url=https://primates.dev&redo=True` will force the crawling. Doesn't crawl if less than 24 hours
 -  `/api/graph?url=https://primates.dev&max=10` stops after visiting 10 pages. (Default=500)
 
+## TODO
+
+- [ ] Not downloading images when they are linked
+- [ ] Async requests
+
 Have fun ! 

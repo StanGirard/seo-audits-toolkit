@@ -36,5 +36,6 @@ This will expose one endpoint:
 
 - [ ] Not downloading images when they are linked
 - [ ] Async requests
+- [ ] Implement Scrapy for better perf
 
 Have fun ! 

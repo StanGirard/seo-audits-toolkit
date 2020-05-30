@@ -27,6 +27,16 @@ def update_or_insert_graph_in_db(conn, urls, maximum, update=False):
 
 
 def update_running_status(conn, urls, status="STOPPED", already_exists=True):
+    """Updates the status of the crawl
+
+    Arguments:
+        conn {Connection} -- DB Connection
+        urls {string} -- Root url for crawling
+
+    Keyword Arguments:
+        status {str} -- Status string (default: {"STOPPED"})
+        already_exists {bool} -- Is the url already in the database (default: {True})
+    """
     if status == "RUNNING":
         if already_exists:
             db.update_running_db(conn, ("RUNNING", urls))
@@ -41,8 +51,6 @@ def generate_interactive_graph(conn, urls, relaunch, maxi_urls):
         return "Empty Url paramaters"
     maximum_urls = 500
     if maxi_urls is not None:
-        print(maxi_urls)
-        print("HAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHA")
         maximum_urls = int(maxi_urls)
     stopped, already_exists = db.check_status_url(conn, urls, "STOPPED")
     if stopped == True:

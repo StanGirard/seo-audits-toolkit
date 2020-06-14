@@ -2,6 +2,7 @@
 
 ![](examples/example.png)
 
+This seo toolkit is a collection of multiple toos to help you in SEO improvement. It is an easy to use API.
 ## Installation
 
 You need **Python3**

@@ -2,7 +2,7 @@ import urllib.parse
 from datetime import datetime, timedelta
 from seo import db
 from bokeh.embed import components
-from seo.core import generate_graph_internal_link_interactive
+from seo.core import generate_graph_internal_link_interactive, find_all_headers_url
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
@@ -97,7 +97,7 @@ def generate_interactive_graph(conn, urls, relaunch, maxi_urls):
         return "JOB IS ALREADY RUNNING. PLEASE WAIT AND REFRESH."
 
 
-@app.route('/')
+@app.route('/api/graph')
 def interactive_graph():
     conn = db.create_connection("visited.db")
     with conn:
@@ -106,6 +106,15 @@ def interactive_graph():
         maxi_urls = request.args.get('max')
         return generate_interactive_graph(conn, urls, relaunch, maxi_urls)
     conn.close()
+
+@app.route('/api/headers')
+def find_headers():
+    value = request.args.get('url')
+    if value:
+        return find_all_headers_url(value)
+    else:
+        return "Please input a valid value like this: /api/headers?url='https://primates.dev'"
+
 
 
 if __name__ == '__main__':

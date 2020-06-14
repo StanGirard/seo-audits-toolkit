@@ -43,13 +43,21 @@ def check_internal(website, url):
 
 
 def find_all_headings(soup):
-    headings = {"h1": {"count": 0, "header": []}, "h2": {"count": 0, "header": []},
-                "h3": {"count": 0, "header": []}, "h4": {"count": 0, "header": []},
-                "h5": {"count": 0, "header": []}, "h6": {"count": 0, "header": []}}
+    headings = {"h1": {"count": 0, "values": []}, "h2": {"count": 0, "values": []},
+                "h3": {"count": 0, "values": []}, "h4": {"count": 0, "values": []},
+                "h5": {"count": 0, "values": []}, "h6": {"count": 0, "values": []}}
     for heading in soup.find_all(["h1", "h2", "h3", "h4", "h5", "h6"]):
-        headings[heading.name]["header"].append(heading.text.strip())
+        headings[heading.name]["values"].append(heading.text.strip())
         headings[heading.name]["count"] += 1
     return headings
+
+def find_all_headers_url(url):
+    soup = request_parse(url)
+    if soup:
+        return find_all_headings(soup)
+    else:
+        return {"Error": "No headers found or error in the url"}
+
 
 
 def print_all_headers(headers_list):

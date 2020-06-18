@@ -1,10 +1,15 @@
 from googlesearch import search
 import logging
 
-def rank(domain, query):
+def rank(domain, query, lang = 'en', tld = 'com'):
     my_results_list = []
-    print(domain)
-    print(query)
+    lang = lang
+    tld = tld
+    if lang is None:
+        lang = 'en'
+    if tld is None:
+        tld = 'com' 
+
     for i in search(query,        # The query you want to run
                     tld = 'com',  # The top level domain
                     lang = 'en',  # The language

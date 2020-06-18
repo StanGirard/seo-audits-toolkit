@@ -124,10 +124,13 @@ def find_headers():
 def find_rank_query():
     query = request.args.get('query')
     domain = request.args.get('domain')
+    tld = request.args.get('tld')
+    lang = request.args.get('lang')
+    print (lang)
     if query and domain:
-        return rank(domain,query)
+        return rank(domain,query, lang=lang, tld=tld)
     else:
-        return 'Please input a valid value like this: /api/serp?domain=primates.dev&query=parse api xml response'
+        return 'Please input a valid value like this: /api/serp?domain=primates.dev&query=parse api xml response&tld=com&lang=en'
 
 
 

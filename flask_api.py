@@ -4,6 +4,7 @@ from seo import db
 from bokeh.embed import components
 from seo.core import generate_graph_internal_link_interactive, find_all_headers_url
 from seo.rank import rank
+from analysis.keywords import generate_results
 from flask import Flask, render_template, request
 import logging
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.DEBUG, datefmt='%m/%d/%Y %I:%M:%S %p')
@@ -131,6 +132,13 @@ def find_rank_query():
         return rank(domain,query, lang=lang, tld=tld)
     else:
         return 'Please input a valid value like this: /api/serp?domain=primates.dev&query=parse api xml response&tld=com&lang=en'
+@app.route('/api/analysis/keywords')
+def find_keywords_query():
+    query = request.args.get('query')
+    if query:
+        return generate_results(query)
+    else:
+        return 'Please input a valid value like this: /api/analysis/keywords?query=parse api xml response'
 
 
 

@@ -46,6 +46,82 @@ This will expose two endpoints:
   "url": "https://primates.dev/parsing-an-api-xml-response-data-python/"
 }
 ```
+#### Keywords Query Finder
+
+This endpoint allows you to find all the keywords used on the pages found in a Google result for a specific query
+
+- `/api/analysis/keywords?query=parse api xml response`
+
+It returns the most used Monograms, Bigrams and Tigrams and the pages. It will visit the first 50 pages of the results.
+
+```JSON
+{
+  "Bigram": [
+    {
+      "frequency": 102, 
+      "keyword": "xml document"
+    }, 
+    {
+      "frequency": 99, 
+      "keyword": "xml response"
+    }, 
+    {
+      "frequency": 75, 
+      "keyword": "xml parser"
+    }, 
+    {
+      "frequency": 70, 
+      "keyword": "stack overflow"
+    }, 
+    {
+      "frequency": 68, 
+      "keyword": "parsing xml"
+    }, 
+    ...
+  ], 
+  "Monogram": [
+    {
+      "frequency": 1506, 
+      "keyword": "xml"
+    }, 
+    {
+      "frequency": 445, 
+      "keyword": "data"
+    }, 
+    {
+      "frequency": 406, 
+      "keyword": "parser"
+    }, 
+    {
+      "frequency": 392, 
+      "keyword": "api"
+    }, 
+    {
+      "frequency": 374, 
+      "keyword": "response"
+    }, 
+    {
+      "frequency": 357, 
+      "keyword": "name"
+    }, 
+    ...
+  ], 
+  "Trigram": [
+    {
+      "frequency": 45, 
+      "keyword": "xml etree elementtree"
+    }, 
+    {
+      "frequency": 30, 
+      "keyword": "xml version encoding"
+    }, 
+    {
+      "frequency": 30, 
+      "keyword": "version encoding utf"
+    }, 
+    ...
+  ]
+}
 
 #### Headers
 

@@ -3,9 +3,13 @@ from datetime import datetime, timedelta
 from seo import db
 from bokeh.embed import components
 from seo.core import generate_graph_internal_link_interactive, find_all_headers_url
+from seo.rank import rank
 from flask import Flask, render_template, request
 import logging
+logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.DEBUG, datefmt='%m/%d/%Y %I:%M:%S %p')
+
 app = Flask(__name__)
+
 
 
 def initialize_db(conn):
@@ -116,7 +120,16 @@ def find_headers():
     else:
         return "Please input a valid value like this: /api/headers?url='https://primates.dev'"
 
-logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.DEBUG, datefmt='%m/%d/%Y %I:%M:%S %p')
+@app.route('/api/serp')
+def find_rank_query():
+    query = request.args.get('query')
+    domain = request.args.get('domain')
+    if query and domain:
+        return rank(domain,query)
+    else:
+        return 'Please input a valid value like this: /api/serp?domain=primates.dev&query=parse api xml response'
+
+
 
 
 if __name__ == '__main__':

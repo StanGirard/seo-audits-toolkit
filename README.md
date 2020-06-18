@@ -36,6 +36,17 @@ This will expose two endpoints:
 -  `/api/graph?url=https://primates.dev&redo=True` will force the crawling. Doesn't crawl if less than 24 hours
 -  `/api/graph?url=https://primates.dev&max=10` stops after visiting 10 pages. (Default=500)
 
+### SERP - Search Engine Result Page Rank
+
+- `/api/serp?domain=primates.dev&query=parse api xml response` will give the rank of you website based on a query
+
+```JSON
+{
+  "pos": 2, 
+  "url": "https://primates.dev/parsing-an-api-xml-response-data-python/"
+}
+```
+
 #### Headers
 
 - `/api/headers?url=https://primates.dev` returns all the headers of the page

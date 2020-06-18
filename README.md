@@ -122,6 +122,7 @@ It returns the most used Monograms, Bigrams and Tigrams and the pages. It will v
     ...
   ]
 }
+```
 
 #### Headers
 

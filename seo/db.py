@@ -1,4 +1,5 @@
 import sqlite3
+import logging
 
 sql_create_projects_table = """ CREATE TABLE IF NOT EXISTS visited (
                                         id integer PRIMARY KEY,
@@ -27,7 +28,7 @@ def create_table(conn, create_table_sql):
         c = conn.cursor()
         c.execute(create_table_sql)
     except sqlite3.Error as e:
-        print(e)
+        logging.warning(e)
 
 
 def insert_url_db(conn, result):
@@ -128,7 +129,7 @@ def create_connection(db_file):
         conn = sqlite3.connect(db_file)
         return conn
     except:
-        print("ERROR")
+        logging.warning("ERROR")
 
     return conn
 

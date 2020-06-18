@@ -13,6 +13,7 @@ from bokeh.palettes import Spectral4, Spectral8, Spectral6
 from bokeh.models.graphs import NodesAndLinkedEdges
 from bokeh.layouts import row
 import seaborn as sns
+import logging
 palette = sns.color_palette("hls", 99)
 pal_hex_lst = palette.as_hex()
 
@@ -114,12 +115,12 @@ def add_edge(list_urls, url, domain, maximum=500):
     if len(list_urls) > maximum:
         return list_urls
     if domain not in url:
-        print(url + " not in domain")
+        logging.info(url + " not in domain")
         return
 
     if extract_path(url) not in list_urls and domain in url and (url.startswith("https://" + domain) or url.startswith("http://" + domain)):
         list_urls[extract_path(url)] = []
-        print("Requesting " + url)
+        logging.info("Requesting " + url)
         soup = request_parse(url)
         if soup:
             for link in soup.find_all('a'):
@@ -143,7 +144,7 @@ def generate_graph_internal_link(website):
     g = nx.Graph(urls)
     d = dict(g.degree)
     size = g.number_of_nodes()
-    print(g.degree)
+    logging.info(g.degree)
     max_connection = max(d.values())
 
     colors = [i[1] / max_connection for i in g.degree]

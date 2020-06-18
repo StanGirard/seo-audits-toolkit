@@ -4,6 +4,7 @@ from seo import db
 from bokeh.embed import components
 from seo.core import generate_graph_internal_link_interactive, find_all_headers_url
 from flask import Flask, render_template, request
+import logging
 app = Flask(__name__)
 
 
@@ -115,6 +116,7 @@ def find_headers():
     else:
         return "Please input a valid value like this: /api/headers?url='https://primates.dev'"
 
+logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.DEBUG, datefmt='%m/%d/%Y %I:%M:%S %p')
 
 
 if __name__ == '__main__':
@@ -125,7 +127,7 @@ if __name__ == '__main__':
         # create projects table and set running status to stopped
         initialize_db(conn)
     else:
-        print("Error! cannot create the database connection.")
+        logging.warning("Error! cannot create the database connection.")
 
-    print("DB running")
+    logging.info("DB running")
     app.run(debug=True, port=5000)  # run app in debug mode on port 5000

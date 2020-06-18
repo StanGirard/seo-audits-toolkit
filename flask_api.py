@@ -136,7 +136,7 @@ def find_rank_query():
 def find_keywords_query():
     query = request.args.get('query')
     if query:
-        return generate_results(query)
+        return generate_results(query, 20)
     else:
         return 'Please input a valid value like this: /api/analysis/keywords?query=parse api xml response'
 

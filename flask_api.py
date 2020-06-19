@@ -7,6 +7,7 @@ from toolkit.seo.core import generate_graph_internal_link_interactive
 from toolkit.seo.headers import find_all_headers_url
 from toolkit.seo.rank import rank
 from toolkit.analysis.keywords import generate_results
+from toolkit.seo.links import find_all_links
 from flask import Flask, render_template, request
 import logging
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
@@ -97,13 +98,22 @@ def interactive_graph():
     conn.close()
 
 
-@app.route('/api/headers')
+@app.route('/api/extract/headers')
 def find_headers():
     value = request.args.get('url')
     if value:
         return find_all_headers_url(value)
     else:
-        return "Please input a valid value like this: /api/headers?url='https://primates.dev'"
+        return "Please input a valid value like this: /api/extract/headers?url=https://primates.dev"
+
+
+@app.route('/api/extract/links')
+def find_all_links_page():
+    value = request.args.get('url')
+    if value:
+        return find_all_links(value)
+    else:
+        return 'Please input a valid url like this: /api/extract/links?url=https://primates.dev'
 
 
 @app.route('/api/serp')
@@ -128,6 +138,7 @@ def find_keywords_query():
 
     else:
         return 'Please input a valid value like this: /api/analysis/keywords?query=parse api xml response'
+
 
 
 if __name__ == '__main__':

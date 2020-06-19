@@ -2,17 +2,17 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def request_status_code(url):
+def request_status_code(url, timeout = 1):
     try:
-        response = requests.get(url)
+        response = requests.get(url, timeout=timeout)
         return response.status_code
     except:
         return 500
 
 
-def request_parse(url):
+def request_parse(url, timeout = 1):
     try:
-        response = requests.get(url)
+        response = requests.get(url, timeout=timeout)
         if response.status_code != 200:
             return
         soup = BeautifulSoup(response.content, "lxml")

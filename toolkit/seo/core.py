@@ -15,6 +15,7 @@ from bokeh.layouts import row
 from toolkit.lib.http_tools import request_parse, request_status_code, check_internal
 import seaborn as sns
 import logging
+
 palette = sns.color_palette("hls", 99)
 pal_hex_lst = palette.as_hex()
 
@@ -73,30 +74,6 @@ def add_edge(list_urls, url, domain, maximum=500):
             return list_urls
 
     return list_urls
-
-
-def generate_graph_internal_link(website):
-    domain = urllib.parse.urlparse(website).netloc
-    urls = add_edge({}, website, domain)
-
-    g = nx.Graph(urls)
-    d = dict(g.degree)
-    size = g.number_of_nodes()
-    logging.info(g.degree)
-    max_connection = max(d.values())
-
-    colors = [i[1] / max_connection for i in g.degree]
-
-    plt.figure(num=None, figsize=(30 * math.ceil(math.sqrt(size) / 8), 20 *
-                                  math.ceil(math.sqrt(size) / 8)), dpi=100, facecolor='w', edgecolor='k')
-    nodi_size = [((math.sqrt(v) / 6) * 3000) for v in d.values()]
-    pos = nx.nx_agraph.graphviz_layout(g)
-
-    nx.draw(g, pos=pos, arrows=True, width=0.1, node_size=nodi_size,
-            node_color=colors, linewidths=0.25, font_size=10, with_labels=True, scale=math.ceil(math.sqrt(g.number_of_nodes()) / 8))
-
-    plt.savefig(domain + '.png')
-    plt.show()
 
 
 def generate_graph_internal_link_interactive(website, maximum):

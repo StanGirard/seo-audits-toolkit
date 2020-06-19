@@ -16,6 +16,16 @@ sql_create_running_table = """ CREATE TABLE IF NOT EXISTS running (
                                         
                                     ); """
 
+sql_create_keywords_table = """ CREATE TABLE IF NOT EXISTS keywords (
+                                        id integer PRIMARY KEY,
+                                        query text NOT NULL,
+                                        results text NOT NULL,
+                                        status_job text NOT NULL,
+                                        begin_date text NOT NULL
+                                );
+                            """
+
+
 
 def create_table(conn, create_table_sql):
     """Create a table in the database
@@ -98,9 +108,14 @@ def update_running_db_stopped(conn):
     sql = ''' UPDATE running
               SET
                   status_job = ? '''
-
     cur = conn.cursor()
     cur.execute(sql, task)
+
+    sql = ''' UPDATE keywords
+              SET
+                  status_job = ? '''
+    cur = conn.cursor()
+    cur.execute(sql, ("FINISHED",))
     conn.commit()
 
 

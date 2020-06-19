@@ -1,10 +1,11 @@
 import urllib.parse
 from datetime import datetime, timedelta
-from seo import db
+from toolkit.db import db, analysis
+from toolkit.analysis import keywords
 from bokeh.embed import components
-from seo.core import generate_graph_internal_link_interactive, find_all_headers_url
-from seo.rank import rank
-from analysis.keywords import generate_results
+from toolkit.seo.core import generate_graph_internal_link_interactive, find_all_headers_url
+from toolkit.seo.rank import rank
+from toolkit.analysis.keywords import generate_results
 from flask import Flask, render_template, request
 import logging
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.DEBUG, datefmt='%m/%d/%Y %I:%M:%S %p')
@@ -21,6 +22,7 @@ def initialize_db(conn):
     """
     db.create_table(conn, db.sql_create_projects_table)
     db.create_table(conn, db.sql_create_running_table)
+    db.create_table(conn, db.sql_create_keywords_table)
     db.update_running_db_stopped(conn)
 
 
@@ -87,7 +89,7 @@ def generate_interactive_graph(conn, urls, relaunch, maxi_urls):
         # If not first time
         if len(already_visited) == 1:
 
-            # ALREADY VISITED IN THE LAST 5 HOURS
+            # ALREADY VISITED IN THE LAST 24 HOURS
             if datetime.strptime(already_visited[0][2], '%m/%d/%Y, %H:%M:%S') + timedelta(hours=24) > datetime.now() and relaunch != "True":
                 update_running_status(conn, urls)
                 return render_template("bokeh.html", script=already_visited[0][3], div=already_visited[0][4], domain=urllib.parse.urlparse(already_visited[0][1]).netloc, template="Flask", time=datetime.strptime(already_visited[0][2], '%m/%d/%Y, %H:%M:%S'))
@@ -132,11 +134,15 @@ def find_rank_query():
         return rank(domain,query, lang=lang, tld=tld)
     else:
         return 'Please input a valid value like this: /api/serp?domain=primates.dev&query=parse api xml response&tld=com&lang=en'
+
+
 @app.route('/api/analysis/keywords')
 def find_keywords_query():
+    conn = db.create_connection("visited.db")
     query = request.args.get('query')
     if query:
-        return generate_results(query, 20)
+        return analysis.get_query_results(conn,query)
+        
     else:
         return 'Please input a valid value like this: /api/analysis/keywords?query=parse api xml response'
 

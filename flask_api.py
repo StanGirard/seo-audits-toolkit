@@ -8,6 +8,7 @@ from toolkit.seo.headers import find_all_headers_url
 from toolkit.seo.rank import rank
 from toolkit.analysis.keywords import generate_results
 from toolkit.seo.links import find_all_links
+from toolkit.seo.images import find_all_images
 from flask import Flask, render_template, request
 import logging
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
@@ -114,6 +115,14 @@ def find_all_links_page():
         return find_all_links(value)
     else:
         return 'Please input a valid url like this: /api/extract/links?url=https://primates.dev'
+
+@app.route('/api/extract/images')
+def find_all_images_page():
+    value = request.args.get('url')
+    if value:
+        return find_all_images(value)
+    else:
+        return 'Please input a valid url like this: /api/extract/images?url=https://primates.dev'
 
 
 @app.route('/api/serp')

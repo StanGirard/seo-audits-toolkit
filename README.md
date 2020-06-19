@@ -182,6 +182,23 @@ This will give you all the links on the page and their status codes.
 }
 ```
 
+#### Images
+
+- `/api/extract/images?url=https://primates.dev`
+
+This will give you all the image links of a page
+
+```JSON
+{
+  "images":
+    [
+      {"alt":"Primates","url":"https://primates.dev/content/images/size/w600/2020/02/monkey.png"},
+      {"alt":"10 Tips on How to choose a domain name for your business","url":"https://primates.dev/content/images/size/w1000/2020/06/SEO.jpg"},
+      ...
+    ]
+}
+```
+
 ### TODO
 
 - [ ] Not downloading images when they are linked

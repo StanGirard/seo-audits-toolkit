@@ -12,73 +12,11 @@ from bokeh.transform import linear_cmap
 from bokeh.palettes import Spectral4, Spectral8, Spectral6
 from bokeh.models.graphs import NodesAndLinkedEdges
 from bokeh.layouts import row
+from toolkit.lib.http_tools import request_parse, request_status_code, check_internal
 import seaborn as sns
 import logging
 palette = sns.color_palette("hls", 99)
 pal_hex_lst = palette.as_hex()
-
-
-def request_status_code(url):
-    try:
-        response = requests.get(url)
-        return response.status_code
-    except:
-        return 500
-
-
-def request_parse(url):
-    try:
-        response = requests.get(url)
-        if response.status_code != 200:
-            return
-        soup = BeautifulSoup(response.content, "lxml")
-        return soup
-    except:
-        return
-
-
-def check_internal(website, url):
-    if website not in url:
-        return False
-    return True
-
-
-def find_all_headings(soup):
-    headings = {"h1": {"count": 0, "values": []}, "h2": {"count": 0, "values": []},
-                "h3": {"count": 0, "values": []}, "h4": {"count": 0, "values": []},
-                "h5": {"count": 0, "values": []}, "h6": {"count": 0, "values": []}}
-    for heading in soup.find_all(["h1", "h2", "h3", "h4", "h5", "h6"]):
-        headings[heading.name]["values"].append(heading.text.strip())
-        headings[heading.name]["count"] += 1
-    return headings
-
-def find_all_headers_url(url):
-    soup = request_parse(url)
-    if soup:
-        return find_all_headings(soup)
-    else:
-        return {"Error": "No headers found or error in the url"}
-
-
-
-def print_all_headers(headers_list):
-    for key in headers_list:
-        for i in headers_list[key]["header"]:
-            print(key + " " + i)
-
-
-def print_specific_header(headers_list, header):
-    for i in headers_list[header]["header"]:
-        print(header + " " + i)
-
-
-def print_all_headers_count(headers_list):
-    for key in headers_list:
-        print("Number of " + key + " : " + str(headers_list[key]["count"]))
-
-
-def print_specific_header_count(headers_list, header):
-    print("Number of " + header + " : " + str(headers_list[header]["count"]))
 
 
 def find_all_urls_single_page(source, soup):

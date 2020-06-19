@@ -3,14 +3,15 @@ from datetime import datetime, timedelta
 from toolkit.db import conf, analysis, seo
 from toolkit.analysis import keywords
 from bokeh.embed import components
-from toolkit.seo.core import generate_graph_internal_link_interactive, find_all_headers_url
+from toolkit.seo.core import generate_graph_internal_link_interactive
+from toolkit.seo.headers import find_all_headers_url
 from toolkit.seo.rank import rank
 from toolkit.analysis.keywords import generate_results
 from flask import Flask, render_template, request
 import logging
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.DEBUG, datefmt='%m/%d/%Y %I:%M:%S %p')
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='toolkit/templates')
 
 
 
@@ -75,7 +76,7 @@ def generate_interactive_graph(conn, urls, relaunch, maxi_urls):
             # ALREADY VISITED IN THE LAST 24 HOURS
             if datetime.strptime(already_visited[0][2], '%m/%d/%Y, %H:%M:%S') + timedelta(hours=24) > datetime.now() and relaunch != "True":
                 seo.update_running_status(conn, urls)
-                return render_template("main.html", script=already_visited[0][3], div=already_visited[0][4], domain=urllib.parse.urlparse(already_visited[0][1]).netloc, template="Flask", time=datetime.strptime(already_visited[0][2], '%m/%d/%Y, %H:%M:%S'))
+                return render_template("bokeh.html", script=already_visited[0][3], div=already_visited[0][4], domain=urllib.parse.urlparse(already_visited[0][1]).netloc, template="Flask", time=datetime.strptime(already_visited[0][2], '%m/%d/%Y, %H:%M:%S'))
 
             # More than 24 hours or parameter redo is True
             if (datetime.strptime(already_visited[0][2], '%m/%d/%Y, %H:%M:%S') + timedelta(hours=24) < datetime.now() or relaunch == "True"):

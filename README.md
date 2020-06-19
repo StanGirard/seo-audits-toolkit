@@ -188,5 +188,6 @@ It returns the most used Monograms, Bigrams and Tigrams and the pages. It will v
 - [ ] Not downloading images when they are linked
 - [ ] Async requests
 - [ ] Implement Scrapy for better perf
+- [ ] Clean Code regarding DB Interactions
 
 Have fun ! 

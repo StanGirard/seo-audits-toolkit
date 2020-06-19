@@ -2,6 +2,7 @@ import datetime
 from toolkit.analysis import keywords
 import json
 
+
 def insert_query_db(conn, values):
     """Insert a query into the DB
 
@@ -15,12 +16,14 @@ def insert_query_db(conn, values):
     cur.execute(sql, values)
     conn.commit()
 
+
 def select_query(conn, query):
     cur = conn.cursor()
     cur.execute("SELECT * FROM keywords WHERE query=?", (query,))
 
     row = cur.fetchall()
     return row
+
 
 def update_running_db(conn, query, status):
     """Update running table where url = input
@@ -37,6 +40,7 @@ def update_running_db(conn, query, status):
     cur.execute(sql, (status, query))
     conn.commit()
 
+
 def update_result_db(conn, task):
     sql = ''' UPDATE keywords
               SET
@@ -47,6 +51,7 @@ def update_result_db(conn, task):
     cur = conn.cursor()
     cur.execute(sql, task)
     conn.commit()
+
 
 def finished_all_jobs(conn):
     sql = ''' UPDATE keywords
@@ -68,13 +73,9 @@ def get_query_results(conn, query, redo=False):
             return json.loads(check_exist[0][2])
         print(check_exist)
     else:
-        insert_query_db(conn, (query,"","RUNNING",datetime.datetime.now()))
+        insert_query_db(conn, (query, "", "RUNNING", datetime.datetime.now()))
         results = keywords.generate_results(query, 20)
-        update_result_db(conn, ("FINISHED", datetime.datetime.now(), json.dumps(results), query))
+        update_result_db(
+            conn, ("FINISHED", datetime.datetime.now(), json.dumps(results), query))
         return results
     return "Blabla"
-
-
-
-
-                

@@ -21,6 +21,7 @@ def update_running_status(conn, urls, status="STOPPED", already_exists=True):
     else:
         update_running_db(conn, ("STOPPED", urls))
 
+
 def insert_url_db(conn, result):
     """Insert an url into the DB
 
@@ -81,8 +82,6 @@ def update_running_db(conn, task):
     cur = conn.cursor()
     cur.execute(sql, task)
     conn.commit()
-
-
 
 
 def select_visited(conn, urls):

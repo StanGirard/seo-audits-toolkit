@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+
 def request_status_code(url):
     try:
         response = requests.get(url)

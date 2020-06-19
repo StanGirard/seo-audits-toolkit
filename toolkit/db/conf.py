@@ -26,7 +26,6 @@ sql_create_keywords_table = """ CREATE TABLE IF NOT EXISTS keywords (
                             """
 
 
-
 def create_table(conn, create_table_sql):
     """Create a table in the database
 
@@ -40,8 +39,9 @@ def create_table(conn, create_table_sql):
     except sqlite3.Error as e:
         logging.warning(e)
 
+
 def create_connection(db_file):
-    
+
     conn = None
     try:
         conn = sqlite3.connect(db_file)
@@ -50,6 +50,7 @@ def create_connection(db_file):
         logging.warning("ERROR")
 
     return conn
+
 
 def update_running_db_stopped(conn):
     task = ["STOPPED"]
@@ -65,4 +66,3 @@ def update_running_db_stopped(conn):
     cur = conn.cursor()
     cur.execute(sql, ("FINISHED",))
     conn.commit()
-

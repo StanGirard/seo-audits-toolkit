@@ -9,10 +9,10 @@ from toolkit.seo.rank import rank
 from toolkit.analysis.keywords import generate_results
 from flask import Flask, render_template, request
 import logging
-logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s', level=logging.DEBUG, datefmt='%m/%d/%Y %I:%M:%S %p')
+logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
+                    level=logging.DEBUG, datefmt='%m/%d/%Y %I:%M:%S %p')
 
 app = Flask(__name__, template_folder='toolkit/templates')
-
 
 
 def initialize_db(conn):
@@ -51,9 +51,6 @@ def update_or_insert_graph_in_db(conn, urls, maximum, update=False):
             "%m/%d/%Y, %H:%M:%S"), script, div))
     seo.update_running_status(conn, urls)
     return render_template("bokeh.html", script=script, div=div, domain=domain, template="Flask", time=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"))
-
-
-
 
 
 def generate_interactive_graph(conn, urls, relaunch, maxi_urls):
@@ -99,6 +96,7 @@ def interactive_graph():
         return generate_interactive_graph(conn, urls, relaunch, maxi_urls)
     conn.close()
 
+
 @app.route('/api/headers')
 def find_headers():
     value = request.args.get('url')
@@ -107,15 +105,16 @@ def find_headers():
     else:
         return "Please input a valid value like this: /api/headers?url='https://primates.dev'"
 
+
 @app.route('/api/serp')
 def find_rank_query():
     query = request.args.get('query')
     domain = request.args.get('domain')
     tld = request.args.get('tld')
     lang = request.args.get('lang')
-    print (lang)
+    print(lang)
     if query and domain:
-        return rank(domain,query, lang=lang, tld=tld)
+        return rank(domain, query, lang=lang, tld=tld)
     else:
         return 'Please input a valid value like this: /api/serp?domain=primates.dev&query=parse api xml response&tld=com&lang=en'
 
@@ -125,12 +124,10 @@ def find_keywords_query():
     conn = conf.create_connection("visited.db")
     query = request.args.get('query')
     if query:
-        return analysis.get_query_results(conn,query)
-        
+        return analysis.get_query_results(conn, query)
+
     else:
         return 'Please input a valid value like this: /api/analysis/keywords?query=parse api xml response'
-
-
 
 
 if __name__ == '__main__':
@@ -144,4 +141,4 @@ if __name__ == '__main__':
         logging.warning("Error! cannot create the database connection.")
 
     logging.info("DB running")
-    app.run(debug=True, port=5000)  # run app in debug mode on port 5000
+    app.run(port=5000)  # run app in debug mode on port 5000

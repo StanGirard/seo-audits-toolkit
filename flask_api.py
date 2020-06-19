@@ -1,6 +1,6 @@
 import urllib.parse
 from datetime import datetime, timedelta
-from toolkit.db import db, analysis, seo
+from toolkit.db import conf, analysis, seo
 from toolkit.analysis import keywords
 from bokeh.embed import components
 from toolkit.seo.core import generate_graph_internal_link_interactive, find_all_headers_url
@@ -20,10 +20,10 @@ def initialize_db(conn):
     Arguments:
         conn {Connection} -- Connector
     """
-    db.create_table(conn, db.sql_create_projects_table)
-    db.create_table(conn, db.sql_create_running_table)
-    db.create_table(conn, db.sql_create_keywords_table)
-    db.update_running_db_stopped(conn)
+    conf.create_table(conn, conf.sql_create_projects_table)
+    conf.create_table(conn, conf.sql_create_running_table)
+    conf.create_table(conn, conf.sql_create_keywords_table)
+    conf.update_running_db_stopped(conn)
 
 
 def update_or_insert_graph_in_db(conn, urls, maximum, update=False):
@@ -90,7 +90,7 @@ def generate_interactive_graph(conn, urls, relaunch, maxi_urls):
 
 @app.route('/api/graph')
 def interactive_graph():
-    conn = db.create_connection("visited.db")
+    conn = conf.create_connection("visited.db")
     with conn:
         urls = request.args.get('url')  # if key doesn't exist, returns None
         relaunch = request.args.get('redo')
@@ -121,7 +121,7 @@ def find_rank_query():
 
 @app.route('/api/analysis/keywords')
 def find_keywords_query():
-    conn = db.create_connection("visited.db")
+    conn = conf.create_connection("visited.db")
     query = request.args.get('query')
     if query:
         return analysis.get_query_results(conn,query)
@@ -134,7 +134,7 @@ def find_keywords_query():
 
 if __name__ == '__main__':
 
-    conn = db.create_connection("visited.db")
+    conn = conf.create_connection("visited.db")
 
     if conn is not None:
         # create projects table and set running status to stopped

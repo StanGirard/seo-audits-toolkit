@@ -41,7 +41,7 @@ This will expose four endpoints:
 
 ### SERP - Search Engine Result Page Rank
 
-- `/api/serp?domain=primates.dev&query=parse api xml response&tld=com&lang=en'` will give the rank of you website based on a query. tld and lang are not required. Default values are **.com** and **en**
+- `/api/serp?domain=primates.dev&query=parse api xml response&tld=com&lang=en` will give the rank of you website based on a query. tld and lang are not required. Default values are **.com** and **en**
 
 ```JSON
 {

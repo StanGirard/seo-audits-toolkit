@@ -24,11 +24,14 @@ pip install -r requirements.txt
 python3 flask_api
 ```
 
-This will expose two endpoints:
+This will expose four endpoints:
 - `localhost:5000/api/graph`
 - `localhost:5000/api/headers`
+- `localhost:5000/api/serp`
+- `localhost:5000/api/analysis/keywords`
+- 
 
-### Parameters
+### Endpoints
 
 #### Graphs
 
@@ -52,7 +55,7 @@ This endpoint allows you to find all the keywords used on the pages found in a G
 
 - `/api/analysis/keywords?query=parse api xml response`
 
-It returns the most used Monograms, Bigrams and Tigrams and the pages. It will visit the first 50 pages of the results.
+It returns the most used Monograms, Bigrams and Tigrams and the pages. It will visit the first 20 pages of the results.
 
 ```JSON
 {

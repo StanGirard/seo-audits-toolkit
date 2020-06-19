@@ -1,5 +1,7 @@
 from inscriptis import get_text
 import requests
+import nltk
+nltk.download('stopwords')
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 from nltk.tokenize import RegexpTokenizer

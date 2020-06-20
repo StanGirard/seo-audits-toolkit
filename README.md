@@ -40,10 +40,11 @@ pip install -r requirements.txt
 python3 flask_api
 ```
 
-This will expose four endpoints:
+This will expose six endpoints:
 - `localhost:5000/api/graph`
 - `localhost:5000/api/extract/headers`
 - `localhost:5000/api/extract/links`
+- `localhost:5000/api/extract/links/website`
 - `localhost:5000/api/serp`
 - `localhost:5000/api/analysis/keywords`
 

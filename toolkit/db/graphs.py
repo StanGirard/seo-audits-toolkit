@@ -1,5 +1,3 @@
-import sqlite3
-import logging
 
 
 def update_running_status(conn, urls, status="STOPPED", already_exists=True):

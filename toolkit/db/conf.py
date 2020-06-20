@@ -1,5 +1,6 @@
 import sqlite3
 import logging
+from toolkit.db import conf
 
 sql_create_projects_table = """ CREATE TABLE IF NOT EXISTS visited (
                                         id integer PRIMARY KEY,
@@ -24,6 +25,17 @@ sql_create_keywords_table = """ CREATE TABLE IF NOT EXISTS keywords (
                                         begin_date text NOT NULL
                                 );
                             """
+
+def initialize_db(conn):
+    """Initialize the DB
+
+    Arguments:
+        conn {Connection} -- Connector
+    """
+    conf.create_table(conn, conf.sql_create_projects_table)
+    conf.create_table(conn, conf.sql_create_running_table)
+    conf.create_table(conn, conf.sql_create_keywords_table)
+    conf.update_running_db_stopped(conn)
 
 
 def create_table(conn, create_table_sql):

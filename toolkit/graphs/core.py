@@ -1,18 +1,21 @@
-import requests
 import math
-from bs4 import BeautifulSoup
+from datetime import datetime, timedelta
+
+from bokeh.embed import components
 import urllib.parse
 import networkx as nx
-import matplotlib.pyplot as plt
 from bokeh.plotting import figure, from_networkx
 from bokeh.models import (BoxZoomTool, Circle, HoverTool,
-                          MultiLine,  Range1d, ResetTool, LinearColorMapper, ColorBar,
+                          MultiLine,  Range1d, ResetTool,  ColorBar,
                           ColumnDataSource, DataTable, TableColumn)
 from bokeh.transform import linear_cmap
 from bokeh.palettes import Spectral4, Spectral8, Spectral6
 from bokeh.models.graphs import NodesAndLinkedEdges
 from bokeh.layouts import row
-from toolkit.lib.http_tools import request_parse, request_status_code, check_internal
+from flask import render_template
+
+from toolkit.db import graphs
+from toolkit.lib.http_tools import request_parse, request_status_code
 import seaborn as sns
 import logging
 
@@ -74,6 +77,65 @@ def add_edge(list_urls, url, domain, maximum=500):
             return list_urls
 
     return list_urls
+
+def update_or_insert_graph_in_db(conn, urls, maximum, update=False):
+    """Update or inserts html in the DB
+
+    Arguments:
+        conn {Connection} -- DB connector
+        urls {string} -- Root Domain
+        maximum {int} -- Maximum number of urls to crawl
+
+    Keyword Arguments:
+        update {bool} -- update or insert (default: {False})
+
+    Returns:
+        HTML Render -- Renders the Graph
+    """
+    plot, domain = generate_graph_internal_link_interactive(urls, maximum)
+    script, div = components(plot)
+    if update:
+        graphs.update_url_db(conn, (datetime.now().strftime(
+            "%m/%d/%Y, %H:%M:%S"), script, div, urls))
+    else:
+        graphs.insert_url_db(conn, (urls, datetime.now().strftime(
+            "%m/%d/%Y, %H:%M:%S"), script, div))
+    graphs.update_running_status(conn, urls)
+    return render_template("bokeh.html", script=script, div=div, domain=domain, template="Flask", time=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"))
+
+
+
+def generate_interactive_graph(conn, urls, relaunch, maxi_urls):
+    if urls is None:
+        return "Empty Url paramaters"
+    maximum_urls = 500
+    if maxi_urls is not None:
+        maximum_urls = int(maxi_urls)
+    stopped, already_exists = graphs.check_status_url(conn, urls, "STOPPED")
+    if stopped == True:
+
+        # Set status to running
+        graphs.update_running_status(conn, urls, "RUNNING", already_exists)
+        # Check if urls aready in Status Table
+        already_visited = graphs.select_visited(conn, urls)
+
+        # If not first time
+        if len(already_visited) == 1:
+
+            # ALREADY VISITED IN THE LAST 24 HOURS
+            if datetime.strptime(already_visited[0][2], '%m/%d/%Y, %H:%M:%S') + timedelta(hours=24) > datetime.now() and relaunch != "True":
+                graphs.update_running_status(conn, urls)
+                return render_template("bokeh.html", script=already_visited[0][3], div=already_visited[0][4], domain=urllib.parse.urlparse(already_visited[0][1]).netloc, template="Flask", time=datetime.strptime(already_visited[0][2], '%m/%d/%Y, %H:%M:%S'))
+
+            # More than 24 hours or parameter redo is True
+            if (datetime.strptime(already_visited[0][2], '%m/%d/%Y, %H:%M:%S') + timedelta(hours=24) < datetime.now() or relaunch == "True"):
+                return update_or_insert_graph_in_db(conn, urls,  maximum_urls, True)
+
+        # If first time
+        else:
+            return update_or_insert_graph_in_db(conn, urls, maximum_urls)
+    else:
+        return "JOB IS ALREADY RUNNING. PLEASE WAIT AND REFRESH."
 
 
 def generate_graph_internal_link_interactive(website, maximum):

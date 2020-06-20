@@ -6,6 +6,19 @@ This seo toolkit is a collection of multiple tools to help you in your quest for
 
 I've grown tired of SEO agencies making us pay hundreds of euros for simple tools. I decided to develop an API to help users find issues in their website and increase their SEO for free. It can, of course, be used for anything else.
 
+- [SEOToolkit](#seotoolkit)
+  - [Installation](#installation)
+  - [Running Flask](#running-flask)
+  - [Endpoints](#endpoints)
+    - [Graphs](#graphs)
+    - [SERP - Search Engine Result Page Rank](#serp---search-engine-result-page-rank)
+    - [Keywords Query Finder](#keywords-query-finder)
+    - [Extracts](#extracts)
+      - [Headers](#headers)
+      - [Links](#links)
+      - [Images](#images)
+    - [TODO](#todo)
+
 ## Installation
 
 You need **Python3**

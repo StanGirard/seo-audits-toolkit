@@ -205,7 +205,7 @@ This will give you all the links found on your website.
       "total":67
     },
     "pages_visited":51,
-    "time_crawl":65.590064001,
+    "time_crawl":13.310942938551307,
     "total":157
 }
 ```

@@ -199,7 +199,8 @@ This will give you all the image links of a page
       {"alt":"Primates","url":"https://primates.dev/content/images/size/w600/2020/02/monkey.png"},
       {"alt":"10 Tips on How to choose a domain name for your business","url":"https://primates.dev/content/images/size/w1000/2020/06/SEO.jpg"},
       ...
-    ]
+    ],
+  "summary":{"missing_alt":0,"missing_title":0,"total":10}}
 }
 ```
 

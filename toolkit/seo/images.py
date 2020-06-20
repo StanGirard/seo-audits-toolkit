@@ -10,7 +10,9 @@ def find_all_images(url):
     images = soup.findAll('img')
     for image in images:
         url = urllib.parse.urljoin(url,image['src'])
-        alt = image['alt']
+        alt = None
+        if "alt" in image:
+            alt  = image['alt']
         if url not in list_urls:
             list_images["images"].append({"url": url, "alt": alt})
             list_urls.append(url)

@@ -17,7 +17,7 @@ I've grown tired of SEO agencies making us pay hundreds of euros for simple tool
       - [Headers](#headers)
       - [Links](#links)
       - [Images](#images)
-    - [TODO](#todo)
+  - [TODO](#todo)
 
 ## Installation
 
@@ -240,7 +240,7 @@ This will give you all the image links of a page and a summary of the page.
 }
 ```
 
-### TODO
+## TODO
 
 - [ ] Not downloading images when they are linked
 - [ ] Async requests

@@ -186,6 +186,29 @@ This will give you all the links on the page and their status codes.
 }
 ```
 
+- `api/extract/links/website?url=https://primates.dev&max=50` 
+
+This will give you all the links found on your website. 
+
+```JSON
+{
+  "domain_name":"primates.dev",
+  "external_urls":
+    {
+      "results":["https://www.linkedin.com/shareArticle","https://archive.org/web/","https://git-scm.com/book",...],
+      "total":90
+    },
+  "internal_urls":
+    {
+      "results":
+        ["https://primates.dev/","https://primates.dev/brave-a-web-browser-that-pays-its-users-and-respects-privacy/",...],
+      "total":67
+    },
+    "pages_visited":51,
+    "time_crawl":65.590064001,
+    "total":157
+}
+```
 #### Images
 
 - `/api/extract/images?url=https://primates.dev`

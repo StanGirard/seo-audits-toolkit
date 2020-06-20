@@ -5,6 +5,7 @@ from toolkit.seo.headers import find_all_headers_url
 from toolkit.seo.rank import rank
 from toolkit.seo.links import find_all_links
 from toolkit.seo.images import find_all_images
+from toolkit.seo.audit import get_all_links_website
 from flask import Flask, request
 import logging
 
@@ -41,6 +42,18 @@ def find_all_links_page():
         return find_all_links(value)
     else:
         return 'Please input a valid url like this: /api/extract/links?url=https://primates.dev'
+
+@app.route('/api/extract/links/website')
+def find_all_links_website():
+    value = request.args.get('url')
+    maxi = request.args.get('max')
+    if value:
+        if maxi:
+            return get_all_links_website(value, int(maxi))
+        return get_all_links_website(value)
+    else:
+        return 'Please input a valid url like this: /api/extract/links/website?url=https://primates.dev&max=50'
+
 
 
 @app.route('/api/extract/images')

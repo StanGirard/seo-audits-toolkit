@@ -190,7 +190,7 @@ This will give you all the links on the page and their status codes.
 
 - `/api/extract/images?url=https://primates.dev`
 
-This will give you all the image links of a page
+This will give you all the image links of a page and a summary of the page.
 
 ```JSON
 {
@@ -200,7 +200,7 @@ This will give you all the image links of a page
       {"alt":"10 Tips on How to choose a domain name for your business","url":"https://primates.dev/content/images/size/w1000/2020/06/SEO.jpg"},
       ...
     ],
-  "summary":{"missing_alt":0,"missing_title":0,"total":10}}
+  "summary":{"duplicates":17,"missing_alt":0,"missing_title":37,"total":37}}
 }
 ```
 

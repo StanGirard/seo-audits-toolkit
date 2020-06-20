@@ -2,7 +2,10 @@
 
 ![](examples/example.png)
 
-This seo toolkit is a collection of multiple toos to help you in SEO improvement. It is an easy to use API.
+This seo toolkit is a collection of multiple tools to help you in your quest for a better SEO. It is an easy to use API.
+
+I've grown tired of SEO agencies making us pay hundreds of euros for simple tools. I decided to develop an API to help users find issues in their website and increase their SEO for free. It can, of course, be used for anything else.
+
 ## Installation
 
 You need **Python3**
@@ -45,7 +48,8 @@ This will expose four endpoints:
 
 ### SERP - Search Engine Result Page Rank
 
-- `/api/serp?domain=primates.dev&query=parse api xml response&tld=com&lang=en` will give the rank of you website based on a query. tld and lang are not required. Default values are **.com** and **en**
+- `/api/serp?domain=primates.dev&query=parse api xml response&tld=com&lang=en` will give the rank of your website based on a query. tld and lang are not required. 
+Default values are **.com** and **en**
 
 ```JSON
 {

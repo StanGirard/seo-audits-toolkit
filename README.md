@@ -8,6 +8,7 @@ I've grown tired of SEO agencies making us pay hundreds of euros for simple tool
 
 - [SEOToolkit](#seotoolkit)
   - [Installation](#installation)
+  - [Updating](#updating)
   - [Running Flask](#running-flask)
   - [Endpoints](#endpoints)
     - [Graphs](#graphs)
@@ -33,6 +34,10 @@ Then install dependencies
 ```Bash
 pip install -r requirements.txt
 ```
+
+## Updating
+
+Please delete the file visited.db if you have any issues when updating. 
 
 ## Running Flask
 

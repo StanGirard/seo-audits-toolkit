@@ -2,12 +2,13 @@ import sqlite3
 import logging
 from toolkit.db import conf
 
-sql_create_projects_table = """ CREATE TABLE IF NOT EXISTS visited (
+sql_create_projects_table = """ CREATE TABLE IF NOT EXISTS graphs (
                                         id integer PRIMARY KEY,
                                         urls text NOT NULL,
                                         begin_date text NOT NULL,
                                         script text,
-                                        div text
+                                        div text,
+                                        status_job text NOT NULL
                                         
                                     ); """
 sql_create_running_table = """ CREATE TABLE IF NOT EXISTS running (
@@ -25,6 +26,7 @@ sql_create_keywords_table = """ CREATE TABLE IF NOT EXISTS keywords (
                                         begin_date text NOT NULL
                                 );
                             """
+
 
 def initialize_db(conn):
     """Initialize the DB
@@ -65,8 +67,8 @@ def create_connection(db_file):
 
 
 def update_running_db_stopped(conn):
-    task = ["STOPPED"]
-    sql = ''' UPDATE running
+    task = ["FINISHED"]
+    sql = ''' UPDATE graphs
               SET
                   status_job = ? '''
     cur = conn.cursor()

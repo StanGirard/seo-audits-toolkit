@@ -78,65 +78,6 @@ def add_edge(list_urls, url, domain, maximum=500):
 
     return list_urls
 
-def update_or_insert_graph_in_db(conn, urls, maximum, update=False):
-    """Update or inserts html in the DB
-
-    Arguments:
-        conn {Connection} -- DB connector
-        urls {string} -- Root Domain
-        maximum {int} -- Maximum number of urls to crawl
-
-    Keyword Arguments:
-        update {bool} -- update or insert (default: {False})
-
-    Returns:
-        HTML Render -- Renders the Graph
-    """
-    plot, domain = generate_graph_internal_link_interactive(urls, maximum)
-    script, div = components(plot)
-    if update:
-        graphs.update_url_db(conn, (datetime.now().strftime(
-            "%m/%d/%Y, %H:%M:%S"), script, div, urls))
-    else:
-        graphs.insert_url_db(conn, (urls, datetime.now().strftime(
-            "%m/%d/%Y, %H:%M:%S"), script, div))
-    graphs.update_running_status(conn, urls)
-    return render_template("bokeh.html", script=script, div=div, domain=domain, template="Flask", time=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"))
-
-
-
-def generate_interactive_graph(conn, urls, relaunch, maxi_urls):
-    if urls is None:
-        return "Empty Url paramaters"
-    maximum_urls = 500
-    if maxi_urls is not None:
-        maximum_urls = int(maxi_urls)
-    stopped, already_exists = graphs.check_status_url(conn, urls, "STOPPED")
-    if stopped == True:
-
-        # Set status to running
-        graphs.update_running_status(conn, urls, "RUNNING", already_exists)
-        # Check if urls aready in Status Table
-        already_visited = graphs.select_visited(conn, urls)
-
-        # If not first time
-        if len(already_visited) == 1:
-
-            # ALREADY VISITED IN THE LAST 24 HOURS
-            if datetime.strptime(already_visited[0][2], '%m/%d/%Y, %H:%M:%S') + timedelta(hours=24) > datetime.now() and relaunch != "True":
-                graphs.update_running_status(conn, urls)
-                return render_template("bokeh.html", script=already_visited[0][3], div=already_visited[0][4], domain=urllib.parse.urlparse(already_visited[0][1]).netloc, template="Flask", time=datetime.strptime(already_visited[0][2], '%m/%d/%Y, %H:%M:%S'))
-
-            # More than 24 hours or parameter redo is True
-            if (datetime.strptime(already_visited[0][2], '%m/%d/%Y, %H:%M:%S') + timedelta(hours=24) < datetime.now() or relaunch == "True"):
-                return update_or_insert_graph_in_db(conn, urls,  maximum_urls, True)
-
-        # If first time
-        else:
-            return update_or_insert_graph_in_db(conn, urls, maximum_urls)
-    else:
-        return "JOB IS ALREADY RUNNING. PLEASE WAIT AND REFRESH."
-
 
 def generate_graph_internal_link_interactive(website, maximum):
     domain = urllib.parse.urlparse(website).netloc
@@ -190,3 +131,56 @@ def generate_graph_internal_link_interactive(website, maximum):
     plot.add_layout(color_bar, 'right')
     plot.renderers.append(graph)
     return p, domain
+
+
+def update_or_insert_graph_in_db(conn, urls, maximum, update=False):
+    """Update or inserts html in the DB
+
+    Arguments:
+        conn {Connection} -- DB connector
+        urls {string} -- Root Domain
+        maximum {int} -- Maximum number of urls to crawl
+
+    Keyword Arguments:
+        update {bool} -- update or insert (default: {False})
+
+    Returns:
+        HTML Render -- Renders the Graph
+    """
+    plot, domain = generate_graph_internal_link_interactive(urls, maximum)
+    script, div = components(plot)
+    graphs.update_url_db(conn, (datetime.now().strftime(
+        "%m/%d/%Y, %H:%M:%S"), script, div, "FINISHED", urls))
+    return render_template("bokeh.html", script=script, div=div, domain=domain, template="Flask", time=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"))
+
+
+def generate_interactive_graph(conn, urls, relaunch, maxi_urls):
+    if urls is None:
+        return "Empty Url paramaters"
+    maximum_urls = 500
+    if maxi_urls is not None:
+        maximum_urls = int(maxi_urls)
+    stopped, already_exists = graphs.check_status_url(conn, urls, "FINISHED")
+
+    if stopped == True:
+
+        # If not first time
+        if already_exists:
+            query_result = graphs.select_visited(conn, urls)
+            # ALREADY VISITED IN THE LAST 24 HOURS
+
+            if datetime.strptime(query_result[0][2], '%m/%d/%Y, %H:%M:%S') + timedelta(hours=24) > datetime.now() and relaunch != "True":
+                return render_template("bokeh.html", script=query_result[0][3], div=query_result[0][4], domain=urllib.parse.urlparse(query_result[0][1]).netloc, template="Flask", time=datetime.strptime(query_result[0][2], '%m/%d/%Y, %H:%M:%S'))
+
+            # More than 24 hours or parameter redo is True
+            if (datetime.strptime(query_result[0][2], '%m/%d/%Y, %H:%M:%S') + timedelta(hours=24) < datetime.now() or relaunch == "True"):
+                graphs.update_running_db(conn, ("RUNNING", urls))
+                return update_or_insert_graph_in_db(conn, urls,  maximum_urls, True)
+
+        # If first time
+        else:
+            graphs.insert_url_db(conn, (urls, datetime.now().strftime(
+                "%m/%d/%Y, %H:%M:%S"), "", "", "RUNNING"))
+            return update_or_insert_graph_in_db(conn, urls, maximum_urls)
+    else:
+        return "JOB IS ALREADY RUNNING. PLEASE WAIT AND REFRESH."

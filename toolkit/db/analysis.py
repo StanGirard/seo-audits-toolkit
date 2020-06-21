@@ -78,4 +78,4 @@ def get_query_results(conn, query, redo=False):
         update_result_db(
             conn, ("FINISHED", datetime.datetime.now(), json.dumps(results), query))
         return results
-    return "Blabla"
+    return "error"

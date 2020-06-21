@@ -9,8 +9,8 @@ from toolkit.seo.audit import get_all_links_website
 from flask import Flask, request
 import logging
 
-logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
-                    level=logging.DEBUG, datefmt='%m/%d/%Y %I:%M:%S %p')
+#logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
+#                     level=logging.DEBUG, datefmt='%m/%d/%Y %I:%M:%S %p')
 
 app = Flask(__name__, template_folder='toolkit/templates')
 

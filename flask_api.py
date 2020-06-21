@@ -100,4 +100,4 @@ if __name__ == '__main__':
         logging.warning("Error! cannot create the database connection.")
 
     logging.info("DB running")
-    app.run(port=5000)  # run app in debug mode on port 5000
+    app.run(host='0.0.0.0')  # run app in debug mode on port 5000

@@ -35,6 +35,12 @@ Then install dependencies
 pip install -r requirements.txt
 ```
 
+or you can use Docker
+
+```Bash
+docker build -t seo-toolkit:latest .
+```
+
 ## Updating
 
 Please delete the file visited.db if you have any issues when updating. 
@@ -45,6 +51,12 @@ Please delete the file visited.db if you have any issues when updating.
 python3 flask_api
 ```
 
+or with docker
+
+```Bash
+docker run -d -p 5000:5000 seo-toolkit:latest
+```
+
 This will expose six endpoints:
 - `localhost:5000/api/graph`
 - `localhost:5000/api/extract/headers`
@@ -52,6 +64,7 @@ This will expose six endpoints:
 - `localhost:5000/api/extract/links/website`
 - `localhost:5000/api/serp`
 - `localhost:5000/api/analysis/keywords`
+
 
 ## Endpoints
 

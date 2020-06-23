@@ -6,7 +6,7 @@ from toolkit.seo.rank import rank
 from toolkit.seo.links import find_all_links
 from toolkit.seo.images import find_all_images
 from toolkit.seo.audit import get_all_links_website
-from toolkit.seo.lighthouse import audit_google_lighthouse_full, 
+from toolkit.seo.lighthouse import audit_google_lighthouse_full, audit_google_lighthouse_seo
 from flask import Flask, request
 import logging
 
@@ -117,4 +117,4 @@ if __name__ == '__main__':
         logging.warning("Error! cannot create the database connection.")
 
     logging.info("DB running")
-    app.run(debug=True,host='0.0.0.0')  # run app in debug mode on port 5000
+    app.run(host='0.0.0.0')  # run app in debug mode on port 5000

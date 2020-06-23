@@ -6,6 +6,7 @@ from toolkit.seo.rank import rank
 from toolkit.seo.links import find_all_links
 from toolkit.seo.images import find_all_images
 from toolkit.seo.audit import get_all_links_website
+from toolkit.seo.lighthouse import audit_google_lighthouse_full
 from flask import Flask, request
 import logging
 
@@ -14,6 +15,14 @@ import logging
 
 app = Flask(__name__, template_folder='toolkit/templates')
 
+
+@app.route('/api/audit/lighthouse/full')
+def audit_lighthouse():
+    value = request.args.get('url')
+    if value:
+        return audit_google_lighthouse_full(value)
+    else:
+        return "Please input a valid value like this: /api/audit/lighthouse/full?url=https://primates.dev"
 
 @app.route('/api/graph')
 def interactive_graph():

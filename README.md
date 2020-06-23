@@ -12,6 +12,7 @@ I've grown tired of SEO agencies making us pay hundreds of euros for simple tool
   - [Running Flask](#running-flask)
   - [Endpoints](#endpoints)
     - [Graphs](#graphs)
+    - [Audits](#audits)
     - [SERP - Search Engine Result Page Rank](#serp---search-engine-result-page-rank)
     - [Keywords Query Finder](#keywords-query-finder)
     - [Extracts](#extracts)
@@ -57,13 +58,14 @@ or with docker
 docker run -d -p 5000:5000 seo-toolkit:latest
 ```
 
-This will expose six endpoints:
+This will expose these endpoints:
 - `localhost:5000/api/graph`
 - `localhost:5000/api/extract/headers`
 - `localhost:5000/api/extract/links`
 - `localhost:5000/api/extract/links/website`
 - `localhost:5000/api/serp`
 - `localhost:5000/api/analysis/keywords`
+- `localhost:5000/api/audit/lighthouse/full`
 
 
 ## Endpoints
@@ -75,6 +77,12 @@ This will expose six endpoints:
 -  `/api/graph?url=https://primates.dev` will crawl the website and respond with the graph as html
 -  `/api/graph?url=https://primates.dev&redo=True` will force the crawling. Doesn't crawl if less than 24 hours
 -  `/api/graph?url=https://primates.dev&max=10` stops after visiting 10 pages. (Default=500)
+
+--- 
+
+### Audits
+
+- `/api/audit/lighthouse/full&url=https://primates.dev` will run Google Speed Page Insight (Lighthouse) on the specified url
 
 --- 
 

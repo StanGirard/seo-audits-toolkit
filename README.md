@@ -65,7 +65,7 @@ This will expose these endpoints:
 - `localhost:5000/api/extract/links/website`
 - `localhost:5000/api/serp`
 - `localhost:5000/api/analysis/keywords`
-- `localhost:5000/api/audit/lighthouse/full`
+- `localhost:5000/api/audit/lighthouse`
 
 
 ## Endpoints
@@ -82,7 +82,8 @@ This will expose these endpoints:
 
 ### Audits
 
-- `/api/audit/lighthouse/full&url=https://primates.dev` will run Google Speed Page Insight (Lighthouse) on the specified url
+- `/api/audit/lighthouse/full?url=https://primates.dev` will run Google Speed Page Insight (Lighthouse) on the specified url
+- `/api/audit/lighthouse/seo?url=https://primates.dev` will run Google Speed Page Insight SEO on the specified url 
 
 --- 
 

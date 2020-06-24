@@ -99,6 +99,11 @@ Default values are **.com** and **en**
 }
 ```
 
+- `/api/serp/all` returns all the queries 
+
+TODO - Implement refresh
+
+
 ---
 
 ### Keywords Query Finder

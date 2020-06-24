@@ -1,4 +1,4 @@
-from toolkit.db import conf, analysis
+from toolkit.db import conf, analysis, serp
 from toolkit.db.conf import initialize_db, create_connection
 from toolkit.graphs.core import generate_interactive_graph
 from toolkit.seo.headers import find_all_headers_url
@@ -9,6 +9,7 @@ from toolkit.seo.audit import get_all_links_website
 from toolkit.seo.lighthouse import audit_google_lighthouse_full, audit_google_lighthouse_seo
 from flask import Flask, request
 import logging
+from datetime import datetime
 
 #logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
 #                     level=logging.DEBUG, datefmt='%m/%d/%Y %I:%M:%S %p')
@@ -84,16 +85,28 @@ def find_all_images_page():
 
 @app.route('/api/serp')
 def find_rank_query():
+    conn = create_connection("visited.db")
     query = request.args.get('query')
     domain = request.args.get('domain')
     tld = request.args.get('tld')
     lang = request.args.get('lang')
     print(lang)
     if query and domain:
-        return rank(domain, query, lang=lang, tld=tld)
+        result = rank(domain, query, lang=lang, tld=tld)
+        serp.insert_query_db(conn, (result["query"], result["pos"], result["url"], datetime.now().strftime(
+            "%m/%d/%Y, %H:%M:%S") ))
+        return result
     else:
         return 'Please input a valid value like this: /api/serp?domain=primates.dev&query=parse api xml response&tld=com&lang=en'
 
+@app.route('/api/serp/all')
+def find_rank_query_all():
+    conn = create_connection("visited.db")
+    result = serp.select_query(conn)
+    result_list = {"result":[]}
+    for i in result:
+        result_list["result"].append({"pos": i[2], "url": i[3], "query": i[1]})
+    return result_list
 
 @app.route('/api/analysis/keywords')
 def find_keywords_query():

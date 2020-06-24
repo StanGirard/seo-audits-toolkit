@@ -22,8 +22,8 @@ def rank(domain, query, lang='en', tld='com'):
         my_results_list.append(i)
         logging.debug(str(my_results_list.index(i)) + ": " + str(i))
         if domain in i:
-            return {"pos": my_results_list.index(i) + 1, "url": i}
-    return {"pos": -1, "url": None, "query": query}
+            return {"pos": my_results_list.index(i) + 1, "url": i, "query": query}
+    return {"pos": -1, "url": "None", "query": query}
 
 
 if __name__ == "__main__":

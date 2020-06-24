@@ -26,6 +26,14 @@ sql_create_keywords_table = """ CREATE TABLE IF NOT EXISTS keywords (
                                         begin_date text NOT NULL
                                 );
                             """
+sql_create_rank_table = """ CREATE TABLE IF NOT EXISTS serp (
+                                        id integer PRIMARY KEY,
+                                        query text NOT NULL,
+                                        pos int NOT NULL,
+                                        result text NOT NULL,
+                                        begin_date text NOT NULL
+                                );
+                            """
 
 
 def initialize_db(conn):
@@ -37,6 +45,7 @@ def initialize_db(conn):
     conf.create_table(conn, conf.sql_create_projects_table)
     conf.create_table(conn, conf.sql_create_running_table)
     conf.create_table(conn, conf.sql_create_keywords_table)
+    conf.create_table(conn, conf.sql_create_rank_table)
     conf.update_running_db_stopped(conn)
 
 

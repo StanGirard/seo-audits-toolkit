@@ -14,9 +14,9 @@ def rank(domain, query, lang='en', tld='com'):
     for i in search(query,        # The query you want to run
                     tld='com',  # The top level domain
                     lang='en',  # The language
-                    num=10,     # Number of results per page
+                    num=25,     # Number of results per page
                     start=0,    # First result to retrieve
-                    stop=100,  # Last result to retrieve
+                    stop=50,  # Last result to retrieve
                     pause=2.0,  # Lapse between HTTP requests
                     ):
         my_results_list.append(i)
@@ -24,6 +24,8 @@ def rank(domain, query, lang='en', tld='com'):
         if domain in i:
             return {"pos": my_results_list.index(i) + 1, "url": i, "query": query}
     return {"pos": -1, "url": "None", "query": query}
+
+
 
 
 if __name__ == "__main__":

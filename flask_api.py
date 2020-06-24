@@ -95,6 +95,7 @@ def find_rank_query():
 
     if query and domain:
         already = serp.select_query_already(conn, query)
+        all_results = serp.select_query(conn)
         if len(already) > 0:
             print(already[0])
             if datetime.strptime(already[0][4], '%m/%d/%Y, %H:%M:%S') + timedelta(hours=24) < datetime.now():
@@ -106,11 +107,17 @@ def find_rank_query():
             else:
                 print("no refresh")
                 return {"pos": already[0][2], "url": already[0][3], "query": already[0][1]}
-
-        else:       
-            result = rank(domain, query, lang=lang, tld=tld)
-            serp.insert_query_db(conn, (result["query"], result["pos"], result["url"], datetime.now().strftime(
-                "%m/%d/%Y, %H:%M:%S") ))
+        if len(all_results) >= 5:
+            print(len(all_results))
+            if datetime.strptime(all_results[4][4], '%m/%d/%Y, %H:%M:%S') + timedelta(hours=1) > datetime.now():
+                waiting = datetime.now() - datetime.strptime(all_results[4][4], '%m/%d/%Y, %H:%M:%S')
+                secs = 3600 - int(waiting.total_seconds())
+                minutes = int(secs / 60) % 60
+                return {"limit": "Imposing a limit of 5 query per hour to avoid Google Ban", "waiting_time": str(minutes) + "m " + str(int(secs % 60)) + "s" }   
+        
+        result = rank(domain, query, lang=lang, tld=tld)
+        serp.insert_query_db(conn, (result["query"], result["pos"], result["url"], datetime.now().strftime(
+            "%m/%d/%Y, %H:%M:%S") ))
         return result
     else:
         return 'Please input a valid value like this: /api/serp?domain=primates.dev&query=parse api xml response&tld=com&lang=en'

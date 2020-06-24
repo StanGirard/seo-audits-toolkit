@@ -19,3 +19,23 @@ def select_query(conn):
 
     row = cur.fetchall()
     return row
+
+def select_query_already(conn, query):
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM serp WHERE query=?", (query,))
+
+    row = cur.fetchall()
+
+    return row
+
+def update_query(conn, task):
+   
+    sql = ''' UPDATE serp
+              SET
+                  pos = ?,
+                  result = ?,
+                  begin_date = ?
+              WHERE query  = ?'''
+    cur = conn.cursor()
+    cur.execute(sql, task)
+    conn.commit()

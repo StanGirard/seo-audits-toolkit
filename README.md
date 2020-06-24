@@ -92,6 +92,8 @@ This will expose these endpoints:
 - `/api/serp?domain=primates.dev&query=parse api xml response&tld=com&lang=en` will give the rank of your website based on a query. tld and lang are not required. 
 Default values are **.com** and **en**
 
+If the query already exist and has been crawled in the last 24 hours it won't be refreshed
+
 ```JSON
 {
   "pos": 2, 
@@ -101,7 +103,6 @@ Default values are **.com** and **en**
 
 - `/api/serp/all` returns all the queries 
 
-TODO - Implement refresh
 
 
 ---

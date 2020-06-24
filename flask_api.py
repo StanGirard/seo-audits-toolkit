@@ -9,7 +9,7 @@ from toolkit.seo.audit import get_all_links_website
 from toolkit.seo.lighthouse import audit_google_lighthouse_full, audit_google_lighthouse_seo
 from flask import Flask, request
 import logging
-from datetime import datetime
+from datetime import datetime, timedelta
 
 #logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
 #                     level=logging.DEBUG, datefmt='%m/%d/%Y %I:%M:%S %p')
@@ -91,10 +91,26 @@ def find_rank_query():
     tld = request.args.get('tld')
     lang = request.args.get('lang')
     print(lang)
+    
+
     if query and domain:
-        result = rank(domain, query, lang=lang, tld=tld)
-        serp.insert_query_db(conn, (result["query"], result["pos"], result["url"], datetime.now().strftime(
-            "%m/%d/%Y, %H:%M:%S") ))
+        already = serp.select_query_already(conn, query)
+        if len(already) > 0:
+            print(already[0])
+            if datetime.strptime(already[0][4], '%m/%d/%Y, %H:%M:%S') + timedelta(hours=24) < datetime.now():
+                print("refresh")
+                result = rank(domain, query, lang=lang, tld=tld)
+                serp.update_query(conn, (result["pos"], result["url"], datetime.now().strftime(
+                    "%m/%d/%Y, %H:%M:%S"), query))
+                return result
+            else:
+                print("no refresh")
+                return {"pos": already[0][2], "url": already[0][3], "query": already[0][1]}
+
+        else:       
+            result = rank(domain, query, lang=lang, tld=tld)
+            serp.insert_query_db(conn, (result["query"], result["pos"], result["url"], datetime.now().strftime(
+                "%m/%d/%Y, %H:%M:%S") ))
         return result
     else:
         return 'Please input a valid value like this: /api/serp?domain=primates.dev&query=parse api xml response&tld=com&lang=en'

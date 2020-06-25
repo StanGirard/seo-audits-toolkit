@@ -127,7 +127,7 @@ def get_urls_from_query( query, number = 50, lang = 'en', tld = 'com'):
     for i in search(query,        # The query you want to run
                     tld = 'com',  # The top level domain
                     lang = 'en',  # The language
-                    num = 10,     # Number of results per page
+                    num = 50,     # Number of results per page
                     start = 0,    # First result to retrieve
                     stop = number,  # Last result to retrieve
                     pause = 2.0,  # Lapse between HTTP requests

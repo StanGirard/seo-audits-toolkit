@@ -1,0 +1,40 @@
+ {% extends "base.html" %} {% block title %}Rank{% endblock %} {% block content %}
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <ul class="list-group list-group-flush">
+                    {% for item in result %} 
+                    <li class="list-group-item d-flex justify-content-between align-items-center"> {{ item["query"] }}
+                        
+                        {% if item.pos > 10  %} 
+                            <span class="badge badge-primary badge-pill badge-warning">{{item["pos"]}}</span>
+                        {% elif item.pos == -1  %} 
+                            <span class="badge badge-primary badge-pill badge-danger">{{item["pos"]}}</span>
+                        {% else %}
+                            <span class="badge badge-primary badge-pill badge-success">{{item["pos"]}}</span> 
+                        {% endif %}
+                    </li>
+                    {% endfor %}
+
+
+                </ul>
+            </div>
+            <div class="col-sm">
+                <form action="rank" method="POST">
+                    <input type="text" id="query" name="query" placeholder="Query">
+                    <input type="text" id="domain" name="domain" placeholder="Domain">
+                    <button type="submit" id="submit">Submit</button>
+                </form>
+                 {% if error  %} 
+                    <div class="alert alert-danger" role="alert">
+                        {{error.limit}}</br>
+                        Next crawl possible in {{error.waiting_time}}
+                    </div>
+                 {% endif %}
+            </div>
+        </div>
+    </div >
+</body>
+{% endblock %}

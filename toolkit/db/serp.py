@@ -20,6 +20,13 @@ def select_query(conn):
     row = cur.fetchall()
     return row
 
+def select_query_desc(conn):
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM serp ORDER BY begin_date DESC LIMIT 50")
+
+    row = cur.fetchall()
+    return row
+
 def select_query_already(conn, query):
     cur = conn.cursor()
     cur.execute("SELECT * FROM serp WHERE query=?", (query,))

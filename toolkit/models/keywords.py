@@ -1,24 +1,14 @@
 from toolkit import dbAlchemy
 
-sql_create_keywords_table = """ CREATE TABLE IF NOT EXISTS keywords (
-                                        id integer PRIMARY KEY,
-                                        query text NOT NULL,
-                                        results text NOT NULL,
-                                        status_job text NOT NULL,
-                                        begin_date text NOT NULL
-                                );
-                            """
-
-
 class Keywords(dbAlchemy.Model):
     """Data model for user accounts."""
 
-    __tablename__ = 'keyword'
+    __tablename__ = 'keywords'
     id = dbAlchemy.Column(
         dbAlchemy.Integer,
         primary_key=True
     )
-    query = dbAlchemy.Column(
+    query_text = dbAlchemy.Column(
         dbAlchemy.String(64),
         index=True,
         unique=True,
@@ -27,21 +17,22 @@ class Keywords(dbAlchemy.Model):
     results = dbAlchemy.Column(
         dbAlchemy.Integer,
         index=False,
-        unique=True,
+        unique=False,
         nullable=False
     )
-    created = dbAlchemy.Column(
+    status_job = dbAlchemy.Column(
+    dbAlchemy.String(20),
+    index=False,
+    unique=False,
+    nullable=True
+    )
+    begin_date = dbAlchemy.Column(
         dbAlchemy.DateTime,
         index=False,
         unique=False,
         nullable=False
     )
-    status_job = dbAlchemy.Column(
-        dbAlchemy.String(20),
-        index=False,
-        unique=False,
-        nullable=True
-    )
+   
 
     def __repr__(self):
-        return '<Keywords {}>'.format(self.username)
+        return '<Keywords {}>'.format(self.query)

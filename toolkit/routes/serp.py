@@ -7,14 +7,14 @@ from toolkit.models import Serp
 
 def query_domain_serp( query, domain, lang, tld):
     if query and domain:
-        existing_serp = Serp.query.filter(
-            Serp.query_text == query and Serp.domain == domain
-        ).all()
         existing_serp_count= Serp.query.filter(
             Serp.query_text == query and Serp.domain == domain
         ).count()
         
         if existing_serp_count > 0:
+            existing_serp = Serp.query.filter(
+            Serp.query_text == query and Serp.domain == domain
+        ).all()
             if existing_serp[0].begin_date + timedelta(hours=24) < datetime.now():
                 result = rank(domain, query, lang=lang, tld=tld)
                 Serp.update().where(query_text==query and domain==domain).values(begin_date=datetime.now(),url=result["url"], pos=result["pos"])

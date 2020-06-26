@@ -48,3 +48,11 @@ def find_rank_query():
         return query_domain_serp(query,domain, lang, tld)
     else:
         return 'Please input a valid value like this: /api/serp?domain=primates.dev&query=parse api xml response&tld=com&lang=en'
+
+@app.route('/api/serp/all')
+def find_rank_query_all():
+    result = Serp.query.all()
+    result_list = {"result":[]}
+    for i in result:
+        result_list["result"].append({"pos": i.pos, "url": i.url, "query": i.query_text})
+    return result_list

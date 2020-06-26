@@ -14,24 +14,18 @@ def query_domain_serp( query, domain, lang, tld):
             Serp.query_text == query and Serp.domain == domain
         ).count()
         
-        print(existing_serp)
-        
         if existing_serp_count > 0:
-            print(existing_serp[0])
             if existing_serp[0].begin_date + timedelta(hours=24) < datetime.now():
-                print("refresh")
                 result = rank(domain, query, lang=lang, tld=tld)
                 Serp.update().where(query_text==query and domain==domain).values(begin_date=datetime.now(),url=result["url"], pos=result["pos"])
                 return result
             else:
-                print("no refresh")
                 return {"pos": existing_serp[0].pos, "url": existing_serp[0].url, "query": existing_serp[0].query_text}
         
         all_results_count = Serp.query.order_by(Serp.begin_date.desc()).count()
         if all_results_count >= 5:
             all_results = Serp.query.order_by(Serp.begin_date.desc()).all()
             if all_results[4].begin_date+ timedelta(hours=1) > datetime.now():
-                print("Already passed")
                 waiting = datetime.now() - all_results[4].begin_date
                 secs = 3600 - int(waiting.total_seconds())
                 minutes = int(secs / 60) % 60
@@ -39,7 +33,7 @@ def query_domain_serp( query, domain, lang, tld):
         
         result = rank(domain, query, lang=lang, tld=tld)
         new_result = Serp(query_text=result["query"],pos=result["pos"], domain=domain, url=result["url"], begin_date=datetime.now() )
-        db.session.add(new_result)  # Adds new User record to database
+        db.session.add(new_result)
         db.session.commit()
         return result
 

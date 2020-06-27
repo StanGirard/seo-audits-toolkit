@@ -6,7 +6,7 @@ dbAlchemy = SQLAlchemy()
 def create_app():
     """Construct the core application."""
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test12.db'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
     dbAlchemy.init_app(app)
 
     with app.app_context():

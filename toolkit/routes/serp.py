@@ -10,6 +10,7 @@ def query_domain_serp( query, domain, lang, tld):
         existing_serp_count= Serp.query.filter(
             Serp.query_text == query and Serp.domain == domain
         ).count()
+        print("hello")
         
         if existing_serp_count > 0:
             existing_serp = Serp.query.filter(

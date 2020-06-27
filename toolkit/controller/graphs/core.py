@@ -150,7 +150,7 @@ def update_or_insert_graph_in_db(conn, urls, maximum, update=False):
     script, div = components(plot)
     graphs.update_url_db(conn, (datetime.now().strftime(
         "%m/%d/%Y, %H:%M:%S"), script, div, "FINISHED", urls))
-    return render_template("bokeh.html", script=script, div=div, domain=domain, template="Flask", time=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"))
+    return render_template("bokeh.jinja2", script=script, div=div, domain=domain, template="Flask", time=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"))
 
 
 def generate_interactive_graph(conn, urls, relaunch, maxi_urls):
@@ -169,7 +169,7 @@ def generate_interactive_graph(conn, urls, relaunch, maxi_urls):
             # ALREADY VISITED IN THE LAST 24 HOURS
 
             if datetime.strptime(query_result[0][2], '%m/%d/%Y, %H:%M:%S') + timedelta(hours=24) > datetime.now() and relaunch != "True":
-                return render_template("bokeh.html", script=query_result[0][3], div=query_result[0][4], domain=urllib.parse.urlparse(query_result[0][1]).netloc, template="Flask", time=datetime.strptime(query_result[0][2], '%m/%d/%Y, %H:%M:%S'))
+                return render_template("bokeh.jinja2", script=query_result[0][3], div=query_result[0][4], domain=urllib.parse.urlparse(query_result[0][1]).netloc, template="Flask", time=datetime.strptime(query_result[0][2], '%m/%d/%Y, %H:%M:%S'))
 
             # More than 24 hours or parameter redo is True
             if (datetime.strptime(query_result[0][2], '%m/%d/%Y, %H:%M:%S') + timedelta(hours=24) < datetime.now() or relaunch == "True"):

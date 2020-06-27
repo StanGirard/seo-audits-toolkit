@@ -1,11 +1,12 @@
 from flask import current_app as app
-from flask import  render_template, request
+from flask import  render_template, request, redirect, url_for
 from toolkit import dbAlchemy
 from toolkit.models import Serp, Graphs, Keywords
 from toolkit.routes.keywords import get_query_results
 from toolkit.routes.serp import query_domain_serp
 from toolkit.routes.graphs import generate_interactive_graph
 import urllib
+from urllib.parse import urlparse
 import json
 
 @app.route('/')
@@ -18,14 +19,24 @@ def rank_get():
     if request.method == "POST":
         query = request.form["query"]
         domain = request.form["domain"]
-        result = query_domain_serp( query, domain, "en", "com")
-        if "limit" in result:
+        if not (domain.startswith('//') or domain.startswith('http://') or domain.startswith('https://')):
+            domain = '//' + domain
+        result = query_domain_serp( query, urlparse(domain).netloc, "en", "com")
+        
+        if result and "limit" in result:
             error = result
     result = Serp.query.order_by(Serp.begin_date.desc()).all()
     result_list = []
     for i in result:
-        result_list.append({"domain": i.domain, "pos": i.pos, "url": i.pos, "query": i.query_text, "time": i.begin_date})
+        result_list.append({"id": i.id, "domain": i.domain, "pos": i.pos, "url": i.pos, "query": i.query_text, "time": i.begin_date})
     return render_template("rank.jinja2", result=result_list, error=error)
+
+@app.route('/rank/delete', methods=["GET"])
+def delete_rank():
+    id = request.args.get('id')
+    Serp.query.filter(Serp.id == id).delete()
+    dbAlchemy.session.commit()
+    return redirect(url_for('rank_get'))
 
 @app.route('/graphs', methods=["POST", "GET"])
 def graphs_get():

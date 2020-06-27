@@ -8,7 +8,6 @@ I've grown tired of SEO agencies making us pay hundreds of euros for simple tool
 
 - [SEOToolkit](#seotoolkit)
   - [Installation](#installation)
-  - [Updating](#updating)
   - [Running Flask](#running-flask)
   - [Endpoints](#endpoints)
     - [Graphs](#graphs)
@@ -36,26 +35,10 @@ Then install dependencies
 pip install -r requirements.txt
 ```
 
-or you can use Docker
-
-```Bash
-docker build -t seo-toolkit:latest .
-```
-
-## Updating
-
-Please delete the file visited.db if you have any issues when updating. 
-
 ## Running Flask
 
 ```Bash
-python3 flask_api
-```
-
-or with docker
-
-```Bash
-docker run -d -p 5000:5000 seo-toolkit:latest
+flask run
 ```
 
 This will expose these endpoints:

@@ -1,5 +1,3 @@
-
-from bs4 import BeautifulSoup
 from toolkit.lib.http_tools import request_parse, request_status_code
 import urllib
 

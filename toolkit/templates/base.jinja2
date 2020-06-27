@@ -8,15 +8,15 @@
     <meta name="author" content="StanGirard">
     <title>{% block title %}{% endblock %}</title>
     <!-- Favicon -->
-    <link rel="icon" href="static/assets/img/brand/favicon.png" type="image/png">
+    <link rel="icon" href="/static/assets/img/brand/favicon.png" type="image/png">
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
     <!-- Icons -->
-    <link rel="stylesheet" href="static/assets/vendor/nucleo/css/nucleo.css" type="text/css">
-    <link rel="stylesheet" href="static/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="/static/assets/vendor/nucleo/css/nucleo.css" type="text/css">
+    <link rel="stylesheet" href="/static/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
     <!-- Page plugins -->
     <!-- Argon CSS -->
-    <link rel="stylesheet" href="static/assets/css/argon.css?v=1.2.0" type="text/css">
+    <link rel="stylesheet" href="/static/assets/css/argon.css?v=1.2.0" type="text/css">
 </head>
 
 <body>
@@ -26,7 +26,7 @@
             <!-- Brand -->
             <div class="sidenav-header  align-items-center">
                 <a class="navbar-brand" href="javascript:void(0)">
-                    <img src="static/assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+                    <img src="/static/assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
                 </a>
             </div>
             <div class="navbar-inner">
@@ -92,7 +92,7 @@
                             {#<h6 class="h2 text-white d-inline-block mb-0">{% block name %}{% endblock %}</h6>#}
                             <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                                    <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a href="/"><i class="fas fa-home"></i></a></li>
                                     <li class="breadcrumb-item active" aria-current="page"> {{ self.name() }} </li>
                                 </ol>
                             </nav>
@@ -108,16 +108,17 @@
     </div>
         <!-- Argon Scripts -->
         <!-- Core -->
-        <script src="static/assets/vendor/jquery/dist/jquery.min.js"></script>
-        <script src="static/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="static/assets/vendor/js-cookie/js.cookie.js"></script>
-        <script src="static/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
-        <script src="static/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+        <script src="/static/assets/vendor/jquery/dist/jquery.min.js"></script>
+        <script src="/static/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/static/assets/vendor/js-cookie/js.cookie.js"></script>
+        <script src="/static/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+        <script src="/static/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
         <!-- Optional JS -->
-        <script src="static/assets/vendor/chart.js/dist/Chart.min.js"></script>
-        <script src="static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+        <script src="/static/assets/vendor/chart.js/dist/Chart.min.js"></script>
+        <script src="/static/assets/vendor/chart.js/dist/Chart.extension.js"></script>
         <!-- Argon JS -->
-        <script src="static/assets/js/argon.js?v=1.2.0"></script>
+        <script src="/static/assets/js/argon.js?v=1.2.0"></script>
+        {% block script_js%} {% endblock%}
 </body>
 
 </html>

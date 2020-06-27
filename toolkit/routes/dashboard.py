@@ -24,7 +24,7 @@ def rank_get():
     result = Serp.query.order_by(Serp.begin_date.desc()).all()
     result_list = []
     for i in result:
-        result_list.append({"pos": i.pos, "url": i.pos, "query": i.query_text, "time": i.begin_date})
+        result_list.append({"domain": i.domain, "pos": i.pos, "url": i.pos, "query": i.query_text, "time": i.begin_date})
     return render_template("rank.jinja2", result=result_list, error=error)
 
 @app.route('/graphs', methods=["POST", "GET"])

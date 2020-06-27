@@ -6,7 +6,7 @@ from toolkit import dbAlchemy as db
 from toolkit.models import Graphs
 from sqlalchemy import update
 import urllib
-from toolkit.graphs.core import generate_graph_internal_link_interactive
+from toolkit.controller.graphs.core import generate_graph_internal_link_interactive
 
 from sqlalchemy import update
 

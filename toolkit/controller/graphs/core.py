@@ -14,7 +14,6 @@ from bokeh.models.graphs import NodesAndLinkedEdges
 from bokeh.layouts import row
 from flask import render_template
 
-from toolkit.db import graphs
 from toolkit.lib.http_tools import request_parse, request_status_code
 import seaborn as sns
 import logging

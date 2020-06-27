@@ -2,7 +2,7 @@ from flask import request
 from flask import current_app as app
 from toolkit import dbAlchemy as db
 from toolkit.models import Keywords
-from toolkit.analysis.keywords import generate_results
+from toolkit.controller.analysis.keywords import generate_results
 import json
 from datetime import datetime
 from sqlalchemy import update
@@ -22,7 +22,10 @@ def get_query_results(query, redo=False):
         db.session.add(new_keywords)
         db.session.commit()
         results = generate_results(query, 20)
-        update(Keywords).where(Keywords.query_text==query).values(results=json.dumps(results), status_job="FINISHED")
+        conn = db.engine.connect()
+        smt = update(Keywords).where(Keywords.query_text==query).values(results=json.dumps(results), status_job="FINISHED")
+        conn.execute(smt)
+        
         #Serp.update().where(query_text==query and domain==domain).values(begin_date=datetime.now(),url=result["url"], pos=result["pos"])
         return results
     return "error"

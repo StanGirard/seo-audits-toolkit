@@ -1,4 +1,4 @@
-from toolkit.seo.lighthouse import audit_google_lighthouse_full, audit_google_lighthouse_seo
+from toolkit.controller.seo.lighthouse import audit_google_lighthouse_full, audit_google_lighthouse_seo
 from flask import request
 from flask import current_app as app
 

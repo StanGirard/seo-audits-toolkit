@@ -2,7 +2,7 @@ from flask import current_app as app
 from flask import request
 from datetime import datetime, timedelta
 from toolkit import dbAlchemy as db
-from toolkit.seo.rank import rank
+from toolkit.controller.seo.rank import rank
 from toolkit.models import Serp
 
 def query_domain_serp( query, domain, lang, tld):

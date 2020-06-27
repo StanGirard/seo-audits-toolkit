@@ -1,10 +1,12 @@
 from flask import current_app as app
 from flask import  render_template, request
 from toolkit import dbAlchemy
-from toolkit.models import Serp, Graphs
+from toolkit.models import Serp, Graphs, Keywords
+from toolkit.routes.keywords import get_query_results
 from toolkit.routes.serp import query_domain_serp
 from toolkit.routes.graphs import generate_interactive_graph
 import urllib
+import json
 
 @app.route('/')
 def home():
@@ -43,3 +45,23 @@ def graphs_get():
 def graphs_get_by_id(id):
     results = Graphs.query.filter(Graphs.id == id).first()
     return render_template("bokeh.jinja2", script=results.script, div=results.div, domain=urllib.parse.urlparse(results.urls).netloc, template="Flask", time=results.begin_date)
+
+@app.route('/keywords', methods=["POST", "GET"])
+def get_all_keywords_dashboard():
+    if request.method == "POST":
+        query = request.form["query"]
+        get_query_results(query)
+    keyw = Keywords.query.all()
+    results = []
+    for keyword in keyw:
+        results.append({"id":keyword.id,"query": keyword.query_text, "status_job": keyword.status_job})
+    return render_template("keywords_all.jinja2", result=results)
+
+@app.route('/keywords/<id>')
+def get_all_keywords_by_id(id):
+    keyw = Keywords.query.filter(Keywords.id == id).first()
+    results = json.loads(keyw.results)
+    monogram = results["Monogram"]
+    bigram = results["Bigram"]
+    trigram = results["Trigram"]
+    return render_template("keywords.jinja2", query=keyw.query_text,monogram=monogram, bigram=bigram, trigram=trigram)

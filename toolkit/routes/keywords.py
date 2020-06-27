@@ -39,3 +39,11 @@ def find_keywords_query():
 
     else:
         return 'Please input a valid value like this: /api/analysis/keywords?query=parse api xml response'
+
+@app.route('/api/analysis/keywords/all')
+def get_all_keywords():
+    keyw = Keywords.query.all()
+    results = {"results": []}
+    for keyword in keyw:
+        results["results"].append({"query": keyword.query_text, "status_job": keyword.status_job})
+    return results

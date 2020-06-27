@@ -1,0 +1,42 @@
+ {% extends "base.jinja2" %} {% block title %}Keywords{% endblock %} {% block content %}
+
+<body>
+    <div class="container">
+       
+        <h2 class="d-flex justify-content-center">{{query}}</h2>
+       
+        <h2> Monograms </h2>
+        <div class="row">
+         {% for item in monogram %} 
+            <div class="col-2">
+                    <div> {{ item["keyword"] }}
+                    {#<span class="badge badge-primary badge-pill badge-success">{{item["frequency"]}}</span>#}
+                    </div>   
+            </div>
+         {% endfor %} 
+        </div>
+        <h2> Bigrams </h2>
+        <div class="row">
+         {% for item in bigram %} 
+            <div class="col-2">
+                    <div> {{ item["keyword"] }}
+                    {#<span class="badge badge-primary badge-pill badge-success">{{item["frequency"]}}</span>#}
+                    </div>   
+            </div>
+         {% endfor %}
+        </div>
+        <h2> Trigrams </h2>
+        <div class="row">
+         {% for item in trigram %} 
+            <div class="col-3">
+                    <div> {{ item["keyword"] }}
+                    {#<span class="badge badge-primary badge-pill badge-success">{{item["frequency"]}}</span>#}
+                    </div>   
+            </div>
+         {% endfor %}
+        </div>
+
+
+    </div >
+</body>
+{% endblock %}

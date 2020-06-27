@@ -13,19 +13,6 @@ from sqlalchemy import update
 
 
 def update_or_insert_graph_in_db( urls, maximum, updating=False):
-    """Update or inserts html in the DB
-
-    Arguments:
-        conn {Connection} -- DB connector
-        urls {string} -- Root Domain
-        maximum {int} -- Maximum number of urls to crawl
-
-    Keyword Arguments:
-        update {bool} -- update or insert (default: {False})
-
-    Returns:
-        HTML Render -- Renders the Graph
-    """
     plot, domain = generate_graph_internal_link_interactive(urls, maximum)
     script, div = components(plot)
     conn = db.engine.connect()
@@ -83,5 +70,5 @@ def interactive_graph_all():
     results = Graphs.query.all()
     result_arr={"results":[]}
     for i in results:
-        result_arr["results"].append({"urls": i.urls, "status_job": i.status_job})
+        result_arr["results"].append({"urls": i.urls, "status_job": i.status_job, "begin_date": i.begin_date})
     return result_arr

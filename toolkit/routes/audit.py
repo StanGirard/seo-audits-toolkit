@@ -35,5 +35,5 @@ def add_headers():
         )
         db.session.add(new_audit)
         db.session.commit()
-    return redirect(url_for('rank_get'))
+    return redirect(url_for('get_all_headers'))
     

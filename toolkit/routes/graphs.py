@@ -19,7 +19,7 @@ def update_or_insert_graph_in_db( urls, maximum, updating=False):
     smt = update(Graphs).where(Graphs.urls == urls).values(script= script, 
             div = div, begin_date=datetime.now(), status_job="FINISHED")
     conn.execute(smt)
-    return render_template("bokeh.jinja2", script=script, div=div, domain=domain, template="Flask", time=datetime.now())
+    return render_template("graphs/bokeh.jinja2", script=script, div=div, domain=domain, template="Flask", time=datetime.now())
 
 def generate_interactive_graph(urls, relaunch, maxi_urls):
     if urls is None:
@@ -37,7 +37,7 @@ def generate_interactive_graph(urls, relaunch, maxi_urls):
             # ALREADY VISITED IN THE LAST 24 HOURS
 
             if query_result.begin_date + timedelta(hours=24) > datetime.now() and relaunch != "True":
-                return render_template("bokeh.jinja2", script=query_result.script, div=query_result.div, domain=urllib.parse.urlparse(query_result.urls).netloc, template="Flask", time=query_result.begin_date)
+                return render_template("graphs/bokeh.jinja2", script=query_result.script, div=query_result.div, domain=urllib.parse.urlparse(query_result.urls).netloc, template="Flask", time=query_result.begin_date)
 
             # More than 24 hours or parameter redo is True
             if query_result.begin_date + timedelta(hours=24) < datetime.now() or relaunch == "True":

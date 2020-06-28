@@ -32,7 +32,7 @@ def rank_get():
     result_list = []
     for i in result:
         result_list.append({"id": i.id, "domain": i.domain, "pos": i.pos, "url": i.pos, "query": i.query_text, "time": i.begin_date})
-    return render_template("rank.jinja2", result=result_list, error=error)
+    return render_template("serp/rank.jinja2", result=result_list, error=error)
 
 @app.route('/rank/delete', methods=["GET"])
 def delete_rank():
@@ -53,12 +53,12 @@ def graphs_get():
     result_arr=[]
     for i in results:
         result_arr.append({"id": i.id, "urls": i.urls, "status_job": i.status_job, "begin_date": i.begin_date})
-    return render_template("graphs_all.jinja2", result=result_arr)
+    return render_template("graphs/graphs_all.jinja2", result=result_arr)
 
 @app.route('/graphs/<id>', methods=["GET"])
 def graphs_get_by_id(id):
     results = Graphs.query.filter(Graphs.id == id).first()
-    return render_template("bokeh.jinja2", script=results.script, div=results.div, domain=urllib.parse.urlparse(results.urls).netloc, template="Flask", time=results.begin_date)
+    return render_template("graphs/bokeh.jinja2", script=results.script, div=results.div, domain=urllib.parse.urlparse(results.urls).netloc, template="Flask", time=results.begin_date)
 
 @app.route('/graphs/delete', methods=["GET"])
 def delete_graph():
@@ -86,6 +86,10 @@ def get_all_keywords_by_id(id):
     bigram = results["Bigram"]
     trigram = results["Trigram"]
     return render_template("keywords/keywords.jinja2", query=keyw.query_text,monogram=monogram, bigram=bigram, trigram=trigram)
+
+@app.route('/extract', methods=["GET"])
+def extract_page():
+    return render_template("extract/extract.jinja2")
 
 @app.route('/extract/headers', methods=["GET"])
 def get_all_headers():

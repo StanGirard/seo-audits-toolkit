@@ -1,6 +1,6 @@
 # SEOToolkit
 
-![](examples/example.png)
+![](examples/seotoolkit.gif)
 
 This seo toolkit is a collection of multiple tools to help you in your quest for a better SEO. It is an easy to use API.
 
@@ -9,6 +9,7 @@ I've grown tired of SEO agencies making us pay hundreds of euros for simple tool
 - [SEOToolkit](#seotoolkit)
   - [Installation](#installation)
   - [Running Flask](#running-flask)
+  - [Dashboard](#dashboard)
   - [Endpoints](#endpoints)
     - [Graphs](#graphs)
     - [Audits](#audits)
@@ -49,6 +50,10 @@ This will expose these endpoints:
 - `localhost:5000/api/serp`
 - `localhost:5000/api/analysis/keywords`
 - `localhost:5000/api/audit/lighthouse`
+
+## Dashboard
+
+You can access the dashboard by going to `localhost:5000`
 
 
 ## Endpoints

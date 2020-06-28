@@ -1,59 +1,58 @@
  {% extends "base.jinja2" %} {% block title %}Rank{% endblock %} {% block name %}Rank {% endblock %} {% block content %}
 
-<body>
 
-    <form class="py-4" action="rank" method="POST">
-        <div style="display: flex; align-items: center; justify-content: center;">
-            <input class="form-control " style="max-width: 200px; margin-right: 5px" type="text" id="query" name="query" placeholder="Query">
-            <input class="form-control " style="max-width: 200px;  margin-right: 5px" type="text" id="domain" name="domain" placeholder="Domain">
-            <button class="btn btn-primary" type="submit" id="submit">Submit</button>
-        </div>
-    </form>
-    {% if error %}
-    <div class="alert alert-danger" role="alert">
-        {{error.limit}}</br>
-        Next crawl possible in {{error.waiting_time}}
+<form class="py-4" action="rank" method="POST">
+    <div style="display: flex; align-items: center; justify-content: center;">
+        <input class="form-control " style="max-width: 200px; margin-right: 5px" type="text" id="query" name="query" placeholder="Query">
+        <input class="form-control " style="max-width: 200px;  margin-right: 5px" type="text" id="domain" name="domain" placeholder="Domain">
+        <button class="btn btn-primary" type="submit" id="submit">Submit</button>
     </div>
-    {% endif %}
+</form>
+{% if error %}
+<div class="alert alert-danger" role="alert">
+    {{error.limit}}</br>
+    Next crawl possible in {{error.waiting_time}}
+</div>
+{% endif %}
 
-    <table class="table align-items-center table-flush">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col">Domain</th>
-                <th scope="col">Query</th>
-                <th scope="col">Position</th>
-                <th scope="col">Update</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in result %}
+<table class="table align-items-center table-flush">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Domain</th>
+            <th scope="col">Query</th>
+            <th scope="col">Position</th>
+            <th scope="col">Update</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in result %}
 
-            <tr>
-                <th scope="row">
-                    {{item.domain}}
-                </th>
-                <td>
-                    {{item.query}}
-                </td>
-                <td>
-                    {% if item.pos > 10 %}
-                    <span class="badge badge-primary badge-pill badge-warning">{{item["pos"]}}</span> {% elif item.pos == -1 %}
-                    <span class="badge badge-primary badge-pill badge-danger">{{item["pos"]}}</span> {% else %}
-                    <span class="badge badge-primary badge-pill badge-success">{{item["pos"]}}</span> {% endif %}
-                </td>
-                <td>
-                    <form action="rank/delete" id="delete{{item.id}}" method="GET">
-                        <input type="hidden" id="id" name="id" value="{{item.id}}">
-                        <a type="submit" id="submit" href="javascript:$('#delete{{item.id}}').submit();">
-                            <i style="color: red" class="ni ni-fat-remove"></i>
-                        </a>
-                        </div>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        <tr>
+            <th scope="row">
+                {{item.domain}}
+            </th>
+            <td>
+                {{item.query}}
+            </td>
+            <td>
+                {% if item.pos > 10 %}
+                <span class="badge badge-primary badge-pill badge-warning">{{item["pos"]}}</span> {% elif item.pos == -1 %}
+                <span class="badge badge-primary badge-pill badge-danger">{{item["pos"]}}</span> {% else %}
+                <span class="badge badge-primary badge-pill badge-success">{{item["pos"]}}</span> {% endif %}
+            </td>
+            <td>
+                <form action="rank/delete" id="delete{{item.id}}" method="GET">
+                    <input type="hidden" id="id" name="id" value="{{item.id}}">
+                    <a type="submit" id="submit" href="javascript:$('#delete{{item.id}}').submit();">
+                        <i style="color: red" class="ni ni-fat-remove"></i>
+                    </a>
+                    </div>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
-</body>
+
 {% endblock %}

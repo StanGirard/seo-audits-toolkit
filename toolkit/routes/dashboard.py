@@ -11,7 +11,10 @@ import json
 
 @app.route('/')
 def home():
-    return render_template("index.jinja2")
+    rank = Serp.query.count()
+    graphs = Graphs.query.count()
+    keywords = Keywords.query.count()
+    return render_template("index.jinja2", rank=rank, graphs=graphs, keywords=keywords)
 
 @app.route('/rank', methods=["POST", "GET"])
 def rank_get():
@@ -56,6 +59,13 @@ def graphs_get():
 def graphs_get_by_id(id):
     results = Graphs.query.filter(Graphs.id == id).first()
     return render_template("bokeh.jinja2", script=results.script, div=results.div, domain=urllib.parse.urlparse(results.urls).netloc, template="Flask", time=results.begin_date)
+
+@app.route('/graphs/delete', methods=["GET"])
+def delete_graph():
+    id = request.args.get('id')
+    Graphs.query.filter(Graphs.id == id).delete()
+    dbAlchemy.session.commit()
+    return redirect(url_for('graphs_get'))
 
 @app.route('/keywords', methods=["POST", "GET"])
 def get_all_keywords_dashboard():

@@ -1,38 +1,57 @@
  {% extends "base.jinja2" %} {% block title %}Graphs{% endblock %} {% block name %} Graphs {% endblock %} {% block content %}
 
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm">
-                <ul class="list-group list-group-flush">
-                    {% for item in result %} 
-                    
-                    <a href="graphs/{{item.id}}"class="list-group-item d-flex justify-content-between align-items-center list-group-item-action"> {{ item["urls"] }}
-                        
-                        {% if item.status_job == "RUNNING"  %} 
-                            <span class="badge badge-primary badge-pill badge-warning">{{item["status_job"]}}</span>
-                        {% else %}
-                            <span class="badge badge-primary badge-pill badge-success">{{item["status_job"]}}</span> 
-                        {% endif %}
+<form class="py-4" action="/graphs" method="POST">
+    <div style="display: flex; align-items: center; justify-content: center;">
+        <input class="form-control " style="max-width: 200px; margin-right: 5px" type="text" id="domain" name="domain" placeholder="Domain">
+        <button class="btn btn-primary" type="submit" id="submit">Submit</button>
+    </div>
+</form>
+{% if error %}
+<div class="alert alert-danger" role="alert">
+    {{error.limit}}
+</div>
+{% endif %}
+
+<table class="table align-items-center table-flush">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Domain</th>
+            <th scope="col">Status</th>
+            <th scope="col">Last Updated</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in result %}
+
+        <tr href="graphs/{{item.id}}">
+
+            <th scope="row">
+                <a href="graphs/{{item.id}}">
+                    {{ item["urls"] }}
+            </a>
+            </th>
+
+            <td>
+                {% if item.status_job == "RUNNING" %}
+                <span class="badge badge-primary badge-pill badge-warning">{{item["status_job"]}}</span> {% else %}
+                <span class="badge badge-primary badge-pill badge-success">{{item["status_job"]}}</span> {% endif %}
+            </td>
+            <td>
+                {{item.begin_date}}
+            </td>
+            <td>
+                <form action="graphs/delete" id="delete{{item.id}}" method="GET">
+                    <input type="hidden" id="id" name="id" value="{{item.id}}">
+                    <a type="submit" id="submit" href="javascript:$('#delete{{item.id}}').submit();">
+                        <i style="color: red" class="ni ni-fat-remove"></i>
                     </a>
-                    {% endfor %}
-
-
-                </ul>
-            </div>
-            <div class="col-sm">
-                <form action="/graphs" method="POST">
-                    <input type="text" id="domain" name="domain" placeholder="Domain">
-                    <button type="submit" id="submit">Submit</button>
-                </form>
-                 {% if error  %} 
-                    <div class="alert alert-danger" role="alert">
-                        {{error.limit}}</br>
                     </div>
-                 {% endif %}
-            </div>
-           
-        </div>
-    </div >
-</body>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
 {% endblock %}

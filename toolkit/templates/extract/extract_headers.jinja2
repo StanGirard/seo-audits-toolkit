@@ -1,0 +1,133 @@
+{% extends "base.jinja2" %} {% block title %}Extract Headers{% endblock %}{% block name %}Headers {% endblock %} {% block content %}
+
+
+
+<table class="table align-items-center table-flush">
+
+    <h2 class="d-flex justify-content-center">H1</h2>
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Values</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in h1 %}
+
+        <tr>
+            <td>
+
+                {{item}}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<!-- H2 -->
+<table class="table align-items-center table-flush">
+
+    <h2 class="d-flex justify-content-center">H2</h2>
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Values</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in h2 %}
+
+        <tr>
+            <td>
+
+                {{item}}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<!-- H3 -->
+<table class="table align-items-center table-flush">
+
+    <h2 class="d-flex justify-content-center">H3</h2>
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Values</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in h3 %}
+
+        <tr>
+            <td>
+
+                {{item}}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<!-- H4 -->
+<table class="table align-items-center table-flush">
+
+    <h2 class="d-flex justify-content-center">H4</h2>
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Values</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in h4 %}
+
+        <tr>
+            <td>
+
+                {{item}}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<!-- H5 -->
+<table class="table align-items-center table-flush">
+
+    <h2 class="d-flex justify-content-center">H5</h2>
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Values</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in h5 %}
+
+        <tr>
+            <td>
+
+                {{item}}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<!-- H6 -->
+<table class="table align-items-center table-flush">
+
+    <h2 class="d-flex justify-content-center">H6</h2>
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Values</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in h6 %}
+
+        <tr>
+            <td>
+
+                {{item}}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+{% endblock %}

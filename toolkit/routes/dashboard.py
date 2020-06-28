@@ -1,7 +1,7 @@
 from flask import current_app as app
 from flask import  render_template, request, redirect, url_for
 from toolkit import dbAlchemy
-from toolkit.models import Serp, Graphs, Keywords
+from toolkit.models import Serp, Graphs, Keywords, Audit
 from toolkit.routes.keywords import get_query_results
 from toolkit.routes.serp import query_domain_serp
 from toolkit.routes.graphs import generate_interactive_graph
@@ -76,7 +76,7 @@ def get_all_keywords_dashboard():
     results = []
     for keyword in keyw:
         results.append({"id":keyword.id,"query": keyword.query_text, "status_job": keyword.status_job})
-    return render_template("keywords_all.jinja2", result=results)
+    return render_template("keywords/keywords_all.jinja2", result=results)
 
 @app.route('/keywords/<id>')
 def get_all_keywords_by_id(id):
@@ -85,4 +85,28 @@ def get_all_keywords_by_id(id):
     monogram = results["Monogram"]
     bigram = results["Bigram"]
     trigram = results["Trigram"]
-    return render_template("keywords.jinja2", query=keyw.query_text,monogram=monogram, bigram=bigram, trigram=trigram)
+    return render_template("keywords/keywords.jinja2", query=keyw.query_text,monogram=monogram, bigram=bigram, trigram=trigram)
+
+@app.route('/extract/headers', methods=["GET"])
+def get_all_headers():
+    results = Audit.query.filter(Audit.type_audit == "Headers")
+    result_arr=[]
+    for i in results:
+        result_arr.append({"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date})
+    return render_template("extract/extract_headers_all.jinja2", result=result_arr)
+
+@app.route('/extract/headers/<id>', methods=["GET"])
+def get_all_headers_by_id(id):
+    audit = Audit.query.filter(Audit.id == id).first()
+    print(audit.result)
+    result = json.loads(audit.result)
+    
+    h1 = result["h1"]["values"]
+    h2 = result["h2"]["values"]
+    h3 = result["h3"]["values"]
+    h4 = result["h4"]["values"]
+    h5 = result["h5"]["values"]
+    h6 = result["h6"]["values"]
+    print(h1)
+    return render_template("extract/extract_headers.jinja2",h1=h1,h2=h2,h3=h3, h4=h4, h5=h5, h6=h6 )
+

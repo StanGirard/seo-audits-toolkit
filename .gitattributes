@@ -2,3 +2,4 @@
 *.python linguist-detectable=true
 *.html linguist-detectable=false
 *.js linguist-detectable=false
+toolkit/static/* linguist-vendored

@@ -1,7 +1,5 @@
 import json
-import urllib
 from datetime import datetime
-from urllib.parse import urlparse
 
 from flask import current_app as app
 from flask import redirect, render_template, request, url_for
@@ -10,10 +8,7 @@ from toolkit import dbAlchemy as db
 from toolkit.controller.seo.audit import get_all_links_website
 from toolkit.controller.seo.headers import find_all_headers_url
 from toolkit.controller.seo.links import find_all_links
-from toolkit.models import Audit, Graphs, Keywords, Serp
-from toolkit.routes.graphs import generate_interactive_graph
-from toolkit.routes.keywords import get_query_results
-from toolkit.routes.serp import query_domain_serp
+from toolkit.models import Audit
 from toolkit.controller.seo.images import find_all_images
 
 

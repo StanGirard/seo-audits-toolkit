@@ -1,10 +1,7 @@
 from toolkit.controller.seo.lighthouse import audit_google_lighthouse_full, audit_google_lighthouse_seo
-from flask import request, redirect, url_for
+from flask import request
 from flask import current_app as app
-from toolkit.models import Audit
-from datetime import datetime
-from toolkit import dbAlchemy as db
-import json
+
 
 @app.route('/api/audit/lighthouse/full')
 def audit_lighthouse_full():

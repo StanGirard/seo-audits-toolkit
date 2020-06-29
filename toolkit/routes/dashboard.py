@@ -8,8 +8,6 @@ from toolkit.routes.graphs import generate_interactive_graph
 import urllib
 from urllib.parse import urlparse
 import json
-from toolkit.controller.seo.headers import find_all_headers_url
-from toolkit.controller.seo.links import find_all_links
 
 @app.route('/')
 def home():

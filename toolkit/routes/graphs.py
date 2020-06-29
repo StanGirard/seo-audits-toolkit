@@ -4,7 +4,7 @@ from bokeh.embed import components
 from datetime import datetime, timedelta
 from toolkit import dbAlchemy as db
 from toolkit.models import Graphs
-from sqlalchemy import update
+
 import urllib
 from toolkit.controller.graphs.core import generate_graph_internal_link_interactive
 

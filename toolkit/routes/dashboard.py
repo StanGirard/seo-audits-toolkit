@@ -16,7 +16,8 @@ def home():
     rank = Serp.query.count()
     graphs = Graphs.query.count()
     keywords = Keywords.query.count()
-    return render_template("index.jinja2", rank=rank, graphs=graphs, keywords=keywords)
+    audit = Audit.query.count()
+    return render_template("index.jinja2", rank=rank, graphs=graphs, keywords=keywords,audit=audit)
 
 @app.route('/rank', methods=["POST", "GET"])
 def rank_get():

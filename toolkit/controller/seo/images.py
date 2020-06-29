@@ -7,20 +7,28 @@ def find_all_images(url):
     soup = request_parse(url, timeout=1)
     images = soup.findAll('img')
     for image in images:
-        url = urllib.parse.urljoin(url,image['src'])
+        url_img = None
+        print(image)
+        if image.has_attr('src'):
+            print("Im in")
+            url_img = urllib.parse.urljoin(url,image['src'])
+        elif image.has_attr('data-src'):
+            url_img = urllib.parse.urljoin(url,image['data-src'])
+        elif image.has_attr('src-set'):
+            url_img = urllib.parse.urljoin(url,image['src-set'])
         alt = image.get("alt")
         title = image.get("title")
         list_images["summary"]["total"] += 1
-    
-        if not alt:
-            list_images["summary"]["missing_alt"] += 1
-        if not title:
-            list_images["summary"]["missing_title"] += 1
-        if url not in list_urls:
-            list_images["images"].append({"url": url, "alt": alt, "title": title})
-            list_urls.append(url)
-        else:
-            list_images["summary"]["duplicates"] +=1
+        if url_img:
+            if not alt:
+                list_images["summary"]["missing_alt"] += 1
+            if not title:
+                list_images["summary"]["missing_title"] += 1
+            if url_img not in list_urls:
+                list_images["images"].append({"url": url_img, "alt": alt, "title": title})
+                list_urls.append(url_img)
+            else:
+                list_images["summary"]["duplicates"] +=1
     return list_images
     
 

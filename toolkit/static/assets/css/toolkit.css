@@ -3,3 +3,7 @@
     width: 18rem;
     padding: 0px !important;
 }
+
+.img-extract {
+    max-width: 50px;
+}

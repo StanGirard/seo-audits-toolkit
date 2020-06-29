@@ -14,6 +14,7 @@ from toolkit.models import Audit, Graphs, Keywords, Serp
 from toolkit.routes.graphs import generate_interactive_graph
 from toolkit.routes.keywords import get_query_results
 from toolkit.routes.serp import query_domain_serp
+from toolkit.controller.seo.images import find_all_images
 
 
 @app.route('/extract', methods=["GET"])
@@ -121,3 +122,51 @@ def get_all_links_website_by_id(id):
                  external=result["external_urls"]["results"],internal_number=result["internal_urls"]["total"],
                  external_number=result["external_urls"]["total"], page_visited=result["page_visited"],
                  crawl_time=result["time_crawl"])
+
+@app.route('/extract/images', methods=["GET"])
+def get_all_images_dashboard():
+    results = Audit.query.filter(Audit.type_audit == "Images").all()
+    result_arr=[]
+    for i in results:
+        result_arr.append({"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date})
+    return render_template("extract/images_all.jinja2", result=result_arr)
+
+
+@app.route('/extract/images', methods=["POST"])
+def add_images_dashboard():
+    url = request.form['url']
+    count = Audit.query.filter(Audit.url == url).filter(Audit.type_audit=="Images").count()
+    print(url)
+    print(count)
+    if url and count == 0:
+        value = find_all_images(url)
+        new_audit = Audit(
+            url = url, result=json.dumps(value), type_audit="Images", begin_date=datetime.now()
+        )
+        db.session.add(new_audit)
+        db.session.commit()
+        print("added")
+    return redirect(url_for('get_all_images_dashboard'))
+
+@app.route('/extract/images/<id>', methods=["GET"])
+def get_all_images_by_id(id):
+    audit = Audit.query.filter(Audit.id == id).first()
+    print(audit.result)
+    result = json.loads(audit.result)
+    return render_template("extract/images.jinja2",id=id,images=result["images"], missing_title=result["summary"]["missing_title"],
+                missing_alt=result["summary"]["missing_alt"],duplicates=result["summary"]["duplicates"], total=result["summary"]["total"])
+
+@app.route('/extract/images/delete', methods=["GET"])
+def delete_extract_image():
+    id = request.args.get('id')
+    Audit.query.filter(Audit.id == id).delete()
+    db.session.commit()
+    return redirect(url_for('get_all_images_dashboard'))
+
+# @app.route('/api/extract/images')
+# def find_all_images_page():
+#     value = request.args.get('url')
+#     if value:
+#         return find_all_images(value)
+#     else:
+#         return 'Please input a valid url like this: /api/extract/images?url=https://primates.dev'

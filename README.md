@@ -36,10 +36,22 @@ Then install dependencies
 pip install -r requirements.txt
 ```
 
+or you can use Docker
+
+```Bash
+docker build -t seo-toolkit:latest .
+```
+
 ## Running Flask
 
 ```Bash
 flask run
+```
+
+or with docker
+
+```Bash
+docker run -d -p 5000:5000 seo-toolkit:latest
 ```
 
 This will expose these endpoints:

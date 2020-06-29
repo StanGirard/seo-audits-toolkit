@@ -4,6 +4,7 @@ from flask import current_app as app
 from toolkit.models import Audit
 from datetime import datetime
 from toolkit.controller.seo.headers import find_all_headers_url
+from toolkit.controller.seo.links import find_all_links
 from toolkit import dbAlchemy as db
 import json
 
@@ -27,7 +28,7 @@ def audit_lighthouse_seo():
 @app.route('/extract/headers', methods=["POST"])
 def add_headers():
     url = request.form['url']
-    count = Audit.query.filter(Audit.url == url and Audit.type_audit=="Headers").count()
+    count = Audit.query.filter(Audit.url == url).filter(Audit.type_audit=="Headers").count()
     if url and count == 0:
         value = find_all_headers_url(url)
         new_audit = Audit(
@@ -36,4 +37,20 @@ def add_headers():
         db.session.add(new_audit)
         db.session.commit()
     return redirect(url_for('get_all_headers'))
+
+@app.route('/extract/links', methods=["POST"])
+def add_links():
+    url = request.form['url']
+    count = Audit.query.filter(Audit.url == url).filter(Audit.type_audit=="Links").count()
+    print(url)
+    print(count)
+    if url and count == 0:
+        value = find_all_links(url)
+        new_audit = Audit(
+            url = url, result=json.dumps(value), type_audit="Links", begin_date=datetime.now()
+        )
+        db.session.add(new_audit)
+        db.session.commit()
+        print("added")
+    return redirect(url_for('get_all_links'))
     

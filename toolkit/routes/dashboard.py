@@ -114,3 +114,17 @@ def get_all_headers_by_id(id):
     print(h1)
     return render_template("extract/extract_headers.jinja2",h1=h1,h2=h2,h3=h3, h4=h4, h5=h5, h6=h6 )
 
+@app.route('/extract/links', methods=["GET"])
+def get_all_links():
+    results = Audit.query.filter(Audit.type_audit == "Links").all()
+    result_arr=[]
+    for i in results:
+        result_arr.append({"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date})
+    return render_template("extract/links_all.jinja2", result=result_arr)
+
+@app.route('/extract/links/<id>', methods=["GET"])
+def get_all_links_by_id(id):
+    audit = Audit.query.filter(Audit.id == id).first()
+    print(audit.result)
+    result = json.loads(audit.result)
+    return render_template("extract/links.jinja2",results=result["200"] )

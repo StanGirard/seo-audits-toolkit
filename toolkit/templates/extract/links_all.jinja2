@@ -1,0 +1,37 @@
+ {% extends "base.jinja2" %} {% block title %}Extract Links{% endblock %}{% block name %}Links {% endblock %} {% block content %}
+
+<form class="py-4" action="/extract/links" method="POST">
+    <div style="display: flex; align-items: center; justify-content: center;">
+        <input class="form-control " style="max-width: 200px; margin-right: 5px" type="text" id="url" name="url" placeholder="url">
+        <button class="btn btn-primary" type="submit" id="submit">Submit</button>
+    </div>
+</form>
+
+<table class="table align-items-center table-flush">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">URL</th>
+            <th scope="col">Update Time </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in result %}
+
+        <tr href="/extract/links/{{item.id}}">
+
+            <th scope="row">
+                <a href="/extract/links/{{item.id}}">
+                {{item.url}}
+            </a>
+            </th>
+
+            <td>
+              
+                {{item.begin_date}}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

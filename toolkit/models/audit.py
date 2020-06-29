@@ -1,4 +1,5 @@
 from toolkit import dbAlchemy
+from sqlalchemy import UniqueConstraint
 
 class Audit(dbAlchemy.Model):
     """Data model for user accounts."""
@@ -11,7 +12,7 @@ class Audit(dbAlchemy.Model):
     url = dbAlchemy.Column(
         dbAlchemy.String(256),
         index=True,
-        unique=True,
+        unique=False,
         nullable=False
     )
     result = dbAlchemy.Column(
@@ -32,6 +33,7 @@ class Audit(dbAlchemy.Model):
         unique=False,
         nullable=False
     )
+    __table_args__ = (UniqueConstraint('url', 'type_audit', name='url_audit_type'),)
    
 
     def __repr__(self):

@@ -1,0 +1,30 @@
+{% extends "base.jinja2" %} {% block title %}Extract Links{% endblock %}{% block name %}Links {% endblock %} {% block content %}
+
+
+
+<table class="table align-items-center table-flush">
+
+    <h2 class="d-flex justify-content-center">Links</h2>
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Values</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in results %}
+
+        <tr>
+            <td>
+                <a href="{{item}}">
+                    {{item}}
+                </a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+{% endblock %}

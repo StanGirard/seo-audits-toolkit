@@ -1,4 +1,13 @@
-{% extends "base.jinja2" %} {% block title %}Home Page{% endblock %} {% block name %} Dashboard {% endblock %} {% block content %}
+{% extends "base.jinja2" %} {% block title %}Extract Links Website{% endblock %}
+{% block list %}
+<li class="breadcrumb-item"><a href="/extract">Extract</a></li>
+<li class="breadcrumb-item"><a href="/extract/links/website">Links Website</a></li>
+<li class="breadcrumb-item active" aria-current="page">{{id}}</a>
+</li>
+{%endblock%}
+
+{% block content %}
+
 <div class="row">
     <div class="col-xl-3 col-md-6">
         <div class="card card-stats">
@@ -6,8 +15,8 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">Serp Ranks</h5>
-                        <span class="h2 font-weight-bold mb-0">{{rank}}</span>
+                        <h5 class="card-title text-uppercase text-muted mb-0">Internal Links</h5>
+                        <span class="h2 font-weight-bold mb-0">{{internal_number}}</span>
                     </div>
                     <div class="col-auto">
                         <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
@@ -25,8 +34,8 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">Graphs</h5>
-                        <span class="h2 font-weight-bold mb-0">{{graphs}}</span>
+                        <h5 class="card-title text-uppercase text-muted mb-0">External Links</h5>
+                        <span class="h2 font-weight-bold mb-0">{{external_number}}</span>
                     </div>
                     <div class="col-auto">
                         <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
@@ -43,8 +52,8 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">Keywords</h5>
-                        <span class="h2 font-weight-bold mb-0">{{keywords}}</span>
+                        <h5 class="card-title text-uppercase text-muted mb-0">Page Visited</h5>
+                        <span class="h2 font-weight-bold mb-0">{{page_visited}}</span>
                     </div>
                     <div class="col-auto">
                         <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
@@ -61,8 +70,8 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">Github</h5>
-                        <span class="h2 font-weight-bold mb-0">Awesome</span>
+                        <h5 class="card-title text-uppercase text-muted mb-0">Crawl Time</h5>
+                        <span class="h2 font-weight-bold mb-0">{{crawl_time}}</span>
                     </div>
                     <div class="col-auto">
                         <div class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
@@ -75,4 +84,53 @@
         </div>
     </div>
 </div>
+
+<table class="table align-items-center table-flush">
+
+    <h2 class="d-flex justify-content-center">Internal Links</h2>
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Values</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in internal %}
+
+        <tr>
+            <td>
+                <a href="{{item}}">
+                    {{item}}
+                </a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<table class="table align-items-center table-flush">
+
+    <h2 class="d-flex justify-content-center">External Links</h2>
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Values</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in external %}
+
+        <tr>
+            <td>
+                <a href="{{item}}">
+                    {{item}}
+                </a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
 {% endblock %}

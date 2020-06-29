@@ -8,6 +8,8 @@ from toolkit.routes.graphs import generate_interactive_graph
 import urllib
 from urllib.parse import urlparse
 import json
+from toolkit.controller.seo.headers import find_all_headers_url
+from toolkit.controller.seo.links import find_all_links
 
 @app.route('/')
 def home():
@@ -58,7 +60,7 @@ def graphs_get():
 @app.route('/graphs/<id>', methods=["GET"])
 def graphs_get_by_id(id):
     results = Graphs.query.filter(Graphs.id == id).first()
-    return render_template("graphs/bokeh.jinja2", script=results.script, div=results.div, domain=urllib.parse.urlparse(results.urls).netloc, template="Flask", time=results.begin_date)
+    return render_template("graphs/bokeh.jinja2", id=id,script=results.script, div=results.div, domain=urllib.parse.urlparse(results.urls).netloc, template="Flask", time=results.begin_date)
 
 @app.route('/graphs/delete', methods=["GET"])
 def delete_graph():
@@ -85,46 +87,5 @@ def get_all_keywords_by_id(id):
     monogram = results["Monogram"]
     bigram = results["Bigram"]
     trigram = results["Trigram"]
-    return render_template("keywords/keywords.jinja2", query=keyw.query_text,monogram=monogram, bigram=bigram, trigram=trigram)
+    return render_template("keywords/keywords.jinja2",id=id, query=keyw.query_text,monogram=monogram, bigram=bigram, trigram=trigram)
 
-@app.route('/extract', methods=["GET"])
-def extract_page():
-    return render_template("extract/extract.jinja2")
-
-@app.route('/extract/headers', methods=["GET"])
-def get_all_headers():
-    results = Audit.query.filter(Audit.type_audit == "Headers")
-    result_arr=[]
-    for i in results:
-        result_arr.append({"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date})
-    return render_template("extract/extract_headers_all.jinja2", result=result_arr)
-
-@app.route('/extract/headers/<id>', methods=["GET"])
-def get_all_headers_by_id(id):
-    audit = Audit.query.filter(Audit.id == id).first()
-    print(audit.result)
-    result = json.loads(audit.result)
-    
-    h1 = result["h1"]["values"]
-    h2 = result["h2"]["values"]
-    h3 = result["h3"]["values"]
-    h4 = result["h4"]["values"]
-    h5 = result["h5"]["values"]
-    h6 = result["h6"]["values"]
-    print(h1)
-    return render_template("extract/extract_headers.jinja2",h1=h1,h2=h2,h3=h3, h4=h4, h5=h5, h6=h6 )
-
-@app.route('/extract/links', methods=["GET"])
-def get_all_links():
-    results = Audit.query.filter(Audit.type_audit == "Links").all()
-    result_arr=[]
-    for i in results:
-        result_arr.append({"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date})
-    return render_template("extract/links_all.jinja2", result=result_arr)
-
-@app.route('/extract/links/<id>', methods=["GET"])
-def get_all_links_by_id(id):
-    audit = Audit.query.filter(Audit.id == id).first()
-    print(audit.result)
-    result = json.loads(audit.result)
-    return render_template("extract/links.jinja2",results=result["200"] )

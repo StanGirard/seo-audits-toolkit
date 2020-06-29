@@ -1,4 +1,10 @@
- {% extends "base.jinja2" %} {% block title %}Graphs - Details {% endblock %} {% block name %}Graphs{% endblock %} {% block content %}
+ {% extends "base.jinja2" %} {% block title %}Graphs - Details {% endblock %} 
+{% block list %}
+<li class="breadcrumb-item"><a href="/graphs">Graphs</a></li>
+<li class="breadcrumb-item active" aria-current="page">{{id}}</a>
+</li>
+{%endblock%} 
+{% block content %}
     <link rel="stylesheet" type="text/css" href="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.bokeh.org/bokeh/release/bokeh-widgets-2.0.1.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdn.bokeh.org/bokeh/release/bokeh-tables-2.0.1.min.css" />

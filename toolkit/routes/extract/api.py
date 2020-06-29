@@ -4,6 +4,7 @@ from toolkit.controller.seo.links import find_all_links
 from toolkit.controller.seo.images import find_all_images
 from toolkit.controller.seo.audit import get_all_links_website
 from toolkit.controller.seo.headers import find_all_headers_url
+from toolkit.controller.seo.audit import get_all_links_website
 
 
 @app.route('/api/extract/headers')

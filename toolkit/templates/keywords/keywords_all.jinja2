@@ -16,6 +16,7 @@
         <tr>
             <th scope="col">Query</th>
             <th scope="col">Status</th>
+            <th scope="col">Update</th>
         </tr>
     </thead>
     <tbody>
@@ -33,6 +34,15 @@
                 {% if item.status_job == "RUNNING" %}
                 <span class="badge badge-primary badge-pill badge-warning">{{item["status_job"]}}</span> {% else %}
                 <span class="badge badge-primary badge-pill badge-success">{{item["status_job"]}}</span> {% endif %}
+            </td>
+            <td>
+            <form action="/keywords/delete" id="delete{{item.id}}" method="GET">
+                    <input type="hidden" id="id" name="id" value="{{item.id}}">
+                    <a type="submit" id="submit" href="javascript:$('#delete{{item.id}}').submit();">
+                        <i style="color: red" class="ni ni-fat-remove"></i>
+                    </a>
+                    </div>
+                </form>
             </td>
         </tr>
         {% endfor %}

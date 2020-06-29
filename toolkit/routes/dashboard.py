@@ -81,6 +81,14 @@ def get_all_keywords_dashboard():
         results.append({"id":keyword.id,"query": keyword.query_text, "status_job": keyword.status_job})
     return render_template("keywords/keywords_all.jinja2", result=results)
 
+@app.route('/keywords/delete', methods=["GET"])
+def delete_keywords():
+    id = request.args.get('id')
+    Keywords.query.filter(Keywords.id == id).delete()
+    dbAlchemy.session.commit()
+    return redirect(url_for('get_all_keywords_dashboard'))
+
+
 @app.route('/keywords/<id>')
 def get_all_keywords_by_id(id):
     keyw = Keywords.query.filter(Keywords.id == id).first()

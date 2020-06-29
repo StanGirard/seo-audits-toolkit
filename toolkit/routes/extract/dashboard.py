@@ -22,7 +22,7 @@ def get_all_headers():
     result_arr=[]
     for i in results:
         result_arr.append({"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date})
-    return render_template("extract/extract_headers_all.jinja2",result=result_arr)
+    return render_template("extract/headers/extract_headers_all.jinja2",result=result_arr)
 
 @app.route('/extract/headers/<id>', methods=["GET"])
 def get_all_headers_by_id(id):
@@ -37,7 +37,7 @@ def get_all_headers_by_id(id):
     h5 = result["h5"]["values"]
     h6 = result["h6"]["values"]
     print(h1)
-    return render_template("extract/extract_headers.jinja2",id=id,h1=h1,h2=h2,h3=h3, h4=h4, h5=h5, h6=h6 )
+    return render_template("extract/headers/extract_headers.jinja2",id=id,h1=h1,h2=h2,h3=h3, h4=h4, h5=h5, h6=h6 )
 
 @app.route('/extract/links', methods=["GET"])
 def get_all_links():
@@ -45,14 +45,14 @@ def get_all_links():
     result_arr=[]
     for i in results:
         result_arr.append({"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date})
-    return render_template("extract/links_all.jinja2", result=result_arr)
+    return render_template("extract/links/links_all.jinja2", result=result_arr)
 
 @app.route('/extract/links/<id>', methods=["GET"])
 def get_all_links_by_id(id):
     audit = Audit.query.filter(Audit.id == id).first()
     print(audit.result)
     result = json.loads(audit.result)
-    return render_template("extract/links.jinja2",id=id,results=result["200"] )
+    return render_template("extract/links/links.jinja2",id=id,results=result["200"] )
 
 @app.route('/extract/headers', methods=["POST"])
 def add_headers():
@@ -90,7 +90,7 @@ def get_all_links_website_dashboard():
     result_arr=[]
     for i in results:
         result_arr.append({"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date})
-    return render_template("extract/links_all_website.jinja2", result=result_arr)
+    return render_template("extract/links_website/links_all_website.jinja2", result=result_arr)
 
 @app.route('/extract/links/website', methods=["POST"])
 def add_links_website():
@@ -113,7 +113,7 @@ def get_all_links_website_by_id(id):
     audit = Audit.query.filter(Audit.id == id).first()
     print(audit.result)
     result = json.loads(audit.result)
-    return render_template("extract/links_website.jinja2",id=id,internal=result["internal_urls"]["results"],
+    return render_template("extract/links_website/links_website.jinja2",id=id,internal=result["internal_urls"]["results"],
                  external=result["external_urls"]["results"],internal_number=result["internal_urls"]["total"],
                  external_number=result["external_urls"]["total"], page_visited=result["page_visited"],
                  crawl_time=result["time_crawl"])
@@ -124,7 +124,7 @@ def get_all_images_dashboard():
     result_arr=[]
     for i in results:
         result_arr.append({"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date})
-    return render_template("extract/images_all.jinja2", result=result_arr)
+    return render_template("extract/images/images_all.jinja2", result=result_arr)
 
 
 @app.route('/extract/images', methods=["POST"])
@@ -148,7 +148,7 @@ def get_all_images_by_id(id):
     audit = Audit.query.filter(Audit.id == id).first()
     print(audit.result)
     result = json.loads(audit.result)
-    return render_template("extract/images.jinja2",id=id,images=result["images"], missing_title=result["summary"]["missing_title"],
+    return render_template("extract/images/images.jinja2",id=id,images=result["images"], missing_title=result["summary"]["missing_title"],
                 missing_alt=result["summary"]["missing_alt"],duplicates=result["summary"]["duplicates"], total=result["summary"]["total"])
 
 @app.route('/extract/images/delete', methods=["GET"])

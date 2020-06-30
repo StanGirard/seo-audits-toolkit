@@ -8,7 +8,7 @@ def find_all_links(url):
     for link in soup.findAll('a'):
         url2 = urllib.parse.urljoin(url, link.get('href'))
         if url2 not in list_visited:
-            status_code = request_status_code(url, timeout=1)
+            status_code = request_status_code(url2, timeout=2)
             if status_code not in list_urls:
                 list_urls[status_code] = []
             if url2 not in list_urls[status_code]:

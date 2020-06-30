@@ -5,16 +5,17 @@
 </li>
 {%endblock%} {% block content %}
 
+{% for status in links_status %}
 <table class="table align-items-center table-flush">
 
-    <h2 class="d-flex justify-content-center">Links</h2>
+    <h2 class="d-flex justify-content-center">{{status}}</h2>
     <thead class="thead-light">
         <tr>
             <th scope="col">Values</th>
         </tr>
     </thead>
     <tbody>
-        {% for item in results %}
+        {% for item in results[status] %}
 
         <tr>
             <td>
@@ -27,6 +28,7 @@
         {% endfor %}
     </tbody>
 </table>
+{% endfor %}
 
 
 

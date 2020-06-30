@@ -52,7 +52,9 @@ def get_all_links_by_id(id):
     audit = Audit.query.filter(Audit.id == id).first()
     print(audit.result)
     result = json.loads(audit.result)
-    return render_template("extract/links/links.jinja2",id=id,results=result["200"] )
+    links_status = [x for x in result]
+    print(links_status)
+    return render_template("extract/links/links.jinja2",id=id,results=result, links_status=links_status )
 
 @app.route('/extract/headers', methods=["POST"])
 def add_headers():

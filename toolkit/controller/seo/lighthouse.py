@@ -2,8 +2,8 @@ from toolkit.lib.http_tools import request_page
 
 def audit_google_lighthouse_full(url):
     pagespeed = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url="
-    result = request_page(pagespeed + url, timeout=30)
-    return result.content
+    result = request_page(pagespeed + url + "&category=BEST_PRACTICES&category=ACCESSIBILITY&category=PERFORMANCE&category=PWA&category=SEO", timeout=30)
+    return result.json()
 
 def audit_google_lighthouse_seo(url):
     pagespeed = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url="

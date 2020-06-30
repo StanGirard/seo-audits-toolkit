@@ -1,8 +1,7 @@
 from urllib.parse import urlparse
 from toolkit.lib.http_tools import request_page
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Doctype
 import requests
-from bs4 import BeautifulSoup as Soup
 import pandas as pd
 import hashlib
 
@@ -18,6 +17,8 @@ class AuditWebsite():
         self.populate_request()
         self.robots_finder()
         self.populate_urls()
+        self.soup = BeautifulSoup(self.request.content, features="lxml")
+        self.populate_doctype()
     
     def populate_request(self):
         self.request = request_page(self.generate_url())
@@ -50,7 +51,10 @@ class AuditWebsite():
                     if url not in list_urls:
                         list_urls.append(url)
             self.urls = list_urls
-        
+    
+    def populate_doctype(self):
+        items = [item for item in self.soup.contents if isinstance(item, Doctype)]
+        self.doctype = items[0] if items else None
 
     def generate_url(self):
         return self.scheme + "://" + self.domain
@@ -66,7 +70,7 @@ def parse_sitemap( url):
         return False
 
     # BeautifulSoup to parse the document
-    soup = Soup(resp.content, "xml")
+    soup = BeautifulSoup(resp.content, "xml")
 
     # find all the <url> tags in the document
     urls = soup.findAll('url')

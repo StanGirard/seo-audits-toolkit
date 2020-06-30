@@ -3,4 +3,4 @@
 *.html linguist-detectable=false
 *.js linguist-detectable=false
 toolkit/static/* linguist-vendored
-/toolkit/static/assets/vendor/* linguist-vendored
+toolkit/static/assets/vendor/* linguist-vendored

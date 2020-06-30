@@ -71,8 +71,6 @@ def add_headers():
 def add_links():
     url = request.form['url']
     count = Audit.query.filter(Audit.url == url).filter(Audit.type_audit=="Links").count()
-    print(url)
-    print(count)
     if url and count == 0:
         value = find_all_links(url)
         new_audit = Audit(

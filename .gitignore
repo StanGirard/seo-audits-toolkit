@@ -3,3 +3,4 @@ visited.db
 *.db
 test.py
 .idea/*
+.env

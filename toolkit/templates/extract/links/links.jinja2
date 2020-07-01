@@ -6,6 +6,7 @@
 {%endblock%} {% block content %}
 
 {% for status in links_status %}
+<div class="table-responsive">
 <table class="table align-items-center table-flush">
 
     <h2 class="d-flex justify-content-center">{{status}}</h2>
@@ -28,6 +29,7 @@
         {% endfor %}
     </tbody>
 </table>
+</div>
 {% endfor %}
 
 

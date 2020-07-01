@@ -12,7 +12,7 @@
         <button class="btn btn-primary" type="submit" id="submit">Submit</button>
     </div>
 </form>
-
+<div class="table-responsive">
 <table class="table align-items-center table-flush">
     <thead class="thead-light">
         <tr>
@@ -33,11 +33,11 @@
 
             <td>
               
-                {{item.begin_date}}
+                {{item.begin_date|formatdatetime}}
             </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
-
+</div>
 {% endblock %}

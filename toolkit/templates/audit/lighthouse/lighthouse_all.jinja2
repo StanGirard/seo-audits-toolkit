@@ -18,6 +18,7 @@
 </div>
 {% endif %}
 
+<div class="table-responsive">
 <table class="table align-items-center table-flush">
     <thead class="thead-light">
         <tr>
@@ -42,23 +43,61 @@
             </a>
             </th>
             <td>
-                {{item.accessibility}}
+            <div class="d-flex align-items-center">
+                        <span class="mr-2">{{item.accessibility}}</span>
+                        <div>
+                          <div class="progress">
+                            <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="{{item.accessibility}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.accessibility}}%;"></div>
+                          </div>
+                        </div>
+                      </div>
             </td>
             <td>
-                {{item.best_practices}}
+            <div class="d-flex align-items-center">
+                        <span class="mr-2">{{item.best_practices}}</span>
+                        <div>
+                          <div class="progress">
+                            <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="{{item.best_practices}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.best_practices}}%;"></div>
+                          </div>
+                        </div>
+                      </div>
             </td>
             <td>
-                {{item.performance}}
+            <div class="d-flex align-items-center">
+                        <span class="mr-2">{{item.performance}}</span>
+                        <div>
+                          <div class="progress">
+                            <div class="progress-bar bg-gradient-primary" role="progressbar" aria-valuenow="{{item.performance}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.performance}}%;"></div>
+                          </div>
+                        </div>
+                      </div>
+                
             </td>
             <td>
-                {{item.seo}}
+            <div class="d-flex align-items-center">
+                        <span class="mr-2">{{item.seo}}</span>
+                        <div>
+                          <div class="progress">
+                            <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="{{item.seo}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.seo}}%;"></div>
+                          </div>
+                        </div>
+                      </div>
+                
             </td>
             <td>
-                {{item.pwa}}
+            <div class="d-flex align-items-center">
+                        <span class="mr-2">{{item.pwa}}</span>
+                        <div>
+                          <div class="progress">
+                            <div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow="{{item.pwa}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.pwa}}%;"></div>
+                          </div>
+                        </div>
+                      </div>
+                
             </td>
             <td>
 
-                {{item.begin_date}}
+                {{item.begin_date|formatdatetime}}
             </td>
             <td>
                 <form action="/audit/lighthouse/score" id="update{{item.id}}" method="POST">
@@ -73,5 +112,5 @@
         {% endfor %}
     </tbody>
 </table>
-
+</div>
 {% endblock %}

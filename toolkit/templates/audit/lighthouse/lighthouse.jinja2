@@ -4,16 +4,18 @@
 <li class="breadcrumb-item active" aria-current="page">{{id}}</a>
 </li>
 {%endblock%} {% block content %}
+<div class="table-responsive">
 <table class="table align-items-center table-flush">
     <h2 class="d-flex justify-content-center">{{url}}</h2>
     <thead class="thead-light">
         <tr>
+        <th scope="col">Update Time</th>
             <th scope="col">Accessibility</th>
             <th scope="col">Best Practices</th>
             <th scope="col">Performances</th>
             <th scope="col">SEO</th>
             <th scope="col">PWA</th>
-            <th scope="col">Update Time</th>
+            
 
         </tr>
     </thead>
@@ -21,28 +23,67 @@
         {% for item in result %}
 
         <tr>
-            <td>
-                {{item.accessibility}}
-            </td>
-            <td>
-                {{item.best_practices}}
-            </td>
-            <td>
-                {{item.performance}}
-            </td>
-            <td>
-                {{item.seo}}
-            </td>
-            <td>
-                {{item.pwa}}
-            </td>
-            <td>
+        <td>
 
-                {{item.begin_date}}
+                {{item.begin_date|formatdatetime}}
+            <td>
+            <div class="d-flex align-items-center">
+                        <span class="mr-2">{{item.accessibility}}</span>
+                        <div>
+                          <div class="progress">
+                            <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="{{item.accessibility}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.accessibility}}%;"></div>
+                          </div>
+                        </div>
+                      </div>
             </td>
+            <td>
+            <div class="d-flex align-items-center">
+                        <span class="mr-2">{{item.best_practices}}</span>
+                        <div>
+                          <div class="progress">
+                            <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="{{item.best_practices}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.best_practices}}%;"></div>
+                          </div>
+                        </div>
+                      </div>
+            </td>
+            <td>
+            <div class="d-flex align-items-center">
+                        <span class="mr-2">{{item.performance}}</span>
+                        <div>
+                          <div class="progress">
+                            <div class="progress-bar bg-gradient-primary" role="progressbar" aria-valuenow="{{item.performance}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.performance}}%;"></div>
+                          </div>
+                        </div>
+                      </div>
+                
+            </td>
+            <td>
+            <div class="d-flex align-items-center">
+                        <span class="mr-2">{{item.seo}}</span>
+                        <div>
+                          <div class="progress">
+                            <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="{{item.seo}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.seo}}%;"></div>
+                          </div>
+                        </div>
+                      </div>
+                
+            </td>
+            <td>
+            <div class="d-flex align-items-center">
+                        <span class="mr-2">{{item.pwa}}</span>
+                        <div>
+                          <div class="progress">
+                            <div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow="{{item.pwa}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.pwa}}%;"></div>
+                          </div>
+                        </div>
+                      </div>
+                
+            </td>
+            
         </tr>
         {% endfor %}
     </tbody>
 </table>
+</div>
 
 {% endblock %}

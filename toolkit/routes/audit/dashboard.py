@@ -10,6 +10,12 @@ from toolkit import dbAlchemy as db
 from toolkit.controller.seo.lighthouse import audit_google_lighthouse_full
 from toolkit.models import Audit, LighthouseScore
 
+@app.template_filter('formatdatetime')
+def format_datetime(value, format="%d %b %Y %I:%M %p"):
+    """Format a date time to (Default): d Mon YYYY HH:MM P"""
+    if value is None:
+        return ""
+    return value.strftime(format)
 
 @app.route('/audit', methods=["GET"])
 def audit_home():

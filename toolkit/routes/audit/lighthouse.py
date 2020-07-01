@@ -1,6 +1,8 @@
-from toolkit.controller.seo.lighthouse import audit_google_lighthouse_full, audit_google_lighthouse_seo
-from flask import request
 from flask import current_app as app
+from flask import request
+
+from toolkit.controller.seo.lighthouse import (audit_google_lighthouse_full,
+                                               audit_google_lighthouse_seo)
 
 
 @app.route('/api/audit/lighthouse/full')

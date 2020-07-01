@@ -30,9 +30,7 @@ def generate_interactive_graph(urls, relaunch, maxi_urls):
     urls_exists = Graphs.query.filter(Graphs.urls == urls).count()
     if urls_exists > 0:
         stopped = Graphs.query.filter(Graphs.urls == urls and Graphs.status_job == "RUNNING").first()
-        print(stopped)
         if stopped.status_job == "FINISHED":
-            print("STOPPED")
             query_result = Graphs.query.filter(Graphs.urls == urls and Graphs.status_job == "RUNNING").first()
             # ALREADY VISITED IN THE LAST 24 HOURS
 

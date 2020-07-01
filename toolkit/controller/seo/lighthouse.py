@@ -1,8 +1,11 @@
 from toolkit.lib.http_tools import request_page
+from flask import current_app
 
 def audit_google_lighthouse_full(url):
-    pagespeed = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url="
-    result = request_page(pagespeed + url + "&category=BEST_PRACTICES&category=ACCESSIBILITY&category=PERFORMANCE&category=PWA&category=SEO", timeout=30)
+    pagespeed = "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=" + url + "&category=BEST_PRACTICES&category=ACCESSIBILITY&category=PERFORMANCE&category=PWA&category=SEO"
+    if current_app.config['GOOGLE_API_KEY'] != "None":
+        pagespeed += "&key=" + current_app.config["GOOGLE_API_KEY"]
+    result = request_page(pagespeed , timeout=30)
     return result.json()
 
 def audit_google_lighthouse_seo(url):

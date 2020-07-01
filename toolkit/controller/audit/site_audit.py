@@ -43,7 +43,7 @@ class AuditWebsite():
     def populate_urls(self):
         list_urls = []
         self.urls = []
-        print(len(self.sitemap))
+        
         if len(self.sitemap) > 0:
             for i in self.sitemap:
                 sitemap_urls = parse_sitemap(i)

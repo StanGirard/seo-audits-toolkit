@@ -27,7 +27,6 @@ def get_all_headers():
 @app.route('/extract/headers/<id>', methods=["GET"])
 def get_all_headers_by_id(id):
     audit = Audit.query.filter(Audit.id == id).first()
-    print(audit.result)
     result = json.loads(audit.result)
     
     h1 = result["h1"]["values"]
@@ -36,7 +35,6 @@ def get_all_headers_by_id(id):
     h4 = result["h4"]["values"]
     h5 = result["h5"]["values"]
     h6 = result["h6"]["values"]
-    print(h1)
     return render_template("extract/headers/extract_headers.jinja2",id=id,h1=h1,h2=h2,h3=h3, h4=h4, h5=h5, h6=h6 )
 
 @app.route('/extract/links', methods=["GET"])
@@ -50,10 +48,8 @@ def get_all_links():
 @app.route('/extract/links/<id>', methods=["GET"])
 def get_all_links_by_id(id):
     audit = Audit.query.filter(Audit.id == id).first()
-    print(audit.result)
     result = json.loads(audit.result)
     links_status = [x for x in result]
-    print(links_status)
     return render_template("extract/links/links.jinja2",id=id,results=result, links_status=links_status )
 
 @app.route('/extract/headers', methods=["POST"])
@@ -80,7 +76,6 @@ def add_links():
         )
         db.session.add(new_audit)
         db.session.commit()
-        print("added")
     return redirect(url_for('get_all_links'))
 
 
@@ -96,8 +91,6 @@ def get_all_links_website_dashboard():
 def add_links_website():
     url = request.form['url']
     count = Audit.query.filter(Audit.url == url).filter(Audit.type_audit=="Links_Website").count()
-    print(url)
-    print(count)
     if url and count == 0:
         value = get_all_links_website(url)
         new_audit = Audit(
@@ -105,13 +98,11 @@ def add_links_website():
         )
         db.session.add(new_audit)
         db.session.commit()
-        print("added")
     return redirect(url_for('get_all_links_website_dashboard'))
 
 @app.route('/extract/links/website/<id>', methods=["GET"])
 def get_all_links_website_by_id(id):
     audit = Audit.query.filter(Audit.id == id).first()
-    print(audit.result)
     result = json.loads(audit.result)
     return render_template("extract/links_website/links_website.jinja2",id=id,internal=result["internal_urls"]["results"],
                  external=result["external_urls"]["results"],internal_number=result["internal_urls"]["total"],
@@ -131,8 +122,6 @@ def get_all_images_dashboard():
 def add_images_dashboard():
     url = request.form['url']
     count = Audit.query.filter(Audit.url == url).filter(Audit.type_audit=="Images").count()
-    print(url)
-    print(count)
     if url and count == 0:
         value = find_all_images(url)
         new_audit = Audit(
@@ -140,13 +129,11 @@ def add_images_dashboard():
         )
         db.session.add(new_audit)
         db.session.commit()
-        print("added")
     return redirect(url_for('get_all_images_dashboard'))
 
 @app.route('/extract/images/<id>', methods=["GET"])
 def get_all_images_by_id(id):
     audit = Audit.query.filter(Audit.id == id).first()
-    print(audit.result)
     result = json.loads(audit.result)
     return render_template("extract/images/images.jinja2",id=id,images=result["images"], missing_title=result["summary"]["missing_title"],
                 missing_alt=result["summary"]["missing_alt"],duplicates=result["summary"]["duplicates"], total=result["summary"]["total"])

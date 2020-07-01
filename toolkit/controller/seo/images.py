@@ -8,9 +8,9 @@ def find_all_images(url):
     images = soup.findAll('img')
     for image in images:
         url_img = None
-        print(image)
+        
         if image.has_attr('src'):
-            print("Im in")
+            
             url_img = urllib.parse.urljoin(url,image['src'])
         elif image.has_attr('data-src'):
             url_img = urllib.parse.urljoin(url,image['data-src'])

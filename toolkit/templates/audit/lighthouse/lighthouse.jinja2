@@ -1,0 +1,48 @@
+ {% extends "base.jinja2" %} {% block title %}Lighthouse{% endblock %} {% block list %}
+<li class="breadcrumb-item"><a href="/audit">Audit</a></li>
+<li class="breadcrumb-item"><a href="/audit/lighthouse/score">Audit</a></li>
+<li class="breadcrumb-item active" aria-current="page">{{id}}</a>
+</li>
+{%endblock%} {% block content %}
+<table class="table align-items-center table-flush">
+    <h2 class="d-flex justify-content-center">{{url}}</h2>
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Accessibility</th>
+            <th scope="col">Best Practices</th>
+            <th scope="col">Performances</th>
+            <th scope="col">SEO</th>
+            <th scope="col">PWA</th>
+            <th scope="col">Update Time</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in result %}
+
+        <tr>
+            <td>
+                {{item.accessibility}}
+            </td>
+            <td>
+                {{item.best_practices}}
+            </td>
+            <td>
+                {{item.performance}}
+            </td>
+            <td>
+                {{item.seo}}
+            </td>
+            <td>
+                {{item.pwa}}
+            </td>
+            <td>
+
+                {{item.begin_date}}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

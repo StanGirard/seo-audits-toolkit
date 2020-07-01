@@ -1,0 +1,77 @@
+ {% extends "base.jinja2" %} {% block title %}Lighthouse{% endblock %} {% block list %}
+<li class="breadcrumb-item"><a href="/audit">Audit</a></li>
+<li class="breadcrumb-item active" aria-current="page">Lighthouse</a>
+</li>
+{%endblock%} {% block content %}
+
+<form class="py-4" action="/audit/lighthouse/score" method="POST">
+    <div style="display: flex; align-items: center; justify-content: center;">
+        <input class="form-control " style="max-width: 200px; margin-right: 5px" type="text" id="url" name="url" placeholder="url">
+        <button class="btn btn-primary" type="submit" id="submit">Submit</button>
+    </div>
+</form>
+
+{% if error %}
+<div class="alert alert-danger" role="alert">
+    To avoid restrictions please add your Google API key in the .env <br/> Get your api key <a href="https://developers.google.com/speed/docs/insights/v5/get-started">here
+    </a>
+</div>
+{% endif %}
+
+<table class="table align-items-center table-flush">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">URL</th>
+            <th scope="col">Accessibility</th>
+            <th scope="col">Best Practices</th>
+            <th scope="col">Performances</th>
+            <th scope="col">SEO</th>
+            <th scope="col">PWA</th>
+            <th scope="col">Update Time </th>
+            <th scope="col">Update </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in result %}
+
+        <tr href="/audit/lighthouse/score/{{item.id}}">
+
+            <th scope="row">
+                <a href="/audit/lighthouse/score/{{item.id}}">
+                {{item.url}}
+            </a>
+            </th>
+            <td>
+                {{item.accessibility}}
+            </td>
+            <td>
+                {{item.best_practices}}
+            </td>
+            <td>
+                {{item.performance}}
+            </td>
+            <td>
+                {{item.seo}}
+            </td>
+            <td>
+                {{item.pwa}}
+            </td>
+            <td>
+
+                {{item.begin_date}}
+            </td>
+            <td>
+                <form action="/audit/lighthouse/score" id="update{{item.id}}" method="POST">
+                    <input type="hidden" id="url" name="url" value="{{item.url}}">
+                    <a type="submit" id="submit" href="javascript:$('#update{{item.id}}').submit();">
+                        <i style="color: green" class="ni ni-fat-add"></i>
+                    </a>
+                    </div>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

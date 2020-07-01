@@ -8,8 +8,9 @@ I've grown tired of SEO agencies making us pay hundreds of euros for simple tool
 
 - [SEOToolkit](#seotoolkit)
   - [Installation](#installation)
-  - [Running Flask](#running-flask)
+  - [Running](#running)
   - [Dashboard](#dashboard)
+  - [Config](#config)
   - [Endpoints](#endpoints)
     - [Graphs](#graphs)
     - [Audits](#audits)
@@ -42,7 +43,7 @@ or you can use Docker
 docker build -t seo-toolkit:latest .
 ```
 
-## Running Flask
+## Running
 
 ```Bash
 flask run
@@ -54,18 +55,13 @@ or with docker
 docker run -d -p 5000:5000 seo-toolkit:latest
 ```
 
-This will expose these endpoints:
-- `localhost:5000/api/graph`
-- `localhost:5000/api/extract/headers`
-- `localhost:5000/api/extract/links`
-- `localhost:5000/api/extract/links/website`
-- `localhost:5000/api/serp`
-- `localhost:5000/api/analysis/keywords`
-- `localhost:5000/api/audit/lighthouse`
-
 ## Dashboard
 
 You can access the dashboard by going to `localhost:5000`
+
+## Config
+
+If needed create a `.env` file with information that you would like to overload from config.py
 
 
 ## Endpoints

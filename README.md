@@ -2,9 +2,9 @@
 
 ![](examples/seotoolkit.gif)
 
-This seo toolkit is a collection of multiple tools to help you in your quest for a better SEO. It is an easy to use API.
+This seo toolkit is a collection of multiple tools to help you in your quest for a better SEO. It is an easy to use Web App.
 
-I've grown tired of SEO agencies making us pay hundreds of euros for simple tools. I decided to develop an API to help users find issues in their website and increase their SEO for free. It can, of course, be used for anything else.
+I've grown tired of SEO agencies making us pay hundreds of euros for simple tools. I decided to develop a Web App to help users find issues in their website and increase their SEO for free. It can, of course, be used for anything else.
 
 - [SEOToolkit](#seotoolkit)
   - [Installation](#installation)

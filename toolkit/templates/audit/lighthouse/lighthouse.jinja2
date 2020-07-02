@@ -5,9 +5,10 @@
 </li>
 {%endblock%} {% block content %}
 <div class="table-responsive">
-<table class="table align-items-center table-flush">
+<div>
+<table class="table align-items-center table-dark">
     <h2 class="d-flex justify-content-center">{{url}}</h2>
-    <thead class="thead-light">
+    <thead class="thead-dark">
         <tr>
         <th scope="col">Update Time</th>
             <th scope="col">Accessibility</th>
@@ -19,7 +20,7 @@
 
         </tr>
     </thead>
-    <tbody>
+    <tbody class="list">
         {% for item in result %}
 
         <tr>
@@ -84,6 +85,7 @@
         {% endfor %}
     </tbody>
 </table>
+</div>
 </div>
 
 {% endblock %}

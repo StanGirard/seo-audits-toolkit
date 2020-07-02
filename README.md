@@ -11,16 +11,14 @@ I've grown tired of SEO agencies making us pay hundreds of euros for simple tool
   - [Running](#running)
   - [Dashboard](#dashboard)
   - [Config](#config)
-  - [Endpoints](#endpoints)
-    - [Graphs](#graphs)
-    - [Audits](#audits)
-    - [SERP - Search Engine Result Page Rank](#serp---search-engine-result-page-rank)
-    - [Keywords Query Finder](#keywords-query-finder)
-    - [Extracts](#extracts)
-      - [Headers](#headers)
-      - [Links](#links)
-      - [Images](#images)
-  - [TODO](#todo)
+  - [Features](#features)
+  - [Screenshots](#screenshots)
+    - [SERP Rank](#serp-rank)
+    - [Internal Links Graphs](#internal-links-graphs)
+    - [Keywords Finder](#keywords-finder)
+    - [Lighthouse Audit](#lighthouse-audit)
+    - [Images Extractor](#images-extractor)
+  - [API](#api)
 
 ## Installation
 
@@ -57,224 +55,44 @@ docker run -d -p 5000:5000 seo-toolkit:latest
 
 ## Dashboard
 
-You can access the dashboard by going to `localhost:5000`
+You can access the dashboard by going to [localhost:5000](http://localhost:5000)
 
 ## Config
 
 If needed create a `.env` file with information that you would like to overload from config.py
 
 
-## Endpoints
+## Features
 
----
-
-### Graphs
-
--  `/api/graph?url=https://primates.dev` will crawl the website and respond with the graph as html
--  `/api/graph?url=https://primates.dev&redo=True` will force the crawling. Doesn't crawl if less than 24 hours
--  `/api/graph?url=https://primates.dev&max=10` stops after visiting 10 pages. (Default=500)
-
---- 
-
-### Audits
-
-- `/api/audit/lighthouse/full?url=https://primates.dev` will run Google Speed Page Insight (Lighthouse) on the specified url
-- `/api/audit/lighthouse/seo?url=https://primates.dev` will run Google Speed Page Insight SEO on the specified url 
-
---- 
-
-### SERP - Search Engine Result Page Rank
-
-- `/api/serp?domain=primates.dev&query=parse api xml response&tld=com&lang=en` will give the rank of your website based on a query. tld and lang are not required. 
-Default values are **.com** and **en**
-
-If the query already exist and has been crawled in the last 24 hours it won't be refreshed
-
-```JSON
-{
-  "pos": 2, 
-  "url": "https://primates.dev/parsing-an-api-xml-response-data-python/"
-}
-```
-
-- `/api/serp/all` returns all the queries 
+- **Lighthouse Score**: Run [Lighthouse](https://developers.google.com/web/tools/lighthouse) Audits and keep track of your scores
+- **SERP Rank** - Get the rank of your website on google for specific queries
+- **Keywords Finder** - Finds all the Mono,Bi and Trigrams associated to a specific request. Helps you write content faster.
+- **Internal Links Graphs** - Creates a graph of your website showing all the connections between your pages.
+- **Extract Headers/Links/Images** - Easily extract all the links on your website and their status codes, the headers of a page and all the images.
 
 
+## Screenshots
 
----
+### SERP Rank
 
-### Keywords Query Finder
+![](examples/SERP-rank.png)
 
-This endpoint allows you to find all the keywords used on the pages found in a Google result for a specific query
+### Internal Links Graphs
 
-- `/api/analysis/keywords?query=parse api xml response`
+![](examples/graphs.png)
 
-It returns the most used Monograms, Bigrams and Tigrams and the pages. It will visit the first 20 pages of the results.
+### Keywords Finder
 
-```JSON
-{
-  "Bigram": [
-    {
-      "frequency": 102, 
-      "keyword": "xml document"
-    }, 
-    {
-      "frequency": 99, 
-      "keyword": "xml response"
-    }, 
-    {
-      "frequency": 75, 
-      "keyword": "xml parser"
-    }, 
-    {
-      "frequency": 70, 
-      "keyword": "stack overflow"
-    }, 
-    {
-      "frequency": 68, 
-      "keyword": "parsing xml"
-    }, 
-    ...
-  ], 
-  "Monogram": [
-    {
-      "frequency": 1506, 
-      "keyword": "xml"
-    }, 
-    {
-      "frequency": 445, 
-      "keyword": "data"
-    }, 
-    {
-      "frequency": 406, 
-      "keyword": "parser"
-    }, 
-    {
-      "frequency": 392, 
-      "keyword": "api"
-    }, 
-    {
-      "frequency": 374, 
-      "keyword": "response"
-    }, 
-    {
-      "frequency": 357, 
-      "keyword": "name"
-    }, 
-    ...
-  ], 
-  "Trigram": [
-    {
-      "frequency": 45, 
-      "keyword": "xml etree elementtree"
-    }, 
-    {
-      "frequency": 30, 
-      "keyword": "xml version encoding"
-    }, 
-    {
-      "frequency": 30, 
-      "keyword": "version encoding utf"
-    }, 
-    ...
-  ]
-}
-```
+![](examples/keywords-finder.png)
 
----
+### Lighthouse Audit
 
-### Extracts
+![](examples/lighthouse-primates.png)
 
-#### Headers
+### Images Extractor
 
-- `/api/extract/headers?url=https://primates.dev` returns all the headers of the page
+![](examples/images.png)
 
-```JSON
-{
-  "h1": {
-    "count": 0, 
-    "values": []
-  }, 
-  "h2": {
-    "count": 15, 
-    "values": [
-      "Help fight diseases with your computer", 
-      "A Twitter Crawler and News Indexer", 
-      "Find every social account of a user", 
-      "How to point a domain name to a server?"
-    ]
-  }, 
- ...
-  "h6": {
-    "count": 0, 
-    "values": []
-  }
-}
-```
+## API
 
-#### Links
-
-- `/api/extract/links?url=https://primates.dev`
-
-This will give you all the links on the page and their status codes.
-
-```JSON
-{
-  "200":
-  [
-    "https://primates.dev","https://primates.dev/become-an-author/",
-    "https://www.facebook.com/primatesDev","https://primates.dev/tag/python/", ...
-  ],
-"500":["javascript:;"]
-}
-```
-
-- `api/extract/links/website?url=https://primates.dev&max=50` 
-
-This will give you all the links found on your website. 
-
-```JSON
-{
-  "domain_name":"primates.dev",
-  "external_urls":
-    {
-      "results":["https://www.linkedin.com/shareArticle","https://archive.org/web/","https://git-scm.com/book",...],
-      "total":90
-    },
-  "internal_urls":
-    {
-      "results":
-        ["https://primates.dev/","https://primates.dev/brave-a-web-browser-that-pays-its-users-and-respects-privacy/",...],
-      "total":67
-    },
-    "pages_visited":51,
-    "time_crawl":13.310942938551307,
-    "total":157
-}
-```
-#### Images
-
-- `/api/extract/images?url=https://primates.dev`
-
-This will give you all the image links of a page and a summary of the page.
-
-```JSON
-{
-  "images":
-    [
-      {"alt":"Primates","url":"https://primates.dev/content/images/size/w600/2020/02/monkey.png"},
-      {"alt":"10 Tips on How to choose a domain name for your business","url":"https://primates.dev/content/images/size/w1000/2020/06/SEO.jpg"},
-      ...
-    ],
-  "summary":{"duplicates":17,"missing_alt":0,"missing_title":37,"total":37}}
-}
-```
-
-## TODO
-
-- [ ] Not downloading images when they are linked
-- [ ] Async requests
-- [ ] Implement Scrapy for better perf
-- [ ] Clean Code regarding DB Interactions
-
-Have fun ! 
+The API won't be maintained for now as I am moving towards the dashboard. Existing endpoints will still be working. If you need informations on the API please visit an [older](https://github.com/StanGirard/SEOToolkit/tree/ed6a59513921d5e58f3c69839274cd59b1e33fb2) version of the project.

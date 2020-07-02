@@ -1,91 +1,148 @@
  {% extends "base.jinja2" %} {% block title %}Lighthouse{% endblock %} {% block list %}
 <li class="breadcrumb-item"><a href="/audit">Audit</a></li>
-<li class="breadcrumb-item"><a href="/audit/lighthouse/score">Audit</a></li>
+<li class="breadcrumb-item"><a href="/audit/lighthouse/score">Lighthouse</a></li>
 <li class="breadcrumb-item active" aria-current="page">{{id}}</a>
 </li>
 {%endblock%} {% block content %}
+<h2 class="d-flex justify-content-center">{{url}}</h2>
+<div class="card">
+    <div class="card-body">
+    <canvas id="myChart" height='300px' </canvas>
+</div> 
+</div>
 <div class="table-responsive">
-<div>
-<table class="table align-items-center table-dark">
-    <h2 class="d-flex justify-content-center">{{url}}</h2>
-    <thead class="thead-dark">
-        <tr>
-        <th scope="col">Update Time</th>
-            <th scope="col">Accessibility</th>
-            <th scope="col">Best Practices</th>
-            <th scope="col">Performances</th>
-            <th scope="col">SEO</th>
-            <th scope="col">PWA</th>
+    <div>
+        <table class="table align-items-center table-dark">
             
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Update Time</th>
+                    <th scope="col">Accessibility</th>
+                    <th scope="col">Best Practices</th>
+                    <th scope="col">Performances</th>
+                    <th scope="col">SEO</th>
+                    <th scope="col">PWA</th>
 
-        </tr>
-    </thead>
-    <tbody class="list">
-        {% for item in result %}
 
-        <tr>
-        <td>
+                </tr>
+            </thead>
+            <tbody class="list">
+                {% for item in result %}
 
-                {{item.begin_date|formatdatetime}}
-            <td>
-            <div class="d-flex align-items-center">
-                        <span class="mr-2">{{item.accessibility}}</span>
-                        <div>
-                          <div class="progress">
-                            <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="{{item.accessibility}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.accessibility}}%;"></div>
-                          </div>
-                        </div>
-                      </div>
-            </td>
-            <td>
-            <div class="d-flex align-items-center">
-                        <span class="mr-2">{{item.best_practices}}</span>
-                        <div>
-                          <div class="progress">
-                            <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="{{item.best_practices}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.best_practices}}%;"></div>
-                          </div>
-                        </div>
-                      </div>
-            </td>
-            <td>
-            <div class="d-flex align-items-center">
-                        <span class="mr-2">{{item.performance}}</span>
-                        <div>
-                          <div class="progress">
-                            <div class="progress-bar bg-gradient-primary" role="progressbar" aria-valuenow="{{item.performance}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.performance}}%;"></div>
-                          </div>
-                        </div>
-                      </div>
-                
-            </td>
-            <td>
-            <div class="d-flex align-items-center">
-                        <span class="mr-2">{{item.seo}}</span>
-                        <div>
-                          <div class="progress">
-                            <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="{{item.seo}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.seo}}%;"></div>
-                          </div>
-                        </div>
-                      </div>
-                
-            </td>
-            <td>
-            <div class="d-flex align-items-center">
-                        <span class="mr-2">{{item.pwa}}</span>
-                        <div>
-                          <div class="progress">
-                            <div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow="{{item.pwa}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.pwa}}%;"></div>
-                          </div>
-                        </div>
-                      </div>
-                
-            </td>
-            
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+                <tr>
+                    <td>
+
+                        {{item.begin_date|formatdatetime}}
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <span class="mr-2">{{item.accessibility}}</span>
+                                <div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="{{item.accessibility}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.accessibility}}%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <span class="mr-2">{{item.best_practices}}</span>
+                                <div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="{{item.best_practices}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.best_practices}}%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <span class="mr-2">{{item.performance}}</span>
+                                <div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-gradient-primary" role="progressbar" aria-valuenow="{{item.performance}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.performance}}%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <span class="mr-2">{{item.seo}}</span>
+                                <div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="{{item.seo}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.seo}}%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <span class="mr-2">{{item.pwa}}</span>
+                                <div>
+                                    <div class="progress">
+                                        <div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow="{{item.pwa}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.pwa}}%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
-</div>
 
-{% endblock %}
+
+{% endblock %} {% block script_js %}
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{labels}},
+            datasets: [{
+                label: 'SEO',
+                data: {{seo_list}},
+                fill: false,
+                borderColor: '#11cdef',
+                borderWidth: 1
+            },
+            {
+                label: 'PWA',
+                data: {{pwa_list}},
+                fill: false,
+                borderColor: '#fb6340',
+                
+                borderWidth: 1
+            },{
+                label: 'Performances',
+                data: {{performance_list}},
+                fill: false,
+                borderColor: '#5603ad',
+                borderWidth: 1
+            },{
+                label: 'Best practices',
+                data: {{best_list}},
+                fill: false,
+                borderColor: '#2dce89',
+                borderWidth: 1
+            },{
+                label: 'Accessibility',
+                data: {{accessibility_list}},
+                fill: false,
+                borderColor: '#f5365c',
+                borderWidth: 1
+            }]
+        },
+        options: {
+        scales:{
+            xAxes: [{
+                display: false 
+            }]
+        }
+    }
+    });
+</script>
+{%endblock%}

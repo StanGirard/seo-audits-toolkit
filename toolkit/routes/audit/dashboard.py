@@ -68,11 +68,12 @@ def dashboard_audit_lighthouse_score():
     results = quer.all()
     result_arr={"results": []}
     if app.config['GOOGLE_API_KEY'] == "None":
-        print("HAHAHA")
         error = True
     for i in results:
+       
         result_arr["results"].append({"id": i.id, "url": i.url, "accessibility": i.accessibility, "pwa": i.pwa, "seo": i.seo, "best_practices": i.best_practices, "performance": i.performance, "begin_date": i.begin_date})
-    return render_template("audit/lighthouse/lighthouse_all.jinja2", result=result_arr["results"], error=error)
+    return render_template("audit/lighthouse/lighthouse_all.jinja2", result=result_arr["results"],
+             error=error)
 
 @app.route('/audit/lighthouse/score/<id>', methods=["GET"])
 def dashboard_audit_lighthouse_score_get_id(id):
@@ -80,9 +81,22 @@ def dashboard_audit_lighthouse_score_get_id(id):
     results = LighthouseScore.query.filter(LighthouseScore.url == id_url.url).order_by(LighthouseScore.begin_date.desc()).all()
 
     result_arr={"results": []}
+    seo_list = []
+    accessibility_list = []
+    pwa_list = []
+    best_list = []
+    performance_list = []
+    labels = []
     for i in results:
+        labels.append(i.begin_date.strftime("%m/%d/%Y, %H:%M:%S"))
+        seo_list.append(i.seo)
+        accessibility_list.append(i.accessibility)
+        pwa_list.append(i.pwa)
+        best_list.append(i.best_practices)
+        performance_list.append(i.performance)
         result_arr["results"].append({"id": i.id, "url": i.url, "accessibility": i.accessibility, "pwa": i.pwa, "seo": i.seo, "best_practices": i.best_practices, "performance": i.performance, "begin_date": i.begin_date})
-    return render_template("audit/lighthouse/lighthouse.jinja2", url=id_url.url, id=id, result=result_arr["results"])
+    return render_template("audit/lighthouse/lighthouse.jinja2", url=id_url.url, id=id, result=result_arr["results"], seo_list=seo_list, accessibility_list=accessibility_list,pwa_list=pwa_list,
+             best_list=best_list, performance_list=performance_list, labels=labels)
 
 
 

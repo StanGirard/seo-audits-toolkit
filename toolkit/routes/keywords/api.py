@@ -1,11 +1,13 @@
-from flask import request
-from flask import current_app as app
-from toolkit import dbAlchemy as db
-from toolkit.models import Keywords
-from toolkit.controller.analysis.keywords import generate_results
 import json
 from datetime import datetime
+
+from flask import current_app as app
+from flask import request
 from sqlalchemy import update
+
+from toolkit import dbAlchemy as db
+from toolkit.controller.analysis.keywords import generate_results
+from toolkit.models import Keywords
 
 
 def get_query_results(query, redo=False):

@@ -7,11 +7,11 @@ This seo toolkit is a collection of multiple tools to help you in your quest for
 I've grown tired of SEO agencies making us pay hundreds of euros for simple tools. I decided to develop an API to help users find issues in their website and increase their SEO for free. It can, of course, be used for anything else.
 
 - [SEOToolkit](#seotoolkit)
+  - [Features](#features)
   - [Installation](#installation)
   - [Running](#running)
   - [Dashboard](#dashboard)
   - [Config](#config)
-  - [Features](#features)
   - [Screenshots](#screenshots)
     - [SERP Rank](#serp-rank)
     - [Internal Links Graphs](#internal-links-graphs)
@@ -19,6 +19,14 @@ I've grown tired of SEO agencies making us pay hundreds of euros for simple tool
     - [Lighthouse Audit](#lighthouse-audit)
     - [Images Extractor](#images-extractor)
   - [API](#api)
+
+## Features
+
+- **Lighthouse Score**: Run [Lighthouse](https://developers.google.com/web/tools/lighthouse) Audits and keep track of your scores
+- **SERP Rank** - Get the rank of your website on google for specific queries
+- **Keywords Finder** - Finds all the Mono,Bi and Trigrams associated to a specific request. Helps you write content faster.
+- **Internal Links Graphs** - Creates a graph of your website showing all the connections between your pages.
+- **Extract Headers/Links/Images** - Easily extract all the links on your website and their status codes, the headers of a page and all the images.
 
 ## Installation
 
@@ -61,14 +69,6 @@ You can access the dashboard by going to [localhost:5000](http://localhost:5000)
 
 If needed create a `.env` file with information that you would like to overload from config.py
 
-
-## Features
-
-- **Lighthouse Score**: Run [Lighthouse](https://developers.google.com/web/tools/lighthouse) Audits and keep track of your scores
-- **SERP Rank** - Get the rank of your website on google for specific queries
-- **Keywords Finder** - Finds all the Mono,Bi and Trigrams associated to a specific request. Helps you write content faster.
-- **Internal Links Graphs** - Creates a graph of your website showing all the connections between your pages.
-- **Extract Headers/Links/Images** - Easily extract all the links on your website and their status codes, the headers of a page and all the images.
 
 
 ## Screenshots

@@ -19,6 +19,7 @@ class AuditWebsite():
         self.populate_urls()
         self.soup = BeautifulSoup(self.request.content, features="lxml")
         self.populate_doctype()
+        self.is_https()
     
     def populate_request(self):
         self.request = request_page(self.generate_url())
@@ -55,6 +56,13 @@ class AuditWebsite():
     def populate_doctype(self):
         items = [item for item in self.soup.contents if isinstance(item, Doctype)]
         self.doctype = items[0] if items else None
+
+    def is_https(self):
+        if request_page("https://" + self.domain).status_code == 200:
+            self.https = True
+        else:
+            self.https = False
+
 
     def generate_url(self):
         return self.scheme + "://" + self.domain

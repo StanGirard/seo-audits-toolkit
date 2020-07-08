@@ -65,6 +65,13 @@ def add_headers():
         db.session.commit()
     return redirect(url_for('get_all_headers'))
 
+@app.route('/extract/headers/delete', methods=["GET"])
+def delete_extract_headers():
+    id = request.args.get('id')
+    Audit.query.filter(Audit.id == id).delete()
+    db.session.commit()
+    return redirect(url_for('get_all_headers'))
+
 @app.route('/extract/links', methods=["POST"])
 def add_links():
     url = request.form['url']
@@ -144,11 +151,3 @@ def delete_extract_image():
     Audit.query.filter(Audit.id == id).delete()
     db.session.commit()
     return redirect(url_for('get_all_images_dashboard'))
-
-# @app.route('/api/extract/images')
-# def find_all_images_page():
-#     value = request.args.get('url')
-#     if value:
-#         return find_all_images(value)
-#     else:
-#         return 'Please input a valid url like this: /api/extract/images?url=https://primates.dev'

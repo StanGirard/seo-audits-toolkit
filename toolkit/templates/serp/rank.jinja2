@@ -39,10 +39,7 @@
                 {{item.query}}
             </td>
             <td>
-                {% if item.pos > 10 %}
-                <span class="badge badge-primary badge-pill badge-warning">{{item["pos"]}}</span> {% elif item.pos == -1 %}
-                <span class="badge badge-primary badge-pill badge-danger">{{item["pos"]}}</span> {% else %}
-                <span class="badge badge-primary badge-pill badge-success">{{item["pos"]}}</span> {% endif %}
+            {{item.pos}}
             </td>
             <td>
                 <form action="rank/delete" id="delete{{item.id}}" method="GET">

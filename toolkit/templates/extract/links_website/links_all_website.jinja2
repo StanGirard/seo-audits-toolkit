@@ -19,6 +19,7 @@
         <tr>
             <th scope="col">URL</th>
             <th scope="col">Update Time </th>
+            <th scope="col"> Update </th>
         </tr>
     </thead>
     <tbody>
@@ -35,6 +36,17 @@
             <td>
               
                 {{item.begin_date|formatdatetime}}
+            </td>
+            <td>
+            <td>
+                <form action="/extract/links/website/delete" id="delete{{item.id}}" method="GET">
+                    <input type="hidden" id="id" name="id" value="{{item.id}}">
+                    <a type="submit" id="submit" href="javascript:$('#delete{{item.id}}').submit();">
+                        <i style="color: red" class="ni ni-fat-remove"></i>
+                    </a>
+                    </div>
+                </form>
+            </td>
             </td>
         </tr>
         {% endfor %}

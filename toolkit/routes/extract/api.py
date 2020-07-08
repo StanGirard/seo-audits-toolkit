@@ -1,5 +1,5 @@
 from flask import current_app as app
-from flask import  request
+from flask import request
 from toolkit.controller.seo.links import find_all_links
 from toolkit.controller.seo.images import find_all_images
 from toolkit.controller.seo.headers import find_all_headers_url

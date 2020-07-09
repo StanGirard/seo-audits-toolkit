@@ -14,12 +14,14 @@ class AuditWebsite():
         self.path = parsed_url.path
         self.sitemap = []
         self.robots = False
+        self.cms = None
         self.populate_request()
         self.robots_finder()
         self.populate_urls()
         self.soup = BeautifulSoup(self.request.content, features="lxml")
         self.populate_doctype()
         self.is_https()
+        self.get_cms()
     
     def populate_request(self):
         self.request = request_page(self.generate_url())
@@ -28,7 +30,7 @@ class AuditWebsite():
     def robots_finder(self):
         request = request_page(self.generate_url() + "/robots.txt")
         if request.status_code == 200:
-            self.robots_present = True
+            self.robots = True
             self.find_sitemap(request.text)
 
     def find_sitemap(self, robots):
@@ -47,7 +49,7 @@ class AuditWebsite():
         
         if len(self.sitemap) > 0:
             for i in self.sitemap:
-                sitemap_urls = parse_sitemap(i)
+                sitemap_urls = self.parse_sitemap(i)
                 for url in sitemap_urls:
                     if url not in list_urls:
                         list_urls.append(url)
@@ -67,47 +69,56 @@ class AuditWebsite():
     def generate_url(self):
         return self.scheme + "://" + self.domain
 
+    def get_cms(self):
+        metatags = self.soup.find_all('meta',attrs={'name':'generator'})
+        if metatags:
+            self.cms = metatags[0]["content"]
+            
+    def generate(self):
+        result = {"domain": self.domain, "scheme": self.scheme, "path": self.path, "sitemap": self.sitemap,
+                "robots": self.robots, "doctype": self.doctype, "cms": self.cms, "https": self.https}
+
+        return result
+
+    def parse_sitemap(self,url):
+        resp = requests.get(url)
+        # we didn't get a valid response, bail
+        if (200 != resp.status_code):
+            return False
+
+        # BeautifulSoup to parse the document
+        soup = BeautifulSoup(resp.content, "xml")
+
+        # find all the <url> tags in the document
+        urls = soup.findAll('url')
+        sitemaps = soup.findAll('sitemap')
+        panda_out_total = []
 
 
+        if not urls and not sitemaps:
+            return False
 
+        # Recursive call to the the function if sitemap contains sitemaps
+        if sitemaps:
+            for u in sitemaps:
+                test = u.find('loc').string
+                if test not in self.sitemap:
+                    self.sitemap.append(test)
+                panda_recursive = self.parse_sitemap(test)
+                panda_out_total += panda_recursive
 
-def parse_sitemap( url):
-    resp = requests.get(url)
-    # we didn't get a valid response, bail
-    if (200 != resp.status_code):
-        return False
+        # storage for later...
+        out = []
 
-    # BeautifulSoup to parse the document
-    soup = BeautifulSoup(resp.content, "xml")
+        # Extract the keys we want
+        for u in urls:
+            loc = None
+            loc = u.find("loc")
+            if not loc:
+                loc = "None"
+            else:
+                loc = loc.string
+            out.append(loc)
 
-    # find all the <url> tags in the document
-    urls = soup.findAll('url')
-    sitemaps = soup.findAll('sitemap')
-    panda_out_total = []
-
-
-    if not urls and not sitemaps:
-        return False
-
-    # Recursive call to the the function if sitemap contains sitemaps
-    if sitemaps:
-        for u in sitemaps:
-            test = u.find('loc').string
-            panda_recursive = parse_sitemap(test)
-            panda_out_total += panda_recursive
-
-    # storage for later...
-    out = []
-
-    # Extract the keys we want
-    for u in urls:
-        loc = None
-        loc = u.find("loc")
-        if not loc:
-            loc = "None"
-        else:
-            loc = loc.string
-        out.append(loc)
-
-    #returns the dataframe
-    return  panda_out_total + out
+        #returns the dataframe
+        return  panda_out_total + out

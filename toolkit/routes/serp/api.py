@@ -4,8 +4,10 @@ from datetime import datetime, timedelta
 from toolkit import dbAlchemy as db
 from toolkit.controller.seo.rank import rank
 from toolkit.models import Serp
+from urllib.parse import urlparse
 
 def query_domain_serp( query, domain, lang, tld):
+    domain = urlparse(domain).netloc + urlparse(domain).path
     if query and domain:
         existing_serp_count= Serp.query.filter(
             Serp.query_text == query and Serp.domain == domain

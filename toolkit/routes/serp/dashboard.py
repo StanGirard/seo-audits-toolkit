@@ -18,7 +18,7 @@ def rank_get():
         domain = request.form["domain"]
         if not (domain.startswith('//') or domain.startswith('http://') or domain.startswith('https://')):
             domain = '//' + domain
-        result = query_domain_serp( query, urlparse(domain).netloc, "en", "com")
+        result = query_domain_serp( query, domain, "en", "com")
         
         if result and "limit" in result:
             error = result

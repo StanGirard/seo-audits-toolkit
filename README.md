@@ -68,6 +68,28 @@ You can access the dashboard by going to [localhost:5000](http://localhost:5000)
 
 If needed create a `.env` file with information that you would like to overload from config.py
 
+## Screenshots
+
+### SERP Rank
+
+![](examples/SERP-rank.png)
+
+### Internal Links Graphs
+
+![](examples/graphs.png)
+
+### Keywords Finder
+
+![](examples/keywords-finder.png)
+
+### Lighthouse Audit
+
+![](examples/lighthouse-primates.png)
+
+### Images Extractor
+
+![](examples/images.png)
+
 ## API
 
 ### Lighthouse
@@ -135,24 +157,4 @@ If needed create a `.env` file with information that you would like to overload 
 | **POST**     | Deletes ranks by ID | `/api/rank/delete` | `id` |
 
 
-## Screenshots
 
-### SERP Rank
-
-![](examples/SERP-rank.png)
-
-### Internal Links Graphs
-
-![](examples/graphs.png)
-
-### Keywords Finder
-
-![](examples/keywords-finder.png)
-
-### Lighthouse Audit
-
-![](examples/lighthouse-primates.png)
-
-### Images Extractor
-
-![](examples/images.png)

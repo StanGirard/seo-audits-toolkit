@@ -3,6 +3,7 @@ from urllib.parse import urlparse
 
 from flask import current_app as app
 from flask import request
+from sqlalchemy import update
 
 from toolkit import dbAlchemy as db
 from toolkit.controller.seo.rank import rank
@@ -23,7 +24,7 @@ def query_domain_serp( query, domain, lang, tld):
         ).all()
             if existing_serp[0].begin_date + timedelta(hours=24) < datetime.now():
                 result = rank(domain, query, lang=lang, tld=tld)
-                Serp.update().where(query_text==query and domain==domain).values(begin_date=datetime.now(),url=result["url"], pos=result["pos"])
+                update(Serp).where(Serp.query_text==query and Serp.domain==domain).values(begin_date=datetime.now(),url=result["url"], pos=result["pos"])
                 return result
             else:
                 return {"pos": existing_serp[0].pos, "url": existing_serp[0].url, "query": existing_serp[0].query_text}

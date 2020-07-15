@@ -7,17 +7,17 @@
 
 I've grown tired of SEO agencies making us pay hundreds of euros for simple tools. I decided to develop **OSAT** to help users find issues in their website and increase their SEO for free. 
 
-<p align="center"><img src="./examples/seotoolkit.gif" width="400px" /></p>
+<p align="center"><img src="./examples/seotoolkit.gif" width="600px" /></p>
 
 ## Why you need it
----
+
 
 - It's **free** to use, easy and open source. No credit cards required.
 - It has a growing list of features
 - It's easy to install
 
 ## Features
----
+
 
 - **Lighthouse Score**: Run [Lighthouse](https://developers.google.com/web/tools/lighthouse) Audits and keep track of your scores
 - **SERP Rank** - Get the rank of your website on google for specific queries

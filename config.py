@@ -11,6 +11,7 @@ class Config:
 
     # General Config
     SECRET_KEY = environ.get('SECRET_KEY', "changeme")
+    URL_APP = environ.get('URL_APP', "http://localhost:5000")
     FLASK_APP = environ.get('FLASK_APP', "SEOToolkit")
     FLASK_ENV = environ.get('FLASK_ENV', 'development')
     GOOGLE_API_KEY = environ.get('GOOGLE_API_KEY', "None")

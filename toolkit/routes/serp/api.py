@@ -1,10 +1,14 @@
+from datetime import datetime, timedelta
+from urllib.parse import urlparse
+
 from flask import current_app as app
 from flask import request
-from datetime import datetime, timedelta
+
 from toolkit import dbAlchemy as db
 from toolkit.controller.seo.rank import rank
+from toolkit.lib.api_tools import generate_answer
 from toolkit.models import Serp
-from urllib.parse import urlparse
+
 
 def query_domain_serp( query, domain, lang, tld):
     domain = urlparse(domain).netloc + urlparse(domain).path
@@ -40,21 +44,35 @@ def query_domain_serp( query, domain, lang, tld):
         return result
 
 
-@app.route('/api/serp')
-def find_rank_query():
-    query = request.args.get('query')
-    domain = request.args.get('domain')
-    if domain and query:
-        tld = request.args.get('tld')
-        lang = request.args.get('lang')
-        return query_domain_serp(query,domain, lang, tld)
-    else:
-        return 'Please input a valid value like this: /api/serp?domain=primates.dev&query=parse api xml response&tld=com&lang=en'
+@app.route('/api/rank', methods=["POST", "GET"])
+def get_post_rank():
+    try:
+        error = None
+        if request.method == "POST":
+            query = request.form["query"]
+            domain = request.form["domain"]
+            if not (domain.startswith('//') or domain.startswith('http://') or domain.startswith('https://')):
+                domain = '//' + domain
+            result = query_domain_serp( query, domain, "en", "com")
+            
+            if result and "limit" in result:
+                error = result
+        result = Serp.query.order_by(Serp.begin_date.desc()).all()
+        result_list = {"results": [], "error": error}
+        for i in result:
+            result_list["results"].append({"id": i.id, "domain": i.domain, "pos": i.pos, "url": i.pos, "query": i.query_text, "time": i.begin_date})
+        return generate_answer(data=result_list)
+    except Exception as e:
+        print(e)
+        return generate_answer(success=False)
 
-@app.route('/api/serp/all')
-def find_rank_query_all():
-    result = Serp.query.all()
-    result_list = {"result":[]}
-    for i in result:
-        result_list["result"].append({"pos": i.pos, "url": i.url, "query": i.query_text})
-    return result_list
+@app.route('/api/rank/delete', methods=["POST"])
+def post_delete_rank():
+    try:
+        id = request.form["id"]
+        Serp.query.filter(Serp.id == id).delete()
+        db.session.commit()
+        return generate_answer(success=True)
+    except Exception as e:
+        print(e)
+        return generate_answer(success=False)

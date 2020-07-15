@@ -164,7 +164,7 @@ def get_extract_links_website_by_id(id):
 @app.route('/api/extract/links/website/delete', methods=["POST"])
 def post_extract_delete_links_website():
     try:
-        id = request.form('id')
+        id = request.form['id']
         Audit.query.filter(Audit.id == id).delete()
         db.session.commit()
         return generate_answer(success=True)

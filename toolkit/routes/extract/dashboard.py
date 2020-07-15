@@ -102,6 +102,7 @@ def get_all_links_website_by_id(id):
 def delete_extract_links_website():
     id = request.args.get('id')
     result = post_request_api('/api/extract/links/website/delete', {"id": id})
+    print(result)
     return redirect(url_for('get_all_links_website_dashboard'))
 
 

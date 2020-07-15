@@ -7,6 +7,7 @@ from toolkit.models import Graphs
 
 import urllib
 from toolkit.controller.graphs.core import generate_graph_internal_link_interactive
+from toolkit.lib.api_tools import generate_answer
 
 from sqlalchemy import update
 
@@ -56,17 +57,42 @@ def generate_interactive_graph(urls, relaunch, maxi_urls):
         return update_or_insert_graph_in_db(urls, maximum_urls)
 
 
-@app.route('/api/graph')
-def interactive_graph():
-    urls = request.args.get('url')  # if key doesn't exist, returns None
-    relaunch = request.args.get('redo')
-    maxi_urls = request.args.get('max')
-    return generate_interactive_graph( urls, relaunch, maxi_urls)
+@app.route('/api/graphs', methods=["POST", "GET"])
+def get_post_graphs():
+    try:
+        error = None
+        if request.method == "POST":
+            domain = request.form["domain"]
+            result = generate_interactive_graph(domain, False, 500)
+            if "error" in result:
+                error = result
+        results = Graphs.query.all()
+        result_arr= {"results":[]}
+        for i in results:
+            result_arr["results"].append({"id": i.id, "urls": i.urls, "status_job": i.status_job, "begin_date": i.begin_date})
+        return generate_answer(data=result_arr)
+    except Exception as e:
+        print(e)
+        return generate_answer(success=False)
 
-@app.route('/api/graph/all')
-def interactive_graph_all():
-    results = Graphs.query.all()
-    result_arr={"results":[]}
-    for i in results:
-        result_arr["results"].append({"urls": i.urls, "status_job": i.status_job, "begin_date": i.begin_date})
-    return result_arr
+@app.route('/api/graphs/<id>', methods=["GET"])
+def get_graphs_by_id(id):
+    try:
+        results = Graphs.query.filter(Graphs.id == id).first()
+        result = {"id": id, "script": results.script, "div": results.div, "domain": urllib.parse.urlparse(results.urls).netloc,
+                "template":"Flask", "time":results.begin_date}
+        return generate_answer(data=result)
+    except Exception as e:
+        print(e)
+        return generate_answer(success=False)
+
+@app.route('/api/graphs/delete', methods=["POST"])
+def post_delete_graph():
+    try:
+        id = request.form['id']
+        Graphs.query.filter(Graphs.id == id).delete()
+        db.session.commit()
+        return generate_answer(success=True)
+    except Exception as e:
+        print(e)
+        return generate_answer(success=False)

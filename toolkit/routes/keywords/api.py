@@ -8,6 +8,7 @@ from sqlalchemy import update
 from toolkit import dbAlchemy as db
 from toolkit.controller.analysis.keywords import generate_results
 from toolkit.models import Keywords
+from toolkit.lib.api_tools import generate_answer
 
 
 def get_query_results(query, redo=False):
@@ -33,19 +34,42 @@ def get_query_results(query, redo=False):
     return "error"
 
 
-@app.route('/api/analysis/keywords')
-def find_keywords_query():
-    query = request.args.get('query')
-    if query:
-        return get_query_results(query)
+@app.route('/api/keywords', methods=["POST", "GET"])
+def get_post_keywords():
+    try:
+        if request.method == "POST":
+            query = request.form["query"]
+            get_query_results(query)
+        keyw = Keywords.query.all()
+        results = {"results":[]}
+        for keyword in keyw:
+            results["results"].append({"id":keyword.id,"query": keyword.query_text, "status_job": keyword.status_job})
+        return generate_answer(data=results)
+    except Exception as e:
+        print(e)
+        return generate_answer(success=False)
 
-    else:
-        return 'Please input a valid value like this: /api/analysis/keywords?query=parse api xml response'
 
-@app.route('/api/analysis/keywords/all')
-def get_all_keywords():
-    keyw = Keywords.query.all()
-    results = {"results": []}
-    for keyword in keyw:
-        results["results"].append({"query": keyword.query_text, "status_job": keyword.status_job})
-    return results
+@app.route('/api/keywords/delete', methods=["POST"])
+def post_delete_keywords():
+    try:
+        id = request.form['id']
+        Keywords.query.filter(Keywords.id == id).delete()
+        db.session.commit()
+        generate_answer(success=True)
+    except Exception as e:
+        print(e)
+        return generate_answer(success=False)
+
+@app.route('/api/keywords/<id>')
+def get_keywords_by_id(id):
+    try:
+        keyw = Keywords.query.filter(Keywords.id == id).first()
+        results = json.loads(keyw.results)
+        results_arr = {"results": results, "query": keyw.query_text}
+        return generate_answer(data=results_arr)
+    except Exception as e:
+        print(e)
+        return generate_answer(success=False)
+
+

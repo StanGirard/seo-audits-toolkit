@@ -12,6 +12,9 @@ from toolkit.models import Audit
 from toolkit.controller.seo.images import find_all_images
 
 
+from toolkit.lib.api_tools import post_request_api, get_request_api
+
+
 @app.route('/extract', methods=["GET"])
 def extract_page():
     return render_template("extract/extract.jinja2")
@@ -19,19 +22,13 @@ def extract_page():
 
 @app.route('/extract/headers', methods=["GET"])
 def get_all_headers():
-    results = Audit.query.filter(Audit.type_audit == "Headers")
-    result_arr = []
-    for i in results:
-        result_arr.append(
-            {"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date})
-    return render_template("extract/headers/extract_headers_all.jinja2", result=result_arr)
+    result = get_request_api('/api/extract/headers')
+    return render_template("extract/headers/extract_headers_all.jinja2", result=result["results"])
 
 
 @app.route('/extract/headers/<id>', methods=["GET"])
 def get_all_headers_by_id(id):
-    audit = Audit.query.filter(Audit.id == id).first()
-    result = json.loads(audit.result)
-
+    result = get_request_api('/api/extract/headers/' + id )
     h1 = result["h1"]["values"]
     h2 = result["h2"]["values"]
     h3 = result["h3"]["values"]
@@ -43,97 +40,58 @@ def get_all_headers_by_id(id):
 
 @app.route('/extract/links', methods=["GET"])
 def get_all_links():
-    results = Audit.query.filter(Audit.type_audit == "Links").all()
-    result_arr = []
-    for i in results:
-        result_arr.append(
-            {"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date})
-    return render_template("extract/links/links_all.jinja2", result=result_arr)
+    result = get_request_api('/api/extract/links')
+    return render_template("extract/links/links_all.jinja2", result=result["results"])
 
 
 @app.route('/extract/links/<id>', methods=["GET"])
 def get_all_links_by_id(id):
-    audit = Audit.query.filter(Audit.id == id).first()
-    result = json.loads(audit.result)
-    links_status = [x for x in result]
-    return render_template("extract/links/links.jinja2", id=id, results=result, links_status=links_status)
+    result = get_request_api('/api/extract/links/' + id )
+    return render_template("extract/links/links.jinja2", id=id, results=result["results"], links_status=result["link_status"])
 
 
 @app.route('/extract/headers', methods=["POST"])
 def add_headers():
-    url = request.form['url']
-    count = Audit.query.filter(Audit.url == url).filter(
-        Audit.type_audit == "Headers").count()
-    if url and count == 0:
-        value = find_all_headers_url(url)
-        new_audit = Audit(
-            url=url, result=json.dumps(value), type_audit="Headers", begin_date=datetime.now()
-        )
-        db.session.add(new_audit)
-        db.session.commit()
+    result = post_request_api('/api/extract/headers', request.form)
     return redirect(url_for('get_all_headers'))
 
 
 @app.route('/extract/headers/delete', methods=["GET"])
 def delete_extract_headers():
     id = request.args.get('id')
-    Audit.query.filter(Audit.id == id).delete()
-    db.session.commit()
+    result = post_request_api('/api/extract/headers/delete', {"id": id})
     return redirect(url_for('get_all_headers'))
 
 
 @app.route('/extract/links', methods=["POST"])
 def add_links():
-    url = request.form['url']
-    count = Audit.query.filter(Audit.url == url).filter(
-        Audit.type_audit == "Links").count()
-    if url and count == 0:
-        value = find_all_links(url)
-        new_audit = Audit(
-            url=url, result=json.dumps(value), type_audit="Links", begin_date=datetime.now()
-        )
-        db.session.add(new_audit)
-        db.session.commit()
+    result = post_request_api('/api/extract/links', request.form)
     return redirect(url_for('get_all_links'))
 
 
 @app.route('/extract/links/delete', methods=["GET"])
 def delete_extract_links():
     id = request.args.get('id')
-    Audit.query.filter(Audit.id == id).delete()
-    db.session.commit()
+    result = post_request_api('/api/extract/links/delete', {"id": id})
     return redirect(url_for('get_all_links'))
 
 
 @app.route('/extract/links/website', methods=["GET"])
 def get_all_links_website_dashboard():
-    results = Audit.query.filter(Audit.type_audit == "Links_Website").all()
-    result_arr = []
-    for i in results:
-        result_arr.append(
-            {"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date})
-    return render_template("extract/links_website/links_all_website.jinja2", result=result_arr)
+    result = get_request_api('/api/extract/links/website' )
+    return render_template("extract/links_website/links_all_website.jinja2", result=result["results"])
 
 
 @app.route('/extract/links/website', methods=["POST"])
 def add_links_website():
-    url = request.form['url']
-    count = Audit.query.filter(Audit.url == url).filter(
-        Audit.type_audit == "Links_Website").count()
-    if url and count == 0:
-        value = get_all_links_website(url)
-        new_audit = Audit(
-            url=url, result=json.dumps(value), type_audit="Links_Website", begin_date=datetime.now()
-        )
-        db.session.add(new_audit)
-        db.session.commit()
+    result = post_request_api('/api/extract/links/website', request.form)
     return redirect(url_for('get_all_links_website_dashboard'))
 
 
 @app.route('/extract/links/website/<id>', methods=["GET"])
 def get_all_links_website_by_id(id):
-    audit = Audit.query.filter(Audit.id == id).first()
-    result = json.loads(audit.result)
+    results = get_request_api('/api/extract/links/website/' + id )
+    result = results["results"]
     return render_template("extract/links_website/links_website.jinja2", id=id, internal=result["internal_urls"]["results"],
                            external=result["external_urls"]["results"], internal_number=result["internal_urls"]["total"],
                            external_number=result["external_urls"]["total"], page_visited=result["page_visited"],
@@ -143,40 +101,26 @@ def get_all_links_website_by_id(id):
 @app.route('/extract/links/website/delete', methods=["GET"])
 def delete_extract_links_website():
     id = request.args.get('id')
-    Audit.query.filter(Audit.id == id).delete()
-    db.session.commit()
+    result = post_request_api('/api/extract/links/website/delete', {"id": id})
     return redirect(url_for('get_all_links_website_dashboard'))
 
 
 @app.route('/extract/images', methods=["GET"])
 def get_all_images_dashboard():
-    results = Audit.query.filter(Audit.type_audit == "Images").all()
-    result_arr = []
-    for i in results:
-        result_arr.append(
-            {"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date})
-    return render_template("extract/images/images_all.jinja2", result=result_arr)
+    results = get_request_api('/api/extract/images' )
+    return render_template("extract/images/images_all.jinja2", result=results["results"])
 
 
 @app.route('/extract/images', methods=["POST"])
 def add_images_dashboard():
-    url = request.form['url']
-    count = Audit.query.filter(Audit.url == url).filter(
-        Audit.type_audit == "Images").count()
-    if url and count == 0:
-        value = find_all_images(url)
-        new_audit = Audit(
-            url=url, result=json.dumps(value), type_audit="Images", begin_date=datetime.now()
-        )
-        db.session.add(new_audit)
-        db.session.commit()
+    result = post_request_api('/api/extract/images', request.form)
     return redirect(url_for('get_all_images_dashboard'))
 
 
 @app.route('/extract/images/<id>', methods=["GET"])
 def get_all_images_by_id(id):
-    audit = Audit.query.filter(Audit.id == id).first()
-    result = json.loads(audit.result)
+    results = get_request_api('/api/extract/images/' + id )
+    result = results["results"]
     return render_template("extract/images/images.jinja2", id=id, images=result["images"], missing_title=result["summary"]["missing_title"],
                            missing_alt=result["summary"]["missing_alt"], duplicates=result["summary"]["duplicates"], total=result["summary"]["total"])
 
@@ -184,6 +128,5 @@ def get_all_images_by_id(id):
 @app.route('/extract/images/delete', methods=["GET"])
 def delete_extract_image():
     id = request.args.get('id')
-    Audit.query.filter(Audit.id == id).delete()
-    db.session.commit()
+    result = post_request_api('/api/extract/images/delete', {"id": id})
     return redirect(url_for('get_all_images_dashboard'))

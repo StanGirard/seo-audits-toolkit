@@ -15,8 +15,8 @@ def graphs_get():
     if request.method == "POST":
         results = post_request_api("/api/graphs", request.form) 
     else:
-        results= get_request_api("/api/graphs")
-    return render_template("graphs/graphs_all.jinja2", result=results["results"])
+        results = get_request_api("/api/graphs")
+    return render_template("graphs/graphs_all.jinja2", result=results["results"], error=results["error"])
 
 @app.route('/graphs/<id>', methods=["GET"])
 def graphs_get_by_id(id):

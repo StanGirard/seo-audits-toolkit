@@ -6,6 +6,7 @@ from toolkit import dbAlchemy as db
 from toolkit.models import Graphs
 
 import urllib
+from urllib.parse import urlparse
 from toolkit.controller.graphs.core import generate_graph_internal_link_interactive
 from toolkit.lib.api_tools import generate_answer
 
@@ -63,11 +64,14 @@ def get_post_graphs():
         error = None
         if request.method == "POST":
             domain = request.form["domain"]
-            result = generate_interactive_graph(domain, False, 500)
-            if "error" in result:
-                error = result
+            if urlparse(domain).scheme not in ["https", "http"]:
+                error = "Please input an url with https or http at the beginning"
+            else:
+                result = generate_interactive_graph(domain, False, 500)
+                if "error" in result:
+                    error = result
         results = Graphs.query.all()
-        result_arr= {"results":[]}
+        result_arr= {"results":[], "error": error}
         for i in results:
             result_arr["results"].append({"id": i.id, "urls": i.urls, "status_job": i.status_job, "begin_date": i.begin_date})
         return generate_answer(data=result_arr)

@@ -45,7 +45,7 @@ pip install -r requirements.txt
 or you can use Docker
 
 ```Bash
-docker build -t seo-toolkit:latest .
+docker pull stangirard/osat:latest
 ```
 
 ## Running
@@ -57,7 +57,7 @@ flask run
 or with docker
 
 ```Bash
-docker run -d -p 5000:5000 seo-toolkit:latest
+docker run -d -p 5000:5000 stangirard/osat:latest
 ```
 
 ## Dashboard

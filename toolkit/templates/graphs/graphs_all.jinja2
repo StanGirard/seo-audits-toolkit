@@ -11,7 +11,7 @@
         <button class="btn btn-primary" type="submit" id="submit">Submit</button>
     </div>
 </form>
-{% if error %}
+{% if error is not none%}
 <div class="alert alert-danger" role="alert">
     {{error}}
 </div>

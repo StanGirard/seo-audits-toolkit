@@ -8,6 +8,7 @@ from toolkit import dbAlchemy as db
 from toolkit.controller.seo.lighthouse import audit_google_lighthouse_full
 from toolkit.models import LighthouseScore
 from celery.signals import worker_process_init, task_prerun
+from sqlalchemy import update
 
 
 @task_prerun.connect

@@ -1,20 +1,18 @@
 import json
 import math
+import time
 from datetime import datetime
 
 from flask import current_app as app
-from flask import redirect, request, url_for, render_template
-from sqlalchemy import func
+from flask import redirect, render_template, request, url_for
+from sqlalchemy import func, update
 
-from toolkit import dbAlchemy as db
-from toolkit.controller.seo.lighthouse import audit_google_lighthouse_full
-from toolkit.models import Audit, LighthouseScore
-
-from toolkit.lib.api_tools import generate_answer
 from toolkit import celery
+from toolkit import dbAlchemy as db
 from toolkit.celeryapp.tasks import LighthouseAudit
-
-import time
+from toolkit.controller.seo.lighthouse import audit_google_lighthouse_full
+from toolkit.lib.api_tools import generate_answer
+from toolkit.models import Audit, LighthouseScore
 
 
 @app.route('/status/<task_id>')
@@ -69,13 +67,13 @@ def post_audit_lighthouse_score():
 def get_all_audit_lighthouse_score():
     try:
         LS = LighthouseScore
-        quer = db.session.query(LS.id,LS.url, LS.accessibility, LS.pwa, LS.seo, LS.best_practices, LS.performance, func.max(LS.begin_date).label('begin_date')).group_by(LS.url)
+        quer = db.session.query(LS.id,LS.url, LS.accessibility, LS.pwa, LS.seo, LS.best_practices, LS.performance,LS.status_job, func.max(LS.begin_date).label('begin_date')).group_by(LS.url)
         results = quer.all()
         result_arr={"results": [], "google_error":False}
         if app.config['GOOGLE_API_KEY'] == "None":
             result_arr["google_error"] = True
         for i in results:
-            result_arr["results"].append({"id": i.id, "url": i.url, "accessibility": i.accessibility, "pwa": i.pwa, "seo": i.seo, "best_practices": i.best_practices, "performance": i.performance, "begin_date": i.begin_date})
+            result_arr["results"].append({"id": i.id, "url": i.url, "accessibility": i.accessibility, "pwa": i.pwa, "seo": i.seo, "best_practices": i.best_practices, "performance": i.performance,"status_job": i.status_job, "begin_date": i.begin_date})
         return generate_answer(data=result_arr)
     except Exception as e:
         print(e)

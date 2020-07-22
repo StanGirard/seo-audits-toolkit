@@ -43,6 +43,7 @@
             </a>
             </th>
             <td>
+            {%if item.status_job == "FINISHED" %}
             <div class="d-flex align-items-center">
                         <span class="mr-2">{{item.accessibility}}</span>
                         <div>
@@ -95,6 +96,13 @@
                       </div>
                 
             </td>
+            {% else %}
+            <td>
+            <div class="d-flex align-items-center">
+                        {{item.status_job}}
+                
+            </td>
+            {% endif %}}
             <td>
 
                 {{item.begin_date|formatdatetime}}

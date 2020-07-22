@@ -12,8 +12,7 @@ from toolkit.models import Audit, LighthouseScore
 
 from toolkit.lib.api_tools import generate_answer
 from toolkit import celery
-from toolkit.celery.tasks import my_background_task
-
+from toolkit.celeryapp.tasks import LighthouseAudit
 
 import time
 
@@ -50,7 +49,7 @@ def taskstatus(task_id):
 
 @app.route('/api/audit/lighthouse/score/test', methods=["GET"])
 def testi_test():
-    task = my_background_task.delay("https://test.com")
+    task = LighthouseAudit.delay("https://test.com")
     return {"id":task.id}
 
 @app.route('/api/audit/lighthouse/score', methods=["POST"])
@@ -58,19 +57,8 @@ def post_audit_lighthouse_score():
     try:
         url = request.form['url']
         if url:
-            value = audit_google_lighthouse_full(url)
-            accessibility = int(math.floor(value["lighthouseResult"]["categories"]["accessibility"]["score"] * 100))
-            seo = int(math.floor(value["lighthouseResult"]["categories"]["seo"]["score"] * 100))
-            pwa = int(math.floor(value["lighthouseResult"]["categories"]["pwa"]["score"] * 100))
-            best_practices = int(math.floor(value["lighthouseResult"]["categories"]["best-practices"]["score"] * 100))
-            performance = int(math.floor(value["lighthouseResult"]["categories"]["performance"]["score"] * 100))
-            new_score = LighthouseScore(
-                url = url, accessibility=accessibility,pwa=pwa,seo=seo, best_practices=best_practices,performance=performance, begin_date=datetime.now()
-            )
-            db.session.add(new_score)
-            db.session.commit()
-            print("Good")
-            return generate_answer()
+            task = LighthouseAudit.delay(url)
+            return generate_answer(data={"id":task.id})
         else:
             return generate_answer(success=False)
     except Exception as e:

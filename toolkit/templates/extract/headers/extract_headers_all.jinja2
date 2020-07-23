@@ -17,6 +17,7 @@
     <thead class="thead-dark">
         <tr>
             <th scope="col">URL</th>
+            <th scope="col">Status</th>
             <th scope="col">Update Time </th>
             <th scope="col">Update </th>
         </tr>
@@ -31,7 +32,27 @@
                 {{item.url}}
             </a>
             </th>
-
+            <td>
+                {% if item.status_job == "RUNNING" %}
+                <span class="badge badge-primary badge-pill badge-warning">{{item["status_job"]}}</span>
+                <script>
+                    setInterval(function() {
+                        $.ajax({
+                            type: "post",
+                            url: "/api/extract/status",
+                            data: { task: {{item.task_id|tojson}},},
+                            success: function(data) {
+                                //console.log the response
+                                if (data["success"] == true) {
+                                  location.reload();
+                                }
+                            }
+                        });
+                    }, 1000);
+                </script>
+                 {% else %}
+                <span class="badge badge-primary badge-pill badge-success">{{item["status_job"]}}</span> {% endif %}
+            </td>
             <td>
               
                 {{item.begin_date|formatdatetime}}

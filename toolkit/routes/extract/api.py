@@ -1,5 +1,6 @@
 import json
 from datetime import datetime
+import time
 
 from flask import current_app as app
 from flask import redirect, render_template, request, url_for
@@ -10,6 +11,7 @@ from toolkit.controller.seo.headers import find_all_headers_url
 from toolkit.controller.seo.images import find_all_images
 from toolkit.controller.seo.links import find_all_links
 from toolkit.lib.api_tools import generate_answer
+from toolkit.celeryapp.tasks import Extractor
 from toolkit.models import Audit
 
 
@@ -20,7 +22,7 @@ def get_extract_headers_all():
         result_arr = {"results": []}
         for i in results:
             result_arr["results"].append(
-                {"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date})
+                {"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date, "task_id": i.task_id, "status_job": i.status_job})
         return generate_answer(data=result_arr)
     except Exception as e:
         print(e)
@@ -43,7 +45,7 @@ def get_extract_links_status_all():
         result_arr = {"results": []}
         for i in results:
             result_arr["results"].append(
-                {"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date})
+                {"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date, "task_id": i.task_id, "status_job": i.status_job})
         return generate_answer(data=result_arr)
     except Exception as e:
         print(e)
@@ -68,12 +70,8 @@ def post_extract_headers():
         count = Audit.query.filter(Audit.url == url).filter(
             Audit.type_audit == "Headers").count()
         if url and count == 0:
-            value = find_all_headers_url(url)
-            new_audit = Audit(
-                url=url, result=json.dumps(value), type_audit="Headers", begin_date=datetime.now()
-            )
-            db.session.add(new_audit)
-            db.session.commit()
+            Extractor.delay("Headers",url)
+            time.sleep(.300)
         return generate_answer(success=True)
     except Exception as e:
         print(e)
@@ -97,12 +95,8 @@ def post_extract_add_links():
         count = Audit.query.filter(Audit.url == url).filter(
             Audit.type_audit == "Links").count()
         if url and count == 0:
-            value = find_all_links(url)
-            new_audit = Audit(
-                url=url, result=json.dumps(value), type_audit="Links", begin_date=datetime.now()
-            )
-            db.session.add(new_audit)
-            db.session.commit()
+            Extractor.delay("Links",url)
+            time.sleep(.300)
             return generate_answer(success=True)
     except Exception as e:
         print(e)
@@ -126,7 +120,7 @@ def get_extract_all_links_website():
         result_arr = {"results": []}
         for i in results:
             result_arr["results"].append(
-                {"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date})
+                {"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date, "task_id": i.task_id, "status_job": i.status_job})
         return generate_answer(data=result_arr)
     except Exception as e:
         print(e)
@@ -139,12 +133,8 @@ def post_extract_add_links_website():
         count = Audit.query.filter(Audit.url == url).filter(
             Audit.type_audit == "Links_Website").count()
         if url and count == 0:
-            value = get_all_links_website(url)
-            new_audit = Audit(
-                url=url, result=json.dumps(value), type_audit="Links_Website", begin_date=datetime.now()
-            )
-            db.session.add(new_audit)
-            db.session.commit()
+            Extractor.delay("Links_Website",url)
+            time.sleep(.300)
         return generate_answer(success=True)
     except Exception as e:
         print(e)
@@ -179,7 +169,7 @@ def get_extract_images_all():
         result_arr = {"results":[]}
         for i in results:
             result_arr["results"].append(
-                {"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date})
+                {"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date, "task_id": i.task_id, "status_job": i.status_job})
         return generate_answer(data=result_arr)
     except Exception as e:
         print(e)
@@ -192,12 +182,9 @@ def post_extract_add_images():
         count = Audit.query.filter(Audit.url == url).filter(
             Audit.type_audit == "Images").count()
         if url and count == 0:
-            value = find_all_images(url)
-            new_audit = Audit(
-                url=url, result=json.dumps(value), type_audit="Images", begin_date=datetime.now()
-            )
-            db.session.add(new_audit)
-            db.session.commit()
+            Extractor.delay("Images",url)
+            time.sleep(.300)
+            
         return generate_answer(success=True)
     except Exception as e:
         print(e)
@@ -225,3 +212,15 @@ def post_delete_extract_image():
         print(e)
         return generate_answer(success=False)
 
+@app.route('/api/extract/status', methods=["POST"])
+def get_extract_status_by_task():
+    try:
+        task_id = request.form['task']
+        result = Audit.query.filter(Audit.task_id == task_id).first()
+        if result and result.status_job == "FINISHED":
+            return generate_answer(success=True)
+        else:
+            return generate_answer(success=False)
+    except Exception as e:
+        print(e)
+        return generate_answer(success=False)

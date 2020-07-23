@@ -33,7 +33,24 @@
 
             <td>
                 {% if item.status_job == "RUNNING" %}
-                <span class="badge badge-primary badge-pill badge-warning">{{item["status_job"]}}</span> {% else %}
+                <span class="badge badge-primary badge-pill badge-warning">{{item["status_job"]}}</span>
+                <script>
+                    setInterval(function() {
+                        $.ajax({
+                            type: "post",
+                            url: "/api/keywords/status",
+                            data: { task: {{item.task_id|tojson}},},
+                            success: function(data) {
+                                //console.log the response
+                                
+                                if (data["success"] == true) {
+                                  location.reload();
+                                }
+                            }
+                        });
+                    }, 2000);
+                </script>
+                 {% else %}
                 <span class="badge badge-primary badge-pill badge-success">{{item["status_job"]}}</span> {% endif %}
             </td>
             <td>

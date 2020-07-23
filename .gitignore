@@ -4,3 +4,4 @@ visited.db
 test.py
 .idea/*
 .env
+dump.rdb

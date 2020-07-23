@@ -1,15 +1,10 @@
-from flask import Flask
+from celery import Celery
 from flask_sqlalchemy import SQLAlchemy
 dbAlchemy = SQLAlchemy()
 
+def make_celery(app_name=__name__):
+    backend = "redis://localhost:6379/0"
+    broker = backend.replace("0", "1")
+    return Celery(app_name, backend=backend, broker=broker)
 
-def create_app():
-    """Construct the core application."""
-    app = Flask(__name__)
-    app.config.from_object('config.Config')
-    dbAlchemy.init_app(app)
-
-    with app.app_context():
-        import toolkit.routes  # Import routes
-        dbAlchemy.create_all()  # Create sql tables for our data models
-        return app
+celery = make_celery()

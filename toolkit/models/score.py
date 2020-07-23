@@ -45,6 +45,19 @@ class LighthouseScore(dbAlchemy.Model):
         unique=False,
         nullable=False
     )
+    status_job = dbAlchemy.Column(
+    dbAlchemy.String(20),
+    index=False,
+    unique=False,
+    nullable=True,
+    default="FINISHED"
+    )
+    task_id = dbAlchemy.Column(
+    dbAlchemy.String(40),
+    index=False,
+    unique=False,
+    nullable=True,
+    )
     begin_date = dbAlchemy.Column(
         dbAlchemy.DateTime,
         index=False,

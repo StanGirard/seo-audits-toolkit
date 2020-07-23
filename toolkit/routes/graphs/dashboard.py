@@ -5,7 +5,6 @@ from urllib.parse import urlparse
 
 from toolkit import dbAlchemy
 from toolkit.models import Graphs
-from toolkit.routes.graphs.api import generate_interactive_graph
 from toolkit.lib.api_tools import post_request_api, get_request_api
 
 

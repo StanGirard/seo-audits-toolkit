@@ -1,5 +1,6 @@
 import json
 import math
+import time
 from datetime import datetime
 
 from flask import current_app as app
@@ -21,6 +22,7 @@ def audit_home():
 @app.route('/audit/lighthouse/score', methods=["POST"])
 def add_audit_lighthouse_score():
     result = post_request_api('/api/audit/lighthouse/score', request.form)
+    time.sleep(.300)
     return redirect(url_for('dashboard_audit_lighthouse_score'))
 
 @app.route('/audit/lighthouse/score')
@@ -36,7 +38,12 @@ def dashboard_audit_lighthouse_score_get_id(id):
     return render_template("audit/lighthouse/lighthouse.jinja2", url=result["url"], id=result["id"], result=result["results"], seo_list=result["table"]["seo_list"], accessibility_list=result["table"]["accessibility_list"],pwa_list=result["table"]["pwa_list"],
              best_list=result["table"]["best_list"], performance_list=result["table"]["performance_list"], labels=result["table"]["labels"])
 
-
+@app.route('/audit/lighthouse/score/delete', methods=["GET"])
+def delete_audit_lighthouse():
+    id = request.args.get('id')
+    print("HHHHHHHHHHHHHHHHHHHHH")
+    result = post_request_api('/api/audit/lighthouse/score/delete', {"id": id})
+    return redirect(url_for('dashboard_audit_lighthouse_score'))
 
 @app.route('/audit/lighthouse/score/all')
 def dashboard_audit_lighthouse_score_all():

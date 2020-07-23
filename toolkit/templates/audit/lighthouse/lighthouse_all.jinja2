@@ -19,108 +19,131 @@
 {% endif %}
 
 <div class="table-responsive">
-<table class="table align-items-center table-dark">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">URL</th>
-            <th scope="col">Accessibility</th>
-            <th scope="col">Best Practices</th>
-            <th scope="col">Performances</th>
-            <th scope="col">SEO</th>
-            <th scope="col">PWA</th>
-            <th scope="col">Update Time </th>
-            <th scope="col">Update </th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in result %}
+    <table class="table align-items-center table-dark">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">URL</th>
+                <th scope="col">Accessibility</th>
+                <th scope="col">Best Practices</th>
+                <th scope="col">Performances</th>
+                <th scope="col">SEO</th>
+                <th scope="col">PWA</th>
+                <th scope="col">Update Time </th>
+                <th scope="col">Update </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in result %}
 
-        <tr href="/audit/lighthouse/score/{{item.id}}">
+            <tr href="/audit/lighthouse/score/{{item.id}}">
 
-            <th scope="row">
-                <a href="/audit/lighthouse/score/{{item.id}}">
+                <th scope="row">
+                    <a href="/audit/lighthouse/score/{{item.id}}">
                 {{item.url}}
             </a>
-            </th>
-           
-            {%if item.status_job == "FINISHED" %}
-            <td>
-            
-            <div class="d-flex align-items-center">
+                </th>
+
+                {%if item.status_job == "FINISHED" %}
+                <td>
+
+                    <div class="d-flex align-items-center">
                         <span class="mr-2">{{item.accessibility}}</span>
                         <div>
-                          <div class="progress">
-                            <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="{{item.accessibility}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.accessibility}}%;"></div>
-                          </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-gradient-danger" role="progressbar" aria-valuenow="{{item.accessibility}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.accessibility}}%;"></div>
+                            </div>
                         </div>
-                      </div>
-            </td>
-            <td>
-            <div class="d-flex align-items-center">
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex align-items-center">
                         <span class="mr-2">{{item.best_practices}}</span>
                         <div>
-                          <div class="progress">
-                            <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="{{item.best_practices}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.best_practices}}%;"></div>
-                          </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="{{item.best_practices}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.best_practices}}%;"></div>
+                            </div>
                         </div>
-                      </div>
-            </td>
-            <td>
-            <div class="d-flex align-items-center">
+                    </div>
+                </td>
+                <td>
+                    <div class="d-flex align-items-center">
                         <span class="mr-2">{{item.performance}}</span>
                         <div>
-                          <div class="progress">
-                            <div class="progress-bar bg-gradient-primary" role="progressbar" aria-valuenow="{{item.performance}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.performance}}%;"></div>
-                          </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-gradient-primary" role="progressbar" aria-valuenow="{{item.performance}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.performance}}%;"></div>
+                            </div>
                         </div>
-                      </div>
-                
-            </td>
-            <td>
-            <div class="d-flex align-items-center">
+                    </div>
+
+                </td>
+                <td>
+                    <div class="d-flex align-items-center">
                         <span class="mr-2">{{item.seo}}</span>
                         <div>
-                          <div class="progress">
-                            <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="{{item.seo}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.seo}}%;"></div>
-                          </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="{{item.seo}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.seo}}%;"></div>
+                            </div>
                         </div>
-                      </div>
-                
-            </td>
-            <td>
-            <div class="d-flex align-items-center">
+                    </div>
+
+                </td>
+                <td>
+                    <div class="d-flex align-items-center">
                         <span class="mr-2">{{item.pwa}}</span>
                         <div>
-                          <div class="progress">
-                            <div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow="{{item.pwa}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.pwa}}%;"></div>
-                          </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-gradient-warning" role="progressbar" aria-valuenow="{{item.pwa}}" aria-valuemin="0" aria-valuemax="100" style="width: {{item.pwa}}%;"></div>
+                            </div>
                         </div>
-                      </div>
-                
-            </td>
-            {% else %}
-            <td  colspan="5">
-            <div class="d-flex align-items-center">
-                        {{item.status_job}}
-                
-            </td>
-            {% endif %}
-            <td>
-
-                {{item.begin_date|formatdatetime}}
-            </td>
-            <td>
-                <form action="/audit/lighthouse/score" id="update{{item.id}}" method="POST">
-                    <input type="hidden" id="url" name="url" value="{{item.url}}">
-                    <a type="submit" id="submit" href="javascript:$('#update{{item.id}}').submit();">
-                        <i style="color: green" class="ni ni-fat-add"></i>
-                    </a>
                     </div>
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
+
+                </td>
+                {% else %}
+                <td colspan="5">
+                    <div class="d-flex align-items-center spinner-border text-light" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </td>
+                <script>
+                    setInterval(function() {
+                        $.ajax({
+                            type: "post",
+                            url: "/api/audit/lighthouse/score/status",
+                            data: { task: {{item.task_id|tojson}},},
+                            success: function(data) {
+                                //console.log the response
+                                
+                                if (data["success"] == true) {
+                                  location.reload();
+                                }
+                            }
+                        });
+                    }, 2000);
+                </script>
+                {% endif %}
+                <td>
+
+                    {{item.begin_date|formatdatetime}}
+                </td>
+                <td>
+                    <form action="/audit/lighthouse/score" id="update{{item.id}}" method="POST">
+                        <input type="hidden" id="url" name="url" value="{{item.url}}">
+                        <a type="submit" id="submit" href="javascript:$('#update{{item.id}}').submit();">
+                            <i style="color: green" class="ni ni-fat-add"></i>
+                        </a>
+</div>
+</form>
+<form action="/audit/lighthouse/score/delete" id="delete{{item.id}}" method="GET">
+    <input type="hidden" id="id" name="id" value="{{item.id}}">
+    <a type="submit" id="submit" href="javascript:$('#delete{{item.id}}').submit();">
+        <i style="color: red" class="ni ni-fat-remove"></i>
+    </a>
+    </div>
+</form>
+</td>
+</tr>
+{% endfor %}
+</tbody>
 </table>
 </div>
 {% endblock %}

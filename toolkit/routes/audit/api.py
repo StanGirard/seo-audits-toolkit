@@ -63,21 +63,47 @@ def post_audit_lighthouse_score():
         print(e)
         return generate_answer(success=False)
 
+@app.route('/api/audit/lighthouse/score/status', methods=["POST"])
+def get_audit_status_by_task():
+    try:
+        task_id = request.form['task']
+        result = LighthouseScore.query.filter(LighthouseScore.task_id == task_id).first()
+        if result and result.status_job == "FINISHED":
+            return generate_answer(success=True)
+        else:
+            return generate_answer(success=False)
+    except Exception as e:
+        print(e)
+        return generate_answer(success=False)
+
 @app.route('/api/audit/lighthouse/score')
 def get_all_audit_lighthouse_score():
     try:
         LS = LighthouseScore
-        quer = db.session.query(LS.id,LS.url, LS.accessibility, LS.pwa, LS.seo, LS.best_practices, LS.performance,LS.status_job, func.max(LS.begin_date).label('begin_date')).group_by(LS.url)
+        quer = db.session.query(LS.id,LS.url, LS.accessibility, LS.pwa, LS.seo, LS.best_practices, LS.performance,LS.status_job, LS.task_id, func.max(LS.begin_date).label('begin_date')).group_by(LS.url)
         results = quer.all()
         result_arr={"results": [], "google_error":False}
         if app.config['GOOGLE_API_KEY'] == "None":
             result_arr["google_error"] = True
         for i in results:
-            result_arr["results"].append({"id": i.id, "url": i.url, "accessibility": i.accessibility, "pwa": i.pwa, "seo": i.seo, "best_practices": i.best_practices, "performance": i.performance,"status_job": i.status_job, "begin_date": i.begin_date})
+            result_arr["results"].append({"id": i.id, "url": i.url, "accessibility": i.accessibility, "pwa": i.pwa, "seo": i.seo, "best_practices": i.best_practices, "performance": i.performance,"status_job": i.status_job,"task_id": i.task_id, "begin_date": i.begin_date})
         return generate_answer(data=result_arr)
     except Exception as e:
         print(e)
         return generate_answer(success=False)   
+
+@app.route('/api/audit/lighthouse/score/delete', methods=["POST"])
+def post_delete_lighthouse_score():
+    try:
+        id = request.form['id']
+        
+        result = LighthouseScore().query.filter(LighthouseScore.id == id).first()
+        LighthouseScore().query.filter(LighthouseScore.url == result.url).delete()
+        db.session.commit()
+        return generate_answer(success=True)
+    except Exception as e:
+        print(e)
+        return generate_answer(success=False)
     
 @app.route('/api/audit/lighthouse/score/<id>', methods=["GET"])
 def get_audit_lighthouse_score_by_id(id):

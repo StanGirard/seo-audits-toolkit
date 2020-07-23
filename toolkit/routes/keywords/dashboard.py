@@ -5,7 +5,6 @@ from flask import redirect, render_template, request, url_for
 
 from toolkit import dbAlchemy
 from toolkit.models import  Keywords
-from toolkit.routes.keywords.api import get_query_results
 from toolkit.lib.api_tools import post_request_api, get_request_api
 
 

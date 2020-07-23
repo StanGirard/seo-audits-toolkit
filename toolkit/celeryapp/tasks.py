@@ -8,6 +8,7 @@ from toolkit import dbAlchemy as db
 from toolkit.controller.seo.lighthouse import audit_google_lighthouse_full
 from toolkit.controller.graphs.core import generate_interactive_graph
 from toolkit.controller.serp.core import query_domain_serp
+from toolkit.controller.keywords.core import get_query_results
 from toolkit.models import LighthouseScore
 from celery.signals import worker_process_init, task_prerun
 from sqlalchemy import update
@@ -45,3 +46,9 @@ def GraphsGenerate(self,domain):
 def SerpRank(self,query, domain, lang, tld):
     result = query_domain_serp(query, domain, lang, tld, str(self.request.id))
     return {'url': domain, 'status': 'Task completed!'}
+
+@celery.task(bind=True,name="Keywords")
+def KeywordsGet(self,query):
+    result = get_query_results(query, str(self.request.id))
+    return {'url': query, 'status': 'Task completed!'}
+

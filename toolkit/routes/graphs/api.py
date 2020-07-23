@@ -20,7 +20,10 @@ def get_post_graphs():
         error = None
         if request.method == "POST":
             domain = request.form["domain"]
-            result = GraphsGenerate.delay(domain)
+            if domain.startswith("https://") or domain.startswith("http://"):
+                result = GraphsGenerate.delay(domain)
+            else:
+                result = GraphsGenerate.delay("https://" + domain)
             time.sleep(0.3)
         results = Graphs.query.all()
         result_arr= {"results":[]}

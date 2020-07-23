@@ -1,22 +1,26 @@
+import logging
 import math
+import urllib
+import urllib.parse
 from datetime import datetime, timedelta
 
-from bokeh.embed import components
-import urllib.parse
 import networkx as nx
-from bokeh.plotting import figure, from_networkx
-from bokeh.models import (BoxZoomTool, Circle, HoverTool,
-                          MultiLine,  Range1d, ResetTool,  ColorBar,
-                          ColumnDataSource, DataTable, TableColumn)
-from bokeh.transform import linear_cmap
-from bokeh.palettes import Spectral4, Spectral8, Spectral6
-from bokeh.models.graphs import NodesAndLinkedEdges
-from bokeh.layouts import row
-from flask import render_template
-
-from toolkit.lib.http_tools import request_parse, request_status_code
 import seaborn as sns
-import logging
+from bokeh.embed import components
+from bokeh.layouts import row
+from bokeh.models import (BoxZoomTool, Circle, ColorBar, ColumnDataSource,
+                          DataTable, HoverTool, MultiLine, Range1d, ResetTool,
+                          TableColumn)
+from bokeh.models.graphs import NodesAndLinkedEdges
+from bokeh.palettes import Spectral4, Spectral6, Spectral8
+from bokeh.plotting import figure, from_networkx
+from bokeh.transform import linear_cmap
+from flask import render_template, request
+from sqlalchemy import update
+from toolkit import dbAlchemy as db
+from toolkit.lib.api_tools import generate_answer
+from toolkit.lib.http_tools import request_parse, request_status_code
+from toolkit.models import Graphs
 
 palette = sns.color_palette("hls", 99)
 pal_hex_lst = palette.as_hex()
@@ -153,33 +157,49 @@ def update_or_insert_graph_in_db(conn, urls, maximum, update=False):
     return render_template("graphs/bokeh.jinja2", script=script, div=div, domain=domain, template="Flask", time=datetime.now().strftime("%m/%d/%Y, %H:%M:%S"))
 
 
-def generate_interactive_graph(conn, urls, relaunch, maxi_urls):
+
+
+
+
+def update_or_insert_graph_in_db( urls, maximum, updating=False):
+    plot, domain = generate_graph_internal_link_interactive(urls, maximum)
+    script, div = components(plot)
+    conn = db.engine.connect()
+    smt = update(Graphs).where(Graphs.urls == urls).values(script= script, 
+            div = div, begin_date=datetime.now(), status_job="FINISHED")
+    conn.execute(smt)
+    return render_template("graphs/bokeh.jinja2", script=script, div=div, domain=domain, template="Flask", time=datetime.now())
+
+def generate_interactive_graph(urls, relaunch,task, maxi_urls):
     if urls is None:
         return "Empty Url paramaters"
     maximum_urls = 500
     if maxi_urls is not None:
         maximum_urls = int(maxi_urls)
-    stopped, already_exists = graphs.check_status_url(conn, urls, "FINISHED")
-
-    if stopped == True:
-
-        # If not first time
-        if already_exists:
-            query_result = graphs.select_visited(conn, urls)
+    urls_exists = Graphs.query.filter(Graphs.urls == urls).count()
+    if urls_exists > 0:
+        stopped = Graphs.query.filter(Graphs.urls == urls and Graphs.status_job == "RUNNING").first()
+        if stopped.status_job == "FINISHED":
+            query_result = Graphs.query.filter(Graphs.urls == urls and Graphs.status_job == "RUNNING").first()
             # ALREADY VISITED IN THE LAST 24 HOURS
 
-            if datetime.strptime(query_result[0][2], '%m/%d/%Y, %H:%M:%S') + timedelta(hours=24) > datetime.now() and relaunch != "True":
-                return render_template("graphs/bokeh.jinja2", script=query_result[0][3], div=query_result[0][4], domain=urllib.parse.urlparse(query_result[0][1]).netloc, template="Flask", time=datetime.strptime(query_result[0][2], '%m/%d/%Y, %H:%M:%S'))
+            if query_result.begin_date + timedelta(hours=24) > datetime.now() and relaunch != "True":
+                return render_template("graphs/bokeh.jinja2", script=query_result.script, div=query_result.div, domain=urllib.parse.urlparse(query_result.urls).netloc, template="Flask", time=query_result.begin_date)
 
             # More than 24 hours or parameter redo is True
-            if (datetime.strptime(query_result[0][2], '%m/%d/%Y, %H:%M:%S') + timedelta(hours=24) < datetime.now() or relaunch == "True"):
-                graphs.update_running_db(conn, ("RUNNING", urls))
-                return update_or_insert_graph_in_db(conn, urls,  maximum_urls, True)
+            if query_result.begin_date + timedelta(hours=24) < datetime.now() or relaunch == "True":
+                conn = db.engine.connect()
+                smt = update(Graphs).where(Graphs.urls == urls).values(status_job="RUNNING")
+                conn.execute(smt)
+                return update_or_insert_graph_in_db(urls,  maximum_urls, True)
 
-        # If first time
         else:
-            graphs.insert_url_db(conn, (urls, datetime.now().strftime(
-                "%m/%d/%Y, %H:%M:%S"), "", "", "RUNNING"))
-            return update_or_insert_graph_in_db(conn, urls, maximum_urls)
+            return {"error": "You graph is being generated. Please wait"}
+
     else:
-        return "JOB IS ALREADY RUNNING. PLEASE WAIT AND REFRESH."
+        new_graph = Graphs(
+            urls = urls, script="", div="", status_job = "RUNNING",task_id=task, begin_date=datetime.now()
+        )
+        db.session.add(new_graph)
+        db.session.commit()
+        return update_or_insert_graph_in_db(urls, maximum_urls)

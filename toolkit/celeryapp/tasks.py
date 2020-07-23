@@ -6,6 +6,7 @@ from flask import current_app as app
 from toolkit import celery
 from toolkit import dbAlchemy as db
 from toolkit.controller.seo.lighthouse import audit_google_lighthouse_full
+from toolkit.controller.graphs.core import generate_interactive_graph
 from toolkit.models import LighthouseScore
 from celery.signals import worker_process_init, task_prerun
 from sqlalchemy import update
@@ -33,3 +34,8 @@ def LighthouseAudit(self,url):
     smt = update(LighthouseScore).where(LighthouseScore.url == url).values(accessibility=accessibility,pwa=pwa,seo=seo, best_practices=best_practices,performance=performance, status_job="FINISHED")
     conn.execute(smt)
     return {'url': url, 'status': 'Task completed!'}
+
+@celery.task(bind=True,name="Graphs")
+def GraphsGenerate(self,domain):
+    result = generate_interactive_graph(domain,str(self.request.id), False, 500)
+    return {'url': domain, 'status': 'Task completed!'}

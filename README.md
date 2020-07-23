@@ -12,7 +12,7 @@ I've grown tired of SEO agencies making us pay hundreds of euros for simple tool
 ## Why you need it
 
 
-- It's **free** to use, easy and open source. No credit cards required.
+- It's **free**, easy and open source. 
 - It has a growing list of features
 - It's easy to install
 

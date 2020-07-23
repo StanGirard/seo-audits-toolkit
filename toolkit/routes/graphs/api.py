@@ -7,6 +7,7 @@ from toolkit.models import Graphs
 import time
 
 import urllib
+from urllib.parse import urlparse
 from toolkit.controller.graphs.core import generate_graph_internal_link_interactive
 from toolkit.lib.api_tools import generate_answer
 from toolkit.celeryapp.tasks import GraphsGenerate
@@ -27,7 +28,6 @@ def get_post_graphs():
             time.sleep(0.3)
         results = Graphs.query.all()
         result_arr= {"results":[]}
-        print(result_arr)
         for i in results:
             result_arr["results"].append({"id": i.id, "urls": i.urls, "status_job": i.status_job,"task_id": i.task_id, "begin_date": i.begin_date})
         return generate_answer(data=result_arr)

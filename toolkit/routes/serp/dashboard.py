@@ -7,7 +7,6 @@ from flask import redirect, render_template, request, url_for
 
 from toolkit import dbAlchemy
 from toolkit.models import Serp
-from toolkit.routes.serp.api import query_domain_serp
 from toolkit.lib.api_tools import post_request_api, get_request_api
 
 

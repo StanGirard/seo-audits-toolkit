@@ -39,7 +39,29 @@
                 {{item.query}}
             </td>
             <td>
-            {{item.pos}}
+            {% if item.status_job == "FINISHED" %}
+                {{item.pos}}
+            {% else %}
+                    <div class="d-flex align-items-center spinner-border text-light" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                <script>
+                    setInterval(function() {
+                        $.ajax({
+                            type: "post",
+                            url: "/api/rank/status",
+                            data: { task: {{item.task_id|tojson}},},
+                            success: function(data) {
+                                //console.log the response
+                                
+                                if (data["success"] == true) {
+                                  location.reload();
+                                }
+                            }
+                        });
+                    }, 2000);
+                </script>
+            {% endif%}
             </td>
             <td>
                 <form action="rank/delete" id="delete{{item.id}}" method="GET">

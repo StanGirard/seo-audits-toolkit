@@ -15,7 +15,7 @@
 # in the templates via {{ site.myvariable }}.
 title: OSAT
 description: Open Source SEO Audits Toolkit
-baseurl: "/" # the subpath of your site, e.g. /blog
+#baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://stangirard.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 remote_theme: pmarsceill/just-the-docs
 search_enabled: true

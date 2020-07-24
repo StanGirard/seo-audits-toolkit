@@ -7,7 +7,6 @@ permalink: /
 last_modified_date: 2020-07-24T17:54:08+0000
 ---
 
-# OSAT
 {: .fs-9 }
 <p align="center"><img src="./examples/OSAT.png" width="180px" /></p>
 {: .fs-6 .fw-300 }

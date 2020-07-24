@@ -15,17 +15,9 @@
 # in the templates via {{ site.myvariable }}.
 title: OSAT
 description: Open Source SEO Audits Toolkit
-baseurl: "/seo-audits-toolkit" # the subpath of your site, e.g. /blog
+baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://stangirard.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 remote_theme: pmarsceill/just-the-docs
-permalink: pretty
-exclude: ["node_modules/", "*.gemspec", "*.gem", "Gemfile", "Gemfile.lock", "package.json", "package-lock.json",  "script/", "LICENSE.txt", "lib/", "bin/", "README.md", "Rakefile"]
-
-# Set a path/url to a logo that will be displayed instead of the title
-#logo: "/assets/images/just-the-docs.png"
-
-# Enable or disable the site search
-# Supports true (default) or false
 search_enabled: true
 search:
   # Split pages into sections that can be searched individually

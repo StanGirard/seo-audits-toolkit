@@ -5,3 +5,5 @@ test.py
 .idea/*
 .env
 dump.rdb
+docs/.jekyll-cache
+docs/_site

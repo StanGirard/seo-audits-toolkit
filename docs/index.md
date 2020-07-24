@@ -125,6 +125,7 @@ If needed create a `.env` file with information that you would like to overload 
 
 ### Extract
 #### Headers
+
 | METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
 | :-------------: |-------------| -----|-----|
 | **GET**     | All Extracted Headers | `/api/extract/headers` | `None` |
@@ -133,6 +134,7 @@ If needed create a `.env` file with information that you would like to overload 
 | **POST**     | Deletes Headers by Id | `/api/extract/headers/delete` | `id` |
 
 #### Status Code Links
+
 | METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
 | :-------------: |-------------| -----|-----|
 | **GET**     | All Links status extracted from pages| `/api/extract/links` | `None` |
@@ -141,6 +143,7 @@ If needed create a `.env` file with information that you would like to overload 
 | **POST**     | Delete Link status by ID | `/api/extract/links/delete` | `id` |
 
 #### Internal & External Links
+
 | METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
 | :-------------: |-------------| -----|-----|
 | **GET**     | All Internal & External links extracted from pages | `/api/extract/links/website` | `None` |
@@ -149,6 +152,7 @@ If needed create a `.env` file with information that you would like to overload 
 | **POST**     | Deletes Internal & External links by ID | `/api/extract/links/website/delete` | `id` |
 
 #### Images
+
 | METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
 | :-------------: |-------------| -----|-----|
 | **GET**     | All Images extracted from pages | `/api/extract/images` | `None` |
@@ -157,6 +161,7 @@ If needed create a `.env` file with information that you would like to overload 
 | **POST**     | Deletes Images by ID | `/api/extract/images/delete` | `id` |
 
 ### Internal Linking Graphs
+
 | METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
 | :-------------: |-------------| -----|-----|
 | **GET**     | All Internal Linking Graphs generated | `/api/graphs` | `None` |
@@ -165,6 +170,7 @@ If needed create a `.env` file with information that you would like to overload 
 | **POST**     | Deletes Graphs by ID | `/api/graphs/delete` | `id` |
 
 ### Query Keywords Generator
+
 | METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
 | :-------------: |-------------| -----|-----|
 | **GET**     | All Keywords generated | `/api/keywords` | `None` |
@@ -173,6 +179,7 @@ If needed create a `.env` file with information that you would like to overload 
 | **POST**     | Deletes Keywords by ID | `/api/keywords/delete` | `id` |
 
 ### Search Engine Result Page Rank
+
 | METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
 | :-------------: |-------------| -----|-----|
 | **GET**     | All Ranks | `/api/rank` | `None` |

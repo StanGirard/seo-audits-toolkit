@@ -2,7 +2,7 @@
 layout: default
 title: Home
 nav_order: 1
-description: "Just the Docs is a responsive Jekyll theme with built-in search that is easily customizable and hosted on GitHub Pages."
+description: "OSAT is an open source audit toolkit to help you improve your seo"
 permalink: /
 last_modified_date: 2020-07-24T17:54:08+0000
 ---
@@ -17,80 +17,164 @@ Just the Docs gives your documentation a jumpstart with a responsive Jekyll them
 
 ---
 
-## Getting started
+<p align="center"><img src="./examples/OSAT.png" width="180px" /></p>
 
-### Dependencies
 
-Just the Docs is built for [Jekyll](https://jekyllrb.com), a static site generator. View the [quick start guide](https://jekyllrb.com/docs/) for more information. Just the Docs requires no special plugins and can run on GitHub Pages' standard Jekyll compiler. The [Jekyll SEO Tag plugin](https://github.com/jekyll/jekyll-seo-tag) is included by default (no need to run any special installation) to inject SEO and open graph metadata on docs pages. For information on how to configure SEO and open graph metadata visit the [Jekyll SEO Tag usage guide](https://jekyll.github.io/jekyll-seo-tag/usage/).
+# Open source SEO Audits Toolkit
 
-### Quick start: Use as a GitHub Pages remote theme
+**OSAT** is a collection of multiple tools to help you in your quest for a better SEO. All of these tools have been grouped into a single web app.
 
-1. Add Just the Docs to your Jekyll site's `_config.yml` as a [remote theme](https://blog.github.com/2017-11-29-use-any-theme-with-github-pages/)
-```yaml
-remote_theme: pmarsceill/just-the-docs
+I've grown tired of SEO agencies making us pay hundreds of euros for simple tools. I decided to develop **OSAT** to help users find issues in their website and increase their SEO for free. 
+
+<p align="center"><img src="./examples/seotoolkit.gif" width="600px" /></p>
+
+## Why you need it
+
+
+- It's **free**, easy and open source. 
+- It has a growing list of features
+- It's easy to install
+
+## Features
+
+
+- **Lighthouse Score**: Run [Lighthouse](https://developers.google.com/web/tools/lighthouse) Audits and keep track of your scores
+- **SERP Rank** - Get the rank of your website on google for specific queries
+- **Keywords Finder** - Finds all the Mono,Bi and Trigrams associated to a specific request. Helps you write content faster.
+- **Internal Links Graphs** - Creates a graph of your website showing all the connections between your pages.
+- **Extract Headers/Links/Images** - Easily extract all the links on your website and their status codes, the headers of a page and all the images.
+
+
+
+## Installation
+
+You need: 
+- **Python3**
+- **[Redis Server](https://redis.io/topics/quickstart)**
+
+
+```Bash
+git clone https://github.com/StanGirard/SEOToolkit
+cd SEOToolkit
 ```
-<small>You must have GitHub Pages enabled on your repo, one or more Markdown files, and a `_config.yml` file. [See an example repository](https://github.com/pmarsceill/jtd-remote)</small>
 
-### Local installation: Use the gem-based theme
+Then install dependencies
 
-1. Install the Ruby Gem
-```bash
-$ gem install just-the-docs
+```Bash
+pip install -r requirements.txt
 ```
-```yaml
-# .. or add it to your your Jekyll site’s Gemfile
-gem "just-the-docs"
+
+## Running
+
+### Flask
+```Bash
+python3 run.py
 ```
-2. Add Just the Docs to your Jekyll site’s `_config.yml`
-```yaml
-theme: "just-the-docs"
+
+### Redis Server
+```Bash
+redis-server
 ```
-3. _Optional:_ Initialize search data (creates `search-data.json`)
-```bash
-$ bundle exec just-the-docs rake search:init
+
+### Celery Worker
+```Bash
+celery worker -A celery_worker.celery --loglevel=info
 ```
-3. Run you local Jekyll server
-```bash
-$ jekyll serve
-```
-```bash
-# .. or if you're using a Gemfile (bundler)
-$ bundle exec jekyll serve
-```
-4. Point your web browser to [http://localhost:4000](http://localhost:4000)
-
-If you're hosting your site on GitHub Pages, [set up GitHub Pages and Jekyll locally](https://help.github.com/en/articles/setting-up-your-github-pages-site-locally-with-jekyll) so that you can more easily work in your development environment.
-
-### Configure Just the Docs
 
 
----
 
-## About the project
+## Dashboard
 
-Just the Docs is &copy; 2017-{{ "now" | date: "%Y" }} by [Patrick Marsceill](http://patrickmarsceill.com).
+You can access the dashboard by going to [localhost:5000](http://localhost:5000)
 
-### License
+## Config
 
-Just the Docs is distributed by an [MIT license](https://github.com/pmarsceill/just-the-docs/tree/master/LICENSE.txt).
+If needed create a `.env` file with information that you would like to overload from config.py
 
-### Contributing
+## Screenshots
 
-When contributing to this repository, please first discuss the change you wish to make via issue,
-email, or any other method with the owners of this repository before making a change. Read more about becoming a contributor in [our GitHub repo](https://github.com/pmarsceill/just-the-docs#contributing).
+### SERP Rank
 
-#### Thank you to the contributors of Just the Docs!
+![](examples/SERP-rank.png)
 
-<ul class="list-style-none">
-{% for contributor in site.github.contributors %}
-  <li class="d-inline-block mr-1">
-     <a href="{{ contributor.html_url }}"><img src="{{ contributor.avatar_url }}" width="32" height="32" alt="{{ contributor.login }}"/></a>
-  </li>
-{% endfor %}
-</ul>
+### Internal Links Graphs
 
-### Code of Conduct
+![](examples/graphs.png)
 
-Just the Docs is committed to fostering a welcoming community.
+### Keywords Finder
 
-[View our Code of Conduct](https://github.com/pmarsceill/just-the-docs/tree/master/CODE_OF_CONDUCT.md) on our GitHub repository.
+![](examples/keywords-finder.png)
+
+### Lighthouse Audit
+
+![](examples/lighthouse-primates.png)
+
+### Images Extractor
+
+![](examples/images.png)
+
+## API
+
+### Lighthouse
+
+| METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
+| :-------------: |-------------| -----|-----|
+| **GET**     | All Audits | `/api/audit/lighthouse/score` | `None` |
+| **GET**     | Audit by Id | `/api/audit/lighthouse/score/<id>` | `id` |
+| **POST**     | Generates an Audit | `/api/audit/lighthouse/score` | `url` |
+
+### Extract
+#### Headers
+| METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
+| :-------------: |-------------| -----|-----|
+| **GET**     | All Extracted Headers | `/api/extract/headers` | `None` |
+| **GET**     | Headers by Id | `/api/extract/headers/<id>` | `id` |
+| **POST**     | Extract Header from URL | `/api/extract/headers` | `url` |
+| **POST**     | Deletes Headers by Id | `/api/extract/headers/delete` | `id` |
+
+#### Status Code Links
+| METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
+| :-------------: |-------------| -----|-----|
+| **GET**     | All Links status extracted from pages| `/api/extract/links` | `None` |
+| **GET**     | Links Status by ID | `/api/extract/links/<id>` | `id` |
+| **POST**     | Extracts link status from URL | `/api/extract/links` | `url` |
+| **POST**     | Delete Link status by ID | `/api/extract/links/delete` | `id` |
+
+#### Internal & External Links
+| METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
+| :-------------: |-------------| -----|-----|
+| **GET**     | All Internal & External links extracted from pages | `/api/extract/links/website` | `None` |
+| **GET**     | Internal & External by ID | `/api/extract/links/website/<id>` | `id` |
+| **POST**     | Extracts Internal & External links from URL | `/api/extract/links/website` | `url` |
+| **POST**     | Deletes Internal & External links by ID | `/api/extract/links/website/delete` | `id` |
+
+#### Images
+| METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
+| :-------------: |-------------| -----|-----|
+| **GET**     | All Images extracted from pages | `/api/extract/images` | `None` |
+| **GET**     | Images by ID | `/api/extract/images/<id>` | `id` |
+| **POST**     | Extracts Images from URL | `/api/extract/images` | `url` |
+| **POST**     | Deletes Images by ID | `/api/extract/images/delete` | `id` |
+
+### Internal Linking Graphs
+| METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
+| :-------------: |-------------| -----|-----|
+| **GET**     | All Internal Linking Graphs generated | `/api/graphs` | `None` |
+| **GET**     | Graphs by ID | `/api/graphs/<id>` | `id` |
+| **POST**     | Extracts graph from domain | `/api/graphs` | `domain` |
+| **POST**     | Deletes Graphs by ID | `/api/graphs/delete` | `id` |
+
+### Query Keywords Generator
+| METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
+| :-------------: |-------------| -----|-----|
+| **GET**     | All Keywords generated | `/api/keywords` | `None` |
+| **GET**     | Keywords by ID | `/api/keywords/<id>` | `id` |
+| **POST**     | Extracts keywords from query | `/api/keywords` | `query` |
+| **POST**     | Deletes Keywords by ID | `/api/keywords/delete` | `id` |
+
+### Search Engine Result Page Rank
+| METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
+| :-------------: |-------------| -----|-----|
+| **GET**     | All Ranks | `/api/rank` | `None` |
+| **POST**     | Extracts ranks from query and domain | `/api/rank` | `query` & `domain` |
+| **POST**     | Deletes ranks by ID | `/api/rank/delete` | `id` |

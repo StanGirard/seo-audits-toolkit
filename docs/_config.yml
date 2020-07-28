@@ -17,7 +17,7 @@ title: OSAT
 description: Open Source SEO Audits Toolkit
 #baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://osat.primates.dev" # the base hostname & protocol for your site, e.g. http://example.com
-theme: "just-the-docs"
+remote-theme: "just-the-docs"
 search_enabled: true
 search:
   # Split pages into sections that can be searched individually

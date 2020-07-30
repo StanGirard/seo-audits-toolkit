@@ -7,7 +7,11 @@ permalink: /api
 last_modified_date: 2020-07-24T17:54:08+0000
 ---
 
+1. TOC
+{:toc}
+
 ## API
+{: .no_toc }
 
 ### Lighthouse
 
@@ -16,6 +20,8 @@ last_modified_date: 2020-07-24T17:54:08+0000
 | **GET**     | All Audits | `/api/audit/lighthouse/score` | `None` |
 | **GET**     | Audit by Id | `/api/audit/lighthouse/score/<id>` | `id` |
 | **POST**     | Generates an Audit | `/api/audit/lighthouse/score` | `url` |
+
+---
 
 ### Extract
 #### Headers
@@ -54,6 +60,8 @@ last_modified_date: 2020-07-24T17:54:08+0000
 | **POST**     | Extracts Images from URL | `/api/extract/images` | `url` |
 | **POST**     | Deletes Images by ID | `/api/extract/images/delete` | `id` |
 
+---
+
 ### Internal Linking Graphs
 
 | METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
@@ -63,6 +71,8 @@ last_modified_date: 2020-07-24T17:54:08+0000
 | **POST**     | Extracts graph from domain | `/api/graphs` | `domain` |
 | **POST**     | Deletes Graphs by ID | `/api/graphs/delete` | `id` |
 
+---
+
 ### Query Keywords Generator
 
 | METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
@@ -71,6 +81,8 @@ last_modified_date: 2020-07-24T17:54:08+0000
 | **GET**     | Keywords by ID | `/api/keywords/<id>` | `id` |
 | **POST**     | Extracts keywords from query | `/api/keywords` | `query` |
 | **POST**     | Deletes Keywords by ID | `/api/keywords/delete` | `id` |
+
+---
 
 ### Search Engine Result Page Rank
 

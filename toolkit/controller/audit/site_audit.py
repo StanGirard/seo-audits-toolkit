@@ -39,9 +39,9 @@ class AuditWebsite():
             line = line.lower()
             line = line.split(" ")
             if line[0] == "sitemap:":
-                self.sitemap.append(line[1])
+                self.sitemap.append(line[1].replace('\r', ''))
             if line[0] == "sitemaps:":
-                self.sitemap.append(line[1])
+                self.sitemap.append(line[1].replace('\r', ''))
         
     def populate_urls(self):
         list_urls = []
@@ -50,9 +50,10 @@ class AuditWebsite():
         if len(self.sitemap) > 0:
             for i in self.sitemap:
                 sitemap_urls = self.parse_sitemap(i)
-                for url in sitemap_urls:
-                    if url not in list_urls:
-                        list_urls.append(url)
+                if sitemap_urls:
+                    for url in sitemap_urls:
+                        if url not in list_urls:
+                            list_urls.append(url)
             self.urls = list_urls
     
     def populate_doctype(self):
@@ -84,7 +85,7 @@ class AuditWebsite():
         resp = requests.get(url)
         # we didn't get a valid response, bail
         if (200 != resp.status_code):
-            return False
+            return
 
         # BeautifulSoup to parse the document
         soup = BeautifulSoup(resp.content, "xml")

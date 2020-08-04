@@ -5,60 +5,13 @@ import requests
 import pandas as pd
 import hashlib
 
-audit_results = {
-    "common_seo_issues":
-    {
-        "description": "Common Errors",
-        "title": "Common SEO Isssues",
-        "audits":
-        {
-            "meta_title":
-                {
-                    "title": "Meta Title Test",
-                    "description": "The meta title of your page has a length of {value} characters. Most search engines will truncate meta titles to 70 characters.",
-                    "result": None,
-                    "score": None,
-                    "score_type": "int"
-                },
-            "meta_description":
-                {
-                    "title": "Meta Description Test",
-                    "description": "The meta description of your page has a length of {value} characters. Most search engines will truncate meta descriptions to 160 characters.",
-                    "result": None,
-                    "score": None,
-                    "score_type": "int"
-                },
-            "robots":
-                {
-                    "title": "Robots.txt Test",
-                    "success": "Congratulations! Your site uses a 'robots.txt' file: {value}",
-                    "error": "Your site doesn't have a 'robots.txt' file",
-                    "result": None,
-                    "score": None,
-                    "score_type": "bool"
-                },
-            "sitemap":
-                {
-                    "title": "Sitemap Test",
-                    "success": "Congratulations! Your site has a sitemap: {value}",
-                    "error": "Your site doesn't have a sitemap",
-                    "result": None,
-                    "score": None,
-                    "score_type": "bool"
-                }
-        }
-    }
-
-}
-
-
 class AuditWebsite():
     def __init__(self, url):
         parsed_url = urlparse(url)
         self.domain = parsed_url.netloc
         self.scheme = parsed_url.scheme
         self.path = parsed_url.path
-        self.audit_results = audit_results
+        self.audit_results = self.generate_audit_json()
         self.sitemap = []
         self.robots = False
         self.cms = None
@@ -78,8 +31,11 @@ class AuditWebsite():
         request = request_page(self.generate_url() + "/robots.txt")
         if request.status_code == 200:
             self.robots = True
-            self.audit_results["common_seo_issues"]["audits"]["robots"]["score"] = True
-            self.audit_results["common_seo_issues"]["audits"]["robots"]["result"] = self.generate_url() + "/robots.txt"
+            robot_answer = self.audit_results["common_seo_issues"]["audits"]["robots"]
+            robot_answer["score"] = True
+            robot_answer["result"] = self.generate_url() + "/robots.txt"
+            robot_answer["success"] = robot_answer["success"].replace("{value}",self.generate_url() + "/robots.txt")
+            self.audit_results["common_seo_issues"]["audits"]["robots"] = robot_answer
             self.find_sitemap(request.text)
 
     def find_sitemap(self, robots):
@@ -92,8 +48,12 @@ class AuditWebsite():
             if line[0] == "sitemaps:":
                 self.sitemap.append(line[1].replace('\r', ''))
         if len(self.sitemap):
-            self.audit_results["common_seo_issues"]["audits"]["sitemap"]["score"] = True
-            self.audit_results["common_seo_issues"]["audits"]["sitemap"]["result"] = self.sitemap
+            sitemap_save = self.audit_results["common_seo_issues"]["audits"]["sitemap"]
+            sitemap_save["score"] = True
+            sitemap_save["result"] = self.sitemap
+            sitemap_save["success"] = sitemap_save["success"].replace("{value}", self.sitemap[0])
+            self.audit_results["common_seo_issues"]["audits"]["sitemap"] = sitemap_save
+
 
     def populate_urls(self):
         list_urls = []
@@ -174,3 +134,51 @@ class AuditWebsite():
 
         # returns the dataframe
         return panda_out_total + out
+    
+    def generate_audit_json(self):
+        audit_results = {
+            "common_seo_issues":
+            {
+                "description": "Common Errors",
+                "title": "Common SEO Isssues",
+                "audits":
+                {
+                    "meta_title":
+                        {
+                            "title": "Meta Title Test",
+                            "description": "The meta title of your page has a length of {value} characters. Most search engines will truncate meta titles to 70 characters.",
+                            "result": None,
+                            "score": None,
+                            "score_type": "int"
+                        },
+                    "meta_description":
+                        {
+                            "title": "Meta Description Test",
+                            "description": "The meta description of your page has a length of {value} characters. Most search engines will truncate meta descriptions to 160 characters.",
+                            "result": None,
+                            "score": None,
+                            "score_type": "int"
+                        },
+                    "robots":
+                        {
+                            "title": "Robots.txt Test",
+                            "success": "Congratulations! Your site uses a 'robots.txt' file: <a href='{value}'>{value}</a>",
+                            "error": "Your site doesn't have a 'robots.txt' file",
+                            "result": None,
+                            "score": None,
+                            "score_type": "bool"
+                        },
+                    "sitemap":
+                        {
+                            "title": "Sitemap Test",
+                            "success": "Congratulations! Your site has a sitemap: <a href='{value}'>{value}</a>",
+                            "error": "Your site doesn't have a sitemap",
+                            "result": None,
+                            "score": None,
+                            "score_type": "bool"
+                        }
+                }
+            }
+
+        }
+        return audit_results

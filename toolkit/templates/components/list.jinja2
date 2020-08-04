@@ -1,0 +1,71 @@
+{% macro audit_element_score(title, description, score, result) -%}
+        <div class="card card-stats">
+            <!-- Card body -->
+            <div class="card-body">
+                
+        <div class="row">
+            <div class="col">
+                <h5 class="card-title text-uppercase text-muted mb-0">{{title}}</h5>
+               
+                    <span class="font-weight-bold mb-0">{{description}}</span>
+               
+            </div>
+            <div class="col-auto">
+            {%if score != 1 %}
+                <div class="icon icon-shape bg-red text-white rounded-circle shadow">
+                <i class="ni ni-fat-remove"></i>
+                </div>
+            {%else%}
+                <div class="icon icon-shape bg-green text-white rounded-circle shadow">
+                    <i class="ni ni-check-bold"></i>
+                </div>
+            {%endif%}
+
+            </div>
+        </div>
+        {# <p class="mt-3 mb-0 text-sm">
+            <span class="text-success mr-2"></i> {{score}}</span>
+            <span class="text-nowrap">Since last month</span>
+        </p> #}
+
+            </div>
+        </div>
+{%- endmacro %}
+
+{% macro audit_element_score_bool(title, success, error, score, result) -%}
+        <div class="card card-stats">
+            <!-- Card body -->
+            <div class="card-body">
+                
+        <div class="row">
+            <div class="col">
+                <h5 class="card-title text-uppercase text-muted mb-0">{{title}}</h5>
+                    {%if score %}
+                        <span class="font-weight-bold mb-0">{{success}}</span>
+                    {%else%}
+                        <span class="font-weight-bold mb-0">{{error}}</span>
+                    {%endif%}
+               
+            </div>
+            <div class="col-auto">
+            {%if score %}
+               <div class="icon icon-shape bg-green text-white rounded-circle shadow">
+                    <i class="ni ni-check-bold"></i>
+                </div>
+            {%else%}
+                
+                 <div class="icon icon-shape bg-red text-white rounded-circle shadow">
+                <i class="ni ni-fat-remove"></i>
+                </div>
+            {%endif%}
+
+            </div>
+        </div>
+        {# <p class="mt-3 mb-0 text-sm">
+            <span class="text-success mr-2"></i> {{score}}</span>
+            <span class="text-nowrap">Since last month</span>
+        </p> #}
+
+            </div>
+        </div>
+{%- endmacro %}

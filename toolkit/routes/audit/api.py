@@ -180,7 +180,7 @@ def get_audit_website_by_id(id):
     try:
         audit = Audit.query.filter(Audit.id == id).first()
         result = json.loads(audit.result)
-        results = {"results": result}
+        results = {"results": result, "url": audit.url}
         return generate_answer(data=results)
     except Exception as e:
         print(e)

@@ -65,3 +65,9 @@ def delete_audit_website_full():
     id = request.args.get('id')
     result = post_request_api('/api/audit/website/delete', {"id": id})
     return redirect(url_for('dashboard_audit_website'))
+
+@app.route('/audit/website/<id>', methods=["GET"])
+def dashboard_audit_website_full_score_get_id(id):
+    result = get_request_api('/api/audit/website/' + id)
+    print(result)
+    return render_template("audit/website_full/website_full.jinja2", url=result["url"], id=id, result=result["results"])

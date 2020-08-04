@@ -6,40 +6,48 @@ import pandas as pd
 import hashlib
 
 audit_results = {
-    "meta_title":
+    "common_seo_issues":
+    {
+        "description": "Common Errors",
+        "title": "Common SEO Isssues",
+        "audits":
         {
-            "title": "Meta Title Test",
-            "description": "The meta title of your page has a length of {value} characters. Most search engines will truncate meta titles to 70 characters.",
-            "result": None,
-            "score": None,
-            "score_type": "int"
-        },
-    "meta_description":
-        {
-            "title": "Meta Description Test",
-            "description": "The meta description of your page has a length of {value} characters. Most search engines will truncate meta descriptions to 160 characters.",
-            "result": None,
-            "score": None,
-            "score_type": "int"
-        },
-    "robots":
-        {
-            "title": "Robots.txt Test",
-            "success": "Congratulations! Your site uses a 'robots.txt' file: {value}",
-            "error": "Your site doesn't have a 'robots.txt' file",
-            "result": None,
-            "score": None,
-            "score_type": "bool"
-        },
-    "sitemap":
-        {
-            "title": "Sitemap Test",
-            "success": "Congratulations! Your site has a sitemap: {value}",
-            "error": "Your site doesn't have a sitemap",
-            "result": None,
-            "score": None,
-            "score_type": "bool"
+            "meta_title":
+                {
+                    "title": "Meta Title Test",
+                    "description": "The meta title of your page has a length of {value} characters. Most search engines will truncate meta titles to 70 characters.",
+                    "result": None,
+                    "score": None,
+                    "score_type": "int"
+                },
+            "meta_description":
+                {
+                    "title": "Meta Description Test",
+                    "description": "The meta description of your page has a length of {value} characters. Most search engines will truncate meta descriptions to 160 characters.",
+                    "result": None,
+                    "score": None,
+                    "score_type": "int"
+                },
+            "robots":
+                {
+                    "title": "Robots.txt Test",
+                    "success": "Congratulations! Your site uses a 'robots.txt' file: {value}",
+                    "error": "Your site doesn't have a 'robots.txt' file",
+                    "result": None,
+                    "score": None,
+                    "score_type": "bool"
+                },
+            "sitemap":
+                {
+                    "title": "Sitemap Test",
+                    "success": "Congratulations! Your site has a sitemap: {value}",
+                    "error": "Your site doesn't have a sitemap",
+                    "result": None,
+                    "score": None,
+                    "score_type": "bool"
+                }
         }
+    }
 
 }
 
@@ -70,8 +78,8 @@ class AuditWebsite():
         request = request_page(self.generate_url() + "/robots.txt")
         if request.status_code == 200:
             self.robots = True
-            self.audit_results["robots"]["score"] = True
-            self.audit_results["robots"]["result"] = self.generate_url() + "/robots.txt"
+            self.audit_results["common_seo_issues"]["audits"]["robots"]["score"] = True
+            self.audit_results["common_seo_issues"]["audits"]["robots"]["result"] = self.generate_url() + "/robots.txt"
             self.find_sitemap(request.text)
 
     def find_sitemap(self, robots):
@@ -84,8 +92,8 @@ class AuditWebsite():
             if line[0] == "sitemaps:":
                 self.sitemap.append(line[1].replace('\r', ''))
         if len(self.sitemap):
-            self.audit_results["sitemap"]["score"] = True
-            self.audit_results["sitemap"]["result"] = self.sitemap
+            self.audit_results["common_seo_issues"]["audits"]["sitemap"]["score"] = True
+            self.audit_results["common_seo_issues"]["audits"]["sitemap"]["result"] = self.sitemap
 
     def populate_urls(self):
         list_urls = []

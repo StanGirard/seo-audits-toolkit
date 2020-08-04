@@ -5,8 +5,6 @@
 </li>
 {%endblock%} {% block content %}
 {% for main , value in result.items() %}
-{{main}}
-{{value}}
 <h2 class="d-flex justify-content-center">{{main.title}}</h2>
 <div class="table-responsive">
     <div>
@@ -25,7 +23,6 @@
             </thead>
             <tbody class="list">
                 {% for item, value in value.audits.items() %}
-                {{item}}
                 <tr>
                     <td>
 

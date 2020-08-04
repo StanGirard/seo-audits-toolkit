@@ -5,6 +5,44 @@ import requests
 import pandas as pd
 import hashlib
 
+audit_results = {
+    "meta_title":
+        {
+            "title": "Meta Title Test",
+            "description": "The meta title of your page has a length of {value} characters. Most search engines will truncate meta titles to 70 characters.",
+            "result": None,
+            "score": None,
+            "score_type": "int"
+        },
+    "meta_description":
+        {
+            "title": "Meta Description Test",
+            "description": "The meta description of your page has a length of {value} characters. Most search engines will truncate meta descriptions to 160 characters.",
+            "result": None,
+            "score": None,
+            "score_type": "int"
+        },
+    "robots":
+        {
+            "title": "Robots.txt Test",
+            "success": "Congratulations! Your site uses a 'robots.txt' file: {value}",
+            "error": "Your site doesn't have a 'robots.txt' file",
+            "result": None,
+            "score": None,
+            "score_type": "bool"
+        },
+    "sitemap":
+        {
+            "title": "Sitemap Test",
+            "success": "Congratulations! Your site has a sitemap: {value}",
+            "error": "Your site doesn't have a sitemap",
+            "result": None,
+            "score": None,
+            "score_type": "bool"
+        }
+
+}
+
 
 class AuditWebsite():
     def __init__(self, url):
@@ -12,6 +50,7 @@ class AuditWebsite():
         self.domain = parsed_url.netloc
         self.scheme = parsed_url.scheme
         self.path = parsed_url.path
+        self.audit_results = audit_results
         self.sitemap = []
         self.robots = False
         self.cms = None
@@ -22,7 +61,7 @@ class AuditWebsite():
         self.populate_doctype()
         self.is_https()
         self.get_cms()
-    
+
     def populate_request(self):
         self.request = request_page(self.generate_url())
         self.status_code = self.request.status_code
@@ -31,6 +70,8 @@ class AuditWebsite():
         request = request_page(self.generate_url() + "/robots.txt")
         if request.status_code == 200:
             self.robots = True
+            self.audit_results["robots"]["score"] = True
+            self.audit_results["robots"]["result"] = self.generate_url() + "/robots.txt"
             self.find_sitemap(request.text)
 
     def find_sitemap(self, robots):
@@ -42,11 +83,14 @@ class AuditWebsite():
                 self.sitemap.append(line[1].replace('\r', ''))
             if line[0] == "sitemaps:":
                 self.sitemap.append(line[1].replace('\r', ''))
-        
+        if len(self.sitemap):
+            self.audit_results["sitemap"]["score"] = True
+            self.audit_results["sitemap"]["result"] = self.sitemap
+
     def populate_urls(self):
         list_urls = []
         self.urls = []
-        
+
         if len(self.sitemap) > 0:
             for i in self.sitemap:
                 sitemap_urls = self.parse_sitemap(i)
@@ -55,9 +99,10 @@ class AuditWebsite():
                         if url not in list_urls:
                             list_urls.append(url)
             self.urls = list_urls
-    
+
     def populate_doctype(self):
-        items = [item for item in self.soup.contents if isinstance(item, Doctype)]
+        items = [
+            item for item in self.soup.contents if isinstance(item, Doctype)]
         self.doctype = items[0] if items else None
 
     def is_https(self):
@@ -66,22 +111,21 @@ class AuditWebsite():
         else:
             self.https = False
 
-
     def generate_url(self):
         return self.scheme + "://" + self.domain
 
     def get_cms(self):
-        metatags = self.soup.find_all('meta',attrs={'name':'generator'})
+        metatags = self.soup.find_all('meta', attrs={'name': 'generator'})
         if metatags:
             self.cms = metatags[0]["content"]
-            
+
     def generate(self):
         result = {"domain": self.domain, "scheme": self.scheme, "path": self.path, "sitemap": self.sitemap,
-                "robots": self.robots, "doctype": self.doctype, "cms": self.cms, "https": self.https}
+                  "robots": self.robots, "doctype": self.doctype, "cms": self.cms, "https": self.https}
 
         return result
 
-    def parse_sitemap(self,url):
+    def parse_sitemap(self, url):
         resp = requests.get(url)
         # we didn't get a valid response, bail
         if (200 != resp.status_code):
@@ -94,7 +138,6 @@ class AuditWebsite():
         urls = soup.findAll('url')
         sitemaps = soup.findAll('sitemap')
         panda_out_total = []
-
 
         if not urls and not sitemaps:
             return False
@@ -121,5 +164,5 @@ class AuditWebsite():
                 loc = loc.string
             out.append(loc)
 
-        #returns the dataframe
-        return  panda_out_total + out
+        # returns the dataframe
+        return panda_out_total + out

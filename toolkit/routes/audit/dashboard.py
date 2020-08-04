@@ -41,11 +41,27 @@ def dashboard_audit_lighthouse_score_get_id(id):
 @app.route('/audit/lighthouse/score/delete', methods=["GET"])
 def delete_audit_lighthouse():
     id = request.args.get('id')
-    print("HHHHHHHHHHHHHHHHHHHHH")
     result = post_request_api('/api/audit/lighthouse/score/delete', {"id": id})
     return redirect(url_for('dashboard_audit_lighthouse_score'))
 
 @app.route('/audit/lighthouse/score/all')
 def dashboard_audit_lighthouse_score_all():
-    result = get_request_api('/api//audit/lighthouse/score/all')
+    result = get_request_api('/api/audit/lighthouse/score/all')
     return result
+
+@app.route('/audit/website')
+def dashboard_audit_website():
+    result = get_request_api('/api/audit/website')
+    return render_template("audit/website_full/website_full_all.jinja2", result=result["results"])
+
+@app.route('/audit/website', methods=["POST"])
+def add_audit_website_full():
+    result = post_request_api('/api/audit/website', request.form)
+    time.sleep(.300)
+    return redirect(url_for('dashboard_audit_website'))
+
+@app.route('/audit/website/delete', methods=["GET"])
+def delete_audit_website_full():
+    id = request.args.get('id')
+    result = post_request_api('/api/audit/website/delete', {"id": id})
+    return redirect(url_for('dashboard_audit_website'))

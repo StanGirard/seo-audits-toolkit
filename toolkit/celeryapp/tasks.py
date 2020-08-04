@@ -16,6 +16,7 @@ from toolkit.controller.seo.images import find_all_images
 from toolkit.controller.seo.lighthouse import audit_google_lighthouse_full
 from toolkit.controller.seo.links import find_all_links
 from toolkit.controller.serp.core import query_domain_serp
+from toolkit.controller.audit.site_audit import AuditWebsite
 from toolkit.models import Audit, LighthouseScore
 
 # @task_prerun.connect
@@ -79,10 +80,14 @@ def Extractor(self,extract_type, url):
         smt = update(Audit).where(Audit.url == url).where(Audit.type_audit == extract_type).values(result=json.dumps(value), status_job="FINISHED")
         conn.execute(smt)
     if extract_type == "Images":
-        print("hello")
         value = find_all_images(url)
         conn = db.engine.connect()
         smt = update(Audit).where(Audit.url == url).where(Audit.type_audit == extract_type).values(result=json.dumps(value), status_job="FINISHED")
+        conn.execute(smt)
+    if extract_type == "Website_Full":
+        value = AuditWebsite(url)
+        conn = db.engine.connect()
+        smt = update(Audit).where(Audit.url == url).where(Audit.type_audit == extract_type).values(result=json.dumps(value.audit_results), status_job="FINISHED")
         conn.execute(smt)
            
     return {'url': url,"Extract": extract_type, 'status': 'Task completed!'}

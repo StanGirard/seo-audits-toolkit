@@ -13,6 +13,7 @@ from toolkit.celeryapp.tasks import LighthouseAudit
 from toolkit.controller.seo.lighthouse import audit_google_lighthouse_full
 from toolkit.lib.api_tools import generate_answer
 from toolkit.models import Audit, LighthouseScore
+from toolkit.celeryapp.tasks import Extractor
 
 
 @app.route('/status/<task_id>')
@@ -143,6 +144,70 @@ def get_audit_lighthouse_score_all():
         for i in results:
             result_arr["results"].append({"id": i.id, "url": i.url, "accessibility": i.accessibility, "pwa": i.pwa, "seo": i.seo, "best_practices": i.best_practices, "performance": i.performance, "begin_date": i.begin_date})
         return generate_answer(data=result_arr)
+    except Exception as e:
+        print(e)
+        return generate_answer(success=False)
+
+@app.route('/api/audit/website')
+def get_audit_website_all():
+    try:
+        results = Audit.query.filter(Audit.type_audit == "Website_Full").all()
+        result_arr={"results": []}
+        for i in results:
+            result_arr["results"].append({"id": i.id, "url": i.url, "result": i.result, "begin_date": i.begin_date, "status_job":i.status_job,"task_id": i.task_id})
+        return generate_answer(data=result_arr)
+    except Exception as e:
+        print(e)
+        return generate_answer(success=False)
+
+@app.route('/api/audit/website', methods=["POST"])
+def post_audit_website_all():
+    try:
+        url = request.form['url']
+        count = Audit.query.filter(Audit.url == url).filter(
+            Audit.type_audit == "Website_Full").count()
+        if url and count == 0:
+            Extractor.delay("Website_Full",url)
+            time.sleep(.300)
+            
+        return generate_answer(success=True)
+    except Exception as e:
+        print(e)
+        return generate_answer(success=False)
+
+@app.route('/api/audit/website/<id>', methods=["GET"])
+def get_audit_website_by_id(id):
+    try:
+        audit = Audit.query.filter(Audit.id == id).first()
+        result = json.loads(audit.result)
+        results = {"results": result}
+        return generate_answer(data=results)
+    except Exception as e:
+        print(e)
+        return generate_answer(success=False)
+
+@app.route('/api/audit/website/delete', methods=["POST"])
+def post_delete_audit_website():
+    try:
+        id = request.form['id']
+        Audit.query.filter(Audit.id == id).delete()
+        db.session.commit()
+        return generate_answer(success=True)
+    except Exception as e:
+        print(e)
+        return generate_answer(success=False)
+
+
+@app.route('/api/audit/website/status', methods=["POST"])
+def get_audit_website_status_by_task():
+    try:
+        print("hahahahaha")
+        task_id = request.form['task']
+        result = Audit.query.filter(Audit.task_id == task_id).first()
+        if result and result.status_job == "FINISHED":
+            return generate_answer(success=True)
+        else:
+            return generate_answer(success=False)
     except Exception as e:
         print(e)
         return generate_answer(success=False)

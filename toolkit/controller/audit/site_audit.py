@@ -74,10 +74,14 @@ class AuditWebsite():
         self.doctype = items[0] if items else None
 
     def is_https(self):
+        https_save = self.audit_results["common_seo_issues"]["audits"]["https"]
         if request_page("https://" + self.domain).status_code == 200:
             self.https = True
+            https_save["score"] = True
         else:
             self.https = False
+            https_save["score"] = False
+        self.audit_results["common_seo_issues"]["audits"]["https"] = https_save
 
     def generate_url(self):
         return self.scheme + "://" + self.domain
@@ -90,7 +94,6 @@ class AuditWebsite():
     def generate(self):
         result = {"domain": self.domain, "scheme": self.scheme, "path": self.path, "sitemap": self.sitemap,
                   "robots": self.robots, "doctype": self.doctype, "cms": self.cms, "https": self.https}
-
         return result
 
     def parse_sitemap(self, url):
@@ -173,6 +176,15 @@ class AuditWebsite():
                             "title": "Sitemap Test",
                             "success": "Congratulations! Your site has a sitemap: <a href='{value}'>{value}</a>",
                             "error": "Your site doesn't have a sitemap",
+                            "result": None,
+                            "score": None,
+                            "score_type": "bool"
+                        },
+                    "https":
+                        {
+                            "title": "Https Test",
+                            "success": "Congratulations! Your website uses https",
+                            "error": "Your site doesn't use https. Your ranking will be impacted",
                             "result": None,
                             "score": None,
                             "score_type": "bool"

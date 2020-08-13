@@ -201,7 +201,6 @@ def post_delete_audit_website():
 @app.route('/api/audit/website/status', methods=["POST"])
 def get_audit_website_status_by_task():
     try:
-        print("hahahahaha")
         task_id = request.form['task']
         result = Audit.query.filter(Audit.task_id == task_id).first()
         if result and result.status_job == "FINISHED":

@@ -18,10 +18,11 @@ class AuditWebsite():
         self.populate_request()
         self.robots_finder()
         self.populate_urls()
-        self.soup = BeautifulSoup(self.request.content, features="lxml")
+        self.soup = BeautifulSoup(self.request.content, features="html.parser")
         self.populate_doctype()
         self.is_https()
         self.get_cms()
+        self.find_google_analytics()
 
     def populate_request(self):
         self.request = request_page(self.generate_url())
@@ -138,6 +139,16 @@ class AuditWebsite():
         # returns the dataframe
         return panda_out_total + out
     
+    def find_google_analytics(self):
+        scripts = self.soup.find_all('script')
+        self.google_analytics = False
+        ga_save = self.audit_results["common_seo_issues"]["audits"]["google_analytics"]
+        ga_save["score"] = False
+        for i in scripts:
+            if "googletagmanager" in str(i) or "google-analytics" in str(i):
+                self.google_analytics = True
+                ga_save["score"] = True
+        self.audit_results["common_seo_issues"]["audits"]["google_analytics"] = ga_save
     def generate_audit_json(self):
         audit_results = {
             "common_seo_issues":
@@ -188,9 +199,19 @@ class AuditWebsite():
                             "result": None,
                             "score": None,
                             "score_type": "bool"
+                        },
+                    "google_analytics":
+                        {
+                            "title": "Google Analytics Test",
+                            "success": "Congratulations! Your webpage is using Google Analytics.",
+                            "error": "Google Analytics is recommended for understanding your visitors",
+                            "result": None,
+                            "score": None,
+                            "score_type": "bool"
                         }
                 }
             }
+            
 
         }
         return audit_results

@@ -25,6 +25,7 @@ class AuditWebsite():
         self.get_cms()
         self.find_google_analytics()
         self.meta_description_title()
+        self.deprecated_html_tags()
 
     def populate_request(self):
         self.request = request_page(self.generate_url())
@@ -123,6 +124,18 @@ class AuditWebsite():
             generate_result_int(self.audit_results, "common_seo_issues", "meta_description", True, len(description["content"]))
         else:
             generate_result_int(self.audit_results, "common_seo_issues", "meta_description", False, len(description["content"]))
+
+    def deprecated_html_tags(self):
+        deprecated = ["acronym", "applet","basefont", "big","center", "dir", "font", "frame", "frameset", "noframes", "strike", "tt"]
+        deprecated_found = []
+        for tag in deprecated:
+            tags = self.soup.find(tag)
+            if tags:
+                deprecated_found.append(tag)
+        if len(deprecated_found) == 0:
+            generate_result_bool(self.audit_results, "common_seo_issues", "deprecated_tag", True)
+        else:  
+            generate_result_bool(self.audit_results, "common_seo_issues", "deprecated_tag", False, str(deprecated_found))
 
 
     def parse_sitemap(self, url):

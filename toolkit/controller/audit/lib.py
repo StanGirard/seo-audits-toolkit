@@ -6,6 +6,7 @@ def generate_result_bool(audit_json, issues_type, audit_type, score, result = No
     audit_json[issues_type]["audits"][audit_type]["result"] = result
     if result:
         audit_json[issues_type]["audits"][audit_type]["success"] = audit_json[issues_type]["audits"][audit_type]["success"].replace("{value}" , result)
+        audit_json[issues_type]["audits"][audit_type]["error"] = audit_json[issues_type]["audits"][audit_type]["error"].replace("{value}" , result)
 
 def generate_result_int(audit_json, issues_type, audit_type, score, result = None ):
     audit_json[issues_type]["audits"][audit_type]["score"] = score
@@ -80,6 +81,15 @@ def generate_audit_json():
                             "title": "Doctype Test",
                             "success": "Congratulations! Your website has a doctype declaration: {value}",
                             "error": "Your website doesn't have a Doctype declaration",
+                            "result": None,
+                            "score": None,
+                            "score_type": "bool"
+                        },
+                    "deprecated_tag":
+                        {
+                            "title": "Deprecated HTML Tags Test",
+                            "success": "Congratulations! Your page does not use HTML deprecated tags.",
+                            "error": "Your website has some deprecated tags: {value}",
                             "result": None,
                             "score": None,
                             "score_type": "bool"

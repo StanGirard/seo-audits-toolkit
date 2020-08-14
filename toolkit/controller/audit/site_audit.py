@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup, Doctype
 import requests
 import pandas as pd
 import hashlib
+from .lib import generate_audit_json, generate_result_bool, generate_result_int
 
 class AuditWebsite():
     def __init__(self, url):
@@ -11,7 +12,7 @@ class AuditWebsite():
         self.domain = parsed_url.netloc
         self.scheme = parsed_url.scheme
         self.path = parsed_url.path
-        self.audit_results = self.generate_audit_json()
+        self.audit_results = generate_audit_json()
         self.sitemap = []
         self.robots = False
         self.cms = None
@@ -23,6 +24,7 @@ class AuditWebsite():
         self.is_https()
         self.get_cms()
         self.find_google_analytics()
+        self.meta_description_title()
 
     def populate_request(self):
         self.request = request_page(self.generate_url())
@@ -73,6 +75,10 @@ class AuditWebsite():
         items = [
             item for item in self.soup.contents if isinstance(item, Doctype)]
         self.doctype = items[0] if items else None
+        if self.doctype:
+            generate_result_bool(self.audit_results, "common_seo_issues", "doctype", True, self.doctype)
+        else:
+            generate_result_bool(self.audit_results, "common_seo_issues", "doctype", False)
 
     def is_https(self):
         https_save = self.audit_results["common_seo_issues"]["audits"]["https"]
@@ -92,10 +98,32 @@ class AuditWebsite():
         if metatags:
             self.cms = metatags[0]["content"]
 
-    def generate(self):
-        result = {"domain": self.domain, "scheme": self.scheme, "path": self.path, "sitemap": self.sitemap,
-                  "robots": self.robots, "doctype": self.doctype, "cms": self.cms, "https": self.https}
-        return result
+    
+    
+    def find_google_analytics(self):
+        scripts = self.soup.find_all('script')
+        self.google_analytics = False
+        ga_save = self.audit_results["common_seo_issues"]["audits"]["google_analytics"]
+        ga_save["score"] = False
+        for i in scripts:
+            if "googletagmanager" in str(i) or "google-analytics" in str(i):
+                self.google_analytics = True
+                ga_save["score"] = True
+        self.audit_results["common_seo_issues"]["audits"]["google_analytics"] = ga_save
+    
+    def meta_description_title(self):
+        title = self.soup.find('title')
+        if len(title.text) > 0 and len(title.text) < 70:
+            generate_result_int(self.audit_results, "common_seo_issues", "meta_title", True, len(title.text))
+        else:
+            generate_result_int(self.audit_results, "common_seo_issues", "meta_title", False, len(title.text))
+        
+        description = self.soup.find('meta', attrs={'name': 'description'})
+        if len(description["content"]) > 0 and len(description["content"]) < 160:
+            generate_result_int(self.audit_results, "common_seo_issues", "meta_description", True, len(description["content"]))
+        else:
+            generate_result_int(self.audit_results, "common_seo_issues", "meta_description", False, len(description["content"]))
+
 
     def parse_sitemap(self, url):
         resp = requests.get(url)
@@ -138,80 +166,5 @@ class AuditWebsite():
 
         # returns the dataframe
         return panda_out_total + out
-    
-    def find_google_analytics(self):
-        scripts = self.soup.find_all('script')
-        self.google_analytics = False
-        ga_save = self.audit_results["common_seo_issues"]["audits"]["google_analytics"]
-        ga_save["score"] = False
-        for i in scripts:
-            if "googletagmanager" in str(i) or "google-analytics" in str(i):
-                self.google_analytics = True
-                ga_save["score"] = True
-        self.audit_results["common_seo_issues"]["audits"]["google_analytics"] = ga_save
-    def generate_audit_json(self):
-        audit_results = {
-            "common_seo_issues":
-            {
-                "description": "Common Errors",
-                "title": "Common SEO Isssues",
-                "audits":
-                {
-                    "meta_title":
-                        {
-                            "title": "Meta Title Test",
-                            "description": "The meta title of your page has a length of {value} characters. Most search engines will truncate meta titles to 70 characters.",
-                            "result": None,
-                            "score": None,
-                            "score_type": "int"
-                        },
-                    "meta_description":
-                        {
-                            "title": "Meta Description Test",
-                            "description": "The meta description of your page has a length of {value} characters. Most search engines will truncate meta descriptions to 160 characters.",
-                            "result": None,
-                            "score": None,
-                            "score_type": "int"
-                        },
-                    "robots":
-                        {
-                            "title": "Robots.txt Test",
-                            "success": "Congratulations! Your site uses a 'robots.txt' file: <a href='{value}'>{value}</a>",
-                            "error": "Your site doesn't have a 'robots.txt' file",
-                            "result": None,
-                            "score": None,
-                            "score_type": "bool"
-                        },
-                    "sitemap":
-                        {
-                            "title": "Sitemap Test",
-                            "success": "Congratulations! Your site has a sitemap: <a href='{value}'>{value}</a>",
-                            "error": "Your site doesn't have a sitemap",
-                            "result": None,
-                            "score": None,
-                            "score_type": "bool"
-                        },
-                    "https":
-                        {
-                            "title": "Https Test",
-                            "success": "Congratulations! Your website uses https",
-                            "error": "Your site doesn't use https. Your ranking will be impacted",
-                            "result": None,
-                            "score": None,
-                            "score_type": "bool"
-                        },
-                    "google_analytics":
-                        {
-                            "title": "Google Analytics Test",
-                            "success": "Congratulations! Your webpage is using Google Analytics.",
-                            "error": "Google Analytics is recommended for understanding your visitors",
-                            "result": None,
-                            "score": None,
-                            "score_type": "bool"
-                        }
-                }
-            }
-            
 
-        }
-        return audit_results
+    

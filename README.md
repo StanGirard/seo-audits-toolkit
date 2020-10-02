@@ -5,7 +5,7 @@
 
 **OSAT** is a collection of multiple tools to help you in your quest for a better SEO. All of these tools have been grouped into a single web app.
 
-I've grown tired of SEO agencies making us pay hundreds of euros for simple tools. I decided to develop **OSAT** to help users find issues in their website and increase their SEO for free. 
+I've grown tired of SEO agencies making us pay hundreds of euros for simple tools. So,I decided to develop **OSAT** to help users find issues in their website and increase their SEO for free. Here are some advantages please check it out.
 
 <p align="center"><img src="./examples/seotoolkit.gif" width="600px" /></p>
 

@@ -1,0 +1,13 @@
+.ButtonTodo {
+    border-radius: 1px;
+    width: 300px;
+    height: 100px;
+    margin: auto;
+    font-size: 32px;
+    font-style: italic;
+    text-align: center;
+    line-height: 100px;
+    cursor: pointer;
+    background-color: #4BE072;
+    color: #21222C
+}

@@ -32,7 +32,7 @@ I've grown tired of SEO agencies making us pay hundreds of euros for simple tool
 ### Docker
 
 You can use **Docker**
-- Intall Docker
+- Install Docker
 
 ### Manual
 

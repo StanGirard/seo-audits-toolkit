@@ -46,9 +46,17 @@ I've grown tired of SEO agencies making us pay hundreds of euros for simple tool
 
 ## Installation
 
+### Docker
+
+You can use **Docker**
+- Install Docker
+
+### Manual
+
 You need: 
 - **Python3**
 - **[Redis Server](https://redis.io/topics/quickstart)**
+
 
 
 ```Bash
@@ -63,6 +71,13 @@ pip install -r requirements.txt
 ```
 
 ## Running
+
+### Docker
+```Bash
+docker-compose -up
+```
+
+**OR**
 
 ### Flask
 ```Bash

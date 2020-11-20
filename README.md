@@ -57,7 +57,7 @@ pip install -r requirements.txt
 
 ### Docker
 ```Bash
-docker-compose -up
+docker-compose up -d
 ```
 
 **OR**

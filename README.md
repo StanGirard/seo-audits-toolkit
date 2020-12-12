@@ -29,6 +29,7 @@ I've grown tired of SEO agencies making us pay hundreds of euros for simple tool
 
 ## Installation
 
+You need to get a Google API Key from [here](https://developers.google.com/speed/docs/insights/v5/get-started) and paste it in your `.env`
 ### Docker
 
 You can use **Docker**

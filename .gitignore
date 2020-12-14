@@ -4,3 +4,4 @@ _site
 Gemfile.lock
 assets
 __pycache__
+vendor/

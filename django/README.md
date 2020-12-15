@@ -12,14 +12,14 @@ Useful endpoints:
 ### Django 
 
 ```Bash
-cd SEO_Django
+cd osat
 pip3 install -r requirements.txt
 pip3 install celery
 ```
 
 ### Database 
 
-Go to `SEO_Django/settings.py`
+Go to `osat/settings.py`
 Change the values you need in 
 ```Python
 DATABASES = {
@@ -47,7 +47,7 @@ If you want to run the project.
 
 And in another terminal run:
 
-`celery -A SEO_Django  worker -l info`
+`celery -A osat  worker -l info`
 
 ### Changes to models
 
@@ -77,7 +77,7 @@ Copy and modify the code from extractor to help you start:
 - tasks -> Modify to suit your needs
 - Views -> Change the filter and ordering fields
 
-Then you need to add your app to `SEO_Django/urls.py` ->
+Then you need to add your app to `osat/urls.py` ->
 ```Python
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)

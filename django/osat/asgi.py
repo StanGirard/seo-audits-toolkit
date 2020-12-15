@@ -1,5 +1,5 @@
 """
-ASGI config for SEO_Django project.
+ASGI config for osat project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'SEO_Django.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'osat.settings')
 
 application = get_asgi_application()

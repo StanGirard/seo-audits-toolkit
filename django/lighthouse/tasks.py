@@ -7,7 +7,7 @@ import json
 
 from .models import Lighthouse, Lighthouse_Result
 
-@periodic_task(run_every=(crontab(minute='*/1')), name="lighthouse_crawler", ignore_result=True)
+@periodic_task(run_every=(crontab(minute=0, hour='*/3')), name="lighthouse_crawler", ignore_result=True)
 def lighthouse_crawler():
     scheduled = Lighthouse.objects.filter(scheduled=True)
     for item in scheduled:

@@ -23,7 +23,6 @@ Redis is used for the long running task with [Celery](https://docs.celeryproject
 ### Requirements
 
 ```Bash
-cd SEO_Django
 pip3 install -r requirements.txt
 pip3 install celery
 ```
@@ -33,7 +32,7 @@ This will install all the required packages and django applications.
 ---
 ### Initialisation 
 
-First of all you need to go to `SEO_Django/settings.py`.
+First of all you need to go to `osat/settings.py`.
 You need to change the specific values to what you want to use in the 
 
 ```Python
@@ -84,9 +83,11 @@ If you want to run the project.
 
 And in another terminal run:
 
-`celery -A SEO_Django  worker -l info`
+`celery -A osat  worker -l info`
 
-A little explanation on what those things do.
+`celery -A osat beat -l info`
+
+A little explanation on what those things do later on.
 
 
 #### Migrate
@@ -106,7 +107,9 @@ The command `python manage.py runserver` runs webserver django
 
 #### Celery 
 
-The command `celery -A SEO_Django  worker -l info` runs the workers needed for the long running tasks
+The command `celery -A osat  worker -l info` runs the workers needed for the long running tasks
+
+The command `celery -A osat beat -l info` run the periodic task needed.
 
 ---
 ### Changes to models

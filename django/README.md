@@ -49,6 +49,8 @@ And in another terminal run:
 
 `celery -A osat  worker -l info`
 
+`celery -A osat beat -l info`
+
 ### Changes to models
 
 If you make a change to a model simply run

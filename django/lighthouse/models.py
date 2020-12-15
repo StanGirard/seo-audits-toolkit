@@ -11,6 +11,10 @@ class Lighthouse(models.Model):
         return self.url
 
 class Lighthouse_Result(models.Model):
-    url = models.ForeignKey(Lighthouse, on_delete=models.CASCADE)
-    result = models.TextField(max_length=10)
+    url = models.ForeignKey(Lighthouse, related_name='lighthouse_results', on_delete=models.CASCADE)
+    performance_score = models.CharField(max_length=10)
+    accessibility_score = models.CharField(max_length=10)
+    best_practices_score =models.CharField(max_length=10)
+    seo_score = models.CharField(max_length=10)
+    pwa_score = models.CharField(max_length=10)
     timestamp = models.DateTimeField(blank=True, null=True)

@@ -1,9 +1,0 @@
-*.css linguist-detectable=false
-*.scss linguist-detectable=false
-*.python linguist-detectable=true
-*.html linguist-detectable=false
-*.js linguist-detectable=false
-*.jinja2 linguist-detectable=false
-toolkit/static/* linguist-vendored
-/toolkit/static/* linguist-vendored
-toolkit/static/assets/vendor/* linguist-vendored

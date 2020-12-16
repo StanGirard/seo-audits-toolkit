@@ -57,6 +57,7 @@ services:
     - "traefik.enable=false"
     networks:
     - internal
+    command: ["worker"]
     restart: unless-stopped
 
   beats:
@@ -69,7 +70,8 @@ services:
     - "traefik.enable=false"
     networks:
     - internal
-    restart: unless-stopped
+    command: ["beats"]
+    restart: unless-stopped    
 
   dashboard:
     image: seoz/seoz-dashboard:latest

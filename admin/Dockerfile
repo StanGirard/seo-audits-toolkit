@@ -15,15 +15,21 @@ COPY . .
 
 RUN yarn build
 
-FROM abiosoft/caddy:builder AS caddy-builder 
+FROM caddy:2.3.0-rc.1-builder-alpine AS caddy-builder 
 MAINTAINER Michalski Luc <michalski.luc@gmail.com>
 
-ARG CADDY_VERSION=${CADDY_VERSION:-"1.0.3"}
-ARG CADDY_PLUGINS="filemanager,cors,realip,expires" 
+ARG CADDY_VERSION=${CADDY_VERSION:-"v2.3.0-rc.1"}
+ARG CADDY_PLUGINS=${CADDY_PLUGINS:-"cors,realip,expires,cache"}
 
 # process wrapper 
-RUN go get -v github.com/abiosoft/parent
-RUN VERSION=${CADDY_VERSION} PLUGINS=${CADDY_PLUGINS} ENABLE_TELEMETRY=false /bin/sh /usr/bin/builder.sh
+RUN go get -v github.com/abiosoft/parent && \
+    go install github.com/abiosoft/parent && \
+    echo "GOPATH: $GOPATH" && \
+    echo "PATH: $PATH" && \
+    which parent
+
+RUN echo "VERSION=${CADDY_VERSION} PLUGINS=${CADDY_PLUGINS}" && \
+    VERSION=${CADDY_VERSION} PLUGINS=${CADDY_PLUGINS} ENABLE_TELEMETRY=false /bin/sh /usr/bin/caddy-builder
 
 FROM alpine:3.12 AS runtime
 MAINTAINER Michalski Luc <michalski.luc@gmail.com>
@@ -43,17 +49,13 @@ USER seoz
 WORKDIR /opt/seoz
 
 # Copy the virtual environment from the previous image
-COPY --from=front-builder /opt/seoz/build /opt/seoz/www
+COPY --from=front-builder /app/build /opt/seoz/www
 
 # Install caddy 
-COPY --from=caddy-builder /install/caddy /usr/bin/caddy
-
-# Validate install 
-RUN /usr/bin/caddy -version
-RUN /usr/bin/caddy -plugins
+COPY --from=caddy-builder /usr/bin/caddy /usr/bin/caddy
 
 COPY Caddyfile /etc/Caddyfile
-COPY --from=builder /go/bin/parent /bin/parent
+COPY --from=caddy-builder /go/bin/parent /bin/parent
 
 # Container configuration
 EXPOSE 3000 80 443 2015 

@@ -81,6 +81,8 @@ services:
       args:
         NODE_VERSION: ${NODE_VERSION}
         TINI_VERSION: ${TINI_VERSION}
+        CADDY_VERSION: "v2.3.0-rc.1" # v2.3.0-rc.1
+        CADDY_PLUGINS: "cors,realip,expires,cache"
     # volumes:
     # - ./dashboard/dist:/opt/seoz/www
     expose:

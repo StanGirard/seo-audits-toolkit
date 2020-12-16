@@ -74,5 +74,5 @@ LABEL name="seoz-server" \
 # Container configuration
 EXPOSE 5000
 VOLUME ["/opt/seoz/data"]
-ENTRYPOINT ["tini", "-g", "--"]
-CMD ["./docker-entrypoint.sh"]
+ENTRYPOINT ["tini", "-g", "--", "./docker-entrypoint.sh"]
+# CMD ["./docker-entrypoint.sh"]

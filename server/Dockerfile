@@ -48,6 +48,9 @@ WORKDIR /opt/seoz
 # Copy the virtual environment from the previous image
 COPY --from=builder /opt/venv /opt/venv
 
+# Copy sources
+COPY . .
+
 # Activate the virtual environment
 ENV PATH="/opt/venv/bin:$PATH" \
     VIRTUAL_ENV="/opt/venv"

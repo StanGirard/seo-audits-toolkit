@@ -11,3 +11,8 @@ node_modules
 node_modules/
 node_modules/*
 node_modules/**
+shared/data
+shared/data/
+shared/data/*
+shared/data/**
+*.pid

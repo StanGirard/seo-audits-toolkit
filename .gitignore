@@ -3,6 +3,7 @@
 celerybeat-schedule
 __pycache__
 .DS_Store
+*.pid
 
 .env
 node_modules

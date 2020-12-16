@@ -44,11 +44,11 @@ services:
     - web
     labels:
     - "org.label-schema.group=front"
-    - "traefik.enable=true"
+    - "traefik.enable=true"    
     restart: unless-stopped
 
   postgres:
-    image: "postgres:${POSTGRES_VERSION}-alpine" # use latest official postgres version
+    image: postgres:${POSTGRES_VERSION}-alpine
     container_name: ${NAMESPACE}-postgres
     # ports:
     # - "${POSTGRES_PORT}:${POSTGRES_PORT}"
@@ -67,7 +67,7 @@ services:
     - "traefik.enable=false"
     restart: unless-stopped
 
-  mariadb:
+  mysql:
     image: mariadb:alpine-${MYSQL_VERSION}
     container_name: ${NAMESPACE}-mariadb
     build:
@@ -117,7 +117,7 @@ services:
   redis:
     image: seoz/redis:${REDIS_VERSION}-alpine
     build:
-      context: ./.docker/redis
+      context: ./.docker/alpine/redis
       dockerfile: Dockerfile
       args:
         REDIS_VERSION: ${REDIS_VERSION}
@@ -139,6 +139,32 @@ services:
     - "--logfile ${REDIS_LOG_FILE}"
     restart: unless-stopped
 
+  influxdb:
+    image: influxdb:${INFLUXDB_VERSION}-alpine
+    container_name: ${NAMESPACE}-influxdb
+    # ports:
+    # - 8083:8083
+    # - 8086:8086
+    # - 8090:8090
+    # expose:
+    # - 8083
+    # - 8086
+    # - 8090
+    environment:
+    - INFLUXDB_DB=${INFLUXDB_DB}
+    - INFLUXDB_ADMIN_USER=${INFLUXDB_ADMIN_USER}
+    - INFLUXDB_ADMIN_PASSWORD=${INFLUXDB_ADMIN_PASSWORD}   
+    networks:
+    - internal
+    # - web
+    volumes:
+    - ./shared/data/influxdb/imports:/imports
+    - influxdb-data:/var/lib/influxdb
+    labels:
+    - "org.label-schema.group=monitoring"
+    - "traefik.enable=false"
+    restart: unless-stopped
+
   grafana:
     image: grafana/grafana:latest
     container_name: ${NAMESPACE}-grafana
@@ -150,7 +176,7 @@ services:
     - internal
     - web
     depends_on:
-    - mariadb
+    - mysql
     - influxdb
     hostname: grafana
     user: ${CURRENT_UID}

@@ -9,3 +9,4 @@ __pycache__
 node_modules
 shared/logs/redis/*
 shared/logs/mysql/*
+shared/data/influxdb/imports/*

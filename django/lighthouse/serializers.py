@@ -5,7 +5,7 @@ from rest_framework import serializers
 class LighthouseResultSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lighthouse_Result
-        fields = ['id','result', 'timestamp']
+        fields = ['id','performance_score','accessibility_score','best_practices_score','seo_score','pwa_score', 'timestamp']
 
 class LighthouseSerializer(serializers.ModelSerializer):
     # lighthouse_results = LighthouseResultSerializer(many=True)

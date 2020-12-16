@@ -13,7 +13,7 @@ RUN apk update && \
     apk add build-base
 
 # Update Pip3 
-RUN python3 -m pip3 install --upgrade pip
+RUN python3 -m pip install --upgrade pip
 
 # Install Pipenv
 RUN pip3 install pipenv
@@ -25,7 +25,7 @@ ENV PATH="/opt/venv/bin:$PATH" \
 	VIRTUAL_ENV="/opt/venv"
 
 # install requirements first to engage docker cache
-RUN python3 -m pip3 install -U pip && \
+RUN python3 -m pip install -U pip && \
 	  pip3 install flasgger
 
 COPY requirements.txt .

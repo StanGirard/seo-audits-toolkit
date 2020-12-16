@@ -4,8 +4,6 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.postgres.fields import JSONField
 
-
-
 class Extractor(models.Model):
     extractor_type = models.TextChoices('Extractor', 'HEADERS IMAGES LINKS')
     url = models.CharField(max_length=200)

@@ -23,7 +23,4 @@ services:
     labels:
     - "org.label-schema.group=extractor"
     - "traefik.enable=true"
-    networks:
-    - internal
-    - web
     restart: unless-stopped

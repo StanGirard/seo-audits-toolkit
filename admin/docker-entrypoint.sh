@@ -31,6 +31,12 @@ case "$1" in
     exec /bin/bash $@
   ;;
 
+  'build')
+    ARGS=""
+    shift
+    exec yarn build $@
+  ;;
+
   *)
     exec yarn start $@
   ;;

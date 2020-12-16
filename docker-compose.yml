@@ -224,6 +224,25 @@ services:
     - web
     restart: unless-stopped    
 
+  contrib-bert-summary:
+    image: seoz/seoz-contrib-bert-summary:latest
+    container_name: ${NAMESPACE}-contrib-bert-summary
+    build:
+      context: ./contribs/bert-summary
+      dockerfile: Dockerfile
+      args:
+        TINI_VERSION: ${TINI_VERSION}
+    ports:
+    - ${BERT_SUMMARY_PORT}:${BERT_SUMMARY_PORT}
+    expose:
+    - ${BERT_SUMMARY_PORT}
+    labels:
+    - "org.label-schema.group=extractor"
+    - "traefik.enable=true"
+    networks:
+    - web
+    restart: unless-stopped    
+
 networks:
   internal:
     driver: bridge

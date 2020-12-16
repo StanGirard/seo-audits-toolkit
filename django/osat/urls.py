@@ -4,6 +4,7 @@ from rest_framework import routers
 from users.views import UserViewSet, GroupViewSet 
 from extractor.views import ExtractorViewSet
 from lighthouse.views import LighthouseViewSet, LighthouseResultViewSet
+from keywords.views import KeywordsViewSet
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
@@ -11,6 +12,7 @@ router.register(r'groups', GroupViewSet)
 router.register(r'api/extractor', ExtractorViewSet)
 router.register(r'api/lighthouse', LighthouseViewSet)
 router.register(r'api/results', LighthouseResultViewSet)
+router.register(r'api/keywords', KeywordsViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

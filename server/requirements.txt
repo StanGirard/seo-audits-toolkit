@@ -9,3 +9,5 @@ drf-nested-routers==0.92.5
 psycopg2==2.8.6
 django-mysql==3.10.0
 django-contrib-postgres==0.0.1
+PyMySQL==0.10.1
+mysqlclient==2.0.2

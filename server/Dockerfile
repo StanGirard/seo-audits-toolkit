@@ -21,6 +21,7 @@ ENV PATH="/opt/venv/bin:$PATH" \
 COPY requirements.txt .
 
 # Install dependencies into the virtual environment with Pipenv
+RUN python3 -m pip install --upgrade pip
 RUN pip3 install -r requirements.txt 
 RUN pip3 install celery
 

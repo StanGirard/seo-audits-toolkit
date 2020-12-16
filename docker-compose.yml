@@ -1,0 +1,19 @@
+---
+version: "3.8"
+services:
+
+  server:
+    image: seoz/seoz-server:latest
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: ${NAMESPACE}-server
+
+
+  dashboard:
+    image: seoz/seoz-dashboard:latest
+    build:
+      context: ./admin
+      dockerfile: Dockerfile
+    container_name: ${NAMESPACE}-dashboard
+    

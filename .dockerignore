@@ -1,3 +1,4 @@
+.env*
 .git
 .git/
 .git/*
@@ -6,3 +7,7 @@ docker-compose*
 Dockerfile*
 *.md
 *.log
+node_modules
+node_modules/
+node_modules/*
+node_modules/**

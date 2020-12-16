@@ -1,16 +1,29 @@
-FROM mhart/alpine-node:14
+ARG NODE_VERSION=${NODE_VERSION:-"14"}
+
+FROM mhart/alpine-node:${NODE_VERSION}
 MAINTAINER Michalski Luc <michalski.luc@gmail.com>
 
+# Set build arguments
+ARG VERSION
+ARG BUILD
+ARG NOW
+
+# Set Tini 
+# Refs. https://github.com/krallin/tini#why-tini
+ARG TINI_VERSION=${TINI_VERSION:-"v0.19.0"}
+
+# Import project's dependencies
 WORKDIR /app
 COPY package.json yarn.lock ./
-
 RUN yarn install
 
+# Copy source files
 COPY . .
 
+# Container configuration
 EXPOSE 3000
-VOLUME ["/app/build"]
 
+VOLUME ["/app/build"]
 LABEL name="seoz-admin" \
       version="$VERSION" \
       build="$BUILD" \
@@ -26,4 +39,5 @@ LABEL name="seoz-admin" \
       vcs-ref="$VERSION" \
       distribution-scope="public"
 
-CMD  ["yarn", "start"]
+ENTRYPOINT ["tini", "-g", "--"]
+CMD ["./docker-entrypoint.sh"]

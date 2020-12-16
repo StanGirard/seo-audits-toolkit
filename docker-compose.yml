@@ -8,12 +8,18 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
+      args:
+        TINI_VERSION: ${TINI_VERSION}
+    ports:
+    - 5000:5000
+    expose:
+    - 5000
     depends_on:
     - redis
     - mysql
     labels:
     - "org.label-schema.group=backend"
-    # - "traefik.enable=true"
+    - "traefik.enable=true"
     networks:
     - internal
     - web
@@ -25,14 +31,20 @@ services:
     build:
       context: ./admin
       dockerfile: Dockerfile
+      args:
+        NODE_VERSION: ${NODE_VERSION}
+        TINI_VERSION: ${TINI_VERSION}
+    expose:
+    - 3000
+    ports:
+    - 3000:3000
     depends_on:
     - server
     networks:
-    - internal
     - web
     labels:
     - "org.label-schema.group=front"
-    # - "traefik.enable=true"
+    - "traefik.enable=true"
     restart: unless-stopped
     
   redis:

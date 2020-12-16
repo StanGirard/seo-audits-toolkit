@@ -7,7 +7,7 @@ WORKDIR /opt/app
 RUN apk add --no-cache libffi libffi-dev musl-dev gcc g++ git ca-certificates
 
 # Update Pip3 
-RUN python3 -m pip install -U pi
+RUN python3 -m pip install --upgrade pip
 
 # Install Pipenv
 RUN pip3 install pipenv
@@ -21,7 +21,8 @@ ENV PATH="/opt/venv/bin:$PATH" \
 COPY requirements.txt .
 
 # Install dependencies into the virtual environment with Pipenv
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r requirements.txt 
+RUN pip3 install celery
 
 FROM python:3-alpine AS runtime
 MAINTAINER Luc Michalski <michalski.luc@gmail.com>

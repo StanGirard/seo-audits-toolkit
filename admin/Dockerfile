@@ -14,7 +14,8 @@ ARG TINI_VERSION=${TINI_VERSION:-"v0.19.0"}
 
 # Import project's dependencies
 WORKDIR /app
-COPY package.json yarn.lock ./
+COPY package.json ./
+
 RUN yarn install
 
 # Copy source files

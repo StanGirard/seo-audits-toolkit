@@ -76,7 +76,7 @@ LABEL name="seoz-contrib-bert-summary" \
       distribution-scope="public"
 
 # Copy server startup script
-COPY ./bert-summary-rest-api.py /opt/bert-summary
+COPY ./api.py /opt/bert-summary
 
 ENV BERT_SUMMARY_PORT=${BERT_SUMMARY_PORT:-"5006"} \
 	BERT_SUMMARY_HOST=${BERT_SUMMARY_HOST:-"0.0.0.0"}

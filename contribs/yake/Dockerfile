@@ -80,7 +80,7 @@ LABEL name="seoz-contrib-yake" \
       distribution-scope="public"
 
 # Copy server startup script
-COPY ./yake-rest-api.py /opt/yake
+COPY ./api.py /opt/yake
 
 ENV YAKE_PORT=${YAKE_PORT:-"5000"} \
 	YAKE_HOST=${YAKE_HOST:-"0.0.0.0"}

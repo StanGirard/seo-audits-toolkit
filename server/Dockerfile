@@ -39,7 +39,7 @@ ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-muslc
 RUN apk --no-cache --no-progress add ca-certificates openssl libffi openblas libstdc++ \
     && chmod +x /usr/local/sbin/tini && mkdir -p /opt \
     && adduser -D seoz -h /opt/seoz -s /bin/sh \
-    && su seoz -c 'cd /opt/seoz; mkdir -p bin config data'
+    && su seoz -c 'cd /opt/seoz; mkdir -p bin config data logs'
 
 # Switch to user context
 USER seoz

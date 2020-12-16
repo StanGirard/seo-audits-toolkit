@@ -21,24 +21,22 @@ services:
     - "org.label-schema.group=backend"
     - "traefik.enable=true"
     environment:
-      CELERY_BROKER_URL: "redis://redis:6379/0"
-      CELERY_RESULT_BACKEND: "redis://redis:6379/0"
-      DATABASE_ENGINE: mysql
+      CELERY_BROKER_URL: ${CELERY_BROKER_URL}
+      CELERY_RESULT_BACKEND: ${CELERY_RESULT_BACKEND}
+      DATABASE_ENGINE: ${DATABASE_ENGINE}
       DATABASE_HOST: mysql
       DATABASE_PORT: ${MYSQL_PORT}
       DATABASE_NAME: ${MYSQL_DATABASE}
       DATABASE_USER: ${MYSQL_USER}
       DATABASE_PASSWORD: ${MYSQL_PASSWORD}
       SECRET_KEY: ${SECRET_KEY}
-      DEBUG: True
-      CORS_ALLOWED_ORIGINS: ""
-      ALLOWED_HOSTS: "http://dashboard:3000,http://server:8000,http://server:8080"
-      REST_FRAMEWORK_PAGE_SIZE: "20"
-      # LANGUAGE_CODE: ${LANGUAGE_CODE}
-      # TIME_ZONE: ${TIME_ZONE}
-      # STATIC_URL: ${STATIC_URL}
+      DEBUG: ${DEBUG}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+      REST_FRAMEWORK_PAGE_SIZE: ${REST_FRAMEWORK_PAGE_SIZE}
     volumes:
-    - 
+    - server-data:/opt/seoz/data
+    - server-logs:/opt/seoz/logs
     networks:
     - internal
     - web
@@ -269,6 +267,13 @@ networks:
     external: true
 
 volumes:
+  # server data
+  server-data:
+  server-logs:
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/shared/logs/server
   # Letsencrypt certificates
   certs-data:
   # PostreSQL

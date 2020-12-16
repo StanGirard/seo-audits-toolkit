@@ -24,10 +24,25 @@ isArgPassed() {
 
 case "$1" in
 
-#  'runserver')
-#  	shift
-#  	exec python3 manage.py runserver $@
-# ;;
+  'worker')
+    shift
+    exec celery -A osat worker -l info $@
+  ;;
+
+  'beat')
+    shift
+    exec celery -A osat beat -l info $@
+  ;;
+
+  'migrate')
+    shift
+    exec python3 manage.py migrate $@
+  ;;
+
+  'createsuperuser')
+   	shift
+   	exec python3 manage.py createsuperuser $@
+  ;;
 
   'bash')
   	ARGS=""
@@ -37,6 +52,7 @@ case "$1" in
 	;;
 
   *)
+    python3 manage.py migrate
   	exec python3 manage.py runserver $@
 	;;
 esac

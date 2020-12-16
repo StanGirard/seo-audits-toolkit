@@ -2,7 +2,7 @@
 version: "3.8"
 services:
 
-  server:
+  seoz: &seoz_base
     image: seoz/seoz-server:latest
     container_name: ${NAMESPACE}-server
     build:
@@ -10,16 +10,6 @@ services:
       dockerfile: Dockerfile
       args:
         TINI_VERSION: ${TINI_VERSION}
-    ports:
-    - 5000:5000
-    expose:
-    - 5000
-    depends_on:
-    - redis
-    - mysql
-    labels:
-    - "org.label-schema.group=backend"
-    - "traefik.enable=true"
     environment:
       CELERY_BROKER_URL: ${CELERY_BROKER_URL}
       CELERY_RESULT_BACKEND: ${CELERY_RESULT_BACKEND}
@@ -37,9 +27,45 @@ services:
     volumes:
     - server-data:/opt/seoz/data
     - server-logs:/opt/seoz/logs
+
+  server:
+    <<: *seoz_base
+    ports:
+    - 5000:5000
+    expose:
+    - 5000
+    depends_on:
+    - worker
+    - beats
+    - mysql
+    labels:
+    - "org.label-schema.group=webservice"
+    - "traefik.enable=true"
     networks:
     - internal
     - web
+    restart: unless-stopped
+
+  worker:
+    <<: *seoz_base
+    depends_on:
+    - redis
+    labels:
+    - "org.label-schema.group=queue"
+    - "traefik.enable=false"
+    networks:
+    - internal
+    restart: unless-stopped
+
+  beats:
+    <<: *seoz_base
+    depends_on:
+    - redis
+    labels:
+    - "org.label-schema.group=queue"
+    - "traefik.enable=false"
+    networks:
+    - internal
     restart: unless-stopped
 
   dashboard:

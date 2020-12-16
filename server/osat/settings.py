@@ -16,31 +16,25 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '=k!3##nty)rnp^(4wu=_kj(g7a)1rk80oymn52(we00z5y%ox='
+SECRET_KEY = os.environ.get("SECRET_KEY", '=k!3##nty)rnp^(4wu=_kj(g7a)1rk80oymn52(we00z5y%ox=')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", '').split(",")
+CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", '').split(",")
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    'http://localhost:8000',
-    'http://localhost:8080',
-]
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    'PAGE_SIZE':                os.environ.get("REST_FRAMEWORK_PAGE_SIZE", '10'),
+    'DEFAULT_FILTER_BACKENDS':  ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
 # Application definition
-
 INSTALLED_APPS = [
     'extractor.apps.ExtractorConfig',
     'lighthouse.apps.LighthouseConfig',
@@ -53,7 +47,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'django_filters'
-    
 ]
 
 MIDDLEWARE = [
@@ -87,8 +80,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'osat.wsgi.application'
 
-
-
 CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL','redis://localhost:6379/0')
 CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND','redis://localhost:6379/0')
 # Database
@@ -96,15 +87,14 @@ CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND','redis://localhos
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'osat',
-        'USER': 'postgres',
-        'PASSWORD': os.environ.get("POSTGRES_PASSWORD", "TEST"),
-        'HOST': 'osat.ctcghdbvsxw2.eu-west-3.rds.amazonaws.com',
-        'PORT': '5432',
+        'ENGINE':   'django.db.backends.'+os.environ.get("DATABASE_ENGINE", "postgresql"),
+        'NAME':     os.environ.get("DATABASE_NAME", "osat"),
+        'USER':     os.environ.get("DATABASE_USER", "postgres"),
+        'PASSWORD': os.environ.get("DATABASE_PASSWORD", "TEST"),
+        'HOST':     os.environ.get("DATABASE_HOST", "osat.ctcghdbvsxw2.eu-west-3.rds.amazonaws.com"),
+        'PORT':     os.environ.get("DATABASE_PORT", '5432'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -128,18 +118,14 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
+LANGUAGE_CODE = os.environ.get("LANGUAGE_CODE", "en-us")
+TIME_ZONE = = os.environ.get("TIME_ZONE", "UTC")
 
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = os.environ.get("STATIC_URL", '/static/')

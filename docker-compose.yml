@@ -20,6 +20,25 @@ services:
     labels:
     - "org.label-schema.group=backend"
     - "traefik.enable=true"
+    environment:
+      CELERY_BROKER_URL: "redis://redis:6379/0"
+      CELERY_RESULT_BACKEND: "redis://redis:6379/0"
+      DATABASE_ENGINE: mysql
+      DATABASE_HOST: mysql
+      DATABASE_PORT: ${MYSQL_PORT}
+      DATABASE_NAME: ${MYSQL_DATABASE}
+      DATABASE_USER: ${MYSQL_USER}
+      DATABASE_PASSWORD: ${MYSQL_PASSWORD}
+      SECRET_KEY: ${SECRET_KEY}
+      DEBUG: True
+      CORS_ALLOWED_ORIGINS: ""
+      ALLOWED_HOSTS: "http://dashboard:3000,http://server:8000,http://server:8080"
+      REST_FRAMEWORK_PAGE_SIZE: "20"
+      # LANGUAGE_CODE: ${LANGUAGE_CODE}
+      # TIME_ZONE: ${TIME_ZONE}
+      # STATIC_URL: ${STATIC_URL}
+    volumes:
+    - 
     networks:
     - internal
     - web
@@ -86,7 +105,7 @@ services:
       LOGROTATE_MAXAGE: 7
       SKIP_SHOW_DATABASE: "OFF" # If set to ON, will deny the SHOW DATABASES statement to regular users.
       # AUTO_LETS_ENCRYPT: "no"
-      # SERVER_NAME: "para-test.gsi-network.com"
+      # SERVER_NAME: "seoz.io"
       # LOCAL_INFILE: "OFF"
       # SECURE_FILE_PRIV: "/opt/data/import"
       # ROOT_HOST: "%"

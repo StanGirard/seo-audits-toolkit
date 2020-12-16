@@ -4,16 +4,72 @@ services:
 
   server:
     image: seoz/seoz-server:latest
+    container_name: ${NAMESPACE}-server
     build:
       context: ./server
       dockerfile: Dockerfile
-    container_name: ${NAMESPACE}-server
-
+    depends_on:
+    - redis
+    - mysql
+    labels:
+    - "org.label-schema.group=backend"
+    # - "traefik.enable=true"
+    networks:
+    - internal
+    - web
+    restart: unless-stopped
 
   dashboard:
     image: seoz/seoz-dashboard:latest
+    container_name: ${NAMESPACE}-dashboard
     build:
       context: ./admin
       dockerfile: Dockerfile
-    container_name: ${NAMESPACE}-dashboard
+    depends_on:
+    - server
+    networks:
+    - internal
+    - web
+    labels:
+    - "org.label-schema.group=front"
+    # - "traefik.enable=true"
+    restart: unless-stopped
     
+  redis:
+    image: seoz/redis:${REDIS_VERSION}-alpine
+    build:
+      context: ./.docker/redis
+      dockerfile: Dockerfile
+      args:
+        REDIS_VERSION: ${REDIS_VERSION}
+        REDIS_LOG_PREFIX_PATH: ${REDIS_LOG_PREFIX_PATH}
+    container_name: ${NAMESPACE}-redis
+    hostname: redis
+    networks:
+    - internal    
+    volumes:
+    - redis-data:/data
+    - redis-logs:${REDIS_LOG_PREFIX_PATH}
+    labels:
+    - "org.label-schema.group=storage"
+    - "traefik.enable=false"
+    command:
+    - "redis-server"
+    - "--maxmemory ${REDIS_MEMORY_MAX}"
+    - "--maxmemory-policy allkeys-lru"
+    - "--logfile ${REDIS_LOG_FILE}"
+    restart: unless-stopped
+
+networks:
+  internal:
+    driver: bridge
+  web:
+    external: true
+
+volumes:
+  redis-data:
+  redis-logs:
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/shared/logs/redis  

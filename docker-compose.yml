@@ -4,7 +4,6 @@ services:
 
   seoz: &seoz_base
     image: seoz/seoz-server:latest
-    container_name: ${NAMESPACE}-server
     build:
       context: ./server
       dockerfile: Dockerfile
@@ -30,6 +29,7 @@ services:
 
   server:
     <<: *seoz_base
+    container_name: ${NAMESPACE}-server
     ports:
     - 5000:5000
     expose:
@@ -38,6 +38,7 @@ services:
     - worker
     - beats
     - mysql
+    - dashboard
     labels:
     - "org.label-schema.group=webservice"
     - "traefik.enable=true"
@@ -48,6 +49,7 @@ services:
 
   worker:
     <<: *seoz_base
+    container_name: ${NAMESPACE}-worker
     depends_on:
     - redis
     labels:
@@ -59,6 +61,7 @@ services:
 
   beats:
     <<: *seoz_base
+    container_name: ${NAMESPACE}-beats
     depends_on:
     - redis
     labels:
@@ -74,15 +77,16 @@ services:
     build:
       context: ./admin
       dockerfile: Dockerfile
+      # dockerfile: Dockerfile
       args:
         NODE_VERSION: ${NODE_VERSION}
         TINI_VERSION: ${TINI_VERSION}
+    # volumes:
+    # - ./dashboard/dist:/opt/seoz/www
     expose:
     - 3000
     ports:
     - 3000:3000
-    depends_on:
-    - server
     networks:
     - web
     labels:
@@ -241,6 +245,36 @@ services:
     labels:
     - "org.label-schema.group=monitoring"
     - "traefik.enable=true"
+    restart: unless-stopped
+
+  proton-privoxy:
+    image: seoz/seoz-protonvpn-privoxy:latest
+    container_name: ${NAMESPACE}-pvpn-privoxy
+    build:
+      context: ./.docker/alpine/proton-privoxy
+      dockerfile: Dockerfile
+    environment:
+    - HOST_NETWORK=${PVPN_HOST_NETWORK}
+    - PVPN_USERNAME=${PVPN_USERNAME}
+    - PVPN_PASSWORD=${PVPN_PASSWORD}
+    - PVPN_TIER=${PVPN_TIER}
+    - PVPN_PROTOCOL=${PVPN_PROTOCOL}
+    - PVPN_CMD_ARGS=${PVPN_CMD_ARGS}
+    - PVPN_DEBUG=${PVPN_DEBUG}
+    volumes:
+    - /etc/localtime:/etc/localtime:ro
+    ports:
+    - 8888:8080
+    devices:
+    - /dev/net/tun
+    cap_add:
+    - NET_ADMIN
+    labels:
+    - "org.label-schema.group=proxy"
+    - "traefik.enable=false"
+    networks:
+    - internal
+    - web
     restart: unless-stopped
 
   contrib-yake:

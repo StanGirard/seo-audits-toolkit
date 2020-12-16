@@ -1,1 +1,8 @@
-.dockerignore
+node_modules
+node_modules/
+node_modules/*
+node_modules/**
+*.md
+docker-compose*
+Dockerfile*
+*-example

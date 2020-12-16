@@ -39,6 +39,11 @@ case "$1" in
     exec python3 manage.py migrate $@
   ;;
 
+  'makemigrations')
+    shift
+    exec python3 manage.py makemigrations $@
+  ;;
+
   'createsuperuser')
    	shift
    	exec python3 manage.py createsuperuser $@

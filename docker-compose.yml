@@ -47,9 +47,29 @@ services:
     - "traefik.enable=true"
     restart: unless-stopped
 
+  postgres:
+    image: "postgres:${POSTGRES_VERSION}-alpine" # use latest official postgres version
+    container_name: ${NAMESPACE}-postgres
+    # ports:
+    # - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    # expose:
+    # - ${POSTGRES_PORT}
+    networks:
+    - internal
+    environment:
+    - POSTGRES_USER=${POSTGRES_USER}
+    - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+    - postgres-data:/var/lib/postgresql/data/
+    labels:
+    - "org.label-schema.group=storage"
+    - "traefik.enable=false"
+    restart: unless-stopped
+
   mariadb:
     image: mariadb:alpine-${MYSQL_VERSION}
-    container_name: mariadb
+    container_name: ${NAMESPACE}-mariadb
     build:
       context: .docker/alpine/mariadb
       dockerfile: Dockerfile
@@ -73,8 +93,10 @@ services:
     labels:
     - "org.label-schema.group=storage"
     - "traefik.enable=false"
-    ports:
-    - 3306:3306
+    # ports:
+    # - ${MYSQL_PORT}:${MYSQL_PORT}
+    # expose:
+    # - ${MYSQL_PORT}
     networks:
     - internal
     - web  
@@ -161,6 +183,8 @@ networks:
 volumes:
   # Letsencrypt certificates
   certs-data:
+  # PostreSQL
+  postgres-data:
   # MySQL/MariaDB
   mysql-data:
   mysql-logs:

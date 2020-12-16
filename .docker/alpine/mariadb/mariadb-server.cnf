@@ -1,0 +1,21 @@
+[mariadb]
+bind_address = 0.0.0.0
+log_error = /var/log/mariadb.log
+#plugin_load_add = auth_ed25519
+#ed25519=FORCE_PLUS_PERMANENT
+#plugin_load_add = simple_password_check
+#simple_password_check=FORCE_PLUS_PERMANENT
+#simple_password_check_digits = %PASSWORD_DIGITS%
+#simple_password_check_letters_same_case = %PASSWORD_LETTERS%
+#simple_password_check_minimal_length = %PASSWORD_LENGTH%
+#simple_password_check_other_characters = %PASSWORD_SPECIALS%
+#ssl_cert = %SSL_CERT%
+#ssl_key = %SSL_KEY%
+#ssl_ca = %SSL_CA%
+#tls_version = TLSv1.3
+#require_secure_transport=%REQUIRE_SECURE_TRANSPORT%
+#local_infile=%LOCAL_INFILE%
+#skip_name_resolve=%SKIP_NAME_RESOLVE%
+#skip_show_database=%SKIP_SHOW_DATABASE%
+#secure_file_priv=%SECURE_FILE_PRIV%
+!includedir /custom.cnf.d

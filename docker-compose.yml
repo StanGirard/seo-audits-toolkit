@@ -200,6 +200,30 @@ services:
     - "traefik.enable=true"
     restart: unless-stopped
 
+  contrib-yake:
+    image: seoz/seoz-contrib-yake:latest
+    container_name: ${NAMESPACE}-contrib-yake
+    build:
+      context: ./contribs/yake
+      dockerfile: Dockerfile
+      args:
+        YAKE_VERSION: ${YAKE_VERSION}
+        TINI_VERSION: ${TINI_VERSION}
+    environment:
+    - YAKE_HOST=${YAKE_HOST}
+    - YAKE_PORT=${YAKE_PORT}
+    - YAKE_DEBUG=${YAKE_DEBUG}
+    ports:
+    - ${YAKE_PORT}:${YAKE_PORT}
+    expose:
+    - ${YAKE_PORT}
+    labels:
+    - "org.label-schema.group=extractor"
+    - "traefik.enable=true"
+    networks:
+    - web
+    restart: unless-stopped    
+
 networks:
   internal:
     driver: bridge

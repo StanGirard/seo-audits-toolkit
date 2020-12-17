@@ -1,0 +1,9 @@
+ARG TRAEFIK_VERSION=${TRAEFIK_VERSION:-"v2.3.4"}
+
+FROM traefik:${TRAEFIK_VERSION}
+MAINTAINER Michalski Luc <michalski.luc@gmail.com>
+
+ARG TRAEFIK_LOG_PREFIX_PATH=${TRAEFIK_LOG_PREFIX_PATH:-"/var/log/traefik"}
+
+RUN mkdir -p ${TRAEFIK_LOG_PREFIX_PATH} 
+

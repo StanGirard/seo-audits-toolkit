@@ -41,6 +41,8 @@ urllib3 = "==1.25.11"
 vine = "==5.0.0"
 wcwidth = "==0.2.5"
 yake = {git = "https://github.com/LIAAD/yake"}
+redis = "*"
+lxml = "*"
 
 [dev-packages]
 

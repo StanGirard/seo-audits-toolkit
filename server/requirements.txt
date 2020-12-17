@@ -19,11 +19,13 @@ drf-nested-routers==0.92.5
 idna==2.10
 jellyfish==0.8.2
 kombu==5.0.2
+lxml==4.6.2
 networkx==2.5
 numpy==1.19.4
 prompt-toolkit==3.0.8
 psycopg2-binary==2.8.6
 pytz==2020.4
+redis==3.5.3
 regex==2020.11.13
 requests==2.24.0
 segtok==1.5.10

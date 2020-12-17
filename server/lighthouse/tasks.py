@@ -1,5 +1,5 @@
-from celery.task.schedules import crontab
-from celery.decorators import periodic_task
+from celery import Celery
+from celery.schedules import crontab
 import subprocess
 from django.utils import timezone
 import pytz
@@ -7,7 +7,15 @@ import json
 
 from .models import Lighthouse, Lighthouse_Result
 
-@periodic_task(run_every=(crontab(minute=0, hour='*/3')), name="lighthouse_crawler", ignore_result=True)
+
+app = Celery()
+
+@app.on_after_configure.connect
+def setup_periodic_tasks(sender, **kwargs):
+    # Calls test('hello') every 10 seconds.
+    sender.add_periodic_task(crontab(minute=0, hour='*/3'), lighthouse_crawler.s(), name='add every 10')
+
+@app.task
 def lighthouse_crawler():
     scheduled = Lighthouse.objects.filter(scheduled=True)
     for item in scheduled:

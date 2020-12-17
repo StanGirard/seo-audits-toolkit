@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY", '=k!3##nty)rnp^(4wu=_kj(g7a)1rk80oymn52(we00z5y%ox=')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", False)
+DEBUG = True
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", '').split(",")
+ALLOWED_HOSTS = []
 CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", 'http://localhost:3000').split(",")
 
 REST_FRAMEWORK = {

@@ -1,3 +1,13 @@
 **/*.pyc
 *.pyc
 celerybeat-schedule
+__pycache__
+.DS_Store
+*.pid
+
+.env
+node_modules
+shared/logs/redis/*
+shared/logs/mysql/*
+shared/logs/server/*
+shared/data/influxdb/imports/*

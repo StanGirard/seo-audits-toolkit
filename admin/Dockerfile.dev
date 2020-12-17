@@ -1,0 +1,18 @@
+ARG NODE_VERSION=${NODE_VERSION:-"14"}
+
+FROM mhart/alpine-node:${NODE_VERSION}
+MAINTAINER Michalski Luc <michalski.luc@gmail.com>
+
+# Import project's dependencies
+WORKDIR /app
+COPY package.json ./
+
+RUN yarn install --network-timeout 1000000000
+
+# Copy source files
+COPY . .
+
+# Container configuration
+EXPOSE 3000
+
+CMD ["yarn", "start"]

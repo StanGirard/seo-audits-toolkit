@@ -1,4 +1,4 @@
-from celery import shared_task,task
+from celery import shared_task
 from .models import Keyword
 from datetime import datetime
 from extractor.src.headers import find_all_headers_url

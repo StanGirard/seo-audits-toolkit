@@ -37,7 +37,7 @@ ARG TINI_VERSION=${TINI_VERSION:-"v0.19.0"}
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini-muslc-amd64 /usr/local/sbin/tini
 
 # Install runtime dependencies & create runtime user
-RUN apk --no-cache --no-progress add ca-certificates openssl libffi openblas libstdc++ mariadb-connector-c postgresql-client \
+RUN apk --no-cache --no-progress add ca-certificates openssl libffi openblas libstdc++ mariadb-connector-c postgresql-client nano bash \
     && chmod +x /usr/local/sbin/tini && mkdir -p /opt \
     && adduser -D seoz -h /opt/seoz -s /bin/sh \
     && su seoz -c 'cd /opt/seoz; mkdir -p bin config data logs'

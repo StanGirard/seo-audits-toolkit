@@ -52,7 +52,7 @@ case "$1" in
   'bash')
   	ARGS=""
   	shift
-    apk add --update --no-cache nano bash jq 
+    # apk add --update --no-cache nano bash jq 
   	exec /bin/bash $@
 	;;
 

@@ -26,6 +26,9 @@ services:
     volumes:
     - server-data:/opt/seoz/data
     - server-logs:/opt/seoz/logs
+    networks:
+    - internal
+    - web
 
   server:
     <<: *seoz_base

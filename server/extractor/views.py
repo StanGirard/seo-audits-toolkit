@@ -13,7 +13,7 @@ class ExtractorViewSet(viewsets.ModelViewSet):
     """
     queryset = Extractor.objects.all().order_by('-begin_date')
     serializer_class = ExtractorSerializer
-    filter_backends = [filters.OrderingFilter]
-    ordering_fields = ['id', 'type_audit']
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
     filterset_fields = ['type_audit', 'status_job']
+    ordering_fields = ['id', 'type_audit']
+   

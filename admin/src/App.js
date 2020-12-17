@@ -1,14 +1,16 @@
 import React from 'react';
 import { Admin, Resource, ListGuesser, EditGuesser } from 'react-admin';
 import drfProvider, { tokenAuthProvider, fetchJsonWithAuthToken } from 'ra-data-django-rest-framework';
-import {ExtractList , ExtractShow, PostShow}  from './extract';
+import {ExtractorList , ExtractorCreate, ExtractorShow}  from './extractor';
+import { Layout } from './layout';
 const authProvider = tokenAuthProvider()
 
 
 
+
 const App = () => (
-    <Admin dataProvider={drfProvider('http://localhost:8000/api', fetchJsonWithAuthToken)}>
-        <Resource name="extractor" list={ExtractList} />
+    <Admin layout={Layout} dataProvider={drfProvider('http://localhost:8000/api', fetchJsonWithAuthToken)}>
+        <Resource name="extractor" list={ExtractorList} edit={EditGuesser} create={ExtractorCreate} show={ExtractorShow}/>
     </Admin>
 );
 

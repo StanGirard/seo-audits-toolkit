@@ -9,7 +9,7 @@ import pytz
 class ExtractorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Extractor
-        fields = ['id','url', 'result', 'type_audit', 'task_id', 'status_job', 'begin_date']
+        fields = ['id','url', 'result', 'type_audit', 'status_job', 'begin_date']
 
     def create(self, validated_data):
         ## Creates the celery task

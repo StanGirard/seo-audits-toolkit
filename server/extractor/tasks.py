@@ -9,6 +9,7 @@ import time
 @shared_task(bind=True, name="extractor_job")
 def extractor_job(self,url, task_type):
     print(task_type)
+    time.sleep(0.2)
     Extractor.objects.filter(task_id=self.request.id).update(status_job="RUNNING")
     result = None
     if (task_type == "HEADERS"):

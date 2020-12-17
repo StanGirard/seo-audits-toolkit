@@ -11,6 +11,7 @@ export const ExtractorList = (props) => (
       <TextField source="id" />
       <MyUrlField source="url" />
       <TextField source="type_audit"  label="Type" />
+      <TextField source="status_job"  label="Type" />
       <DateField source="begin_date"  label="Date"/>
       <ShowButton />
       <DeleteButton undoable={true} />

@@ -1,4 +1,11 @@
-0.0.0.0:3000
-gzip
-log /var/seoz/logs/access.log
-root /opt/seoz/www
+:80
+
+root * /opt/seoz/www
+file_server 
+# try_files {path} ./index.html
+
+# encode gzip
+log {
+	output file         /opt/seoz/logs/access.log
+	format single_field common_log
+}

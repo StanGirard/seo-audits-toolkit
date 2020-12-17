@@ -88,17 +88,19 @@ services:
         TINI_VERSION: ${TINI_VERSION}
         CADDY_VERSION: "v2.3.0-rc.1" # v2.3.0-rc.1
         CADDY_PLUGINS: "cors,realip,expires,cache"
-    # volumes:
+    volumes:
+    - ./admin/Caddyfile:/etc/Caddyfile:rw
     # - ./dashboard/dist:/opt/seoz/www
     expose:
-    - 3000
+    - 80
     ports:
-    - 3000:3000
+    - 3000:80
     networks:
     - web
     labels:
     - "org.label-schema.group=front"
-    - "traefik.enable=true"    
+    - "traefik.enable=true"
+    command: ["run", "--config=/etc/Caddyfile", "--watch"]
     restart: unless-stopped
 
   postgres:

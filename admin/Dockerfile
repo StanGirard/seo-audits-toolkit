@@ -19,7 +19,7 @@ FROM caddy:2.3.0-rc.1-builder-alpine AS caddy-builder
 MAINTAINER Michalski Luc <michalski.luc@gmail.com>
 
 ARG CADDY_VERSION=${CADDY_VERSION:-"v2.3.0-rc.1"}
-ARG CADDY_PLUGINS=${CADDY_PLUGINS:-"cors,realip,expires,cache"}
+ARG CADDY_PLUGINS=${CADDY_PLUGINS:-"cors,realip,expires,cache,gzip"}
 
 # process wrapper 
 RUN go get -v github.com/abiosoft/parent && \
@@ -40,7 +40,7 @@ ARG BUILD
 ARG NOW
 
 # Install runtime dependencies & create runtime user
-RUN apk --no-cache --no-progress add ca-certificates openssl \
+RUN apk --no-cache --no-progress add ca-certificates openssl bash nano \
     && adduser -D seoz -h /opt/seoz -s /bin/sh \
     && su seoz -c 'cd /opt/seoz; mkdir -p www logs'
 
@@ -78,4 +78,4 @@ LABEL name="seoz-admin" \
       distribution-scope="public"
 
 ENTRYPOINT ["/bin/parent", "caddy"]
-CMD ["--conf", "/etc/Caddyfile", "--log", "stdout", "--agree=true"]
+CMD ["run", "--config=/etc/Caddyfile", "--watch"]

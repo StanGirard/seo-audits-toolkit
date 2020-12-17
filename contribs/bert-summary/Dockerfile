@@ -25,8 +25,7 @@ ENV PATH="/opt/venv/bin:$PATH" \
 	VIRTUAL_ENV="/opt/venv"
 
 # install requirements first to engage docker cache
-RUN python3 -m pip install -U pip && \
-	  pip3 install flasgger
+RUN python3 -m pip install -U pip
 
 COPY requirements.txt .
 

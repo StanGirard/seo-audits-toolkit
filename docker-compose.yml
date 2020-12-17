@@ -313,7 +313,7 @@ services:
     container_name: ${NAMESPACE}-contrib-bert-summary
     build:
       context: ./contribs/bert-summary
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.ubuntu
       args:
         TINI_VERSION: ${TINI_VERSION}
     ports:

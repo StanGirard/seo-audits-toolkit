@@ -2,6 +2,7 @@ import * as React from "react";
 import { List,ShowButton,  DeleteButton,Datagrid, TextField, DateField, EditButton } from 'react-admin';
 import MyUrlField from '../custom/fields/urlField';
 import { ExtractorFilter } from './extractorFilter'
+
 export const ExtractorList = (props) => (
   <List {...props}
   filters={<ExtractorFilter />}
@@ -9,9 +10,8 @@ export const ExtractorList = (props) => (
     <Datagrid>
       <TextField source="id" />
       <MyUrlField source="url" />
-      <TextField source="type_audit" />
-      <DateField source="begin_date" />
-      <EditButton />
+      <TextField source="type_audit"  label="Type" />
+      <DateField source="begin_date"  label="Date"/>
       <ShowButton />
       <DeleteButton undoable={true} />
     </Datagrid>

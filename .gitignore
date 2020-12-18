@@ -11,3 +11,7 @@ shared/logs/redis/*
 shared/logs/mysql/*
 shared/logs/server/*
 shared/data/influxdb/imports/*
+Pipfile.lock
+celerybeat-schedule.db
+dump.rdb
+.eslintcache

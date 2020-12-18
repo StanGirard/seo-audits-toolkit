@@ -15,5 +15,5 @@ class ExtractorViewSet(viewsets.ModelViewSet):
     serializer_class = ExtractorSerializer
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
     filterset_fields = ['type_audit', 'status_job']
-    ordering_fields = ['id', 'type_audit']
+    ordering_fields = ['id', 'type_audit', 'begin_date']
    

@@ -5,6 +5,7 @@ from extractor.src.headers import find_all_headers_url
 from extractor.src.images import find_all_images
 from extractor.src.links import find_all_links
 import time
+import json
 
 @shared_task(bind=True, name="extractor_job")
 def extractor_job(self,url, task_type):
@@ -18,5 +19,5 @@ def extractor_job(self,url, task_type):
         result = find_all_images(url)
     elif (task_type == "LINKS"):
         result = find_all_links(url)
-    Extractor.objects.filter(task_id=self.request.id).update(result=str(result), status_job="FINISHED")
+    Extractor.objects.filter(task_id=self.request.id).update(result=json.dumps(result).replace("'", "\\'"), status_job="FINISHED")
     return "Hello World!"

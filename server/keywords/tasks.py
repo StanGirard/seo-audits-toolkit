@@ -6,6 +6,7 @@ from extractor.src.images import find_all_images
 from extractor.src.links import find_all_links
 import time
 import yake
+import json
 
 @shared_task(bind=True, name="keywords_job")
 def keywords_job(self,text,language, ngram, top):
@@ -19,5 +20,5 @@ def keywords_job(self,text,language, ngram, top):
 
     keywords = my_yake.extract_keywords(text)
     result  = [{"ngram":x[1] ,"score":x[0]} for x in keywords]
-    Keyword.objects.filter(task_id=self.request.id).update(result=str(result), status_job="FINISHED")
+    Keyword.objects.filter(task_id=self.request.id).update(result=json.dumps(result), status_job="FINISHED")
     return "Hello World!"

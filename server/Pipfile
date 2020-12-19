@@ -43,6 +43,7 @@ wcwidth = "==0.2.5"
 yake = {git = "https://github.com/LIAAD/yake"}
 redis = "*"
 lxml = "*"
+django-celery-beat = "*"
 
 [dev-packages]
 

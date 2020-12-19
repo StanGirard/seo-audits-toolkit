@@ -1,4 +1,4 @@
-from celery import Celery
+from celery import shared_task
 from celery.schedules import crontab
 import subprocess
 from django.utils import timezone
@@ -8,14 +8,7 @@ import json
 from .models import Lighthouse, Lighthouse_Result
 
 
-app = Celery()
-
-@app.on_after_configure.connect
-def setup_periodic_tasks(sender, **kwargs):
-    # Calls test('hello') every 10 seconds.
-    sender.add_periodic_task(crontab(minute=0, hour='*/3'), lighthouse_crawler.s(), name='add every 10')
-
-@app.task
+@shared_task
 def lighthouse_crawler():
     scheduled = Lighthouse.objects.filter(scheduled=True)
     for item in scheduled:

@@ -1,10 +1,15 @@
 import datetime
-
 from django.db import models
 from django.utils import timezone
+from org.models import Website
 
-
+class ForUser(models.Manager):
+    def for_user(self, user):
+        org = Website.objects.filter(users=user).first()
+        print(org)
+        return self.get_queryset().filter(Org=org)
 class Extractor(models.Model):
+    Org = models.ForeignKey(Website, related_name='extractor', on_delete=models.CASCADE)
     extractor_type = models.TextChoices('Extractor', 'HEADERS IMAGES LINKS')
     url = models.CharField(max_length=200)
     result = models.JSONField(blank=True, null=True)
@@ -13,5 +18,9 @@ class Extractor(models.Model):
     status_job = models.CharField(max_length=30, blank=True, null=True)
     begin_date = models.DateTimeField(blank=True, null=True)
 
+    objects = ForUser()
+    
+
     def __repr__(self):
         return '<Audit {}>'.format(self.url)
+

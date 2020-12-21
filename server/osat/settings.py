@@ -31,7 +31,10 @@ CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", 'http://localhost:
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE':                os.environ.get("REST_FRAMEWORK_PAGE_SIZE", '10'),
-    'DEFAULT_FILTER_BACKENDS':  ['django_filters.rest_framework.DjangoFilterBackend']
+    'DEFAULT_FILTER_BACKENDS':  ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # <-- And here
+    ]
 }
 
 # Application definition
@@ -39,6 +42,7 @@ INSTALLED_APPS = [
     'extractor.apps.ExtractorConfig',
     'lighthouse.apps.LighthouseConfig',
     'keywords.apps.KeywordsConfig',
+    'org.apps.OrgConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,9 +50,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
     'django_filters',
     'django_celery_beat',
+    'organizations',
+    'dj_rest_auth'
 ]
 
 MIDDLEWARE = [
@@ -134,3 +141,4 @@ STATIC_URL = os.environ.get("STATIC_URL", '/static/')
 
 
 CELERY_BEAT_SCHEDULE = {}
+ORGS_SLUGFIELD = 'django_extensions.db.fields.AutoSlugField'

@@ -44,6 +44,9 @@ yake = {git = "https://github.com/LIAAD/yake"}
 redis = "*"
 lxml = "*"
 django-celery-beat = "*"
+django-organizations = "*"
+django-extensions = "*"
+dj-rest-auth = "*"
 
 [dev-packages]
 

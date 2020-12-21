@@ -5,7 +5,7 @@ from .tasks import extractor_job
 from .models import Extractor
 from django.utils import timezone
 import pytz
-
+from org.models import Website
 class ExtractorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Extractor
@@ -14,9 +14,11 @@ class ExtractorSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         ## Creates the celery task
         extractor_task = extractor_job.delay(validated_data["url"],validated_data["type_audit"])
-        
+        print(validated_data)
+        user =  self.context['request'].user
+        org = Website.objects.all().first()
         ## Creates the Save to DB
-        newExtractor = Extractor.objects.create(
+        newExtractor = Extractor.objects.create(Org=org,
         url = validated_data["url"],status_job="SCHEDULED",task_id=str(extractor_task.id), result="", begin_date=timezone.now(), type_audit=validated_data["type_audit"]
         )
         

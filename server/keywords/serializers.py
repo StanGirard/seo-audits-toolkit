@@ -8,9 +8,7 @@ import pytz
 import json
 
 class KeywordsSerializer(serializers.ModelSerializer):
-    # language = serializers.CharField(write_only=True)
-    # ngram = serializers.IntegerField(write_only=True)
-    # number = serializers.IntegerField(write_only=True)
+    
     class Meta:
         model = Keyword
         fields = ['id', 'method', 'text', 'result','settings','status_job', 'task_id', 'last_updated' ]

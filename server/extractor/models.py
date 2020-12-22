@@ -23,3 +23,6 @@ class Extractor(models.Model):
     def __repr__(self):
         return '<Audit {}>'.format(self.url)
 
+    @property
+    def website(self):
+        return self.org.name

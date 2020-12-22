@@ -33,7 +33,8 @@ REST_FRAMEWORK = {
     'PAGE_SIZE':                os.environ.get("REST_FRAMEWORK_PAGE_SIZE", '10'),
     'DEFAULT_FILTER_BACKENDS':  ['django_filters.rest_framework.DjangoFilterBackend'],
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',  # <-- And here
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ]
 }
 

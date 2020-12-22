@@ -15,7 +15,7 @@ router.register(r'api/extractor', ExtractorViewSet,basename='Extractor')
 router.register(r'api/lighthouse', LighthouseViewSet)
 router.register(r'api/results', LighthouseResultViewSet)
 router.register(r'api/keywords', KeywordsViewSet)
-router.register(r'api/website', WebsiteViewSet)
+router.register(r'api/website_user', WebsiteViewSet, basename='Website')
 
 urlpatterns = [
     path('', include(router.urls)),

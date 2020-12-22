@@ -7,4 +7,4 @@ from org.models import Website
 class WebsiteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Website
-        fields = ['id','url']
+        fields = ['id','url', "name"]

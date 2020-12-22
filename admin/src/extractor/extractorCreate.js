@@ -1,10 +1,21 @@
 import * as React from "react";
-import { AutocompleteInput, Create, SimpleForm, TextInput } from 'react-admin';
+import { AutocompleteInput, Create, SimpleForm, TextInput, ReferenceInput, SelectInput, useNotify, useRefresh } from 'react-admin';
 
-export const ExtractorCreate = props => (
+export const ExtractorCreate = props => {
+
+    const notify = useNotify();
+    const refresh = useRefresh();
+
+    const onFailure = (error) => {
+        notify(`Could not edit post: ${error.message}`)
+        refresh();
+    };
+    return (
     <Create {...props}>
         <SimpleForm>
-            <TextInput source="website_name" />
+            <ReferenceInput source="website_name" reference="website_user">
+                <SelectInput optionText="name" />
+            </ReferenceInput>
             <TextInput source="url" />
             <AutocompleteInput source="type_audit" choices={[
                 { id: 'HEADERS', name: 'Headers' },
@@ -13,4 +24,5 @@ export const ExtractorCreate = props => (
             ]} />
         </SimpleForm>
     </Create>
-)
+    )
+}

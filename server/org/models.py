@@ -5,3 +5,4 @@ from organizations.models import Organization
 
 class Website(Organization):
     url = models.CharField(max_length=200)
+    only_domain = models.BooleanField(default=False)

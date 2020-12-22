@@ -8,15 +8,18 @@ from org.serializers import WebsiteSerializer
 from rest_framework import permissions
 
 class WebsiteViewSet(viewsets.ModelViewSet):
-
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-    queryset = Website.objects.all()
+    
+    
     serializer_class = WebsiteSerializer
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
     filterset_fields = ['url']
     ordering_fields = ['id', 'url']
     
-    # def get_queryset(self):
-    #     return Extractor.objects.for_user(self.request.user).order_by('-begin_date')
+    def get_queryset(self):
+        org = Website.objects.filter(users=self.request.user)
+        return org
+    
+    def get_permissions(self):
+        if self.request.method in ['PUT', 'DELETE']:
+            return [permissions.IsAdminUser()]
+        return [permissions.IsAuthenticated()]

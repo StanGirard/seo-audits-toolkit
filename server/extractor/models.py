@@ -5,11 +5,10 @@ from org.models import Website
 
 class ForUser(models.Manager):
     def for_user(self, user):
-        org = Website.objects.filter(users=user).first()
-        print(org)
-        return self.get_queryset().filter(Org=org)
+        org = Website.objects.filter(users=user)
+        return self.get_queryset().filter(org__in=org.values_list('id', flat=True))
 class Extractor(models.Model):
-    Org = models.ForeignKey(Website, related_name='extractor', on_delete=models.CASCADE)
+    org = models.ForeignKey(Website, related_name='extractor', on_delete=models.CASCADE)
     extractor_type = models.TextChoices('Extractor', 'HEADERS IMAGES LINKS')
     url = models.CharField(max_length=200)
     result = models.JSONField(blank=True, null=True)

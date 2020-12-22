@@ -4,6 +4,7 @@ import { AutocompleteInput, Create, SimpleForm, TextInput } from 'react-admin';
 export const ExtractorCreate = props => (
     <Create {...props}>
         <SimpleForm>
+            <TextInput source="website_name" />
             <TextInput source="url" />
             <AutocompleteInput source="type_audit" choices={[
                 { id: 'HEADERS', name: 'Headers' },

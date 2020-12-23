@@ -60,6 +60,40 @@ const TagsField = ({ record }) => {
                 </Table>
             </div>
         )
+    } else if (record.type_audit == "LINKS") {
+        const results = JSON.parse(record.result.replaceAll("'", '"').replaceAll("None", '"None"'))
+        console.log(results)
+        return (
+            <div class="table-responsive">
+            {Object.keys(results).map(key => (
+                
+                <Table size="small">
+                    <TableHead class="thead-dark">
+                        <TableRow>
+                            <TableCell scope="col"><h2> Status Code: {key}</h2></TableCell>
+                            
+
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {results[key].map(item => (
+                            <TableRow>
+                            <TableCell>
+                                <a href={item}>
+                                    {item}
+                                </a>
+                            </TableCell>
+                           
+
+                        </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+               
+            
+            ))}
+            </div>
+        )
     }
 
 }

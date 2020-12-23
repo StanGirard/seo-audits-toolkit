@@ -22,9 +22,6 @@ class ExtractorSerializer(serializers.ModelSerializer):
         
         
         if (org.only_domain and org.url not in validated_data["url"]):
-            print(org.only_domain)
-            print(org.url)
-            print(validated_data["url"])
             raise serializers.ValidationError("Error in your message")
         else:
             extractor_task = extractor_job.delay(validated_data["url"],validated_data["type_audit"])

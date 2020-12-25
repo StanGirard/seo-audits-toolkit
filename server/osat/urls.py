@@ -1,12 +1,12 @@
 from django.contrib import admin
 from django.urls import include, path
-from rest_framework import routers
-from users.views import UserViewSet, GroupViewSet 
 from extractor.views import ExtractorViewSet
-from lighthouse.views import LighthouseViewSet, LighthouseResultViewSet
 from keywords.views import KeywordsViewSet
+from lighthouse.views import LighthouseResultViewSet, LighthouseViewSet
 from org.views import WebsiteViewSet
 from organizations.backends import invitation_backend
+from rest_framework import routers
+from users.views import GroupViewSet, UserViewSet
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)

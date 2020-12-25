@@ -1,9 +1,7 @@
-from keywords.models import Keyword
-from rest_framework import viewsets
-from rest_framework import filters
-from rest_framework import permissions
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters, permissions, viewsets
 
+from keywords.models import Keyword
 from keywords.serializers import KeywordsSerializer
 
 

@@ -1,13 +1,12 @@
-from extractor.models import Extractor
-from rest_framework import viewsets
-from rest_framework import filters
-from rest_framework import permissions
 from django_filters.rest_framework import DjangoFilterBackend
-
-from extractor.serializers import ExtractorSerializer
-from rest_framework import permissions
 from org.models import Website
-from organizations.views.mixins import MembershipRequiredMixin, OrganizationMixin
+from organizations.views.mixins import (MembershipRequiredMixin,
+                                        OrganizationMixin)
+from rest_framework import filters, permissions, viewsets
+
+from extractor.models import Extractor
+from extractor.serializers import ExtractorSerializer
+
 
 class ExtractorViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]

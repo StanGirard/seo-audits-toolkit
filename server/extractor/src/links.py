@@ -1,5 +1,7 @@
-from extractor.lib.http_tools import request_parse, request_status_code
 import urllib
+
+from extractor.lib.http_tools import request_parse, request_status_code
+
 
 def find_all_links(url):
     list_urls = {}

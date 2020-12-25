@@ -1,7 +1,9 @@
 import datetime
+
 from django.db import models
 from django.utils import timezone
 from org.models import Website
+
 
 class ForUser(models.Manager):
     def for_user(self, user):

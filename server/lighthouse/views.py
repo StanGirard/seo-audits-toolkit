@@ -1,9 +1,10 @@
 from django.shortcuts import render
-from .models import Lighthouse, Lighthouse_Result
 from django_filters.rest_framework import DjangoFilterBackend
-from .serializers import LighthouseSerializer, LighthouseResultSerializer
-from rest_framework import filters
-from rest_framework import viewsets
+from rest_framework import filters, viewsets
+
+from .models import Lighthouse, Lighthouse_Result
+from .serializers import LighthouseResultSerializer, LighthouseSerializer
+
 
 class LighthouseViewSet(viewsets.ModelViewSet):
     """

@@ -1,11 +1,14 @@
+import json
+from datetime import datetime
+
+import pytz
+from django.utils import timezone
 from extractor.models import Extractor
 from rest_framework import serializers
-from datetime import datetime
-from .tasks import keywords_job
+
 from .models import Keyword
-from django.utils import timezone
-import pytz
-import json
+from .tasks import keywords_job
+
 
 class KeywordsSerializer(serializers.ModelSerializer):
     

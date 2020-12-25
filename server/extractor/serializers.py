@@ -1,12 +1,17 @@
-from extractor.models import Extractor
-from rest_framework import serializers
 from datetime import datetime
-from .tasks import extractor_job
-from .models import Extractor
-from django.utils import timezone
+
 import pytz
-from org.models import Website
 from django.http import Http404
+from django.utils import timezone
+from org.models import Website
+from rest_framework import serializers
+
+from extractor.models import Extractor
+
+from .models import Extractor
+from .tasks import extractor_job
+
+
 class ExtractorSerializer(serializers.ModelSerializer):
     website_name = serializers.CharField(source='extractor.name',write_only=True)
     website = serializers.ReadOnlyField()

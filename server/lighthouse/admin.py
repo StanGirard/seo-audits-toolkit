@@ -1,8 +1,9 @@
 from django.contrib import admin
 
+from .models import Lighthouse, Lighthouse_Result
+
 # Register your models here.
 
-from .models import Lighthouse, Lighthouse_Result
 
 admin.site.register(Lighthouse)
 admin.site.register(Lighthouse_Result)

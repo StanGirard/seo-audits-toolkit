@@ -1,9 +1,10 @@
+import json
+import subprocess
+
+import pytz
 from celery import shared_task
 from celery.schedules import crontab
-import subprocess
 from django.utils import timezone
-import pytz
-import json
 
 from .models import Lighthouse, Lighthouse_Result
 

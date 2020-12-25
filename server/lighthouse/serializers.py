@@ -1,5 +1,6 @@
-from .models import Lighthouse,Lighthouse_Result
 from rest_framework import serializers
+
+from .models import Lighthouse, Lighthouse_Result
 
 
 class LighthouseResultSerializer(serializers.ModelSerializer):

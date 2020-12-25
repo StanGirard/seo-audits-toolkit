@@ -1,5 +1,7 @@
-from extractor.lib.http_tools import request_parse
 import urllib
+
+from extractor.lib.http_tools import request_parse
+
 
 def find_all_images(url):
     list_images = {"images":[], "summary":{"missing_title": 0, "missing_alt": 0,"duplicates":0, "total": 0}}

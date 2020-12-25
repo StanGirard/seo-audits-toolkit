@@ -1,11 +1,15 @@
-from celery import shared_task
-from .models import Extractor
+import json
+import time
 from datetime import datetime
+
+from celery import shared_task
+
 from extractor.src.headers import find_all_headers_url
 from extractor.src.images import find_all_images
 from extractor.src.links import find_all_links
-import time
-import json
+
+from .models import Extractor
+
 
 @shared_task(bind=True, name="extractor_job")
 def extractor_job(self,url, task_type):

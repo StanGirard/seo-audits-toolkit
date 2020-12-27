@@ -2,6 +2,6 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Keyword
+from .models import Yake
 
-admin.site.register(Keyword)
+admin.site.register(Yake)

@@ -6,15 +6,15 @@ from django.utils import timezone
 from extractor.models import Extractor
 from rest_framework import serializers
 
-from .models import Keyword
+from .models import Yake
 from .tasks import keywords_job
 
 
 class KeywordsSerializer(serializers.ModelSerializer):
     
     class Meta:
-        model = Keyword
-        fields = ['id', 'method', 'text', 'result','settings','status_job', 'task_id', 'last_updated' ]
+        model = Yake
+        fields = ['id', 'text', 'result','ngram','language','number_keywords','status_job', 'task_id', 'last_updated' ]
         extra_kwargs = {
             'result': {'read_only': True},
             'status_job': {'read_only': True},
@@ -23,14 +23,15 @@ class KeywordsSerializer(serializers.ModelSerializer):
         }
     def create(self, validated_data):
         ## Creates the celery task
-        keywords_task = keywords_job.delay(validated_data["text"],validated_data["settings"]["language"],validated_data["settings"]["ngram"],validated_data["settings"]["number"])
+        keywords_task = keywords_job.delay(validated_data["text"],validated_data["language"],validated_data["ngram"],validated_data["number_keywords"])
         
         ## Creates the Save to DB
-        newKeyword = Keyword.objects.create(
-        method=validated_data["method"],
+        newKeyword = Yake.objects.create(
         text=validated_data["text"],
         status_job="SCHEDULED",
-        settings=validated_data["settings"],
+        ngram=validated_data["ngram"],
+        language=validated_data["language"],
+        number_keywords=validated_data["number_keywords"],
         task_id=str(keywords_task.id), 
         result="", 
         last_updated=timezone.now()

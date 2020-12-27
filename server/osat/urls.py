@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import include, path
 from extractor.views import ExtractorViewSet
-from keywords.views import KeywordsViewSet
+from keywords.views import YakeViewSet
 from lighthouse.views import LighthouseResultViewSet, LighthouseViewSet
 from org.views import WebsiteViewSet
 from organizations.backends import invitation_backend
@@ -15,7 +15,7 @@ router.register(r'api/extractor', ExtractorViewSet, basename='Extractor')
 router.register(r'api/lighthouse_details', LighthouseResultViewSet)
 router.register(r'api/lighthouse', LighthouseViewSet)
 
-router.register(r'api/keywords', KeywordsViewSet)
+router.register(r'api/keywords/yake', YakeViewSet)
 router.register(r'api/website_user', WebsiteViewSet, basename='Website')
 
 urlpatterns = [

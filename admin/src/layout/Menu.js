@@ -90,6 +90,14 @@ const Menu = ({ onMenuClick, logout, dense = false }) => {
                     sidebarIsOpen={open}
                     dense={dense}
                 />
+                <MenuItemLink
+                    to={`/keywords/yake`}
+                    primaryText="Yake"
+                    leftIcon={<LinkIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
             </SubMenu>
             {isXSmall && logout}
         </Box>

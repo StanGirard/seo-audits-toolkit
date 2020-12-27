@@ -47,6 +47,8 @@ django-celery-beat = "*"
 django-organizations = "*"
 django-extensions = "*"
 dj-rest-auth = "*"
+pyyaml = "*"
+uritemplate = "*"
 
 [dev-packages]
 

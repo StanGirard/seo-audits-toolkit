@@ -15,3 +15,4 @@ Pipfile.lock
 celerybeat-schedule.db
 dump.rdb
 .eslintcache
+admin/.eslintcache

@@ -1,21 +1,13 @@
+import drfProvider from 'ra-data-django-rest-framework';
 import React from 'react';
-import { Admin,fetchUtils, Resource, ListGuesser, EditGuesser } from 'react-admin';
-import drfProvider, { tokenAuthProvider, fetchJsonWithAuthToken } from 'ra-data-django-rest-framework';
-import {ExtractorList , ExtractorCreate, ExtractorShow}  from './extractor';
-import {WebsiteList} from './website'
+import { Admin, EditGuesser, fetchUtils, Resource } from 'react-admin';
+import authProviderDjango from './authProvider';
+import { ExtractorCreate, ExtractorList, ExtractorShow } from './extractor';
 import { Layout } from './layout';
-import authProviderDjango from './authProvider'
+import { LighthouseCreate, LighthouseList, LighthouseShow } from './lighthouse';
+import {  LighthouseResultsList, LighthouseResultsShow } from './lighthouseResults';
+import { WebsiteList } from './website';
 
-// const httpClient = (url, options = {}) => {
-//     if (!options.headers) {
-//         options.headers = new Headers({ Accept: 'application/json' });
-//     }
-//     const { key } = JSON.parse(localStorage.getItem('auth'));
-//     options.headers.set('Authorization', `Token ${key}`);
-    
-//     return fetchUtils.fetchJson(url, options);
-
-// };
 
 const fetchJson = (url, options = {}) => {
     if (!options.headers) {
@@ -31,6 +23,8 @@ const App = () => (
     <Admin layout={Layout} authProvider={authProviderDjango} dataProvider={drfProvider('http://localhost:8000/api', fetchJson)}>
         <Resource name="website_user" options={{ label: 'Websites' }}  list={WebsiteList}/>
         <Resource name="extractor" list={ExtractorList} edit={EditGuesser} create={ExtractorCreate} show={ExtractorShow}/>
+        <Resource name="lighthouse" title="Lighthouse" options={{ title: 'lighthouse', label: 'Lighthouse' }} list={LighthouseList} show={LighthouseShow}  edit={EditGuesser} create={LighthouseCreate}/>
+        <Resource name="lighthouse_details" title="Lighthouse" options={{ title: 'lighthouse', label: 'Lighthouse Results' }} list={LighthouseResultsList} show={LighthouseResultsShow} />
         
     </Admin>
 );

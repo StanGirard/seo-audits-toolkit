@@ -11,9 +11,10 @@ from users.views import GroupViewSet, UserViewSet
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'groups', GroupViewSet)
-router.register(r'api/extractor', ExtractorViewSet,basename='Extractor')
+router.register(r'api/extractor', ExtractorViewSet, basename='Extractor')
+router.register(r'api/lighthouse_details', LighthouseResultViewSet)
 router.register(r'api/lighthouse', LighthouseViewSet)
-router.register(r'api/results', LighthouseResultViewSet)
+
 router.register(r'api/keywords', KeywordsViewSet)
 router.register(r'api/website_user', WebsiteViewSet, basename='Website')
 

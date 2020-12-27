@@ -2,8 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Lighthouse(models.Model): 
-    url = models.CharField(max_length=200)
-    update_rate = models.CharField(max_length=100)
+    url = models.CharField(max_length=200, unique=True)
     scheduled = models.BooleanField(default=False)
     last_updated = models.DateTimeField(blank=True, null=True)
 

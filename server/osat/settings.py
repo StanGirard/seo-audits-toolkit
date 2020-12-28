@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'extractor.apps.ExtractorConfig',
     'lighthouse.apps.LighthouseConfig',
     'keywords.apps.KeywordsConfig',
+    'internalLinks.apps.InternallinksConfig',
     'org.apps.OrgConfig',
     'django.contrib.admin',
     'django.contrib.auth',

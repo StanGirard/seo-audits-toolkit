@@ -16,3 +16,4 @@ celerybeat-schedule.db
 dump.rdb
 .eslintcache
 admin/.eslintcache
+.vscode/settings.json

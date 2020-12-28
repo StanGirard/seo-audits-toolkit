@@ -49,6 +49,9 @@ django-extensions = "*"
 dj-rest-auth = "*"
 pyyaml = "*"
 uritemplate = "*"
+scipy = "*"
+seaborn = "*"
+bokeh = "*"
 
 [dev-packages]
 

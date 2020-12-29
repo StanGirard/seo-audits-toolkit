@@ -1,6 +1,6 @@
 import drfProvider from 'ra-data-django-rest-framework';
 import React from 'react';
-import { Admin, EditGuesser, fetchUtils, Resource } from 'react-admin';
+import { Admin, EditGuesser, fetchUtils, ListGuesser, Resource } from 'react-admin';
 import authProviderDjango from './authProvider';
 import { ExtractorCreate, ExtractorList, ExtractorShow } from './extractor';
 import { Layout } from './layout';
@@ -9,6 +9,7 @@ import {  LighthouseResultsList, LighthouseResultsShow } from './lighthouseResul
 import { WebsiteList } from './website';
 import { YakeList } from './yake'
 import { Dashboard } from './dashboard/Dashboard'
+import { InternalList, InternalShow } from './internal'
 
 
 const fetchJson = (url, options = {}) => {
@@ -28,6 +29,7 @@ const App = () => (
         <Resource name="lighthouse" title="Lighthouse" options={{ title: 'lighthouse', label: 'Lighthouse' }} list={LighthouseList} show={LighthouseShow}  edit={EditGuesser} create={LighthouseCreate}/>
         <Resource name="lighthouse_details" title="Lighthouse" options={{ title: 'lighthouse', label: 'Lighthouse Results' }} list={LighthouseResultsList} show={LighthouseResultsShow} />
         <Resource name="keywords/yake" options={{ label: 'Yake' }}  list={YakeList}/>
+        <Resource name="internal_links" options={{ label: 'Internal Links' }}  list={InternalList} show={InternalShow} />
     </Admin>
 );
 

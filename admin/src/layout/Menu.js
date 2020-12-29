@@ -3,6 +3,7 @@ import DomainIcon from '@material-ui/icons/Domain';
 import HighlightIcon from '@material-ui/icons/Highlight';
 import LanguageIcon from '@material-ui/icons/Language';
 import LinkIcon from '@material-ui/icons/Link';
+import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
@@ -94,6 +95,14 @@ const Menu = ({ onMenuClick, logout, dense = false }) => {
                     to={`/keywords/yake`}
                     primaryText="Yake"
                     leftIcon={<LinkIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
+                <MenuItemLink
+                    to={`/internal_links`}
+                    primaryText="Internal Links"
+                    leftIcon={<DonutLargeIcon />}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}

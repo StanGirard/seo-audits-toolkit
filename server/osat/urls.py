@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import include, path
-from extractor.views import ExtractorViewSet
+from extractor.views import ExtractorViewSet, SitemapViewSet
 from internalLinks.views import InternalLinksViewSet
 from keywords.views import YakeViewSet
 from lighthouse.views import LighthouseResultViewSet, LighthouseViewSet
@@ -13,6 +13,7 @@ router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'groups', GroupViewSet)
 router.register(r'api/extractor', ExtractorViewSet, basename='Extractor')
+router.register(r'api/sitemap', SitemapViewSet, basename='Sitemap')
 router.register(r'api/lighthouse_details', LighthouseResultViewSet)
 router.register(r'api/lighthouse', LighthouseViewSet)
 router.register(r'api/internal_links', InternalLinksViewSet)

@@ -52,6 +52,7 @@ uritemplate = "*"
 scipy = "*"
 seaborn = "*"
 bokeh = "*"
+pandas = "*"
 
 [dev-packages]
 

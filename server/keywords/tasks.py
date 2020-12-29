@@ -24,5 +24,5 @@ def keywords_job(self,text,language, ngram, top):
 
     keywords = my_yake.extract_keywords(text)
     result  = [{"id":keywords.index(x), "ngram":x[0] ,"score":x[1]} for x in keywords]
-    Yake.objects.filter(task_id=self.request.id).update(result=json.dumps(result), status_job="FINISHED")
+    Yake.objects.filter(task_id=self.request.id).update(result=result, status_job="FINISHED")
     return "Hello World!"

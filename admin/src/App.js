@@ -7,7 +7,7 @@ import { Layout } from './layout';
 import { LighthouseCreate, LighthouseList, LighthouseShow } from './lighthouse';
 import {  LighthouseResultsList, LighthouseResultsShow } from './lighthouseResults';
 import { WebsiteList } from './website';
-import { YakeList, YakeShow } from './yake'
+import { YakeList, YakeShow, YakeCreate } from './yake'
 import { Dashboard } from './dashboard/Dashboard'
 
 
@@ -27,7 +27,7 @@ const App = () => (
         <Resource name="extractor" list={ExtractorList} edit={EditGuesser} create={ExtractorCreate} show={ExtractorShow}/>
         <Resource name="lighthouse" title="Lighthouse" options={{ title: 'lighthouse', label: 'Lighthouse' }} list={LighthouseList} show={LighthouseShow}  edit={EditGuesser} create={LighthouseCreate}/>
         <Resource name="lighthouse_details" title="Lighthouse" options={{ title: 'lighthouse', label: 'Lighthouse Results' }} list={LighthouseResultsList} show={LighthouseResultsShow} />
-        <Resource name="keywords/yake" options={{ label: 'Yake' }}  list={YakeList} show={YakeShow}/>
+        <Resource name="keywords/yake" options={{ label: 'Yake' }}  list={YakeList} show={YakeShow} create={YakeCreate} edit={EditGuesser}/>
     </Admin>
 );
 

@@ -14,7 +14,7 @@ class KeywordsSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Yake
-        fields = ['id', 'text', 'result','ngram','language','number_keywords','status_job', 'task_id', 'last_updated' ]
+        fields = ['id', 'text', 'name','result','ngram','language','number_keywords','status_job', 'last_updated' ]
         extra_kwargs = {
             'result': {'read_only': True},
             'status_job': {'read_only': True},
@@ -29,6 +29,7 @@ class KeywordsSerializer(serializers.ModelSerializer):
         newKeyword = Yake.objects.create(
         text=validated_data["text"],
         status_job="SCHEDULED",
+        name=validated_data["name"],
         ngram=validated_data["ngram"],
         language=validated_data["language"],
         number_keywords=validated_data["number_keywords"],

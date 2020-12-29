@@ -6,6 +6,7 @@ import LinkIcon from '@material-ui/icons/Link';
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import MyLocationIcon from '@material-ui/icons/MyLocation';
 import * as React from 'react';
 import { useState } from 'react';
 import { DashboardMenuItem, MenuItemLink } from 'react-admin';
@@ -93,7 +94,7 @@ const Menu = ({ onMenuClick, logout, dense = false }) => {
                 <MenuItemLink
                     to={`/keywords/yake`}
                     primaryText="Yake"
-                    leftIcon={<LinkIcon />}
+                    leftIcon={<MyLocationIcon />}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}

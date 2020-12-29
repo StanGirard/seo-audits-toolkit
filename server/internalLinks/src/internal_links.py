@@ -1,6 +1,7 @@
 import logging
 import math
 import urllib
+import json
 import urllib.parse
 from datetime import datetime, timedelta
 
@@ -17,6 +18,7 @@ from bokeh.palettes import Spectral4, Spectral6, Spectral8
 from bokeh.plotting import figure, from_networkx
 from bokeh.transform import linear_cmap
 from bs4 import BeautifulSoup
+from bokeh.embed import json_item
 
 
 def request_status_code(url, timeout = 1):
@@ -160,8 +162,7 @@ def generate_graph_internal_link_interactive(website, maximum):
         color_mapper=mapper['transform'], width=8,  location=(0, 0))
     plot.add_layout(color_bar, 'right')
     plot.renderers.append(graph)
-    script, div = components(p)
-    return script, div
+    return json.dumps(json_item(p, "myplot"))
 
 if __name__ == "__main__":
     script, div = generate_graph_internal_link_interactive("https://primates.dev", 10)

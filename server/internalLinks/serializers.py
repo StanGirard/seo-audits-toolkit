@@ -14,10 +14,9 @@ class InternalLinksSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = InternalLinks
-        fields = ['id', 'url', 'div', 'script', 'maximum', 'task_id', 'status_job', 'begin_date' ]
+        fields = ['id', 'url', 'result',  'maximum', 'task_id', 'status_job', 'begin_date' ]
         extra_kwargs = {
-            'div': {'read_only': True},
-            'script' : {'read_only': True},
+            'result': {'read_only': True},
             'status_job': {'read_only': True},
             'task_id': {'read_only': True},
             'begin_date': {'read_only': True},

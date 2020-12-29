@@ -1,3 +1,4 @@
 import { YakeList} from './yakeList'
+import { YakeShow } from './yakeShow'
 
-export { YakeList }
+export { YakeList, YakeShow }

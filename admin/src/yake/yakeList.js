@@ -10,7 +10,7 @@ export const YakeList = (props) => (
     <Datagrid>
       <TextField source="id" />
       <TextField source="status_job"  label="Type" />
-      <DateField source="last_updated"  label="Date"/>
+      <DateField source="last_updated"  label="Date" showTime={true}/>
       <ShowButton />
       <DeleteButton undoable={true} />
     </Datagrid>

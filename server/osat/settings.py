@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'keywords.apps.KeywordsConfig',
     'internalLinks.apps.InternallinksConfig',
     'org.apps.OrgConfig',
+    'bert.apps.BertConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

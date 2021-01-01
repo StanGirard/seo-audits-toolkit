@@ -10,6 +10,7 @@ import { WebsiteList } from './website';
 import { YakeList, YakeShow, YakeCreate } from './yake'
 import { SitemapList, SitemapShow, SitemapCreate } from './sitemap'
 import { Dashboard } from './dashboard/Dashboard'
+import { BertCreate, BertList, BertShow } from './bert';
 
 
 const fetchJson = (url, options = {}) => {
@@ -30,6 +31,7 @@ const App = () => (
         <Resource name="lighthouse_details" title="Lighthouse" options={{ title: 'lighthouse', label: 'Lighthouse Results' }} list={LighthouseResultsList} show={LighthouseResultsShow} />
         <Resource name="keywords/yake" options={{ label: 'Yake' }}  list={YakeList} show={YakeShow} create={YakeCreate} edit={EditGuesser}/>
         <Resource name="sitemap" options={{ label: 'Sitemap' }}  list={SitemapList} show={SitemapShow}  create={SitemapCreate} edit={EditGuesser}/>
+        <Resource name="summarize" options={{ label: 'Sitemap' }}  list={BertList} show={BertShow} create={BertCreate} edit={EditGuesser} />
     </Admin>
 );
 

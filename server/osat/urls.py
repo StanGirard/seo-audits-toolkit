@@ -1,3 +1,4 @@
+from bert.views import BertViewSet
 from django.contrib import admin
 from django.urls import include, path
 from extractor.views import ExtractorViewSet, SitemapViewSet
@@ -17,6 +18,7 @@ router.register(r'api/sitemap', SitemapViewSet, basename='Sitemap')
 router.register(r'api/lighthouse_details', LighthouseResultViewSet)
 router.register(r'api/lighthouse', LighthouseViewSet)
 router.register(r'api/internal_links', InternalLinksViewSet)
+router.register(r'api/summarize', BertViewSet, basename='Bert')
 
 router.register(r'api/keywords/yake', YakeViewSet)
 router.register(r'api/website_user', WebsiteViewSet, basename='Website')

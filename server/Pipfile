@@ -53,6 +53,8 @@ scipy = "*"
 seaborn = "*"
 bokeh = "*"
 pandas = "*"
+bert-extractive-summarizer = "*"
+torch = "*"
 
 [dev-packages]
 

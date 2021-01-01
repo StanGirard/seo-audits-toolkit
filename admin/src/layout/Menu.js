@@ -109,6 +109,14 @@ const Menu = ({ onMenuClick, logout, dense = false }) => {
                     dense={dense}
                 />
             </SubMenu>
+            <MenuItemLink
+                    to={`/summarize`}
+                    primaryText="Summarize"
+                    leftIcon={<MyLocationIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
             {isXSmall && logout}
         </Box>
     );

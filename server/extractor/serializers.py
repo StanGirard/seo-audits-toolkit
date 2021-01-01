@@ -53,7 +53,7 @@ class SitemapSerializer(serializers.ModelSerializer):
         if (org.only_domain and org.url not in validated_data["url"]):
             raise serializers.ValidationError("Error in your message")
         else:
-            sitemap_task = sitemap_job.delay(validated_data["url"])
+            sitemap_task = sitemap_job.delay(validated_data["url"], org.id)
             newSitemap = Sitemap.objects.create(org=org,
             url = validated_data["url"],status_job="SCHEDULED",task_id=str(sitemap_task.id), result="", begin_date=timezone.now()
             )

@@ -16,7 +16,7 @@ class ExtractorViewSet(viewsets.ModelViewSet):
     serializer_class = ExtractorSerializer
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
     filterset_fields = ['type_audit', 'status_job']
-    ordering_fields = ['id', 'type_audit', 'begin_date']
+    ordering_fields = ['begin_date']
     
     def get_queryset(self):
         return Extractor.objects.for_user(self.request.user).order_by('-begin_date')
@@ -29,7 +29,7 @@ class SitemapViewSet(viewsets.ModelViewSet):
     serializer_class = SitemapSerializer
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
     filterset_fields = ['url', 'status_job']
-    ordering_fields = [ 'url', 'begin_date']
+    ordering_fields = ['begin_date']
     
     def get_queryset(self):
         return Sitemap.objects.for_user(self.request.user).order_by('-begin_date')

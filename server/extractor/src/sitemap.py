@@ -60,7 +60,7 @@ def parse_sitemap( url,headers):
     #returns the dataframe
     return panda_out
 
-def extract_urls(url):
+def extract_urls(url, org_id):
     result = parse_sitemap(url, ["loc", "lastmod"])
     if type(result) is bool:
         return {"error": "Invalid Sitemap"}
@@ -70,7 +70,7 @@ def extract_urls(url):
         id = 0
         for x in value:
             print(x)
-            result.append({"id": id, "url": x["loc"], "last_modified": x["lastmod"]})
+            result.append({"id": id,"org": org_id, "url": x["loc"], "last_modified": x["lastmod"]})
             id += 1
         return result
 

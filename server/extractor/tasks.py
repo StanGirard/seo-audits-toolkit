@@ -28,10 +28,10 @@ def extractor_job(self,url, task_type):
     return "Hello World!"
 
 @shared_task(bind=True, name="sitemap_job")
-def sitemap_job(self,url):
+def sitemap_job(self,url, org_id):
     time.sleep(0.2)
     Sitemap.objects.filter(task_id=self.request.id).update(status_job="RUNNING")
-    result = extract_urls(url)
+    result = extract_urls(url, org_id)
     Sitemap.objects.filter(task_id=self.request.id).update(result=result, status_job="FINISHED")
     return "Hello World!"
 

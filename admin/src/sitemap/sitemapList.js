@@ -1,8 +1,6 @@
 import * as React from "react";
-import { List,ShowButton,  DeleteButton,Datagrid, TextField, DateField,  } from 'react-admin';
+import { Link, List,ShowButton,  DeleteButton,Datagrid, TextField, DateField,  } from 'react-admin';
 import MyUrlField from '../custom/fields/urlField';
-
-
 
 export const SitemapList = (props) => (
   <List {...props}

@@ -70,6 +70,9 @@ tabulate==0.8.7
 thinc==7.4.5
 threadpoolctl==2.1.0
 tokenizers==0.9.4
+torch==1.7.1
+torchaudio==0.7.2
+torchvision==0.8.2
 tornado==6.1
 tqdm==4.55.0
 transformers==4.1.1

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BooleanInput, Create, SimpleForm, TextInput, useNotify, useRefresh } from 'react-admin';
+import { BooleanInput, Create, SimpleForm, TextInput, useNotify, useRefresh, ReferenceInput, SelectInput } from 'react-admin';
 
 export const LighthouseCreate = props => {
 
@@ -13,6 +13,9 @@ export const LighthouseCreate = props => {
     return (
     <Create {...props}>
         <SimpleForm>
+        <ReferenceInput source="website_name" reference="website_user">
+                    <SelectInput optionText="name" />
+                </ReferenceInput>
             <TextInput source="url" />
             <BooleanInput source="scheduled"/>
         </SimpleForm>

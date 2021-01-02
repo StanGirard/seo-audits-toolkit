@@ -23,7 +23,6 @@ class LighthouseSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         ## Creates the celery task
-        lighthouse_runner = lighthouse_add_new_url_crawler.delay(validated_data["url"])
         
         org = Website.objects.filter(id=validated_data["ligthouse"]["name"]).first()
 
@@ -36,7 +35,7 @@ class LighthouseSerializer(serializers.ModelSerializer):
                 scheduled = False
             else:
                 scheduled = True
-        
+            lighthouse_runner = lighthouse_add_new_url_crawler.delay(validated_data["url"])
             new_lighthouse = Lighthouse.objects.create(
                 org=org,
                 url=validated_data["url"],

@@ -2,7 +2,6 @@ import * as React from "react";
 import { ArrayField, Link, Datagrid, DateField, DeleteButton, EditButton, Show, SimpleShowLayout, TextField, UrlField } from 'react-admin';
 import Button from '@material-ui/core/Button';
 const CreateRelatedCommentButton = ({record}) => {
-    console.log(record)
     return (
   <Button
       component={Link}

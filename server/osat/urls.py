@@ -20,7 +20,7 @@ router.register(r'api/lighthouse', LighthouseViewSet, basename='Ligthouse')
 router.register(r'api/internal_links', InternalLinksViewSet)
 router.register(r'api/summarize', BertViewSet, basename='Bert')
 
-router.register(r'api/keywords/yake', YakeViewSet)
+router.register(r'api/keywords/yake', YakeViewSet, basename='Yake')
 router.register(r'api/website_user', WebsiteViewSet, basename='Website')
 
 urlpatterns = [

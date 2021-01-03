@@ -31,11 +31,11 @@ def security_add_new_url_crawler(url):
     score = result["scan"]["score"]
     results_db = Security_Result(org=Security_Object.org,url=Security_Object,result=result, score=score, timestamp=timezone.now())
     results_db.save()
-    Security.objects.filter(org=Security_Object.org,url=url).update(last_updated=timezone.now(), score=score)
+    Security.objects.filter(org=Security_Object.org,url=url).update(score=score,last_updated=timezone.now())
     print("Done")
 
 
 def run_security(url):
-    proc=subprocess.Popen("httpobs-cli -d " + url, stdout=subprocess.PIPE, shell=True)
+    proc=subprocess.Popen("httpobs-cli -d -r " + url, stdout=subprocess.PIPE, shell=True)
     result = proc.stdout.read().decode("utf-8") 
     return result

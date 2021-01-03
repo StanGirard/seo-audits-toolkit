@@ -13,12 +13,14 @@ import { useState } from 'react';
 import { DashboardMenuItem, MenuItemLink } from 'react-admin';
 import { useSelector } from 'react-redux';
 import { SubMenu } from './SubMenu';
+import SecurityIcon from '@material-ui/icons/Security';
 
 const Menu = ({ onMenuClick, logout, dense = false }) => {
     const [state, setState] = useState({
         menuLighthouse: false,
         menuOrgs: false,
         menuExtractor: false,
+        menuSecurity: false,
     });
     const isXSmall = useMediaQuery((theme) =>
         theme.breakpoints.down('xs')
@@ -108,8 +110,7 @@ const Menu = ({ onMenuClick, logout, dense = false }) => {
                     sidebarIsOpen={open}
                     dense={dense}
                 />
-            </SubMenu>
-            <MenuItemLink
+                <MenuItemLink
                     to={`/summarize`}
                     primaryText="Summarize"
                     leftIcon={<MyLocationIcon />}
@@ -117,6 +118,34 @@ const Menu = ({ onMenuClick, logout, dense = false }) => {
                     sidebarIsOpen={open}
                     dense={dense}
                 />
+            </SubMenu>
+            
+            <SubMenu
+                handleToggle={() => handleToggle('menuSecurity')}
+                isOpen={state.menuSecurity}
+                sidebarIsOpen={open}
+                name="Security"
+                icon={<SecurityIcon />}
+                dense={dense}
+            >
+                <MenuItemLink
+                    to={`/security`}
+                    primaryText="Security"
+                    leftIcon={<SecurityIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
+                <MenuItemLink
+                    to={`/security_details`}
+                    primaryText="Results"
+                    leftIcon={<PlaylistAddCheckIcon />}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
+            </SubMenu>
+            
             {isXSmall && logout}
         </Box>
     );

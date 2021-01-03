@@ -11,6 +11,8 @@ import { YakeList, YakeShow, YakeCreate } from './yake'
 import { SitemapList, SitemapShow, SitemapCreate } from './sitemap'
 import { Dashboard } from './dashboard/Dashboard'
 import { BertCreate, BertList, BertShow } from './bert';
+import { SecurityCreate, SecurityList, SecurityShow} from './security'
+import {  SecurityResultsList, SecurityResultsShow } from './securityResults';
 
 
 const fetchJson = (url, options = {}) => {
@@ -32,6 +34,8 @@ const App = () => (
         <Resource name="keywords/yake" options={{ label: 'Yake' }}  list={YakeList} show={YakeShow} create={YakeCreate} edit={EditGuesser}/>
         <Resource name="sitemap" options={{ label: 'Sitemap' }}  list={SitemapList} show={SitemapShow}  create={SitemapCreate} edit={EditGuesser}/>
         <Resource name="summarize" options={{ label: 'Sitemap' }}  list={BertList} show={BertShow} create={BertCreate} edit={EditGuesser} />
+        <Resource name="security" title="Security" options={{ title: 'security', label: 'Security' }} list={SecurityList} show={SecurityShow}  edit={EditGuesser} create={SecurityCreate}/>
+        <Resource name="security_details" title="Security" options={{ title: 'security', label: 'Security Results' }} list={SecurityResultsList} show={SecurityResultsShow} />
     </Admin>
 );
 

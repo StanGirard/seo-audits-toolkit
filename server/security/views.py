@@ -9,6 +9,7 @@ from .serializers import SecurityResultSerializer, SecuritySerializer
 
 
 class SecurityViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
     """
     API endpoint that allows users to be viewed or edited.
     """
@@ -23,6 +24,8 @@ class SecurityViewSet(viewsets.ModelViewSet):
 
 
 class SecurityResultViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
+
     """
     API endpoint that allows users to be viewed or edited.
     """

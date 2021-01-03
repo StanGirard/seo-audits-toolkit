@@ -9,6 +9,7 @@ from .serializers import LighthouseResultSerializer, LighthouseSerializer
 
 
 class LighthouseViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
     """
     API endpoint that allows users to be viewed or edited.
     """
@@ -23,6 +24,7 @@ class LighthouseViewSet(viewsets.ModelViewSet):
 
 
 class LighthouseResultViewSet(viewsets.ModelViewSet):
+    permission_classes = [permissions.IsAuthenticated]
     """
     API endpoint that allows users to be viewed or edited.
     """

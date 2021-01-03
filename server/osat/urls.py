@@ -5,6 +5,7 @@ from extractor.views import ExtractorViewSet, SitemapViewSet
 from internalLinks.views import InternalLinksViewSet
 from keywords.views import YakeViewSet
 from lighthouse.views import LighthouseResultViewSet, LighthouseViewSet
+from security.views import SecurityResultViewSet, SecurityViewSet
 from org.views import WebsiteViewSet
 from organizations.backends import invitation_backend
 from rest_framework import routers
@@ -17,6 +18,8 @@ router.register(r'api/extractor', ExtractorViewSet, basename='Extractor')
 router.register(r'api/sitemap', SitemapViewSet, basename='Sitemap')
 router.register(r'api/lighthouse_details', LighthouseResultViewSet, basename='Ligthouse_Results')
 router.register(r'api/lighthouse', LighthouseViewSet, basename='Ligthouse')
+router.register(r'api/security_details', SecurityResultViewSet, basename='Security_Results')
+router.register(r'api/security', SecurityViewSet, basename='Security')
 router.register(r'api/internal_links', InternalLinksViewSet)
 router.register(r'api/summarize', BertViewSet, basename='Bert')
 

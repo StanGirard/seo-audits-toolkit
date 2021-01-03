@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'internalLinks.apps.InternallinksConfig',
     'org.apps.OrgConfig',
     'bert.apps.BertConfig',
+    'security.apps.SecurityConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

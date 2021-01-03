@@ -55,6 +55,7 @@ bokeh = "*"
 pandas = "*"
 bert-extractive-summarizer = "*"
 torch = "*"
+httpobs-cli = "*"
 
 [dev-packages]
 

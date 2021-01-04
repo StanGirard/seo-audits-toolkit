@@ -14,6 +14,8 @@ import { DashboardMenuItem, MenuItemLink } from 'react-admin';
 import { useSelector } from 'react-redux';
 import { SubMenu } from './SubMenu';
 import SecurityIcon from '@material-ui/icons/Security';
+import { green, red, blue, yellow, purple } from '@material-ui/core/colors';
+import CreateIcon from '@material-ui/icons/Create';
 
 const Menu = ({ onMenuClick, logout, dense = false }) => {
     const [state, setState] = useState({
@@ -41,13 +43,13 @@ const Menu = ({ onMenuClick, logout, dense = false }) => {
                 isOpen={state.menuOrgs}
                 sidebarIsOpen={open}
                 name="Organizations"
-                icon={<SupervisorAccountIcon />}
+                icon={<SupervisorAccountIcon style={{ color: green[900] }}/>}
                 dense={dense}
             >
                 <MenuItemLink
                     to={`/website_user`}
                     primaryText="Websites"
-                    leftIcon={<DomainIcon />}
+                    leftIcon={<DomainIcon style={{ color: green[300] }}/>}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}
@@ -58,13 +60,13 @@ const Menu = ({ onMenuClick, logout, dense = false }) => {
                 isOpen={state.menuLighthouse}
                 sidebarIsOpen={open}
                 name="Lighthouse"
-                icon={<HighlightIcon />}
+                icon={<HighlightIcon style={{ color: yellow[900] }}/>}
                 dense={dense}
             >
                 <MenuItemLink
                     to={`/lighthouse`}
                     primaryText="Lighthouse"
-                    leftIcon={<LanguageIcon />}
+                    leftIcon={<LanguageIcon style={{ color: yellow[800] }}/>}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}
@@ -72,7 +74,7 @@ const Menu = ({ onMenuClick, logout, dense = false }) => {
                 <MenuItemLink
                     to={`/lighthouse_details`}
                     primaryText="Results"
-                    leftIcon={<PlaylistAddCheckIcon />}
+                    leftIcon={<PlaylistAddCheckIcon style={{ color: yellow[700] }}/>}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}
@@ -83,13 +85,21 @@ const Menu = ({ onMenuClick, logout, dense = false }) => {
                 isOpen={state.menuExtractor}
                 sidebarIsOpen={open}
                 name="Extractor"
-                icon={<VpnKeyIcon />}
+                icon={<VpnKeyIcon style={{ color: blue[900] }}/>}
                 dense={dense}
             >
                 <MenuItemLink
+                    to={`/sitemap`}
+                    primaryText="Sitemap"
+                    leftIcon={<MapIcon style={{ color: blue["A700"] }}/>}
+                    onClick={onMenuClick}
+                    sidebarIsOpen={open}
+                    dense={dense}
+                />
+                <MenuItemLink
                     to={`/extractor`}
                     primaryText="Images, Links, Headers"
-                    leftIcon={<LinkIcon />}
+                    leftIcon={<LinkIcon style={{ color: blue[700] }}/>}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}
@@ -97,23 +107,16 @@ const Menu = ({ onMenuClick, logout, dense = false }) => {
                 <MenuItemLink
                     to={`/keywords/yake`}
                     primaryText="Yake"
-                    leftIcon={<MyLocationIcon />}
+                    leftIcon={<MyLocationIcon style={{ color: blue[600] }}/>}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}
                 />
-                <MenuItemLink
-                    to={`/sitemap`}
-                    primaryText="Sitemap"
-                    leftIcon={<MapIcon />}
-                    onClick={onMenuClick}
-                    sidebarIsOpen={open}
-                    dense={dense}
-                />
+                
                 <MenuItemLink
                     to={`/summarize`}
-                    primaryText="Summarize"
-                    leftIcon={<MyLocationIcon />}
+                    primaryText="Summarizer"
+                    leftIcon={<CreateIcon style={{ color: blue[500] }}/>}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}
@@ -125,13 +128,13 @@ const Menu = ({ onMenuClick, logout, dense = false }) => {
                 isOpen={state.menuSecurity}
                 sidebarIsOpen={open}
                 name="Security"
-                icon={<SecurityIcon />}
+                icon={<SecurityIcon style={{ color: red[500] }} />}
                 dense={dense}
             >
                 <MenuItemLink
                     to={`/security`}
                     primaryText="Security"
-                    leftIcon={<SecurityIcon />}
+                    leftIcon={<SecurityIcon  style={{ color: red[300] }} />}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}
@@ -139,7 +142,7 @@ const Menu = ({ onMenuClick, logout, dense = false }) => {
                 <MenuItemLink
                     to={`/security_details`}
                     primaryText="Results"
-                    leftIcon={<PlaylistAddCheckIcon />}
+                    leftIcon={<PlaylistAddCheckIcon style={{ color: red[200] }} />}
                     onClick={onMenuClick}
                     sidebarIsOpen={open}
                     dense={dense}

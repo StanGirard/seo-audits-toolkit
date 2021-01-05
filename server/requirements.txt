@@ -68,6 +68,7 @@ soupsieve==2.1
 spacy==2.3.5
 sqlparse==0.4.1
 srsly==1.0.5
+ssh-audit==2.3.1
 tabulate==0.8.7
 thinc==7.4.5
 threadpoolctl==2.1.0

@@ -26,27 +26,33 @@ case "$1" in
 
   'worker')
     shift
-    exec celery -A osat worker -l info $@
+    exec celery -A core worker -l info
   ;;
 
   'beat')
     shift
-    exec celery -A osat beat -l info $@
+    exec celery -A core beat -l info
   ;;
 
   'migrate')
     shift
-    exec python3 manage.py migrate $@
+    exec python3 manage.py migrate
   ;;
 
   'makemigrations')
     shift
-    exec python3 manage.py makemigrations $@
+    exec python3 manage.py makemigrations
   ;;
 
   'createsuperuser')
    	shift
-   	exec python3 manage.py createsuperuser $@
+   	exec python3 manage.py createsuperuser
+  ;;
+
+  'django')
+   	shift
+    python3 manage.py migrate
+   	exec python manage.py runserver 0.0.0.0:8000
   ;;
 
   'bash')
@@ -57,7 +63,7 @@ case "$1" in
 	;;
 
   *)
-    python3 manage.py migrate
-  	exec python3 manage.py runserver $@
+    
+  	exec echo $@
 	;;
 esac

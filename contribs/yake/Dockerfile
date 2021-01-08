@@ -1,7 +1,6 @@
 ARG PYTHON_VERSION=${PYTHON_VERSION:-"3.7.1"}
 
 FROM python:${PYTHON_VERSION}-alpine AS builder
-MAINTAINER Michalski Luc <michalski.luc@gmail.com>
 
 ARG YAKE_VERSION=${YAKE_VERSION:-"master"}
 
@@ -37,7 +36,7 @@ RUN wget https://raw.githubusercontent.com/LIAAD/yake/${YAKE_VERSION}/requiremen
 RUN pip3 install git+https://github.com/liaad/yake.git@${YAKE_VERSION}
 
 FROM python:3-alpine AS runtime
-MAINTAINER Luc Michalski <michalski.luc@gmail.com>
+
 
 ARG VERSION
 ARG BUILD
@@ -64,18 +63,17 @@ ENV PATH="/opt/venv/bin:$PATH" \
 	VIRTUAL_ENV="/opt/venv"
 
 # Set container labels
-LABEL name="seoz-contrib-yake" \
+LABEL name="osat-contrib-yake" \
       version="$VERSION" \
       build="$BUILD" \
       architecture="x86_64" \
       build_date="$NOW" \
-      vendor="seoz" \
-      maintainer="Luc Michalski <michalski.luc@gmail.com>" \
-      url="https://github.com/seoz.io/seoz-docker" \
+      vendor="osat" \
+      url="https://github.com/osat.io/osat-docker" \
       summary="SeoZ contrib - YAKE" \
       description="SeoZ contrib - YAKE" \
       vcs-type="git" \
-      vcs-url="https://github.com/seoz.io/seoz-docker" \
+      vcs-url="https://github.com/osat.io/osat-docker" \
       vcs-ref="$VERSION" \
       distribution-scope="public"
 

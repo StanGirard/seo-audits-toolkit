@@ -2,8 +2,8 @@
 version: "3.8"
 services:
 
-  seoz: &seoz_base
-    image: seoz/seoz-server:latest
+  server:
+    image: stangirard/osat-server
     build:
       context: ./server
       dockerfile: Dockerfile
@@ -13,34 +13,27 @@ services:
       CELERY_BROKER_URL: ${CELERY_BROKER_URL}
       CELERY_RESULT_BACKEND: ${CELERY_RESULT_BACKEND}
       DATABASE_ENGINE: ${DATABASE_ENGINE}
-      DATABASE_HOST: mysql
-      DATABASE_PORT: ${MYSQL_PORT}
-      DATABASE_NAME: ${MYSQL_DATABASE}
-      DATABASE_USER: ${MYSQL_USER}
-      DATABASE_PASSWORD: ${MYSQL_PASSWORD}
+      DATABASE_HOST: postgres
+      DATABASE_PORT: ${POSTGRES_PORT}
+      DATABASE_NAME: ${POSTGRES_DB}
+      DATABASE_USER: ${POSTGRES_USER}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
       SECRET_KEY: ${SECRET_KEY}
       DEBUG: ${DEBUG}
       CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
       ALLOWED_HOSTS: ${ALLOWED_HOSTS}
       REST_FRAMEWORK_PAGE_SIZE: ${REST_FRAMEWORK_PAGE_SIZE}
     volumes:
-    - server-data:/opt/seoz/data
-    - server-logs:/opt/seoz/logs
-    networks:
-    - internal
-    - web
-
-  server:
-    <<: *seoz_base
+    - server-data:/opt/app/data
+    - server-logs:/opt/app/logs
     container_name: ${NAMESPACE}-server
     ports:
-    - 5000:5000
-    expose:
-    - 5000
+      - "8000:8000"
+    command: ["django"]
     depends_on:
     - worker
     - beats
-    - mysql
+    - postgres
     - dashboard
     labels:
     - "org.label-schema.group=webservice"
@@ -51,7 +44,29 @@ services:
     restart: unless-stopped
 
   worker:
-    <<: *seoz_base
+    image: stangirard/osat-server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      args:
+        TINI_VERSION: ${TINI_VERSION}
+    environment:
+      CELERY_BROKER_URL: ${CELERY_BROKER_URL}
+      CELERY_RESULT_BACKEND: ${CELERY_RESULT_BACKEND}
+      DATABASE_ENGINE: ${DATABASE_ENGINE}
+      DATABASE_HOST: postgres
+      DATABASE_PORT: ${POSTGRES_PORT}
+      DATABASE_NAME: ${POSTGRES_DB}
+      DATABASE_USER: ${POSTGRES_USER}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+      SECRET_KEY: ${SECRET_KEY}
+      DEBUG: ${DEBUG}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+      REST_FRAMEWORK_PAGE_SIZE: ${REST_FRAMEWORK_PAGE_SIZE}
+    volumes:
+    - server-data:/opt/app/data
+    - server-logs:/opt/app/logs
     container_name: ${NAMESPACE}-worker
     depends_on:
     - redis
@@ -64,7 +79,29 @@ services:
     restart: unless-stopped
 
   beats:
-    <<: *seoz_base
+    image: stangirard/osat-server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      args:
+        TINI_VERSION: ${TINI_VERSION}
+    environment:
+      CELERY_BROKER_URL: ${CELERY_BROKER_URL}
+      CELERY_RESULT_BACKEND: ${CELERY_RESULT_BACKEND}
+      DATABASE_ENGINE: ${DATABASE_ENGINE}
+      DATABASE_HOST: postgres
+      DATABASE_PORT: ${POSTGRES_PORT}
+      DATABASE_NAME: ${POSTGRES_DB}
+      DATABASE_USER: ${POSTGRES_USER}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+      SECRET_KEY: ${SECRET_KEY}
+      DEBUG: ${DEBUG}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+      REST_FRAMEWORK_PAGE_SIZE: ${REST_FRAMEWORK_PAGE_SIZE}
+    volumes:
+    - server-data:/opt/app/data
+    - server-logs:/opt/app/logs
     container_name: ${NAMESPACE}-beats
     depends_on:
     - redis
@@ -73,11 +110,12 @@ services:
     - "traefik.enable=false"
     networks:
     - internal
-    command: ["beats"]
+    command: ["beat"]
     restart: unless-stopped    
 
   dashboard:
-    image: seoz/seoz-dashboard:latest
+    image: stangirard/osat-dashboard
+    # image: osat/osat-dashboard:latest
     container_name: ${NAMESPACE}-dashboard
     build:
       context: ./admin
@@ -90,7 +128,7 @@ services:
         CADDY_PLUGINS: "cors,realip,expires,cache"
     volumes:
     - ./admin/Caddyfile:/etc/Caddyfile:rw
-    # - ./dashboard/dist:/opt/seoz/www
+    # - ./dashboard/dist:/opt/osat/www
     expose:
     - 80
     ports:
@@ -123,55 +161,8 @@ services:
     - "traefik.enable=false"
     restart: unless-stopped
 
-  mysql:
-    image: mariadb:alpine-${MYSQL_VERSION}
-    container_name: ${NAMESPACE}-mariadb
-    build:
-      context: .docker/alpine/mariadb
-      dockerfile: Dockerfile
-      args:
-        MARIABD_VERSION: ${MYSQL_VERSION}
-    environment:
-      ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      USER_DATABASE: ${MYSQL_DATABASE}
-      USER_NAME: ${MYSQL_USER}
-      USER_PASSWORD: ${MYSQL_PASSWORD}
-      USER_PRIVILEGES: ALTER, CREATE, DELETE, DROP, INDEX, INSERT, REFERENCES, SELECT, UPDATE
-      PASSWORD_LENGTH: ${MYSQL_PASSWORD_LENGTH}
-      LOGROTATE_MINSIZE: 10M
-      LOGROTATE_MAXAGE: 7
-      SKIP_SHOW_DATABASE: "OFF" # If set to ON, will deny the SHOW DATABASES statement to regular users.
-      # AUTO_LETS_ENCRYPT: "no"
-      # SERVER_NAME: "seoz.io"
-      # LOCAL_INFILE: "OFF"
-      # SECURE_FILE_PRIV: "/opt/data/import"
-      # ROOT_HOST: "%"
-    labels:
-    - "org.label-schema.group=storage"
-    - "traefik.enable=false"
-    # ports:
-    # - ${MYSQL_PORT}:${MYSQL_PORT}
-    # expose:
-    # - ${MYSQL_PORT}
-    networks:
-    - internal
-    - web  
-    volumes:
-    - mysql-data:/var/lib/mysql
-    - mysql-logs:/var/log/mysql
-    - certs-data:/etc/letsencrypt
-    - ./shared/config/mysql:/custom.cnf.d
-    command:
-    - --slow_query_log=ON
-    - --slow_query_log_file=/var/log/mysql/slowlog.log
-    - --long_query_time=0
-    - --log_slow_verbosity=full    
-    - --query_response_time_stats=ON
-    - --performance-schema=ON 
-    - --innodb_monitor_enable=all
-    
   redis:
-    image: seoz/redis:${REDIS_VERSION}-alpine
+    # image: osat/redis:${REDIS_VERSION}-alpine
     build:
       context: ./.docker/alpine/redis
       dockerfile: Dockerfile
@@ -195,140 +186,6 @@ services:
     - "--logfile ${REDIS_LOG_FILE}"
     restart: unless-stopped
 
-  influxdb:
-    image: influxdb:${INFLUXDB_VERSION}-alpine
-    container_name: ${NAMESPACE}-influxdb
-    # ports:
-    # - 8083:8083
-    # - 8086:8086
-    # - 8090:8090
-    # expose:
-    # - 8083
-    # - 8086
-    # - 8090
-    environment:
-    - INFLUXDB_DB=${INFLUXDB_DB}
-    - INFLUXDB_ADMIN_USER=${INFLUXDB_ADMIN_USER}
-    - INFLUXDB_ADMIN_PASSWORD=${INFLUXDB_ADMIN_PASSWORD}   
-    networks:
-    - internal
-    # - web
-    volumes:
-    - ./shared/data/influxdb/imports:/imports
-    - influxdb-data:/var/lib/influxdb
-    labels:
-    - "org.label-schema.group=monitoring"
-    - "traefik.enable=false"
-    restart: unless-stopped
-
-  grafana:
-    image: grafana/grafana:latest
-    container_name: ${NAMESPACE}-grafana
-    expose:
-    - ${GF_PORT}
-    ports:
-    - ${GF_PORT}:${GF_PORT}
-    networks:
-    - internal
-    - web
-    depends_on:
-    - mysql
-    - influxdb
-    hostname: grafana
-    user: ${CURRENT_UID}
-    volumes:
-    - ./shared/config/grafana/provisioning:/etc/grafana/provisioning:rw
-    - ./shared/config/grafana/provisioning/plugins:/etc/grafana/provisioning/plugins:rw
-    - ./shared/config/grafana/provisioning/notifiers:/etc/grafana/provisioning/notifiers:rw
-    - ./shared/config/grafana/dashboards:/var/lib/grafana/dashboards:rw
-    - ./shared/config/grafana/datasources:/etc/grafana/datasources:rw
-    - grafana-data:/var/lib/grafana
-    environment:
-      GF_INSTALL_PLUGINS: ${GF_INSTALL_PLUGINS}
-      GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS: ${GF_PLUGINS_ALLOW_LOADING_UNSIGNED_PLUGINS}
-      GF_SECURITY_ADMIN_USER: ${GF_SECURITY_ADMIN_USER}
-      GF_SECURITY_ADMIN_PASSWORD: ${GF_SECURITY_ADMIN_PASSWORD}
-      GF_SERVER_SERVE_FROM_SUB_PATH: "true"
-      GF_USERS_ALLOW_SIGN_UP: "false"
-      GF_PANELS_DISABLE_SANITIZE_HTML: "true"
-    labels:
-    - "org.label-schema.group=monitoring"
-    - "traefik.enable=true"
-    restart: unless-stopped
-
-  proton-privoxy:
-    image: seoz/seoz-protonvpn-privoxy:latest
-    container_name: ${NAMESPACE}-pvpn-privoxy
-    build:
-      context: ./.docker/alpine/proton-privoxy
-      dockerfile: Dockerfile
-    environment:
-    - HOST_NETWORK=${PVPN_HOST_NETWORK}
-    - PVPN_USERNAME=${PVPN_USERNAME}
-    - PVPN_PASSWORD=${PVPN_PASSWORD}
-    - PVPN_TIER=${PVPN_TIER}
-    - PVPN_PROTOCOL=${PVPN_PROTOCOL}
-    - PVPN_CMD_ARGS=${PVPN_CMD_ARGS}
-    - PVPN_DEBUG=${PVPN_DEBUG}
-    volumes:
-    - /etc/localtime:/etc/localtime:ro
-    ports:
-    - 8888:8080
-    devices:
-    - /dev/net/tun
-    cap_add:
-    - NET_ADMIN
-    labels:
-    - "org.label-schema.group=proxy"
-    - "traefik.enable=false"
-    networks:
-    - internal
-    - web
-    restart: unless-stopped
-
-  contrib-yake:
-    image: seoz/seoz-contrib-yake:latest
-    container_name: ${NAMESPACE}-contrib-yake
-    build:
-      context: ./contribs/yake
-      dockerfile: Dockerfile
-      args:
-        YAKE_VERSION: ${YAKE_VERSION}
-        TINI_VERSION: ${TINI_VERSION}
-    environment:
-    - YAKE_HOST=${YAKE_HOST}
-    - YAKE_PORT=${YAKE_PORT}
-    - YAKE_DEBUG=${YAKE_DEBUG}
-    ports:
-    - ${YAKE_PORT}:${YAKE_PORT}
-    expose:
-    - ${YAKE_PORT}
-    labels:
-    - "org.label-schema.group=extractor"
-    - "traefik.enable=true"
-    networks:
-    - web
-    restart: unless-stopped    
-
-  contrib-bert-summary:
-    image: seoz/seoz-contrib-bert-summary:latest
-    container_name: ${NAMESPACE}-contrib-bert-summary
-    build:
-      context: ./contribs/bert-summary
-      dockerfile: Dockerfile.ubuntu
-      args:
-        TINI_VERSION: ${TINI_VERSION}
-    ports:
-    - ${BERT_SUMMARY_PORT}:${BERT_SUMMARY_PORT}
-    expose:
-    - ${BERT_SUMMARY_PORT}
-    labels:
-    - "org.label-schema.group=extractor"
-    - "traefik.enable=true"
-    networks:
-    - web
-    restart: unless-stopped    
-
 networks:
   internal:
     driver: bridge
@@ -347,19 +204,16 @@ volumes:
   certs-data:
   # PostreSQL
   postgres-data:
-  # MySQL/MariaDB
+  # Redis
   mysql-data:
   mysql-logs:
     driver_opts:
       type: none
       o: bind
       device: ${PWD}/shared/logs/mysql
-  # Redis
   redis-data:
   redis-logs:
     driver_opts:
       type: none
       o: bind
       device: ${PWD}/shared/logs/redis  
-  grafana-data:
-  influxdb-data:

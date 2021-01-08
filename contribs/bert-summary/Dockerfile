@@ -1,7 +1,6 @@
 ARG PYTHON_VERSION=${PYTHON_VERSION:-"3"}
 
 FROM python:${PYTHON_VERSION}-alpine AS builder
-MAINTAINER Michalski Luc <michalski.luc@gmail.com>
 
 # change to app dir
 WORKDIR /app
@@ -32,7 +31,7 @@ COPY requirements.txt .
 RUN pip3 install -r requirements.txt
 
 FROM python:${PYTHON_VERSION}-alpine AS runtime
-MAINTAINER Luc Michalski <michalski.luc@gmail.com>
+
 
 ARG VERSION
 ARG BUILD
@@ -59,18 +58,17 @@ ENV PATH="/opt/venv/bin:$PATH" \
 	  VIRTUAL_ENV="/opt/venv"
 
 # Set container labels
-LABEL name="seoz-contrib-bert-summary" \
+LABEL name="osat-contrib-bert-summary" \
       version="$VERSION" \
       build="$BUILD" \
       architecture="x86_64" \
       build_date="$NOW" \
-      vendor="seoz" \
-      maintainer="Luc Michalski <michalski.luc@gmail.com>" \
-      url="https://github.com/seoz.io/seoz-docker" \
+      vendor="osat" \
+      url="https://github.com/osat.io/osat-docker" \
       summary="SeoZ contrib - YAKE" \
       description="SeoZ contrib - YAKE" \
       vcs-type="git" \
-      vcs-url="https://github.com/seoz.io/seoz-docker" \
+      vcs-url="https://github.com/osat.io/osat-docker" \
       vcs-ref="$VERSION" \
       distribution-scope="public"
 

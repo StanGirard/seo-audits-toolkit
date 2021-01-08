@@ -2,7 +2,6 @@ ARG CUDA_VERSION=${CUDA_VERSION:-"10.2"}
 ARG UBUNTU_VERSION=${UBUNTU_VERSION:-"18.04"}
 
 FROM nvidia/cuda:${CUDA_VERSION}-cudnn7-devel-ubuntu${UBUNTU_VERSION}
-MAINTAINER Michalski Luc <michalski.luc@gmail.com>
 
 RUN apt-get update && \
     apt-get install -y sudo \

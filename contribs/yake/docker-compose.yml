@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   yake:
-    image: seoz/seoz-contrib-yake:latest
+    image: osat/osat-contrib-yake:latest
     container_name: ${NAMESPACE}-contrib-yake
     build:
       context: .

@@ -3,7 +3,7 @@ version: '3.8'
 services:
 
   bert-summary:
-    image: seoz/seoz-contrib-bert-summary:latest
+    image: osat/osat-contrib-bert-summary:latest
     container_name: ${NAMESPACE}-contrib-bert-summary
     build:
       context: .

@@ -1,6 +1,6 @@
 :80
 
-root * /opt/seoz/www
+root * /opt/osat/www
 file_server 
 
 header Access-Control-Allow-Origin *
@@ -8,6 +8,6 @@ header Access-Control-Allow-Headers *
 header Access-Control-Allow-Methods *
 
 log {
-	output file         /opt/seoz/logs/access.log
+	output file         /opt/osat/logs/access.log
 	format single_field common_log
 }

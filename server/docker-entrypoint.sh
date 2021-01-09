@@ -31,7 +31,7 @@ case "$1" in
 
   'beat')
     shift
-    exec celery -A core beat -l info
+    exec celery -A core beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
   ;;
 
   'migrate')

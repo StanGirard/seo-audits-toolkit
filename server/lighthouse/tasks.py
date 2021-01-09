@@ -48,6 +48,6 @@ def lighthouse_add_new_url_crawler(url):
 
 
 def run_lighthouse(url):
-    proc=subprocess.Popen("lighthouse --chrome-flags='--headless' "+ url + " --output json", stdout=subprocess.PIPE, shell=True)
+    proc=subprocess.Popen("lighthouse --chrome-flags='--headless --no-sandbox --disable-dev-shm-usage ' "+ url + " --output json", stdout=subprocess.PIPE, shell=True)
     result = proc.stdout.read().decode("utf-8") 
     return result

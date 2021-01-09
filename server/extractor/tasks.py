@@ -11,7 +11,7 @@ from extractor.src.sitemap import extract_urls
 
 from .models import Extractor, Sitemap
 
-
+## Declaration of a task to be used with celery
 @shared_task(bind=True, name="extractor_job")
 def extractor_job(self,url, task_type):
     print(task_type)
@@ -27,6 +27,7 @@ def extractor_job(self,url, task_type):
     Extractor.objects.filter(task_id=self.request.id).update(result=json.dumps(result).replace("'", "\\'"), status_job="FINISHED")
     return "Hello World!"
 
+## Declaration of a task to be used with celery
 @shared_task(bind=True, name="sitemap_job")
 def sitemap_job(self,url, org_id):
     time.sleep(0.2)

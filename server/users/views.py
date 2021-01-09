@@ -3,6 +3,8 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from users.serializers import UserSerializer, GroupSerializer
 
+## https://docs.djangoproject.com/en/3.1/topics/http/views/
+## Don't forget to register the view inside core/urls.py
 
 class UserViewSet(viewsets.ModelViewSet):
     """
@@ -10,6 +12,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
+    ## User has to be authenticated
     permission_classes = [permissions.IsAuthenticated]
 
 

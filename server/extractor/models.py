@@ -4,6 +4,8 @@ from django.db import models
 from django.utils import timezone
 from org.models import Website
 
+## Model Manager
+## Only displays objects where the user is part of the organization. Required for RBAC.
 
 class ForUser(models.Manager):
     def for_user(self, user):
@@ -25,7 +27,8 @@ class Extractor(models.Model):
 
     def __repr__(self):
         return '<Audit {}>'.format(self.url)
-
+    
+    ## Returns the organization name
     @property
     def website(self):
         return self.org.name
@@ -40,6 +43,7 @@ class Sitemap(models.Model):
 
     objects = ForUser()
 
+    ## Returns the organization name
     @property
     def website(self):
         return self.org.name

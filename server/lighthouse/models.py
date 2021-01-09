@@ -1,6 +1,8 @@
 from django.db import models
 from org.models import Website
 
+## Model Manager
+## Only displays objects where the user is part of the organization. Required for RBAC.
 class ForUser(models.Manager):
     def for_user(self, user):
         org = Website.objects.filter(users=user)
@@ -15,6 +17,7 @@ class Lighthouse(models.Model):
 
     objects = ForUser()
 
+    ## Returns the organization name
     @property
     def website(self):
         return self.org.name
@@ -34,6 +37,7 @@ class Lighthouse_Result(models.Model):
 
     objects = ForUser()
 
+    ## Returns the organization name
     @property
     def website(self):
         return self.org.name

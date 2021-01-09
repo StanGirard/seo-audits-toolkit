@@ -9,7 +9,7 @@ from django.utils import timezone
 
 from .models import Lighthouse, Lighthouse_Result
 
-
+## Declaration of a task to be used with celery
 @shared_task
 def lighthouse_crawler():
     scheduled = Lighthouse.objects.filter(scheduled=True)
@@ -29,6 +29,7 @@ def lighthouse_crawler():
         Lighthouse.objects.filter(org=item.org,url=item.url).update(last_updated=timezone.now())
         print("Done")
 
+## Declaration of a task to be used with celery
 @shared_task()
 def lighthouse_add_new_url_crawler(url):
     time.sleep(0.2)

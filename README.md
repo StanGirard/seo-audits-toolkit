@@ -9,7 +9,7 @@ I've grown tired of SEO agencies making us pay hundreds of euros for simple tool
 
 After implementing the first features of **OSAT** I decided to introduced other features such as Security.
 
-<p align="center"><img src="./docs/images/osat-demo.gif" width="600px" /></p>
+<p align="center"><img src="./docs/images/osat-demo.gif" width="700px" /></p>
 
 ## Why you need it
 

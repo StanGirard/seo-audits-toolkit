@@ -9,7 +9,7 @@ from django.utils import timezone
 
 from .models import Security, Security_Result
 
-
+## Declaration of a task to be used with celery
 @shared_task
 def security_crawler():
     scheduled = Security.objects.filter(scheduled=True)
@@ -23,6 +23,7 @@ def security_crawler():
         Security.objects.filter(org=item.org,url=item.url).update(last_updated=timezone.now())
         print("Done")
 
+## Declaration of a task to be used with celery
 @shared_task()
 def security_add_new_url_crawler(url):
     time.sleep(0.2)

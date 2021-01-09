@@ -9,30 +9,42 @@ from .serializers import SecurityResultSerializer, SecuritySerializer
 
 
 class SecurityViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to view security
+    """
+
+    ## User has to be authenticated
     permission_classes = [permissions.IsAuthenticated]
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
+    
+    ## Serializer defines how we respond to REST request
     serializer_class = SecuritySerializer
+    
+    ## Which filtering backends we want to use. 
     filter_backends = [filters.OrderingFilter]
     ordering_fields = ['url', 'last_updated']
-
     filterset_fields = ['url', 'scheduled']
 
+    ## Filters the result so that we only get the results for the user making the request.
     def get_queryset(self):
         return Security.objects.for_user(self.request.user).order_by('-last_updated')
 
 
 class SecurityResultViewSet(viewsets.ModelViewSet):
-    permission_classes = [permissions.IsAuthenticated]
+    """
+    API endpoint that allows users to view security results
+    """
 
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
+    ## User has to be authenticated
+    permission_classes = [permissions.IsAuthenticated]
+    
+    ## Serializer defines how we respond to REST request
     serializer_class = SecurityResultSerializer
+    
+    ## Which filtering backends we want to use. 
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
     ordering_fields = ['url', 'timestamp']
     filterset_fields = ['url']
 
+    ## Filters the result so that we only get the results for the user making the request.
     def get_queryset(self):
         return Security_Result.objects.for_user(self.request.user).order_by('-timestamp')

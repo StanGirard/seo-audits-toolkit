@@ -4,6 +4,8 @@ from django.db import models
 from django.utils import timezone
 from org.models import Website
 
+## Model Manager
+## Only displays objects where the user is part of the organization. Required for RBAC.
 class ForUser(models.Manager):
     def for_user(self, user):
         org = Website.objects.filter(users=user)
@@ -22,11 +24,13 @@ class Bert(models.Model):
 
     def __repr__(self):
         return '<Bert {}>'.format(self.org)
-
+    
+    ## Returns the organization name
     @property
     def website(self):
         return self.org.name
     
+    ## Summary object for smaller information for the front
     @property
     def summary(self):
         return self.text[:200]

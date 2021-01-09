@@ -22,7 +22,6 @@ router.register(r'api/security_details', SecurityResultViewSet, basename='Securi
 router.register(r'api/security', SecurityViewSet, basename='Security')
 router.register(r'api/internal_links', InternalLinksViewSet)
 router.register(r'api/summarize', BertViewSet, basename='Bert')
-
 router.register(r'api/keywords/yake', YakeViewSet, basename='Yake')
 router.register(r'api/website_user', WebsiteViewSet, basename='Website')
 
@@ -30,7 +29,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
-    # path('extractor/', include('extractor.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('organizations.urls')),
     path('invitations/', include(invitation_backend().get_urls()))

@@ -21,7 +21,7 @@ class BertViewSet(viewsets.ModelViewSet):
     ## Serializer defines how we respond to REST request
     serializer_class = BertSerializer
 
-    ## Which filtering backends we want to us. 
+    ## Which filtering backends we want to use. 
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
     filterset_fields = ['status_job']
     ordering_fields = ['id', 'begin_date']

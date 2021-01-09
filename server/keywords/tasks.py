@@ -10,7 +10,7 @@ from extractor.src.links import find_all_links
 
 from .models import Yake
 
-
+## Declaration of a task to be used with celery
 @shared_task(bind=True, name="keywords_job")
 def keywords_job(self,text,language, ngram, top):
     time.sleep(0.2)

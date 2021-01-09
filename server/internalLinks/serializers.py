@@ -9,7 +9,8 @@ from rest_framework import serializers
 from .models import InternalLinks
 from .tasks import internal_links_job
 
-
+## Serializers define how we interact with API calls.
+## https://docs.djangoproject.com/en/3.1/topics/serialization/
 class InternalLinksSerializer(serializers.ModelSerializer):
     
     class Meta:

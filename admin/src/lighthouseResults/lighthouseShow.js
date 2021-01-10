@@ -12,7 +12,6 @@ export const LighthouseResultsShow = (props) => {
                 <TextField source="performance_score" />
                 <TextField source="pwa_score" />
                 <TextField source="seo_score" />
-                <EditButton />
                 <DeleteButton />
             </SimpleShowLayout>
         </Show>

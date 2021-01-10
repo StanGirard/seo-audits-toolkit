@@ -94,7 +94,7 @@ My settings for lighthouse and security are as follows
 I'm using a cronjob that runs every day for both security and lighthouse. But feel free to crawl more often or less :)
 
 Once you've done all the above, you are ready to go.
-You can create as many organizations as you'd like. You can add users panel and you can access all the database from the admin panel.
+You can create as many organizations as you'd like. You can add users and you can access all the database from the admin panel.
 
 ## Links
 
@@ -117,8 +117,7 @@ I've used React Admin to build the front-end. If you want to help me improve the
 
 ## Disclaimers
 
-I'm not a python nor a frontend developer.
-I'll keep working on it.
+I'm not a python nor a frontend developer but I'll keep working on it.
 
 
 

@@ -1,50 +1,219 @@
-version: '3.6'
+---
+version: "3.8"
 services:
-  redis:
-    image: "redis:alpine"
-    hostname: redis
-    ports:
-      - "6379:6379"
-  database:
-    image: "postgres" # use latest official postgres version
-    ports:
-      - "5432:5432"
-    env_file:
-      - database.env # configure postgres
-    volumes:
-      - database-data:/var/lib/postgresql/data/
 
-  flask:
-    build: 
-      context: "."
+  server:
+    image: stangirard/osat-server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      args:
+        TINI_VERSION: ${TINI_VERSION}
+    environment:
+      CELERY_BROKER_URL: ${CELERY_BROKER_URL}
+      CELERY_RESULT_BACKEND: ${CELERY_RESULT_BACKEND}
+      DATABASE_ENGINE: ${DATABASE_ENGINE}
+      DATABASE_HOST: postgres
+      DATABASE_PORT: ${POSTGRES_PORT}
+      DATABASE_NAME: ${POSTGRES_DB}
+      DATABASE_USER: ${POSTGRES_USER}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+      SECRET_KEY: ${SECRET_KEY}
+      DEBUG: ${DEBUG}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+      REST_FRAMEWORK_PAGE_SIZE: ${REST_FRAMEWORK_PAGE_SIZE}
+    volumes:
+    - server-data:/opt/app/data
+    - server-logs:/opt/app/logs
+    container_name: ${NAMESPACE}-server
     ports:
-      - "5000:5000"
+      - "8000:8000"
+    command: ["django"]
     depends_on:
-      - "redis"
+    - worker
+    - beats
+    - postgres
+    - dashboard
+    labels:
+    - "org.label-schema.group=webservice"
+    - "traefik.enable=true"
+    networks:
+    - internal
+    - web
+    restart: unless-stopped
+
+  worker:
+    image: stangirard/osat-server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      args:
+        TINI_VERSION: ${TINI_VERSION}
     environment:
-      - SECRET_KEY=changeme
-      - URL_APP=http://localhost:5000
-      - FLASK_APP=SEOToolkit
-      - FLASK_ENV=development
-      - GOOGLE_API_KEY=None
-      - CELERY_BROKER_URL=redis://redis:6379/0
-      - CELERY_RESULT_BACKEND=redis://redis:6379/0
-      - SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://unicorn_user:magical_password@database:5432/rainbow_database
-  celery:
-    build: 
-      context: "."
-    command: "celery worker -A celery_worker.celery --loglevel=info"
+      CELERY_BROKER_URL: ${CELERY_BROKER_URL}
+      CELERY_RESULT_BACKEND: ${CELERY_RESULT_BACKEND}
+      DATABASE_ENGINE: ${DATABASE_ENGINE}
+      DATABASE_HOST: postgres
+      DATABASE_PORT: ${POSTGRES_PORT}
+      DATABASE_NAME: ${POSTGRES_DB}
+      DATABASE_USER: ${POSTGRES_USER}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+      SECRET_KEY: ${SECRET_KEY}
+      DEBUG: ${DEBUG}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+      REST_FRAMEWORK_PAGE_SIZE: ${REST_FRAMEWORK_PAGE_SIZE}
+    volumes:
+    - server-data:/opt/app/data
+    - server-logs:/opt/app/logs
+    container_name: ${NAMESPACE}-worker
     depends_on:
-      - "redis"
+    - redis
+    labels:
+    - "org.label-schema.group=queue"
+    - "traefik.enable=false"
+    networks:
+    - internal
+    command: ["worker"]
+    restart: unless-stopped
+
+  beats:
+    image: stangirard/osat-server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+      args:
+        TINI_VERSION: ${TINI_VERSION}
     environment:
-      - SECRET_KEY=changeme
-      - URL_APP=http://localhost:5000
-      - FLASK_APP=SEOToolkit
-      - FLASK_ENV=development
-      - GOOGLE_API_KEY=None
-      - CELERY_BROKER_URL=redis://redis:6379/0
-      - CELERY_RESULT_BACKEND=redis://redis:6379/0
-      - SQLALCHEMY_DATABASE_URI=postgresql+psycopg2://unicorn_user:magical_password@database:5432/rainbow_database
+      CELERY_BROKER_URL: ${CELERY_BROKER_URL}
+      CELERY_RESULT_BACKEND: ${CELERY_RESULT_BACKEND}
+      DATABASE_ENGINE: ${DATABASE_ENGINE}
+      DATABASE_HOST: postgres
+      DATABASE_PORT: ${POSTGRES_PORT}
+      DATABASE_NAME: ${POSTGRES_DB}
+      DATABASE_USER: ${POSTGRES_USER}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+      SECRET_KEY: ${SECRET_KEY}
+      DEBUG: ${DEBUG}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+      REST_FRAMEWORK_PAGE_SIZE: ${REST_FRAMEWORK_PAGE_SIZE}
+    volumes:
+    - server-data:/opt/app/data
+    - server-logs:/opt/app/logs
+    container_name: ${NAMESPACE}-beats
+    depends_on:
+    - redis
+    labels:
+    - "org.label-schema.group=queue"
+    - "traefik.enable=false"
+    networks:
+    - internal
+    command: ["beat"]
+    restart: unless-stopped    
+
+  dashboard:
+    image: stangirard/osat-dashboard
+    # image: osat/osat-dashboard:latest
+    container_name: ${NAMESPACE}-dashboard
+    build:
+      context: ./admin
+      dockerfile: Dockerfile
+      # dockerfile: Dockerfile
+      args:
+        NODE_VERSION: ${NODE_VERSION}
+        TINI_VERSION: ${TINI_VERSION}
+        CADDY_VERSION: "v2.3.0-rc.1" # v2.3.0-rc.1
+        CADDY_PLUGINS: "cors,realip,expires,cache"
+    volumes:
+    - ./admin/Caddyfile:/etc/Caddyfile:rw
+    # - ./dashboard/dist:/opt/osat/www
+    expose:
+    - 80
+    ports:
+    - 3000:80
+    networks:
+    - web
+    labels:
+    - "org.label-schema.group=front"
+    - "traefik.enable=true"
+    command: ["run", "--config=/etc/Caddyfile", "--watch"]
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:${POSTGRES_VERSION}-alpine
+    container_name: ${NAMESPACE}-postgres
+    # ports:
+    # - "${POSTGRES_PORT}:${POSTGRES_PORT}"
+    # expose:
+    # - ${POSTGRES_PORT}
+    networks:
+    - internal
+    environment:
+    - POSTGRES_USER=${POSTGRES_USER}
+    - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    - POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+    - postgres-data:/var/lib/postgresql/data/
+    labels:
+    - "org.label-schema.group=storage"
+    - "traefik.enable=false"
+    restart: unless-stopped
+
+  redis:
+    # image: osat/redis:${REDIS_VERSION}-alpine
+    build:
+      context: ./.docker/alpine/redis
+      dockerfile: Dockerfile
+      args:
+        REDIS_VERSION: ${REDIS_VERSION}
+        REDIS_LOG_PREFIX_PATH: ${REDIS_LOG_PREFIX_PATH}
+    container_name: ${NAMESPACE}-redis
+    hostname: redis
+    networks:
+    - internal    
+    volumes:
+    - redis-data:/data
+    - redis-logs:${REDIS_LOG_PREFIX_PATH}
+    labels:
+    - "org.label-schema.group=storage"
+    - "traefik.enable=false"
+    command:
+    - "redis-server"
+    - "--maxmemory ${REDIS_MEMORY_MAX}"
+    - "--maxmemory-policy allkeys-lru"
+    - "--logfile ${REDIS_LOG_FILE}"
+    restart: unless-stopped
+
+networks:
+  internal:
+    driver: bridge
+  web:
+    external: true
 
 volumes:
-  database-data: # named volumes can be managed easier using docker-compose
+  # server data
+  server-data:
+  server-logs:
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/shared/logs/server
+  # Letsencrypt certificates
+  certs-data:
+  # PostreSQL
+  postgres-data:
+  # Redis
+  mysql-data:
+  mysql-logs:
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/shared/logs/mysql
+  redis-data:
+  redis-logs:
+    driver_opts:
+      type: none
+      o: bind
+      device: ${PWD}/shared/logs/redis  

@@ -1,0 +1,26 @@
+---
+version: '3.8'
+services:
+
+  yake:
+    image: osat/osat-contrib-yake:latest
+    container_name: ${NAMESPACE}-contrib-yake
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        PYTHON_VERSION: 
+        YAKE_VERSION: ${YAKE_VERSION}
+        TINI_VERSION: ${TINI_VERSION}
+    environment:
+    - YAKE_HOST=${YAKE_HOST}
+    - YAKE_PORT=${YAKE_PORT}
+    - YAKE_DEBUG=${YAKE_DEBUG}
+    ports:
+    - ${YAKE_PORT}:${YAKE_PORT}
+    expose:
+    - ${YAKE_PORT}
+    labels:
+    - "org.label-schema.group=extractor"
+    - "traefik.enable=true"
+    restart: unless-stopped

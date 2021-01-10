@@ -1,0 +1,4037 @@
+{
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_0_0) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/87.0.4280.88 Safari/537.36",
+
+    "categories": {
+        "performance": {
+            "title": "Performance",
+            "id": "performance",
+            "score": 0.35
+        },
+        "accessibility": {
+            "title": "Accessibility",
+            "description": "These checks highlight opportunities to [improve the accessibility of your web app](https://developers.google.com/web/fundamentals/accessibility). Only a subset of accessibility issues can be automatically detected so manual testing is also encouraged.",
+            "manualDescription": "These items address areas which an automated testing tool cannot cover. Learn more in our guide on [conducting an accessibility review](https://developers.google.com/web/fundamentals/accessibility/how-to-review).",
+            "auditRefs": [{
+                    "id": "accesskeys",
+                    "weight": 0,
+                    "group": "a11y-navigation"
+                },
+                {
+                    "id": "aria-allowed-attr",
+                    "weight": 10,
+                    "group": "a11y-aria"
+                },
+                {
+                    "id": "aria-hidden-body",
+                    "weight": 10,
+                    "group": "a11y-aria"
+                },
+                {
+                    "id": "aria-hidden-focus",
+                    "weight": 3,
+                    "group": "a11y-aria"
+                },
+                {
+                    "id": "aria-input-field-name",
+                    "weight": 0,
+                    "group": "a11y-aria"
+                },
+                {
+                    "id": "aria-required-attr",
+                    "weight": 0,
+                    "group": "a11y-aria"
+                },
+                {
+                    "id": "aria-required-children",
+                    "weight": 0,
+                    "group": "a11y-aria"
+                },
+                {
+                    "id": "aria-required-parent",
+                    "weight": 0,
+                    "group": "a11y-aria"
+                },
+                {
+                    "id": "aria-roles",
+                    "weight": 0,
+                    "group": "a11y-aria"
+                },
+                {
+                    "id": "aria-toggle-field-name",
+                    "weight": 0,
+                    "group": "a11y-aria"
+                },
+                {
+                    "id": "aria-valid-attr-value",
+                    "weight": 10,
+                    "group": "a11y-aria"
+                },
+                {
+                    "id": "aria-valid-attr",
+                    "weight": 10,
+                    "group": "a11y-aria"
+                },
+                {
+                    "id": "button-name",
+                    "weight": 10,
+                    "group": "a11y-names-labels"
+                },
+                {
+                    "id": "bypass",
+                    "weight": 3,
+                    "group": "a11y-navigation"
+                },
+                {
+                    "id": "color-contrast",
+                    "weight": 3,
+                    "group": "a11y-color-contrast"
+                },
+                {
+                    "id": "definition-list",
+                    "weight": 0,
+                    "group": "a11y-tables-lists"
+                },
+                {
+                    "id": "dlitem",
+                    "weight": 0,
+                    "group": "a11y-tables-lists"
+                },
+                {
+                    "id": "document-title",
+                    "weight": 3,
+                    "group": "a11y-names-labels"
+                },
+                {
+                    "id": "duplicate-id-active",
+                    "weight": 0,
+                    "group": "a11y-navigation"
+                },
+                {
+                    "id": "duplicate-id-aria",
+                    "weight": 10,
+                    "group": "a11y-aria"
+                },
+                {
+                    "id": "form-field-multiple-labels",
+                    "weight": 0,
+                    "group": "a11y-names-labels"
+                },
+                {
+                    "id": "frame-title",
+                    "weight": 3,
+                    "group": "a11y-names-labels"
+                },
+                {
+                    "id": "heading-order",
+                    "weight": 2,
+                    "group": "a11y-navigation"
+                },
+                {
+                    "id": "html-has-lang",
+                    "weight": 3,
+                    "group": "a11y-language"
+                },
+                {
+                    "id": "html-lang-valid",
+                    "weight": 3,
+                    "group": "a11y-language"
+                },
+                {
+                    "id": "image-alt",
+                    "weight": 10,
+                    "group": "a11y-names-labels"
+                },
+                {
+                    "id": "input-image-alt",
+                    "weight": 0,
+                    "group": "a11y-names-labels"
+                },
+                {
+                    "id": "label",
+                    "weight": 10,
+                    "group": "a11y-names-labels"
+                },
+                {
+                    "id": "layout-table",
+                    "weight": 0,
+                    "group": "a11y-tables-lists"
+                },
+                {
+                    "id": "link-name",
+                    "weight": 3,
+                    "group": "a11y-names-labels"
+                },
+                {
+                    "id": "list",
+                    "weight": 3,
+                    "group": "a11y-tables-lists"
+                },
+                {
+                    "id": "listitem",
+                    "weight": 3,
+                    "group": "a11y-tables-lists"
+                },
+                {
+                    "id": "meta-refresh",
+                    "weight": 0,
+                    "group": "a11y-best-practices"
+                },
+                {
+                    "id": "meta-viewport",
+                    "weight": 10,
+                    "group": "a11y-best-practices"
+                },
+                {
+                    "id": "object-alt",
+                    "weight": 0,
+                    "group": "a11y-names-labels"
+                },
+                {
+                    "id": "tabindex",
+                    "weight": 0,
+                    "group": "a11y-navigation"
+                },
+                {
+                    "id": "td-headers-attr",
+                    "weight": 0,
+                    "group": "a11y-tables-lists"
+                },
+                {
+                    "id": "th-has-data-cells",
+                    "weight": 0,
+                    "group": "a11y-tables-lists"
+                },
+                {
+                    "id": "valid-lang",
+                    "weight": 0,
+                    "group": "a11y-language"
+                },
+                {
+                    "id": "video-caption",
+                    "weight": 0,
+                    "group": "a11y-audio-video"
+                },
+                {
+                    "id": "video-description",
+                    "weight": 0,
+                    "group": "a11y-audio-video"
+                },
+                {
+                    "id": "logical-tab-order",
+                    "weight": 0
+                },
+                {
+                    "id": "focusable-controls",
+                    "weight": 0
+                },
+                {
+                    "id": "interactive-element-affordance",
+                    "weight": 0
+                },
+                {
+                    "id": "managed-focus",
+                    "weight": 0
+                },
+                {
+                    "id": "focus-traps",
+                    "weight": 0
+                },
+                {
+                    "id": "custom-controls-labels",
+                    "weight": 0
+                },
+                {
+                    "id": "custom-controls-roles",
+                    "weight": 0
+                },
+                {
+                    "id": "visual-order-follows-dom",
+                    "weight": 0
+                },
+                {
+                    "id": "offscreen-content-hidden",
+                    "weight": 0
+                },
+                {
+                    "id": "use-landmarks",
+                    "weight": 0
+                }
+            ],
+            "id": "accessibility",
+            "score": 0.98
+        },
+        "best-practices": {
+            "title": "Best Practices",
+            "auditRefs": [{
+                    "id": "is-on-https",
+                    "weight": 1,
+                    "group": "best-practices-trust-safety"
+                },
+                {
+                    "id": "external-anchors-use-rel-noopener",
+                    "weight": 1,
+                    "group": "best-practices-trust-safety"
+                },
+                {
+                    "id": "geolocation-on-start",
+                    "weight": 1,
+                    "group": "best-practices-trust-safety"
+                },
+                {
+                    "id": "notification-on-start",
+                    "weight": 1,
+                    "group": "best-practices-trust-safety"
+                },
+                {
+                    "id": "no-vulnerable-libraries",
+                    "weight": 1,
+                    "group": "best-practices-trust-safety"
+                },
+                {
+                    "id": "password-inputs-can-be-pasted-into",
+                    "weight": 1,
+                    "group": "best-practices-ux"
+                },
+                {
+                    "id": "image-aspect-ratio",
+                    "weight": 1,
+                    "group": "best-practices-ux"
+                },
+                {
+                    "id": "image-size-responsive",
+                    "weight": 1,
+                    "group": "best-practices-ux"
+                },
+                {
+                    "id": "preload-fonts",
+                    "weight": 0,
+                    "group": "best-practices-ux"
+                },
+                {
+                    "id": "doctype",
+                    "weight": 1,
+                    "group": "best-practices-browser-compat"
+                },
+                {
+                    "id": "charset",
+                    "weight": 1,
+                    "group": "best-practices-browser-compat"
+                },
+                {
+                    "id": "no-unload-listeners",
+                    "weight": 1,
+                    "group": "best-practices-general"
+                },
+                {
+                    "id": "appcache-manifest",
+                    "weight": 1,
+                    "group": "best-practices-general"
+                },
+                {
+                    "id": "js-libraries",
+                    "weight": 0,
+                    "group": "best-practices-general"
+                },
+                {
+                    "id": "deprecations",
+                    "weight": 1,
+                    "group": "best-practices-general"
+                },
+                {
+                    "id": "errors-in-console",
+                    "weight": 1,
+                    "group": "best-practices-general"
+                },
+                {
+                    "id": "valid-source-maps",
+                    "weight": 0,
+                    "group": "best-practices-general"
+                },
+                {
+                    "id": "inspector-issues",
+                    "weight": 1,
+                    "group": "best-practices-general"
+                }
+            ],
+            "id": "best-practices",
+            "score": 0.87
+        },
+        "seo": {
+            "title": "SEO",
+            "description": "These checks ensure that your page is optimized for search engine results ranking. There are additional factors Lighthouse does not check that may affect your search ranking. [Learn more](https://support.google.com/webmasters/answer/35769).",
+            "manualDescription": "Run these additional validators on your site to check additional SEO best practices.",
+            "auditRefs": [{
+                    "id": "viewport",
+                    "weight": 1,
+                    "group": "seo-mobile"
+                },
+                {
+                    "id": "document-title",
+                    "weight": 1,
+                    "group": "seo-content"
+                },
+                {
+                    "id": "meta-description",
+                    "weight": 1,
+                    "group": "seo-content"
+                },
+                {
+                    "id": "http-status-code",
+                    "weight": 1,
+                    "group": "seo-crawl"
+                },
+                {
+                    "id": "link-text",
+                    "weight": 1,
+                    "group": "seo-content"
+                },
+                {
+                    "id": "crawlable-anchors",
+                    "weight": 1,
+                    "group": "seo-crawl"
+                },
+                {
+                    "id": "is-crawlable",
+                    "weight": 1,
+                    "group": "seo-crawl"
+                },
+                {
+                    "id": "robots-txt",
+                    "weight": 1,
+                    "group": "seo-crawl"
+                },
+                {
+                    "id": "image-alt",
+                    "weight": 1,
+                    "group": "seo-content"
+                },
+                {
+                    "id": "hreflang",
+                    "weight": 1,
+                    "group": "seo-content"
+                },
+                {
+                    "id": "canonical",
+                    "weight": 1,
+                    "group": "seo-content"
+                },
+                {
+                    "id": "font-size",
+                    "weight": 1,
+                    "group": "seo-mobile"
+                },
+                {
+                    "id": "plugins",
+                    "weight": 1,
+                    "group": "seo-content"
+                },
+                {
+                    "id": "tap-targets",
+                    "weight": 1,
+                    "group": "seo-mobile"
+                },
+                {
+                    "id": "structured-data",
+                    "weight": 0
+                }
+            ],
+            "id": "seo",
+            "score": 1
+        },
+        "pwa": {
+            "title": "Progressive Web App",
+            "description": "These checks validate the aspects of a Progressive Web App. [Learn more](https://developers.google.com/web/progressive-web-apps/checklist).",
+            "manualDescription": "These checks are required by the baseline [PWA Checklist](https://developers.google.com/web/progressive-web-apps/checklist) but are not automatically checked by Lighthouse. They do not affect your score but it's important that you verify them manually.",
+            "auditRefs": [{
+                    "id": "load-fast-enough-for-pwa",
+                    "weight": 7,
+                    "group": "pwa-fast-reliable"
+                },
+                {
+                    "id": "works-offline",
+                    "weight": 5,
+                    "group": "pwa-fast-reliable"
+                },
+                {
+                    "id": "offline-start-url",
+                    "weight": 1,
+                    "group": "pwa-fast-reliable"
+                },
+                {
+                    "id": "is-on-https",
+                    "weight": 2,
+                    "group": "pwa-installable"
+                },
+                {
+                    "id": "service-worker",
+                    "weight": 1,
+                    "group": "pwa-installable"
+                },
+                {
+                    "id": "installable-manifest",
+                    "weight": 2,
+                    "group": "pwa-installable"
+                },
+                {
+                    "id": "redirects-http",
+                    "weight": 2,
+                    "group": "pwa-optimized"
+                },
+                {
+                    "id": "splash-screen",
+                    "weight": 1,
+                    "group": "pwa-optimized"
+                },
+                {
+                    "id": "themed-omnibox",
+                    "weight": 1,
+                    "group": "pwa-optimized"
+                },
+                {
+                    "id": "content-width",
+                    "weight": 1,
+                    "group": "pwa-optimized"
+                },
+                {
+                    "id": "viewport",
+                    "weight": 2,
+                    "group": "pwa-optimized"
+                },
+                {
+                    "id": "without-javascript",
+                    "weight": 1,
+                    "group": "pwa-optimized"
+                },
+                {
+                    "id": "apple-touch-icon",
+                    "weight": 1,
+                    "group": "pwa-optimized"
+                },
+                {
+                    "id": "maskable-icon",
+                    "weight": 1,
+                    "group": "pwa-optimized"
+                },
+                {
+                    "id": "pwa-cross-browser",
+                    "weight": 0
+                },
+                {
+                    "id": "pwa-page-transitions",
+                    "weight": 0
+                },
+                {
+                    "id": "pwa-each-page-has-url",
+                    "weight": 0
+                }
+            ],
+            "id": "pwa",
+            "score": 0.54
+        }
+    },
+    "categoryGroups": {
+        "metrics": {
+            "title": "Metrics"
+        },
+        "load-opportunities": {
+            "title": "Opportunities",
+            "description": "These suggestions can help your page load faster. They don't [directly affect](https://web.dev/performance-scoring/) the Performance score."
+        },
+        "budgets": {
+            "title": "Budgets",
+            "description": "Performance budgets set standards for the performance of your site."
+        },
+        "diagnostics": {
+            "title": "Diagnostics",
+            "description": "More information about the performance of your application. These numbers don't [directly affect](https://web.dev/performance-scoring/) the Performance score."
+        },
+        "pwa-fast-reliable": {
+            "title": "Fast and reliable"
+        },
+        "pwa-installable": {
+            "title": "Installable"
+        },
+        "pwa-optimized": {
+            "title": "PWA Optimized"
+        },
+        "a11y-best-practices": {
+            "title": "Best practices",
+            "description": "These items highlight common accessibility best practices."
+        },
+        "a11y-color-contrast": {
+            "title": "Contrast",
+            "description": "These are opportunities to improve the legibility of your content."
+        },
+        "a11y-names-labels": {
+            "title": "Names and labels",
+            "description": "These are opportunities to improve the semantics of the controls in your application. This may enhance the experience for users of assistive technology, like a screen reader."
+        },
+        "a11y-navigation": {
+            "title": "Navigation",
+            "description": "These are opportunities to improve keyboard navigation in your application."
+        },
+        "a11y-aria": {
+            "title": "ARIA",
+            "description": "These are opportunities to improve the usage of ARIA in your application which may enhance the experience for users of assistive technology, like a screen reader."
+        },
+        "a11y-language": {
+            "title": "Internationalization and localization",
+            "description": "These are opportunities to improve the interpretation of your content by users in different locales."
+        },
+        "a11y-audio-video": {
+            "title": "Audio and video",
+            "description": "These are opportunities to provide alternative content for audio and video. This may improve the experience for users with hearing or vision impairments."
+        },
+        "a11y-tables-lists": {
+            "title": "Tables and lists",
+            "description": "These are opportunities to improve the experience of reading tabular or list data using assistive technology, like a screen reader."
+        },
+        "seo-mobile": {
+            "title": "Mobile Friendly",
+            "description": "Make sure your pages are mobile friendly so users don’t have to pinch or zoom in order to read the content pages. [Learn more](https://developers.google.com/search/mobile-sites/)."
+        },
+        "seo-content": {
+            "title": "Content Best Practices",
+            "description": "Format your HTML in a way that enables crawlers to better understand your app’s content."
+        },
+        "seo-crawl": {
+            "title": "Crawling and Indexing",
+            "description": "To appear in search results, crawlers need access to your app."
+        },
+        "best-practices-trust-safety": {
+            "title": "Trust and Safety"
+        },
+        "best-practices-ux": {
+            "title": "User Experience"
+        },
+        "best-practices-browser-compat": {
+            "title": "Browser Compatibility"
+        },
+        "best-practices-general": {
+            "title": "General"
+        }
+    },
+    "timing": {
+        "entries": [{
+                "startTime": 1217.43,
+                "name": "lh:init:config",
+                "duration": 517.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 1218.98,
+                "name": "lh:config:requireGatherers",
+                "duration": 31.92,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 1250.99,
+                "name": "lh:config:requireAudits",
+                "duration": 393.06,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 1734.79,
+                "name": "lh:runner:run",
+                "duration": 9369.62,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 1735.51,
+                "name": "lh:init:connect",
+                "duration": 10.82,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 1746.38,
+                "name": "lh:gather:loadBlank",
+                "duration": 77.03,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 1823.54,
+                "name": "lh:gather:getVersion",
+                "duration": 0.4,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 1824.04,
+                "name": "lh:gather:getBenchmarkIndex",
+                "duration": 1006.38,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2830.52,
+                "name": "lh:gather:setupDriver",
+                "duration": 16.17,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2846.9,
+                "name": "lh:gather:runPass-defaultPass",
+                "duration": 4999.56,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2847.01,
+                "name": "lh:gather:loadBlank",
+                "duration": 7.32,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2854.42,
+                "name": "lh:gather:setupPassNetwork",
+                "duration": 0.84,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2855.34,
+                "name": "lh:driver:cleanBrowserCaches",
+                "duration": 3.76,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2859.21,
+                "name": "lh:gather:beforePass",
+                "duration": 4.89,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2859.23,
+                "name": "lh:gather:beforePass:CSSUsage",
+                "duration": 0.04,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2859.29,
+                "name": "lh:gather:beforePass:JsUsage",
+                "duration": 2.13,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2861.43,
+                "name": "lh:gather:beforePass:ViewportDimensions",
+                "duration": 0.02,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2861.46,
+                "name": "lh:gather:beforePass:RuntimeExceptions",
+                "duration": 0.04,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2861.52,
+                "name": "lh:gather:beforePass:ConsoleMessages",
+                "duration": 0.74,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.28,
+                "name": "lh:gather:beforePass:AnchorElements",
+                "duration": 0.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.3,
+                "name": "lh:gather:beforePass:ImageElements",
+                "duration": 0.03,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.34,
+                "name": "lh:gather:beforePass:LinkElements",
+                "duration": 0.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.35,
+                "name": "lh:gather:beforePass:MetaElements",
+                "duration": 0.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.37,
+                "name": "lh:gather:beforePass:ScriptElements",
+                "duration": 0.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.38,
+                "name": "lh:gather:beforePass:IFrameElements",
+                "duration": 0.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.39,
+                "name": "lh:gather:beforePass:FormElements",
+                "duration": 0.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.4,
+                "name": "lh:gather:beforePass:MainDocumentContent",
+                "duration": 0.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.41,
+                "name": "lh:gather:beforePass:GlobalListeners",
+                "duration": 0.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.43,
+                "name": "lh:gather:beforePass:AppCacheManifest",
+                "duration": 0.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.44,
+                "name": "lh:gather:beforePass:Doctype",
+                "duration": 0.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.45,
+                "name": "lh:gather:beforePass:DOMStats",
+                "duration": 0.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.46,
+                "name": "lh:gather:beforePass:OptimizedImages",
+                "duration": 0.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.47,
+                "name": "lh:gather:beforePass:PasswordInputsWithPreventedPaste",
+                "duration": 0.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.48,
+                "name": "lh:gather:beforePass:ResponseCompression",
+                "duration": 0.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.48,
+                "name": "lh:gather:beforePass:TagsBlockingFirstPaint",
+                "duration": 0.42,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.91,
+                "name": "lh:gather:beforePass:FontSize",
+                "duration": 0.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.92,
+                "name": "lh:gather:beforePass:EmbeddedContent",
+                "duration": 0.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.93,
+                "name": "lh:gather:beforePass:RobotsTxt",
+                "duration": 0,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.94,
+                "name": "lh:gather:beforePass:TapTargets",
+                "duration": 0.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.95,
+                "name": "lh:gather:beforePass:Accessibility",
+                "duration": 0,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2862.95,
+                "name": "lh:gather:beforePass:TraceElements",
+                "duration": 0.39,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2863.35,
+                "name": "lh:gather:beforePass:InspectorIssues",
+                "duration": 0.66,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2864.02,
+                "name": "lh:gather:beforePass:SourceMaps",
+                "duration": 0.07,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2864.14,
+                "name": "lh:gather:beginRecording",
+                "duration": 70.56,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2864.3,
+                "name": "lh:gather:getVersion",
+                "duration": 0.23,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 2934.8,
+                "name": "lh:gather:loadPage-defaultPass",
+                "duration": 3001.48,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 5936.41,
+                "name": "lh:gather:pass",
+                "duration": 28.84,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 5965.36,
+                "name": "lh:gather:getTrace",
+                "duration": 474.81,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 6440.18,
+                "name": "lh:gather:getDevtoolsLog",
+                "duration": 3.46,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 6444.88,
+                "name": "lh:gather:afterPass",
+                "duration": 1401.48,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 6448.92,
+                "name": "lh:gather:afterPass:CSSUsage",
+                "duration": 38.67,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 6487.61,
+                "name": "lh:gather:afterPass:JsUsage",
+                "duration": 32.44,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 6520.06,
+                "name": "lh:gather:afterPass:ViewportDimensions",
+                "duration": 2.09,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 6522.21,
+                "name": "lh:gather:afterPass:RuntimeExceptions",
+                "duration": 0.85,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 6523.07,
+                "name": "lh:gather:afterPass:ConsoleMessages",
+                "duration": 1.82,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 6524.89,
+                "name": "lh:gather:afterPass:AnchorElements",
+                "duration": 62.65,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 6587.56,
+                "name": "lh:gather:afterPass:ImageElements",
+                "duration": 145.57,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 6733.15,
+                "name": "lh:gather:afterPass:LinkElements",
+                "duration": 4.34,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 6737.5,
+                "name": "lh:gather:afterPass:MetaElements",
+                "duration": 2.42,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 6739.93,
+                "name": "lh:gather:afterPass:ScriptElements",
+                "duration": 31.59,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 6771.53,
+                "name": "lh:gather:afterPass:IFrameElements",
+                "duration": 5.78,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 6777.32,
+                "name": "lh:gather:afterPass:FormElements",
+                "duration": 5.28,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 6782.61,
+                "name": "lh:gather:afterPass:MainDocumentContent",
+                "duration": 2.75,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 6785.36,
+                "name": "lh:gather:afterPass:GlobalListeners",
+                "duration": 2.17,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 6787.54,
+                "name": "lh:gather:afterPass:AppCacheManifest",
+                "duration": 2.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 6789.56,
+                "name": "lh:gather:afterPass:Doctype",
+                "duration": 1.64,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 6791.2,
+                "name": "lh:gather:afterPass:DOMStats",
+                "duration": 5.16,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 6796.37,
+                "name": "lh:gather:afterPass:OptimizedImages",
+                "duration": 317.33,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7113.71,
+                "name": "lh:gather:afterPass:PasswordInputsWithPreventedPaste",
+                "duration": 2.29,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7116.01,
+                "name": "lh:gather:afterPass:ResponseCompression",
+                "duration": 4.37,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7120.38,
+                "name": "lh:gather:afterPass:TagsBlockingFirstPaint",
+                "duration": 3.05,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7123.45,
+                "name": "lh:gather:afterPass:FontSize",
+                "duration": 21.38,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7144.85,
+                "name": "lh:gather:afterPass:EmbeddedContent",
+                "duration": 2.57,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7147.42,
+                "name": "lh:gather:afterPass:RobotsTxt",
+                "duration": 32.55,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7179.98,
+                "name": "lh:gather:afterPass:TapTargets",
+                "duration": 30.52,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7210.51,
+                "name": "lh:gather:afterPass:Accessibility",
+                "duration": 580.85,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7791.37,
+                "name": "lh:gather:afterPass:TraceElements",
+                "duration": 51.48,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7842.86,
+                "name": "lh:gather:afterPass:InspectorIssues",
+                "duration": 1.1,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7843.96,
+                "name": "lh:gather:afterPass:SourceMaps",
+                "duration": 2.39,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7846.65,
+                "name": "lh:gather:populateBaseArtifacts",
+                "duration": 13.1,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7847.23,
+                "name": "lh:gather:collectStacks",
+                "duration": 12.48,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7860.77,
+                "name": "lh:gather:runPass-offlinePass",
+                "duration": 372.12,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7860.86,
+                "name": "lh:gather:loadBlank",
+                "duration": 13.7,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7874.58,
+                "name": "lh:gather:setupPassNetwork",
+                "duration": 0.95,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7875.54,
+                "name": "lh:gather:beforePass",
+                "duration": 1.43,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7875.55,
+                "name": "lh:gather:beforePass:ServiceWorker",
+                "duration": 1,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7876.56,
+                "name": "lh:gather:beforePass:Offline",
+                "duration": 0.39,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7876.96,
+                "name": "lh:gather:beforePass:StartUrl",
+                "duration": 0.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7876.98,
+                "name": "lh:gather:beginRecording",
+                "duration": 0.06,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 7877.04,
+                "name": "lh:gather:loadPage-offlinePass",
+                "duration": 332.24,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 8209.3,
+                "name": "lh:gather:pass",
+                "duration": 0.15,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 8209.46,
+                "name": "lh:gather:getDevtoolsLog",
+                "duration": 0.1,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 8219.03,
+                "name": "lh:gather:afterPass",
+                "duration": 13.83,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 8227.92,
+                "name": "lh:gather:afterPass:ServiceWorker",
+                "duration": 1.1,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 8229.03,
+                "name": "lh:gather:afterPass:Offline",
+                "duration": 0.96,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 8230,
+                "name": "lh:gather:afterPass:StartUrl",
+                "duration": 2.85,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 8232.96,
+                "name": "lh:gather:runPass-redirectPass",
+                "duration": 1441.44,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 8233.02,
+                "name": "lh:gather:loadBlank",
+                "duration": 108.89,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 8341.93,
+                "name": "lh:gather:setupPassNetwork",
+                "duration": 2.25,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 8344.19,
+                "name": "lh:gather:beforePass",
+                "duration": 0.17,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 8344.2,
+                "name": "lh:gather:beforePass:HTTPRedirect",
+                "duration": 0.12,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 8344.32,
+                "name": "lh:gather:beforePass:HTMLWithoutJavaScript",
+                "duration": 0.03,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 8344.36,
+                "name": "lh:gather:beginRecording",
+                "duration": 0.05,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 8344.42,
+                "name": "lh:gather:loadPage-redirectPass",
+                "duration": 1321.94,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9666.39,
+                "name": "lh:gather:pass",
+                "duration": 0.12,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9666.51,
+                "name": "lh:gather:getDevtoolsLog",
+                "duration": 0.41,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9667.43,
+                "name": "lh:gather:afterPass",
+                "duration": 6.97,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9670.77,
+                "name": "lh:gather:afterPass:HTTPRedirect",
+                "duration": 1.56,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9672.33,
+                "name": "lh:gather:afterPass:HTMLWithoutJavaScript",
+                "duration": 2.06,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9674.49,
+                "name": "lh:gather:disconnect",
+                "duration": 5.15,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9679.87,
+                "name": "lh:runner:auditing",
+                "duration": 1423.87,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9681.98,
+                "name": "lh:audit:is-on-https",
+                "duration": 5.75,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9682.96,
+                "name": "lh:computed:NetworkRecords",
+                "duration": 2.79,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9688.3,
+                "name": "lh:audit:redirects-http",
+                "duration": 1.42,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9690.3,
+                "name": "lh:audit:service-worker",
+                "duration": 1.8,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9692.59,
+                "name": "lh:audit:works-offline",
+                "duration": 1.57,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9694.73,
+                "name": "lh:audit:viewport",
+                "duration": 1.99,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9695.23,
+                "name": "lh:computed:ViewportMeta",
+                "duration": 0.42,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9697.28,
+                "name": "lh:audit:without-javascript",
+                "duration": 1.51,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9699.12,
+                "name": "lh:audit:first-contentful-paint",
+                "duration": 36.64,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9699.53,
+                "name": "lh:computed:FirstContentfulPaint",
+                "duration": 34.19,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9699.62,
+                "name": "lh:computed:TraceOfTab",
+                "duration": 22.19,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9721.93,
+                "name": "lh:computed:LanternFirstContentfulPaint",
+                "duration": 11.78,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9722.09,
+                "name": "lh:computed:PageDependencyGraph",
+                "duration": 6.73,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9728.84,
+                "name": "lh:computed:LoadSimulator",
+                "duration": 1.42,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9728.92,
+                "name": "lh:computed:NetworkAnalysis",
+                "duration": 1.18,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9736.12,
+                "name": "lh:audit:largest-contentful-paint",
+                "duration": 10.29,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9736.66,
+                "name": "lh:computed:LargestContentfulPaint",
+                "duration": 8.89,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9736.7,
+                "name": "lh:computed:LanternLargestContentfulPaint",
+                "duration": 8.84,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9746.79,
+                "name": "lh:audit:first-meaningful-paint",
+                "duration": 2.61,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9747.23,
+                "name": "lh:computed:FirstMeaningfulPaint",
+                "duration": 1.38,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9747.28,
+                "name": "lh:computed:LanternFirstMeaningfulPaint",
+                "duration": 1.33,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9749.92,
+                "name": "lh:audit:load-fast-enough-for-pwa",
+                "duration": 10.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9750.54,
+                "name": "lh:computed:Interactive",
+                "duration": 8.42,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9750.59,
+                "name": "lh:computed:LanternInteractive",
+                "duration": 8.37,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9760.27,
+                "name": "lh:audit:speed-index",
+                "duration": 413.31,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9760.66,
+                "name": "lh:computed:SpeedIndex",
+                "duration": 411.99,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9760.7,
+                "name": "lh:computed:LanternSpeedIndex",
+                "duration": 411.94,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 9760.74,
+                "name": "lh:computed:Speedline",
+                "duration": 402.92,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10173.61,
+                "name": "lh:audit:screenshot-thumbnails",
+                "duration": 142.41,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10316.05,
+                "name": "lh:audit:final-screenshot",
+                "duration": 1.1,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10316.28,
+                "name": "lh:computed:Screenshots",
+                "duration": 0.83,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10318.53,
+                "name": "lh:audit:estimated-input-latency",
+                "duration": 14.92,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10319.96,
+                "name": "lh:computed:EstimatedInputLatency",
+                "duration": 10.52,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10320.01,
+                "name": "lh:computed:LanternEstimatedInputLatency",
+                "duration": 10.46,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10334.34,
+                "name": "lh:audit:total-blocking-time",
+                "duration": 6.73,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10335.17,
+                "name": "lh:computed:TotalBlockingTime",
+                "duration": 4.44,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10335.21,
+                "name": "lh:computed:LanternTotalBlockingTime",
+                "duration": 4.39,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10341.61,
+                "name": "lh:audit:max-potential-fid",
+                "duration": 4.97,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10342.26,
+                "name": "lh:computed:MaxPotentialFID",
+                "duration": 3.1,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10342.31,
+                "name": "lh:computed:LanternMaxPotentialFID",
+                "duration": 3.04,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10347.39,
+                "name": "lh:audit:cumulative-layout-shift",
+                "duration": 2.65,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10348.01,
+                "name": "lh:computed:CumulativeLayoutShift",
+                "duration": 1.12,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10350.64,
+                "name": "lh:audit:errors-in-console",
+                "duration": 3.17,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10354.42,
+                "name": "lh:audit:server-response-time",
+                "duration": 2.64,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10355.36,
+                "name": "lh:computed:MainResource",
+                "duration": 0.18,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10357.58,
+                "name": "lh:audit:first-cpu-idle",
+                "duration": 6.38,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10358.05,
+                "name": "lh:computed:FirstCPUIdle",
+                "duration": 4.26,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10358.09,
+                "name": "lh:computed:LanternFirstCPUIdle",
+                "duration": 4.21,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10364.87,
+                "name": "lh:audit:interactive",
+                "duration": 1.99,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10367.68,
+                "name": "lh:audit:user-timings",
+                "duration": 4.62,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10368.54,
+                "name": "lh:computed:UserTimings",
+                "duration": 1.79,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10372.94,
+                "name": "lh:audit:critical-request-chains",
+                "duration": 4.37,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10373.64,
+                "name": "lh:computed:CriticalRequestChains",
+                "duration": 0.55,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10377.76,
+                "name": "lh:audit:redirects",
+                "duration": 3.44,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10381.9,
+                "name": "lh:audit:installable-manifest",
+                "duration": 2.89,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10382.75,
+                "name": "lh:computed:ManifestValues",
+                "duration": 0.06,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10385.58,
+                "name": "lh:audit:apple-touch-icon",
+                "duration": 4.78,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10390.98,
+                "name": "lh:audit:splash-screen",
+                "duration": 5.6,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10391.62,
+                "name": "lh:computed:ManifestValues",
+                "duration": 0.02,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10397.31,
+                "name": "lh:audit:themed-omnibox",
+                "duration": 2.62,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10398.53,
+                "name": "lh:computed:ManifestValues",
+                "duration": 0.02,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10400.51,
+                "name": "lh:audit:maskable-icon",
+                "duration": 1.84,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10403.02,
+                "name": "lh:audit:content-width",
+                "duration": 1.73,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10405.36,
+                "name": "lh:audit:image-aspect-ratio",
+                "duration": 2.24,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10408.18,
+                "name": "lh:audit:image-size-responsive",
+                "duration": 1.99,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10410.75,
+                "name": "lh:audit:preload-fonts",
+                "duration": 2.77,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10414.03,
+                "name": "lh:audit:deprecations",
+                "duration": 1.84,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10416.45,
+                "name": "lh:audit:mainthread-work-breakdown",
+                "duration": 25.82,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10417.41,
+                "name": "lh:computed:MainThreadTasks",
+                "duration": 21.57,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10443.24,
+                "name": "lh:audit:bootup-time",
+                "duration": 9.83,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10453.56,
+                "name": "lh:audit:uses-rel-preload",
+                "duration": 2.16,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10454.18,
+                "name": "lh:computed:LoadSimulator",
+                "duration": 0.05,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10456.18,
+                "name": "lh:audit:uses-rel-preconnect",
+                "duration": 4.64,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10461.42,
+                "name": "lh:audit:font-display",
+                "duration": 2.29,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10463.73,
+                "name": "lh:audit:diagnostics",
+                "duration": 0.76,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10464.5,
+                "name": "lh:audit:network-requests",
+                "duration": 0.78,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10465.85,
+                "name": "lh:audit:network-rtt",
+                "duration": 2.19,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10468.75,
+                "name": "lh:audit:network-server-latency",
+                "duration": 1.72,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10470.49,
+                "name": "lh:audit:main-thread-tasks",
+                "duration": 0.45,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10470.95,
+                "name": "lh:audit:metrics",
+                "duration": 1.86,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10471.08,
+                "name": "lh:computed:TimingSummary",
+                "duration": 1.63,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10471.33,
+                "name": "lh:computed:LargestContentfulPaintAllFrames",
+                "duration": 0.15,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10471.51,
+                "name": "lh:computed:CumulativeLayoutShiftAllFrames",
+                "duration": 0.68,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10473.44,
+                "name": "lh:audit:offline-start-url",
+                "duration": 1.92,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10475.89,
+                "name": "lh:audit:performance-budget",
+                "duration": 2.45,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10476.47,
+                "name": "lh:computed:ResourceSummary",
+                "duration": 1.06,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10478.81,
+                "name": "lh:audit:timing-budget",
+                "duration": 1.35,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10480.62,
+                "name": "lh:audit:resource-summary",
+                "duration": 2.57,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10483.97,
+                "name": "lh:audit:third-party-summary",
+                "duration": 6.24,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10490.69,
+                "name": "lh:audit:largest-contentful-paint-element",
+                "duration": 2.73,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10493.8,
+                "name": "lh:audit:layout-shift-elements",
+                "duration": 1.41,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10495.64,
+                "name": "lh:audit:long-tasks",
+                "duration": 3.6,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10500.04,
+                "name": "lh:audit:no-unload-listeners",
+                "duration": 2.32,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10502.85,
+                "name": "lh:audit:non-composited-animations",
+                "duration": 2.11,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10505.73,
+                "name": "lh:audit:unsized-images",
+                "duration": 4.61,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10511.19,
+                "name": "lh:audit:valid-source-maps",
+                "duration": 3.72,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10515.59,
+                "name": "lh:audit:preload-lcp-image",
+                "duration": 7.43,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10516.34,
+                "name": "lh:computed:LanternLargestContentfulPaint",
+                "duration": 3.36,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10516.36,
+                "name": "lh:computed:LanternFirstContentfulPaint",
+                "duration": 0.97,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10523.49,
+                "name": "lh:audit:pwa-cross-browser",
+                "duration": 2.53,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10526.54,
+                "name": "lh:audit:pwa-page-transitions",
+                "duration": 1.36,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10528.35,
+                "name": "lh:audit:pwa-each-page-has-url",
+                "duration": 1.22,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10530.15,
+                "name": "lh:audit:accesskeys",
+                "duration": 2.13,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10532.95,
+                "name": "lh:audit:aria-allowed-attr",
+                "duration": 6.98,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10540.76,
+                "name": "lh:audit:aria-hidden-body",
+                "duration": 7.99,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10549.58,
+                "name": "lh:audit:aria-hidden-focus",
+                "duration": 8.84,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10559.06,
+                "name": "lh:audit:aria-input-field-name",
+                "duration": 2.13,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10561.79,
+                "name": "lh:audit:aria-required-attr",
+                "duration": 2.23,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10564.86,
+                "name": "lh:audit:aria-required-children",
+                "duration": 3.02,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10568.58,
+                "name": "lh:audit:aria-required-parent",
+                "duration": 4.13,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10573.71,
+                "name": "lh:audit:aria-roles",
+                "duration": 3.56,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10577.93,
+                "name": "lh:audit:aria-toggle-field-name",
+                "duration": 3.18,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10581.7,
+                "name": "lh:audit:aria-valid-attr-value",
+                "duration": 6.14,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10588.66,
+                "name": "lh:audit:aria-valid-attr",
+                "duration": 5.8,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10595.06,
+                "name": "lh:audit:button-name",
+                "duration": 7.95,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10603.67,
+                "name": "lh:audit:bypass",
+                "duration": 7.15,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10611.42,
+                "name": "lh:audit:color-contrast",
+                "duration": 6.27,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10618.4,
+                "name": "lh:audit:definition-list",
+                "duration": 4.56,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10623.62,
+                "name": "lh:audit:dlitem",
+                "duration": 3.48,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10627.71,
+                "name": "lh:audit:document-title",
+                "duration": 5.72,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10634.03,
+                "name": "lh:audit:duplicate-id-active",
+                "duration": 2.97,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10637.52,
+                "name": "lh:audit:duplicate-id-aria",
+                "duration": 5.92,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10643.98,
+                "name": "lh:audit:form-field-multiple-labels",
+                "duration": 5.55,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10650.03,
+                "name": "lh:audit:frame-title",
+                "duration": 6.6,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10657.24,
+                "name": "lh:audit:heading-order",
+                "duration": 6.47,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10664.42,
+                "name": "lh:audit:html-has-lang",
+                "duration": 8.15,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10673.3,
+                "name": "lh:audit:html-lang-valid",
+                "duration": 6.6,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10680.4,
+                "name": "lh:audit:image-alt",
+                "duration": 4.95,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10685.89,
+                "name": "lh:audit:input-image-alt",
+                "duration": 3.3,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10689.64,
+                "name": "lh:audit:label",
+                "duration": 4.71,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10695,
+                "name": "lh:audit:layout-table",
+                "duration": 4.94,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10700.44,
+                "name": "lh:audit:link-name",
+                "duration": 5.17,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10706.18,
+                "name": "lh:audit:list",
+                "duration": 5.85,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10713.19,
+                "name": "lh:audit:listitem",
+                "duration": 5.62,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10719.42,
+                "name": "lh:audit:meta-refresh",
+                "duration": 3.92,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10724,
+                "name": "lh:audit:meta-viewport",
+                "duration": 7.16,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10731.65,
+                "name": "lh:audit:object-alt",
+                "duration": 4.42,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10736.62,
+                "name": "lh:audit:tabindex",
+                "duration": 4.37,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10741.71,
+                "name": "lh:audit:td-headers-attr",
+                "duration": 6.21,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10748.49,
+                "name": "lh:audit:th-has-data-cells",
+                "duration": 5.03,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10754.07,
+                "name": "lh:audit:valid-lang",
+                "duration": 4.59,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10759.15,
+                "name": "lh:audit:video-caption",
+                "duration": 5.17,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10764.95,
+                "name": "lh:audit:video-description",
+                "duration": 5.65,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10770.63,
+                "name": "lh:audit:custom-controls-labels",
+                "duration": 0.13,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10770.79,
+                "name": "lh:audit:custom-controls-roles",
+                "duration": 0.12,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10770.94,
+                "name": "lh:audit:focus-traps",
+                "duration": 0.09,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10771.05,
+                "name": "lh:audit:focusable-controls",
+                "duration": 0.07,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10771.16,
+                "name": "lh:audit:interactive-element-affordance",
+                "duration": 0.06,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10771.24,
+                "name": "lh:audit:logical-tab-order",
+                "duration": 0.09,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10771.34,
+                "name": "lh:audit:managed-focus",
+                "duration": 0.09,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10771.47,
+                "name": "lh:audit:offscreen-content-hidden",
+                "duration": 0.04,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10771.53,
+                "name": "lh:audit:use-landmarks",
+                "duration": 0.11,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10771.65,
+                "name": "lh:audit:visual-order-follows-dom",
+                "duration": 0.09,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10772.49,
+                "name": "lh:audit:uses-long-cache-ttl",
+                "duration": 3.48,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10776.43,
+                "name": "lh:audit:total-byte-weight",
+                "duration": 2.09,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10778.97,
+                "name": "lh:audit:offscreen-images",
+                "duration": 4.6,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10783.95,
+                "name": "lh:audit:render-blocking-resources",
+                "duration": 5.06,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10784.57,
+                "name": "lh:computed:UnusedCSS",
+                "duration": 0.99,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10785.61,
+                "name": "lh:computed:FirstContentfulPaint",
+                "duration": 2.14,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10785.75,
+                "name": "lh:computed:LanternFirstContentfulPaint",
+                "duration": 1.99,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10789.42,
+                "name": "lh:audit:unminified-css",
+                "duration": 15.1,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10804.85,
+                "name": "lh:audit:unminified-javascript",
+                "duration": 119.85,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10925.41,
+                "name": "lh:audit:unused-css-rules",
+                "duration": 3.37,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10929.1,
+                "name": "lh:audit:unused-javascript",
+                "duration": 20.49,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10929.63,
+                "name": "lh:computed:JSBundles",
+                "duration": 0.19,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10929.87,
+                "name": "lh:computed:UnusedJavascriptSummary",
+                "duration": 0.24,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10930.14,
+                "name": "lh:computed:UnusedJavascriptSummary",
+                "duration": 6.25,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10936.43,
+                "name": "lh:computed:UnusedJavascriptSummary",
+                "duration": 5.12,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10941.6,
+                "name": "lh:computed:UnusedJavascriptSummary",
+                "duration": 0.04,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10941.67,
+                "name": "lh:computed:UnusedJavascriptSummary",
+                "duration": 0.38,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10942.08,
+                "name": "lh:computed:UnusedJavascriptSummary",
+                "duration": 0.26,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10942.37,
+                "name": "lh:computed:UnusedJavascriptSummary",
+                "duration": 0.53,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10942.93,
+                "name": "lh:computed:UnusedJavascriptSummary",
+                "duration": 0.71,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10943.68,
+                "name": "lh:computed:UnusedJavascriptSummary",
+                "duration": 0.07,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10943.79,
+                "name": "lh:computed:UnusedJavascriptSummary",
+                "duration": 0.15,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10943.99,
+                "name": "lh:computed:UnusedJavascriptSummary",
+                "duration": 0.69,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10944.73,
+                "name": "lh:computed:UnusedJavascriptSummary",
+                "duration": 0.22,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10945.01,
+                "name": "lh:computed:UnusedJavascriptSummary",
+                "duration": 0.06,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10945.12,
+                "name": "lh:computed:UnusedJavascriptSummary",
+                "duration": 0.06,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10945.25,
+                "name": "lh:computed:UnusedJavascriptSummary",
+                "duration": 0.06,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10945.37,
+                "name": "lh:computed:UnusedJavascriptSummary",
+                "duration": 0.06,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10945.51,
+                "name": "lh:computed:UnusedJavascriptSummary",
+                "duration": 0.14,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10945.74,
+                "name": "lh:computed:UnusedJavascriptSummary",
+                "duration": 0.27,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10946.15,
+                "name": "lh:computed:UnusedJavascriptSummary",
+                "duration": 0.15,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10946.44,
+                "name": "lh:computed:UnusedJavascriptSummary",
+                "duration": 0.3,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10946.85,
+                "name": "lh:computed:UnusedJavascriptSummary",
+                "duration": 0.14,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10950.01,
+                "name": "lh:audit:uses-webp-images",
+                "duration": 3.32,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10953.69,
+                "name": "lh:audit:uses-optimized-images",
+                "duration": 3.77,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10957.84,
+                "name": "lh:audit:uses-text-compression",
+                "duration": 3.79,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10962.05,
+                "name": "lh:audit:uses-responsive-images",
+                "duration": 4.6,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10967.25,
+                "name": "lh:audit:efficient-animated-content",
+                "duration": 4.57,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10972.6,
+                "name": "lh:audit:duplicated-javascript",
+                "duration": 5.32,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10973.78,
+                "name": "lh:computed:ModuleDuplication",
+                "duration": 0.41,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10974,
+                "name": "lh:computed:JSBundles",
+                "duration": 0.07,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 10978.56,
+                "name": "lh:audit:legacy-javascript",
+                "duration": 45.76,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11026.17,
+                "name": "lh:audit:appcache-manifest",
+                "duration": 1.34,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11028.06,
+                "name": "lh:audit:doctype",
+                "duration": 1.17,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11029.73,
+                "name": "lh:audit:charset",
+                "duration": 1.61,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11031.84,
+                "name": "lh:audit:dom-size",
+                "duration": 2.01,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11034.33,
+                "name": "lh:audit:external-anchors-use-rel-noopener",
+                "duration": 2.11,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11036.95,
+                "name": "lh:audit:geolocation-on-start",
+                "duration": 1.53,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11039.06,
+                "name": "lh:audit:inspector-issues",
+                "duration": 1.71,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11041.26,
+                "name": "lh:audit:no-document-write",
+                "duration": 1.54,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11043.44,
+                "name": "lh:audit:no-vulnerable-libraries",
+                "duration": 3.3,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11047.07,
+                "name": "lh:audit:js-libraries",
+                "duration": 1.69,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11049.29,
+                "name": "lh:audit:notification-on-start",
+                "duration": 1.81,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11051.58,
+                "name": "lh:audit:password-inputs-can-be-pasted-into",
+                "duration": 1.26,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11053.17,
+                "name": "lh:audit:uses-http2",
+                "duration": 2.9,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11056.58,
+                "name": "lh:audit:uses-passive-event-listeners",
+                "duration": 10.86,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11067.99,
+                "name": "lh:audit:meta-description",
+                "duration": 1.87,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11070.58,
+                "name": "lh:audit:http-status-code",
+                "duration": 1.9,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11073.46,
+                "name": "lh:audit:font-size",
+                "duration": 3.05,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11077.02,
+                "name": "lh:audit:link-text",
+                "duration": 2.35,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11079.96,
+                "name": "lh:audit:crawlable-anchors",
+                "duration": 2.19,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11083.48,
+                "name": "lh:audit:is-crawlable",
+                "duration": 2.63,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11086.9,
+                "name": "lh:audit:robots-txt",
+                "duration": 2.04,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11089.61,
+                "name": "lh:audit:tap-targets",
+                "duration": 3.8,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11093.99,
+                "name": "lh:audit:hreflang",
+                "duration": 1.65,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11096.14,
+                "name": "lh:audit:plugins",
+                "duration": 1.44,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11098.08,
+                "name": "lh:audit:canonical",
+                "duration": 4.08,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11102.61,
+                "name": "lh:audit:structured-data",
+                "duration": 1.12,
+                "entryType": "measure"
+            },
+            {
+                "startTime": 11103.75,
+                "name": "lh:runner:generate",
+                "duration": 0.66,
+                "entryType": "measure"
+            }
+        ],
+        "total": 9369.62
+    },
+    "i18n": {
+        "rendererFormattedStrings": {
+            "auditGroupExpandTooltip": "Show audits",
+            "calculatorLink": "See calculator.",
+            "crcInitialNavigation": "Initial Navigation",
+            "crcLongestDurationLabel": "Maximum critical path latency:",
+            "dropdownCopyJSON": "Copy JSON",
+            "dropdownDarkTheme": "Toggle Dark Theme",
+            "dropdownPrintExpanded": "Print Expanded",
+            "dropdownPrintSummary": "Print Summary",
+            "dropdownSaveGist": "Save as Gist",
+            "dropdownSaveHTML": "Save as HTML",
+            "dropdownSaveJSON": "Save as JSON",
+            "dropdownViewer": "Open in Viewer",
+            "errorLabel": "Error!",
+            "errorMissingAuditInfo": "Report error: no audit information",
+            "footerIssue": "File an issue",
+            "labDataTitle": "Lab Data",
+            "lsPerformanceCategoryDescription": "[Lighthouse](https://developers.google.com/web/tools/lighthouse/) analysis of the current page on an emulated mobile network. Values are estimated and may vary.",
+            "manualAuditsGroupTitle": "Additional items to manually check",
+            "notApplicableAuditsGroupTitle": "Not applicable",
+            "opportunityResourceColumnLabel": "Opportunity",
+            "opportunitySavingsColumnLabel": "Estimated Savings",
+            "passedAuditsGroupTitle": "Passed audits",
+            "runtimeDesktopEmulation": "Emulated Desktop",
+            "runtimeMobileEmulation": "Emulated Moto G4",
+            "runtimeNoEmulation": "No emulation",
+            "runtimeSettingsAxeVersion": "Axe version",
+            "runtimeSettingsBenchmark": "CPU/Memory Power",
+            "runtimeSettingsChannel": "Channel",
+            "runtimeSettingsCPUThrottling": "CPU throttling",
+            "runtimeSettingsDevice": "Device",
+            "runtimeSettingsFetchTime": "Fetch Time",
+            "runtimeSettingsNetworkThrottling": "Network throttling",
+            "runtimeSettingsTitle": "Runtime Settings",
+            "runtimeSettingsUA": "User agent (host)",
+            "runtimeSettingsUANetwork": "User agent (network)",
+            "runtimeSettingsUrl": "URL",
+            "runtimeUnknown": "Unknown",
+            "snippetCollapseButtonLabel": "Collapse snippet",
+            "snippetExpandButtonLabel": "Expand snippet",
+            "thirdPartyResourcesLabel": "Show 3rd-party resources",
+            "throttlingProvided": "Provided by environment",
+            "toplevelWarningsMessage": "There were issues affecting this run of Lighthouse:",
+            "varianceDisclaimer": "Values are estimated and may vary. The [performance score is calculated](https://web.dev/performance-scoring/) directly from these metrics.",
+            "warningAuditsGroupTitle": "Passed audits but with warnings",
+            "warningHeader": "Warnings: "
+        },
+        "icuMessagePaths": {
+            "lighthouse-core/audits/is-on-https.js | title": [
+                "audits[is-on-https].title"
+            ],
+            "lighthouse-core/audits/is-on-https.js | description": [
+                "audits[is-on-https].description"
+            ],
+            "lighthouse-core/audits/redirects-http.js | title": [
+                "audits[redirects-http].title"
+            ],
+            "lighthouse-core/audits/redirects-http.js | description": [
+                "audits[redirects-http].description"
+            ],
+            "lighthouse-core/audits/service-worker.js | failureTitle": [
+                "audits[service-worker].title"
+            ],
+            "lighthouse-core/audits/service-worker.js | description": [
+                "audits[service-worker].description"
+            ],
+            "lighthouse-core/audits/works-offline.js | failureTitle": [
+                "audits[works-offline].title"
+            ],
+            "lighthouse-core/audits/works-offline.js | description": [
+                "audits[works-offline].description"
+            ],
+            "lighthouse-core/audits/viewport.js | title": [
+                "audits.viewport.title"
+            ],
+            "lighthouse-core/audits/viewport.js | description": [
+                "audits.viewport.description"
+            ],
+            "lighthouse-core/audits/without-javascript.js | title": [
+                "audits[without-javascript].title"
+            ],
+            "lighthouse-core/audits/without-javascript.js | description": [
+                "audits[without-javascript].description"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | firstContentfulPaintMetric": [
+                "audits[first-contentful-paint].title"
+            ],
+            "lighthouse-core/audits/metrics/first-contentful-paint.js | description": [
+                "audits[first-contentful-paint].description"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | seconds": [{
+                    "values": {
+                        "timeInMs": 1155.3049999999998
+                    },
+                    "path": "audits[first-contentful-paint].displayValue"
+                },
+                {
+                    "values": {
+                        "timeInMs": 9207.7935
+                    },
+                    "path": "audits[largest-contentful-paint].displayValue"
+                },
+                {
+                    "values": {
+                        "timeInMs": 1155.3049999999998
+                    },
+                    "path": "audits[first-meaningful-paint].displayValue"
+                },
+                {
+                    "values": {
+                        "timeInMs": 4738.4622522095015
+                    },
+                    "path": "audits[speed-index].displayValue"
+                },
+                {
+                    "values": {
+                        "timeInMs": 9114.288
+                    },
+                    "path": "audits[first-cpu-idle].displayValue"
+                },
+                {
+                    "values": {
+                        "timeInMs": 9750.906500000001
+                    },
+                    "path": "audits.interactive.displayValue"
+                },
+                {
+                    "values": {
+                        "timeInMs": 4656.240000000001
+                    },
+                    "path": "audits[mainthread-work-breakdown].displayValue"
+                },
+                {
+                    "values": {
+                        "timeInMs": 3146.575999999999
+                    },
+                    "path": "audits[bootup-time].displayValue"
+                }
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | largestContentfulPaintMetric": [
+                "audits[largest-contentful-paint].title"
+            ],
+            "lighthouse-core/audits/metrics/largest-contentful-paint.js | description": [
+                "audits[largest-contentful-paint].description"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | firstMeaningfulPaintMetric": [
+                "audits[first-meaningful-paint].title"
+            ],
+            "lighthouse-core/audits/metrics/first-meaningful-paint.js | description": [
+                "audits[first-meaningful-paint].description"
+            ],
+            "lighthouse-core/audits/load-fast-enough-for-pwa.js | title": [
+                "audits[load-fast-enough-for-pwa].title"
+            ],
+            "lighthouse-core/audits/load-fast-enough-for-pwa.js | description": [
+                "audits[load-fast-enough-for-pwa].description"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | speedIndexMetric": [
+                "audits[speed-index].title"
+            ],
+            "lighthouse-core/audits/metrics/speed-index.js | description": [
+                "audits[speed-index].description"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | estimatedInputLatencyMetric": [
+                "audits[estimated-input-latency].title"
+            ],
+            "lighthouse-core/audits/metrics/estimated-input-latency.js | description": [
+                "audits[estimated-input-latency].description"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | ms": [{
+                    "values": {
+                        "timeInMs": 523.1999999999996
+                    },
+                    "path": "audits[estimated-input-latency].displayValue"
+                },
+                {
+                    "values": {
+                        "timeInMs": 1991.499999999999
+                    },
+                    "path": "audits[total-blocking-time].displayValue"
+                },
+                {
+                    "values": {
+                        "timeInMs": 1137.9999999999995
+                    },
+                    "path": "audits[max-potential-fid].displayValue"
+                },
+                {
+                    "values": {
+                        "timeInMs": 172.425
+                    },
+                    "path": "audits[network-rtt].displayValue"
+                },
+                {
+                    "values": {
+                        "timeInMs": 22.328000000000003
+                    },
+                    "path": "audits[network-server-latency].displayValue"
+                }
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | totalBlockingTimeMetric": [
+                "audits[total-blocking-time].title"
+            ],
+            "lighthouse-core/audits/metrics/total-blocking-time.js | description": [
+                "audits[total-blocking-time].description"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | maxPotentialFIDMetric": [
+                "audits[max-potential-fid].title"
+            ],
+            "lighthouse-core/audits/metrics/max-potential-fid.js | description": [
+                "audits[max-potential-fid].description"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | cumulativeLayoutShiftMetric": [
+                "audits[cumulative-layout-shift].title"
+            ],
+            "lighthouse-core/audits/metrics/cumulative-layout-shift.js | description": [
+                "audits[cumulative-layout-shift].description"
+            ],
+            "lighthouse-core/audits/errors-in-console.js | failureTitle": [
+                "audits[errors-in-console].title"
+            ],
+            "lighthouse-core/audits/errors-in-console.js | description": [
+                "audits[errors-in-console].description"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | columnURL": [
+                "audits[errors-in-console].details.headings[0].text",
+                "audits[server-response-time].details.headings[0].label",
+                "audits[bootup-time].details.headings[0].text",
+                "audits[uses-rel-preconnect].details.headings[0].label",
+                "audits[network-rtt].details.headings[0].text",
+                "audits[network-server-latency].details.headings[0].text",
+                "audits[long-tasks].details.headings[0].text",
+                "audits[no-unload-listeners].details.headings[0].text",
+                "audits[unsized-images].details.headings[1].text",
+                "audits[preload-lcp-image].details.headings[1].label",
+                "audits[uses-long-cache-ttl].details.headings[0].text",
+                "audits[total-byte-weight].details.headings[0].text",
+                "audits[unused-javascript].details.headings[0].label",
+                "audits[uses-webp-images].details.headings[1].label",
+                "audits[uses-text-compression].details.headings[0].label",
+                "audits[uses-responsive-images].details.headings[1].label",
+                "audits[legacy-javascript].details.headings[0].label"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | columnDescription": [
+                "audits[errors-in-console].details.headings[1].text"
+            ],
+            "lighthouse-core/audits/server-response-time.js | title": [
+                "audits[server-response-time].title"
+            ],
+            "lighthouse-core/audits/server-response-time.js | description": [
+                "audits[server-response-time].description"
+            ],
+            "lighthouse-core/audits/server-response-time.js | displayValue": [{
+                "values": {
+                    "timeInMs": 369.548
+                },
+                "path": "audits[server-response-time].displayValue"
+            }],
+            "lighthouse-core/lib/i18n/i18n.js | columnTimeSpent": [
+                "audits[server-response-time].details.headings[1].label",
+                "audits[mainthread-work-breakdown].details.headings[1].text",
+                "audits[network-rtt].details.headings[1].text",
+                "audits[network-server-latency].details.headings[1].text"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | firstCPUIdleMetric": [
+                "audits[first-cpu-idle].title"
+            ],
+            "lighthouse-core/audits/metrics/first-cpu-idle.js | description": [
+                "audits[first-cpu-idle].description"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | interactiveMetric": [
+                "audits.interactive.title"
+            ],
+            "lighthouse-core/audits/metrics/interactive.js | description": [
+                "audits.interactive.description"
+            ],
+            "lighthouse-core/audits/user-timings.js | title": [
+                "audits[user-timings].title"
+            ],
+            "lighthouse-core/audits/user-timings.js | description": [
+                "audits[user-timings].description"
+            ],
+            "lighthouse-core/audits/critical-request-chains.js | title": [
+                "audits[critical-request-chains].title"
+            ],
+            "lighthouse-core/audits/critical-request-chains.js | description": [
+                "audits[critical-request-chains].description"
+            ],
+            "lighthouse-core/audits/critical-request-chains.js | displayValue": [{
+                "values": {
+                    "itemCount": 5
+                },
+                "path": "audits[critical-request-chains].displayValue"
+            }],
+            "lighthouse-core/audits/redirects.js | title": [
+                "audits.redirects.title"
+            ],
+            "lighthouse-core/audits/redirects.js | description": [
+                "audits.redirects.description"
+            ],
+            "lighthouse-core/audits/installable-manifest.js | failureTitle": [
+                "audits[installable-manifest].title"
+            ],
+            "lighthouse-core/audits/installable-manifest.js | description": [
+                "audits[installable-manifest].description"
+            ],
+            "lighthouse-core/audits/apple-touch-icon.js | failureTitle": [
+                "audits[apple-touch-icon].title"
+            ],
+            "lighthouse-core/audits/apple-touch-icon.js | description": [
+                "audits[apple-touch-icon].description"
+            ],
+            "lighthouse-core/audits/splash-screen.js | failureTitle": [
+                "audits[splash-screen].title"
+            ],
+            "lighthouse-core/audits/splash-screen.js | description": [
+                "audits[splash-screen].description"
+            ],
+            "lighthouse-core/audits/themed-omnibox.js | failureTitle": [
+                "audits[themed-omnibox].title"
+            ],
+            "lighthouse-core/audits/themed-omnibox.js | description": [
+                "audits[themed-omnibox].description"
+            ],
+            "lighthouse-core/audits/maskable-icon.js | failureTitle": [
+                "audits[maskable-icon].title"
+            ],
+            "lighthouse-core/audits/maskable-icon.js | description": [
+                "audits[maskable-icon].description"
+            ],
+            "lighthouse-core/audits/content-width.js | title": [
+                "audits[content-width].title"
+            ],
+            "lighthouse-core/audits/content-width.js | description": [
+                "audits[content-width].description"
+            ],
+            "lighthouse-core/audits/image-aspect-ratio.js | title": [
+                "audits[image-aspect-ratio].title"
+            ],
+            "lighthouse-core/audits/image-aspect-ratio.js | description": [
+                "audits[image-aspect-ratio].description"
+            ],
+            "lighthouse-core/audits/image-size-responsive.js | title": [
+                "audits[image-size-responsive].title"
+            ],
+            "lighthouse-core/audits/image-size-responsive.js | description": [
+                "audits[image-size-responsive].description"
+            ],
+            "lighthouse-core/audits/preload-fonts.js | title": [
+                "audits[preload-fonts].title"
+            ],
+            "lighthouse-core/audits/preload-fonts.js | description": [
+                "audits[preload-fonts].description"
+            ],
+            "lighthouse-core/audits/deprecations.js | title": [
+                "audits.deprecations.title"
+            ],
+            "lighthouse-core/audits/deprecations.js | description": [
+                "audits.deprecations.description"
+            ],
+            "lighthouse-core/audits/mainthread-work-breakdown.js | failureTitle": [
+                "audits[mainthread-work-breakdown].title"
+            ],
+            "lighthouse-core/audits/mainthread-work-breakdown.js | description": [
+                "audits[mainthread-work-breakdown].description"
+            ],
+            "lighthouse-core/audits/mainthread-work-breakdown.js | columnCategory": [
+                "audits[mainthread-work-breakdown].details.headings[0].text"
+            ],
+            "lighthouse-core/audits/bootup-time.js | failureTitle": [
+                "audits[bootup-time].title"
+            ],
+            "lighthouse-core/audits/bootup-time.js | description": [
+                "audits[bootup-time].description"
+            ],
+            "lighthouse-core/audits/bootup-time.js | columnTotal": [
+                "audits[bootup-time].details.headings[1].text"
+            ],
+            "lighthouse-core/audits/bootup-time.js | columnScriptEval": [
+                "audits[bootup-time].details.headings[2].text"
+            ],
+            "lighthouse-core/audits/bootup-time.js | columnScriptParse": [
+                "audits[bootup-time].details.headings[3].text"
+            ],
+            "lighthouse-core/audits/uses-rel-preload.js | title": [
+                "audits[uses-rel-preload].title"
+            ],
+            "lighthouse-core/audits/uses-rel-preload.js | description": [
+                "audits[uses-rel-preload].description"
+            ],
+            "lighthouse-core/audits/uses-rel-preconnect.js | title": [
+                "audits[uses-rel-preconnect].title"
+            ],
+            "lighthouse-core/audits/uses-rel-preconnect.js | description": [
+                "audits[uses-rel-preconnect].description"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | displayValueMsSavings": [{
+                    "values": {
+                        "wastedMs": 338.62
+                    },
+                    "path": "audits[uses-rel-preconnect].displayValue"
+                },
+                {
+                    "values": {
+                        "wastedMs": 2703.760000000002
+                    },
+                    "path": "audits[preload-lcp-image].displayValue"
+                }
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | columnWastedBytes": [
+                "audits[uses-rel-preconnect].details.headings[1].label",
+                "audits[preload-lcp-image].details.headings[2].label",
+                "audits[unused-javascript].details.headings[2].label",
+                "audits[uses-webp-images].details.headings[3].label",
+                "audits[uses-text-compression].details.headings[2].label",
+                "audits[uses-responsive-images].details.headings[3].label",
+                "audits[legacy-javascript].details.headings[2].label"
+            ],
+            "lighthouse-core/audits/font-display.js | title": [
+                "audits[font-display].title"
+            ],
+            "lighthouse-core/audits/font-display.js | description": [
+                "audits[font-display].description"
+            ],
+            "lighthouse-core/audits/network-rtt.js | title": [
+                "audits[network-rtt].title"
+            ],
+            "lighthouse-core/audits/network-rtt.js | description": [
+                "audits[network-rtt].description"
+            ],
+            "lighthouse-core/audits/network-server-latency.js | title": [
+                "audits[network-server-latency].title"
+            ],
+            "lighthouse-core/audits/network-server-latency.js | description": [
+                "audits[network-server-latency].description"
+            ],
+            "lighthouse-core/audits/offline-start-url.js | failureTitle": [
+                "audits[offline-start-url].title"
+            ],
+            "lighthouse-core/audits/offline-start-url.js | description": [
+                "audits[offline-start-url].description"
+            ],
+            "lighthouse-core/audits/performance-budget.js | title": [
+                "audits[performance-budget].title"
+            ],
+            "lighthouse-core/audits/performance-budget.js | description": [
+                "audits[performance-budget].description"
+            ],
+            "lighthouse-core/audits/timing-budget.js | title": [
+                "audits[timing-budget].title"
+            ],
+            "lighthouse-core/audits/timing-budget.js | description": [
+                "audits[timing-budget].description"
+            ],
+            "lighthouse-core/audits/resource-summary.js | title": [
+                "audits[resource-summary].title"
+            ],
+            "lighthouse-core/audits/resource-summary.js | description": [
+                "audits[resource-summary].description"
+            ],
+            "lighthouse-core/audits/resource-summary.js | displayValue": [{
+                "values": {
+                    "requestCount": 44,
+                    "byteCount": 1463879
+                },
+                "path": "audits[resource-summary].displayValue"
+            }],
+            "lighthouse-core/lib/i18n/i18n.js | columnResourceType": [
+                "audits[resource-summary].details.headings[0].text"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | columnRequests": [
+                "audits[resource-summary].details.headings[1].text"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | columnTransferSize": [
+                "audits[resource-summary].details.headings[2].text",
+                "audits[third-party-summary].details.headings[1].text",
+                "audits[uses-long-cache-ttl].details.headings[2].text",
+                "audits[total-byte-weight].details.headings[1].text",
+                "audits[unused-javascript].details.headings[1].label",
+                "audits[uses-text-compression].details.headings[1].label"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | totalResourceType": [
+                "audits[resource-summary].details.items[0].label"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | fontResourceType": [
+                "audits[resource-summary].details.items[1].label"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | scriptResourceType": [
+                "audits[resource-summary].details.items[2].label"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | imageResourceType": [
+                "audits[resource-summary].details.items[3].label"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | documentResourceType": [
+                "audits[resource-summary].details.items[4].label"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | otherResourceType": [
+                "audits[resource-summary].details.items[5].label"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | stylesheetResourceType": [
+                "audits[resource-summary].details.items[6].label"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | mediaResourceType": [
+                "audits[resource-summary].details.items[7].label"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | thirdPartyResourceType": [
+                "audits[resource-summary].details.items[8].label"
+            ],
+            "lighthouse-core/audits/third-party-summary.js | failureTitle": [
+                "audits[third-party-summary].title"
+            ],
+            "lighthouse-core/audits/third-party-summary.js | description": [
+                "audits[third-party-summary].description"
+            ],
+            "lighthouse-core/audits/third-party-summary.js | displayValue": [{
+                "values": {
+                    "timeInMs": 1783.2240000000002
+                },
+                "path": "audits[third-party-summary].displayValue"
+            }],
+            "lighthouse-core/audits/third-party-summary.js | columnThirdParty": [
+                "audits[third-party-summary].details.headings[0].text"
+            ],
+            "lighthouse-core/audits/third-party-summary.js | columnBlockingTime": [
+                "audits[third-party-summary].details.headings[2].text"
+            ],
+            "lighthouse-core/audits/third-party-summary.js | otherValue": [
+                "audits[third-party-summary].details.items[1].subItems.items[5].url"
+            ],
+            "lighthouse-core/audits/largest-contentful-paint-element.js | title": [
+                "audits[largest-contentful-paint-element].title"
+            ],
+            "lighthouse-core/audits/largest-contentful-paint-element.js | description": [
+                "audits[largest-contentful-paint-element].description"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | displayValueElementsFound": [{
+                    "values": {
+                        "nodeCount": 1
+                    },
+                    "path": "audits[largest-contentful-paint-element].displayValue"
+                },
+                {
+                    "values": {
+                        "nodeCount": 4
+                    },
+                    "path": "audits[layout-shift-elements].displayValue"
+                }
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | columnElement": [
+                "audits[largest-contentful-paint-element].details.headings[0].text",
+                "audits[layout-shift-elements].details.headings[0].text",
+                "audits[non-composited-animations].details.headings[0].text",
+                "audits[dom-size].details.headings[1].text"
+            ],
+            "lighthouse-core/audits/layout-shift-elements.js | title": [
+                "audits[layout-shift-elements].title"
+            ],
+            "lighthouse-core/audits/layout-shift-elements.js | description": [
+                "audits[layout-shift-elements].description"
+            ],
+            "lighthouse-core/audits/layout-shift-elements.js | columnContribution": [
+                "audits[layout-shift-elements].details.headings[1].text"
+            ],
+            "lighthouse-core/audits/long-tasks.js | title": [
+                "audits[long-tasks].title"
+            ],
+            "lighthouse-core/audits/long-tasks.js | description": [
+                "audits[long-tasks].description"
+            ],
+            "lighthouse-core/audits/long-tasks.js | displayValue": [{
+                "values": {
+                    "itemCount": 13
+                },
+                "path": "audits[long-tasks].displayValue"
+            }],
+            "lighthouse-core/lib/i18n/i18n.js | columnStartTime": [
+                "audits[long-tasks].details.headings[1].text"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | columnDuration": [
+                "audits[long-tasks].details.headings[2].text"
+            ],
+            "lighthouse-core/audits/no-unload-listeners.js | failureTitle": [
+                "audits[no-unload-listeners].title"
+            ],
+            "lighthouse-core/audits/no-unload-listeners.js | description": [
+                "audits[no-unload-listeners].description"
+            ],
+            "lighthouse-core/audits/non-composited-animations.js | title": [
+                "audits[non-composited-animations].title"
+            ],
+            "lighthouse-core/audits/non-composited-animations.js | description": [
+                "audits[non-composited-animations].description"
+            ],
+            "lighthouse-core/audits/non-composited-animations.js | displayValue": [{
+                "values": {
+                    "itemCount": 1
+                },
+                "path": "audits[non-composited-animations].displayValue"
+            }],
+            "lighthouse-core/audits/non-composited-animations.js | unsupportedCSSProperty": [{
+                "values": {
+                    "propertyCount": 1,
+                    "properties": "color"
+                },
+                "path": "audits[non-composited-animations].details.items[0].subItems.items[0].failureReason"
+            }],
+            "lighthouse-core/audits/unsized-images.js | failureTitle": [
+                "audits[unsized-images].title"
+            ],
+            "lighthouse-core/audits/unsized-images.js | description": [
+                "audits[unsized-images].description"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | columnFailingElem": [
+                "audits[unsized-images].details.headings[2].text",
+                "audits[frame-title].details.headings[0].text"
+            ],
+            "lighthouse-core/audits/valid-source-maps.js | title": [
+                "audits[valid-source-maps].title"
+            ],
+            "lighthouse-core/audits/valid-source-maps.js | description": [
+                "audits[valid-source-maps].description"
+            ],
+            "lighthouse-core/audits/preload-lcp-image.js | title": [
+                "audits[preload-lcp-image].title"
+            ],
+            "lighthouse-core/audits/preload-lcp-image.js | description": [
+                "audits[preload-lcp-image].description"
+            ],
+            "lighthouse-core/audits/manual/pwa-cross-browser.js | title": [
+                "audits[pwa-cross-browser].title"
+            ],
+            "lighthouse-core/audits/manual/pwa-cross-browser.js | description": [
+                "audits[pwa-cross-browser].description"
+            ],
+            "lighthouse-core/audits/manual/pwa-page-transitions.js | title": [
+                "audits[pwa-page-transitions].title"
+            ],
+            "lighthouse-core/audits/manual/pwa-page-transitions.js | description": [
+                "audits[pwa-page-transitions].description"
+            ],
+            "lighthouse-core/audits/manual/pwa-each-page-has-url.js | title": [
+                "audits[pwa-each-page-has-url].title"
+            ],
+            "lighthouse-core/audits/manual/pwa-each-page-has-url.js | description": [
+                "audits[pwa-each-page-has-url].description"
+            ],
+            "lighthouse-core/audits/accessibility/accesskeys.js | title": [
+                "audits.accesskeys.title"
+            ],
+            "lighthouse-core/audits/accessibility/accesskeys.js | description": [
+                "audits.accesskeys.description"
+            ],
+            "lighthouse-core/audits/accessibility/aria-allowed-attr.js | title": [
+                "audits[aria-allowed-attr].title"
+            ],
+            "lighthouse-core/audits/accessibility/aria-allowed-attr.js | description": [
+                "audits[aria-allowed-attr].description"
+            ],
+            "lighthouse-core/audits/accessibility/aria-hidden-body.js | title": [
+                "audits[aria-hidden-body].title"
+            ],
+            "lighthouse-core/audits/accessibility/aria-hidden-body.js | description": [
+                "audits[aria-hidden-body].description"
+            ],
+            "lighthouse-core/audits/accessibility/aria-hidden-focus.js | title": [
+                "audits[aria-hidden-focus].title"
+            ],
+            "lighthouse-core/audits/accessibility/aria-hidden-focus.js | description": [
+                "audits[aria-hidden-focus].description"
+            ],
+            "lighthouse-core/audits/accessibility/aria-input-field-name.js | title": [
+                "audits[aria-input-field-name].title"
+            ],
+            "lighthouse-core/audits/accessibility/aria-input-field-name.js | description": [
+                "audits[aria-input-field-name].description"
+            ],
+            "lighthouse-core/audits/accessibility/aria-required-attr.js | title": [
+                "audits[aria-required-attr].title"
+            ],
+            "lighthouse-core/audits/accessibility/aria-required-attr.js | description": [
+                "audits[aria-required-attr].description"
+            ],
+            "lighthouse-core/audits/accessibility/aria-required-children.js | title": [
+                "audits[aria-required-children].title"
+            ],
+            "lighthouse-core/audits/accessibility/aria-required-children.js | description": [
+                "audits[aria-required-children].description"
+            ],
+            "lighthouse-core/audits/accessibility/aria-required-parent.js | title": [
+                "audits[aria-required-parent].title"
+            ],
+            "lighthouse-core/audits/accessibility/aria-required-parent.js | description": [
+                "audits[aria-required-parent].description"
+            ],
+            "lighthouse-core/audits/accessibility/aria-roles.js | title": [
+                "audits[aria-roles].title"
+            ],
+            "lighthouse-core/audits/accessibility/aria-roles.js | description": [
+                "audits[aria-roles].description"
+            ],
+            "lighthouse-core/audits/accessibility/aria-toggle-field-name.js | title": [
+                "audits[aria-toggle-field-name].title"
+            ],
+            "lighthouse-core/audits/accessibility/aria-toggle-field-name.js | description": [
+                "audits[aria-toggle-field-name].description"
+            ],
+            "lighthouse-core/audits/accessibility/aria-valid-attr-value.js | title": [
+                "audits[aria-valid-attr-value].title"
+            ],
+            "lighthouse-core/audits/accessibility/aria-valid-attr-value.js | description": [
+                "audits[aria-valid-attr-value].description"
+            ],
+            "lighthouse-core/audits/accessibility/aria-valid-attr.js | title": [
+                "audits[aria-valid-attr].title"
+            ],
+            "lighthouse-core/audits/accessibility/aria-valid-attr.js | description": [
+                "audits[aria-valid-attr].description"
+            ],
+            "lighthouse-core/audits/accessibility/button-name.js | title": [
+                "audits[button-name].title"
+            ],
+            "lighthouse-core/audits/accessibility/button-name.js | description": [
+                "audits[button-name].description"
+            ],
+            "lighthouse-core/audits/accessibility/bypass.js | title": [
+                "audits.bypass.title"
+            ],
+            "lighthouse-core/audits/accessibility/bypass.js | description": [
+                "audits.bypass.description"
+            ],
+            "lighthouse-core/audits/accessibility/color-contrast.js | title": [
+                "audits[color-contrast].title"
+            ],
+            "lighthouse-core/audits/accessibility/color-contrast.js | description": [
+                "audits[color-contrast].description"
+            ],
+            "lighthouse-core/audits/accessibility/definition-list.js | title": [
+                "audits[definition-list].title"
+            ],
+            "lighthouse-core/audits/accessibility/definition-list.js | description": [
+                "audits[definition-list].description"
+            ],
+            "lighthouse-core/audits/accessibility/dlitem.js | title": [
+                "audits.dlitem.title"
+            ],
+            "lighthouse-core/audits/accessibility/dlitem.js | description": [
+                "audits.dlitem.description"
+            ],
+            "lighthouse-core/audits/accessibility/document-title.js | title": [
+                "audits[document-title].title"
+            ],
+            "lighthouse-core/audits/accessibility/document-title.js | description": [
+                "audits[document-title].description"
+            ],
+            "lighthouse-core/audits/accessibility/duplicate-id-active.js | title": [
+                "audits[duplicate-id-active].title"
+            ],
+            "lighthouse-core/audits/accessibility/duplicate-id-active.js | description": [
+                "audits[duplicate-id-active].description"
+            ],
+            "lighthouse-core/audits/accessibility/duplicate-id-aria.js | title": [
+                "audits[duplicate-id-aria].title"
+            ],
+            "lighthouse-core/audits/accessibility/duplicate-id-aria.js | description": [
+                "audits[duplicate-id-aria].description"
+            ],
+            "lighthouse-core/audits/accessibility/form-field-multiple-labels.js | title": [
+                "audits[form-field-multiple-labels].title"
+            ],
+            "lighthouse-core/audits/accessibility/form-field-multiple-labels.js | description": [
+                "audits[form-field-multiple-labels].description"
+            ],
+            "lighthouse-core/audits/accessibility/frame-title.js | failureTitle": [
+                "audits[frame-title].title"
+            ],
+            "lighthouse-core/audits/accessibility/frame-title.js | description": [
+                "audits[frame-title].description"
+            ],
+            "lighthouse-core/audits/accessibility/heading-order.js | title": [
+                "audits[heading-order].title"
+            ],
+            "lighthouse-core/audits/accessibility/heading-order.js | description": [
+                "audits[heading-order].description"
+            ],
+            "lighthouse-core/audits/accessibility/html-has-lang.js | title": [
+                "audits[html-has-lang].title"
+            ],
+            "lighthouse-core/audits/accessibility/html-has-lang.js | description": [
+                "audits[html-has-lang].description"
+            ],
+            "lighthouse-core/audits/accessibility/html-lang-valid.js | title": [
+                "audits[html-lang-valid].title"
+            ],
+            "lighthouse-core/audits/accessibility/html-lang-valid.js | description": [
+                "audits[html-lang-valid].description"
+            ],
+            "lighthouse-core/audits/accessibility/image-alt.js | title": [
+                "audits[image-alt].title"
+            ],
+            "lighthouse-core/audits/accessibility/image-alt.js | description": [
+                "audits[image-alt].description"
+            ],
+            "lighthouse-core/audits/accessibility/input-image-alt.js | title": [
+                "audits[input-image-alt].title"
+            ],
+            "lighthouse-core/audits/accessibility/input-image-alt.js | description": [
+                "audits[input-image-alt].description"
+            ],
+            "lighthouse-core/audits/accessibility/label.js | title": [
+                "audits.label.title"
+            ],
+            "lighthouse-core/audits/accessibility/label.js | description": [
+                "audits.label.description"
+            ],
+            "lighthouse-core/audits/accessibility/layout-table.js | title": [
+                "audits[layout-table].title"
+            ],
+            "lighthouse-core/audits/accessibility/layout-table.js | description": [
+                "audits[layout-table].description"
+            ],
+            "lighthouse-core/audits/accessibility/link-name.js | title": [
+                "audits[link-name].title"
+            ],
+            "lighthouse-core/audits/accessibility/link-name.js | description": [
+                "audits[link-name].description"
+            ],
+            "lighthouse-core/audits/accessibility/list.js | title": [
+                "audits.list.title"
+            ],
+            "lighthouse-core/audits/accessibility/list.js | description": [
+                "audits.list.description"
+            ],
+            "lighthouse-core/audits/accessibility/listitem.js | title": [
+                "audits.listitem.title"
+            ],
+            "lighthouse-core/audits/accessibility/listitem.js | description": [
+                "audits.listitem.description"
+            ],
+            "lighthouse-core/audits/accessibility/meta-refresh.js | title": [
+                "audits[meta-refresh].title"
+            ],
+            "lighthouse-core/audits/accessibility/meta-refresh.js | description": [
+                "audits[meta-refresh].description"
+            ],
+            "lighthouse-core/audits/accessibility/meta-viewport.js | title": [
+                "audits[meta-viewport].title"
+            ],
+            "lighthouse-core/audits/accessibility/meta-viewport.js | description": [
+                "audits[meta-viewport].description"
+            ],
+            "lighthouse-core/audits/accessibility/object-alt.js | title": [
+                "audits[object-alt].title"
+            ],
+            "lighthouse-core/audits/accessibility/object-alt.js | description": [
+                "audits[object-alt].description"
+            ],
+            "lighthouse-core/audits/accessibility/tabindex.js | title": [
+                "audits.tabindex.title"
+            ],
+            "lighthouse-core/audits/accessibility/tabindex.js | description": [
+                "audits.tabindex.description"
+            ],
+            "lighthouse-core/audits/accessibility/td-headers-attr.js | title": [
+                "audits[td-headers-attr].title"
+            ],
+            "lighthouse-core/audits/accessibility/td-headers-attr.js | description": [
+                "audits[td-headers-attr].description"
+            ],
+            "lighthouse-core/audits/accessibility/th-has-data-cells.js | title": [
+                "audits[th-has-data-cells].title"
+            ],
+            "lighthouse-core/audits/accessibility/th-has-data-cells.js | description": [
+                "audits[th-has-data-cells].description"
+            ],
+            "lighthouse-core/audits/accessibility/valid-lang.js | title": [
+                "audits[valid-lang].title"
+            ],
+            "lighthouse-core/audits/accessibility/valid-lang.js | description": [
+                "audits[valid-lang].description"
+            ],
+            "lighthouse-core/audits/accessibility/video-caption.js | title": [
+                "audits[video-caption].title"
+            ],
+            "lighthouse-core/audits/accessibility/video-caption.js | description": [
+                "audits[video-caption].description"
+            ],
+            "lighthouse-core/audits/accessibility/video-description.js | title": [
+                "audits[video-description].title"
+            ],
+            "lighthouse-core/audits/accessibility/video-description.js | description": [
+                "audits[video-description].description"
+            ],
+            "lighthouse-core/audits/byte-efficiency/uses-long-cache-ttl.js | failureTitle": [
+                "audits[uses-long-cache-ttl].title"
+            ],
+            "lighthouse-core/audits/byte-efficiency/uses-long-cache-ttl.js | description": [
+                "audits[uses-long-cache-ttl].description"
+            ],
+            "lighthouse-core/audits/byte-efficiency/uses-long-cache-ttl.js | displayValue": [{
+                "values": {
+                    "itemCount": 6
+                },
+                "path": "audits[uses-long-cache-ttl].displayValue"
+            }],
+            "lighthouse-core/lib/i18n/i18n.js | columnCacheTTL": [
+                "audits[uses-long-cache-ttl].details.headings[1].text"
+            ],
+            "lighthouse-core/audits/byte-efficiency/total-byte-weight.js | title": [
+                "audits[total-byte-weight].title"
+            ],
+            "lighthouse-core/audits/byte-efficiency/total-byte-weight.js | description": [
+                "audits[total-byte-weight].description"
+            ],
+            "lighthouse-core/audits/byte-efficiency/total-byte-weight.js | displayValue": [{
+                "values": {
+                    "totalBytes": 1463879
+                },
+                "path": "audits[total-byte-weight].displayValue"
+            }],
+            "lighthouse-core/audits/byte-efficiency/offscreen-images.js | title": [
+                "audits[offscreen-images].title"
+            ],
+            "lighthouse-core/audits/byte-efficiency/offscreen-images.js | description": [
+                "audits[offscreen-images].description"
+            ],
+            "lighthouse-core/audits/byte-efficiency/render-blocking-resources.js | title": [
+                "audits[render-blocking-resources].title"
+            ],
+            "lighthouse-core/audits/byte-efficiency/render-blocking-resources.js | description": [
+                "audits[render-blocking-resources].description"
+            ],
+            "lighthouse-core/audits/byte-efficiency/unminified-css.js | title": [
+                "audits[unminified-css].title"
+            ],
+            "lighthouse-core/audits/byte-efficiency/unminified-css.js | description": [
+                "audits[unminified-css].description"
+            ],
+            "lighthouse-core/audits/byte-efficiency/unminified-javascript.js | title": [
+                "audits[unminified-javascript].title"
+            ],
+            "lighthouse-core/audits/byte-efficiency/unminified-javascript.js | description": [
+                "audits[unminified-javascript].description"
+            ],
+            "lighthouse-core/audits/byte-efficiency/unused-css-rules.js | title": [
+                "audits[unused-css-rules].title"
+            ],
+            "lighthouse-core/audits/byte-efficiency/unused-css-rules.js | description": [
+                "audits[unused-css-rules].description"
+            ],
+            "lighthouse-core/audits/byte-efficiency/unused-javascript.js | title": [
+                "audits[unused-javascript].title"
+            ],
+            "lighthouse-core/audits/byte-efficiency/unused-javascript.js | description": [
+                "audits[unused-javascript].description"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | displayValueByteSavings": [{
+                    "values": {
+                        "wastedBytes": 418350
+                    },
+                    "path": "audits[unused-javascript].displayValue"
+                },
+                {
+                    "values": {
+                        "wastedBytes": 173145
+                    },
+                    "path": "audits[uses-webp-images].displayValue"
+                },
+                {
+                    "values": {
+                        "wastedBytes": 34786
+                    },
+                    "path": "audits[uses-text-compression].displayValue"
+                },
+                {
+                    "values": {
+                        "wastedBytes": 212524
+                    },
+                    "path": "audits[uses-responsive-images].displayValue"
+                },
+                {
+                    "values": {
+                        "wastedBytes": 226
+                    },
+                    "path": "audits[legacy-javascript].displayValue"
+                }
+            ],
+            "lighthouse-core/audits/byte-efficiency/uses-webp-images.js | title": [
+                "audits[uses-webp-images].title"
+            ],
+            "lighthouse-core/audits/byte-efficiency/uses-webp-images.js | description": [
+                "audits[uses-webp-images].description"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | columnResourceSize": [
+                "audits[uses-webp-images].details.headings[2].label",
+                "audits[uses-responsive-images].details.headings[2].label"
+            ],
+            "lighthouse-core/audits/byte-efficiency/uses-optimized-images.js | title": [
+                "audits[uses-optimized-images].title"
+            ],
+            "lighthouse-core/audits/byte-efficiency/uses-optimized-images.js | description": [
+                "audits[uses-optimized-images].description"
+            ],
+            "lighthouse-core/audits/byte-efficiency/uses-text-compression.js | title": [
+                "audits[uses-text-compression].title"
+            ],
+            "lighthouse-core/audits/byte-efficiency/uses-text-compression.js | description": [
+                "audits[uses-text-compression].description"
+            ],
+            "lighthouse-core/audits/byte-efficiency/uses-responsive-images.js | title": [
+                "audits[uses-responsive-images].title"
+            ],
+            "lighthouse-core/audits/byte-efficiency/uses-responsive-images.js | description": [
+                "audits[uses-responsive-images].description"
+            ],
+            "lighthouse-core/audits/byte-efficiency/efficient-animated-content.js | title": [
+                "audits[efficient-animated-content].title"
+            ],
+            "lighthouse-core/audits/byte-efficiency/efficient-animated-content.js | description": [
+                "audits[efficient-animated-content].description"
+            ],
+            "lighthouse-core/audits/byte-efficiency/duplicated-javascript.js | title": [
+                "audits[duplicated-javascript].title"
+            ],
+            "lighthouse-core/audits/byte-efficiency/duplicated-javascript.js | description": [
+                "audits[duplicated-javascript].description"
+            ],
+            "lighthouse-core/audits/byte-efficiency/legacy-javascript.js | title": [
+                "audits[legacy-javascript].title"
+            ],
+            "lighthouse-core/audits/byte-efficiency/legacy-javascript.js | description": [
+                "audits[legacy-javascript].description"
+            ],
+            "lighthouse-core/audits/dobetterweb/appcache-manifest.js | title": [
+                "audits[appcache-manifest].title"
+            ],
+            "lighthouse-core/audits/dobetterweb/appcache-manifest.js | description": [
+                "audits[appcache-manifest].description"
+            ],
+            "lighthouse-core/audits/dobetterweb/doctype.js | title": [
+                "audits.doctype.title"
+            ],
+            "lighthouse-core/audits/dobetterweb/doctype.js | description": [
+                "audits.doctype.description"
+            ],
+            "lighthouse-core/audits/dobetterweb/charset.js | title": [
+                "audits.charset.title"
+            ],
+            "lighthouse-core/audits/dobetterweb/charset.js | description": [
+                "audits.charset.description"
+            ],
+            "lighthouse-core/audits/dobetterweb/dom-size.js | title": [
+                "audits[dom-size].title"
+            ],
+            "lighthouse-core/audits/dobetterweb/dom-size.js | description": [
+                "audits[dom-size].description"
+            ],
+            "lighthouse-core/audits/dobetterweb/dom-size.js | displayValue": [{
+                "values": {
+                    "itemCount": 720
+                },
+                "path": "audits[dom-size].displayValue"
+            }],
+            "lighthouse-core/audits/dobetterweb/dom-size.js | columnStatistic": [
+                "audits[dom-size].details.headings[0].text"
+            ],
+            "lighthouse-core/audits/dobetterweb/dom-size.js | columnValue": [
+                "audits[dom-size].details.headings[2].text"
+            ],
+            "lighthouse-core/audits/dobetterweb/dom-size.js | statisticDOMElements": [
+                "audits[dom-size].details.items[0].statistic"
+            ],
+            "lighthouse-core/audits/dobetterweb/dom-size.js | statisticDOMDepth": [
+                "audits[dom-size].details.items[1].statistic"
+            ],
+            "lighthouse-core/audits/dobetterweb/dom-size.js | statisticDOMWidth": [
+                "audits[dom-size].details.items[2].statistic"
+            ],
+            "lighthouse-core/audits/dobetterweb/external-anchors-use-rel-noopener.js | title": [
+                "audits[external-anchors-use-rel-noopener].title"
+            ],
+            "lighthouse-core/audits/dobetterweb/external-anchors-use-rel-noopener.js | description": [
+                "audits[external-anchors-use-rel-noopener].description"
+            ],
+            "lighthouse-core/audits/dobetterweb/geolocation-on-start.js | title": [
+                "audits[geolocation-on-start].title"
+            ],
+            "lighthouse-core/audits/dobetterweb/geolocation-on-start.js | description": [
+                "audits[geolocation-on-start].description"
+            ],
+            "lighthouse-core/audits/dobetterweb/inspector-issues.js | title": [
+                "audits[inspector-issues].title"
+            ],
+            "lighthouse-core/audits/dobetterweb/inspector-issues.js | description": [
+                "audits[inspector-issues].description"
+            ],
+            "lighthouse-core/audits/dobetterweb/no-document-write.js | title": [
+                "audits[no-document-write].title"
+            ],
+            "lighthouse-core/audits/dobetterweb/no-document-write.js | description": [
+                "audits[no-document-write].description"
+            ],
+            "lighthouse-core/audits/dobetterweb/no-vulnerable-libraries.js | title": [
+                "audits[no-vulnerable-libraries].title"
+            ],
+            "lighthouse-core/audits/dobetterweb/no-vulnerable-libraries.js | description": [
+                "audits[no-vulnerable-libraries].description"
+            ],
+            "lighthouse-core/audits/dobetterweb/js-libraries.js | title": [
+                "audits[js-libraries].title"
+            ],
+            "lighthouse-core/audits/dobetterweb/js-libraries.js | description": [
+                "audits[js-libraries].description"
+            ],
+            "lighthouse-core/lib/i18n/i18n.js | columnName": [
+                "audits[js-libraries].details.headings[0].text"
+            ],
+            "lighthouse-core/audits/dobetterweb/js-libraries.js | columnVersion": [
+                "audits[js-libraries].details.headings[1].text"
+            ],
+            "lighthouse-core/audits/dobetterweb/notification-on-start.js | title": [
+                "audits[notification-on-start].title"
+            ],
+            "lighthouse-core/audits/dobetterweb/notification-on-start.js | description": [
+                "audits[notification-on-start].description"
+            ],
+            "lighthouse-core/audits/dobetterweb/password-inputs-can-be-pasted-into.js | title": [
+                "audits[password-inputs-can-be-pasted-into].title"
+            ],
+            "lighthouse-core/audits/dobetterweb/password-inputs-can-be-pasted-into.js | description": [
+                "audits[password-inputs-can-be-pasted-into].description"
+            ],
+            "lighthouse-core/audits/dobetterweb/uses-http2.js | title": [
+                "audits[uses-http2].title"
+            ],
+            "lighthouse-core/audits/dobetterweb/uses-http2.js | description": [
+                "audits[uses-http2].description"
+            ],
+            "lighthouse-core/audits/dobetterweb/uses-passive-event-listeners.js | title": [
+                "audits[uses-passive-event-listeners].title"
+            ],
+            "lighthouse-core/audits/dobetterweb/uses-passive-event-listeners.js | description": [
+                "audits[uses-passive-event-listeners].description"
+            ],
+            "lighthouse-core/audits/seo/meta-description.js | title": [
+                "audits[meta-description].title"
+            ],
+            "lighthouse-core/audits/seo/meta-description.js | description": [
+                "audits[meta-description].description"
+            ],
+            "lighthouse-core/audits/seo/http-status-code.js | title": [
+                "audits[http-status-code].title"
+            ],
+            "lighthouse-core/audits/seo/http-status-code.js | description": [
+                "audits[http-status-code].description"
+            ],
+            "lighthouse-core/audits/seo/font-size.js | title": [
+                "audits[font-size].title"
+            ],
+            "lighthouse-core/audits/seo/font-size.js | description": [
+                "audits[font-size].description"
+            ],
+            "lighthouse-core/audits/seo/font-size.js | displayValue": [{
+                "values": {
+                    "decimalProportion": 1
+                },
+                "path": "audits[font-size].displayValue"
+            }],
+            "lighthouse-core/lib/i18n/i18n.js | columnSource": [
+                "audits[font-size].details.headings[0].text"
+            ],
+            "lighthouse-core/audits/seo/font-size.js | columnSelector": [
+                "audits[font-size].details.headings[1].text"
+            ],
+            "lighthouse-core/audits/seo/font-size.js | columnPercentPageText": [
+                "audits[font-size].details.headings[2].text"
+            ],
+            "lighthouse-core/audits/seo/font-size.js | columnFontSize": [
+                "audits[font-size].details.headings[3].text"
+            ],
+            "lighthouse-core/audits/seo/font-size.js | legibleText": [
+                "audits[font-size].details.items[0].source.value"
+            ],
+            "lighthouse-core/audits/seo/link-text.js | title": [
+                "audits[link-text].title"
+            ],
+            "lighthouse-core/audits/seo/link-text.js | description": [
+                "audits[link-text].description"
+            ],
+            "lighthouse-core/audits/seo/crawlable-anchors.js | title": [
+                "audits[crawlable-anchors].title"
+            ],
+            "lighthouse-core/audits/seo/crawlable-anchors.js | description": [
+                "audits[crawlable-anchors].description"
+            ],
+            "lighthouse-core/audits/seo/is-crawlable.js | title": [
+                "audits[is-crawlable].title"
+            ],
+            "lighthouse-core/audits/seo/is-crawlable.js | description": [
+                "audits[is-crawlable].description"
+            ],
+            "lighthouse-core/audits/seo/robots-txt.js | title": [
+                "audits[robots-txt].title"
+            ],
+            "lighthouse-core/audits/seo/robots-txt.js | description": [
+                "audits[robots-txt].description"
+            ],
+            "lighthouse-core/audits/seo/tap-targets.js | title": [
+                "audits[tap-targets].title"
+            ],
+            "lighthouse-core/audits/seo/tap-targets.js | description": [
+                "audits[tap-targets].description"
+            ],
+            "lighthouse-core/audits/seo/tap-targets.js | displayValue": [{
+                "values": {
+                    "decimalProportion": 1
+                },
+                "path": "audits[tap-targets].displayValue"
+            }],
+            "lighthouse-core/audits/seo/hreflang.js | title": [
+                "audits.hreflang.title"
+            ],
+            "lighthouse-core/audits/seo/hreflang.js | description": [
+                "audits.hreflang.description"
+            ],
+            "lighthouse-core/audits/seo/plugins.js | title": [
+                "audits.plugins.title"
+            ],
+            "lighthouse-core/audits/seo/plugins.js | description": [
+                "audits.plugins.description"
+            ],
+            "lighthouse-core/audits/seo/canonical.js | title": [
+                "audits.canonical.title"
+            ],
+            "lighthouse-core/audits/seo/canonical.js | description": [
+                "audits.canonical.description"
+            ],
+            "lighthouse-core/audits/seo/manual/structured-data.js | title": [
+                "audits[structured-data].title"
+            ],
+            "lighthouse-core/audits/seo/manual/structured-data.js | description": [
+                "audits[structured-data].description"
+            ],
+            "lighthouse-core/config/default-config.js | performanceCategoryTitle": [
+                "categories.performance.title"
+            ],
+            "lighthouse-core/config/default-config.js | a11yCategoryTitle": [
+                "categories.accessibility.title"
+            ],
+            "lighthouse-core/config/default-config.js | a11yCategoryDescription": [
+                "categories.accessibility.description"
+            ],
+            "lighthouse-core/config/default-config.js | a11yCategoryManualDescription": [
+                "categories.accessibility.manualDescription"
+            ],
+            "lighthouse-core/config/default-config.js | bestPracticesCategoryTitle": [
+                "categories[best-practices].title"
+            ],
+            "lighthouse-core/config/default-config.js | seoCategoryTitle": [
+                "categories.seo.title"
+            ],
+            "lighthouse-core/config/default-config.js | seoCategoryDescription": [
+                "categories.seo.description"
+            ],
+            "lighthouse-core/config/default-config.js | seoCategoryManualDescription": [
+                "categories.seo.manualDescription"
+            ],
+            "lighthouse-core/config/default-config.js | pwaCategoryTitle": [
+                "categories.pwa.title"
+            ],
+            "lighthouse-core/config/default-config.js | pwaCategoryDescription": [
+                "categories.pwa.description"
+            ],
+            "lighthouse-core/config/default-config.js | pwaCategoryManualDescription": [
+                "categories.pwa.manualDescription"
+            ],
+            "lighthouse-core/config/default-config.js | metricGroupTitle": [
+                "categoryGroups.metrics.title"
+            ],
+            "lighthouse-core/config/default-config.js | loadOpportunitiesGroupTitle": [
+                "categoryGroups[load-opportunities].title"
+            ],
+            "lighthouse-core/config/default-config.js | loadOpportunitiesGroupDescription": [
+                "categoryGroups[load-opportunities].description"
+            ],
+            "lighthouse-core/config/default-config.js | budgetsGroupTitle": [
+                "categoryGroups.budgets.title"
+            ],
+            "lighthouse-core/config/default-config.js | budgetsGroupDescription": [
+                "categoryGroups.budgets.description"
+            ],
+            "lighthouse-core/config/default-config.js | diagnosticsGroupTitle": [
+                "categoryGroups.diagnostics.title"
+            ],
+            "lighthouse-core/config/default-config.js | diagnosticsGroupDescription": [
+                "categoryGroups.diagnostics.description"
+            ],
+            "lighthouse-core/config/default-config.js | pwaFastReliableGroupTitle": [
+                "categoryGroups[pwa-fast-reliable].title"
+            ],
+            "lighthouse-core/config/default-config.js | pwaInstallableGroupTitle": [
+                "categoryGroups[pwa-installable].title"
+            ],
+            "lighthouse-core/config/default-config.js | pwaOptimizedGroupTitle": [
+                "categoryGroups[pwa-optimized].title"
+            ],
+            "lighthouse-core/config/default-config.js | a11yBestPracticesGroupTitle": [
+                "categoryGroups[a11y-best-practices].title"
+            ],
+            "lighthouse-core/config/default-config.js | a11yBestPracticesGroupDescription": [
+                "categoryGroups[a11y-best-practices].description"
+            ],
+            "lighthouse-core/config/default-config.js | a11yColorContrastGroupTitle": [
+                "categoryGroups[a11y-color-contrast].title"
+            ],
+            "lighthouse-core/config/default-config.js | a11yColorContrastGroupDescription": [
+                "categoryGroups[a11y-color-contrast].description"
+            ],
+            "lighthouse-core/config/default-config.js | a11yNamesLabelsGroupTitle": [
+                "categoryGroups[a11y-names-labels].title"
+            ],
+            "lighthouse-core/config/default-config.js | a11yNamesLabelsGroupDescription": [
+                "categoryGroups[a11y-names-labels].description"
+            ],
+            "lighthouse-core/config/default-config.js | a11yNavigationGroupTitle": [
+                "categoryGroups[a11y-navigation].title"
+            ],
+            "lighthouse-core/config/default-config.js | a11yNavigationGroupDescription": [
+                "categoryGroups[a11y-navigation].description"
+            ],
+            "lighthouse-core/config/default-config.js | a11yAriaGroupTitle": [
+                "categoryGroups[a11y-aria].title"
+            ],
+            "lighthouse-core/config/default-config.js | a11yAriaGroupDescription": [
+                "categoryGroups[a11y-aria].description"
+            ],
+            "lighthouse-core/config/default-config.js | a11yLanguageGroupTitle": [
+                "categoryGroups[a11y-language].title"
+            ],
+            "lighthouse-core/config/default-config.js | a11yLanguageGroupDescription": [
+                "categoryGroups[a11y-language].description"
+            ],
+            "lighthouse-core/config/default-config.js | a11yAudioVideoGroupTitle": [
+                "categoryGroups[a11y-audio-video].title"
+            ],
+            "lighthouse-core/config/default-config.js | a11yAudioVideoGroupDescription": [
+                "categoryGroups[a11y-audio-video].description"
+            ],
+            "lighthouse-core/config/default-config.js | a11yTablesListsVideoGroupTitle": [
+                "categoryGroups[a11y-tables-lists].title"
+            ],
+            "lighthouse-core/config/default-config.js | a11yTablesListsVideoGroupDescription": [
+                "categoryGroups[a11y-tables-lists].description"
+            ],
+            "lighthouse-core/config/default-config.js | seoMobileGroupTitle": [
+                "categoryGroups[seo-mobile].title"
+            ],
+            "lighthouse-core/config/default-config.js | seoMobileGroupDescription": [
+                "categoryGroups[seo-mobile].description"
+            ],
+            "lighthouse-core/config/default-config.js | seoContentGroupTitle": [
+                "categoryGroups[seo-content].title"
+            ],
+            "lighthouse-core/config/default-config.js | seoContentGroupDescription": [
+                "categoryGroups[seo-content].description"
+            ],
+            "lighthouse-core/config/default-config.js | seoCrawlingGroupTitle": [
+                "categoryGroups[seo-crawl].title"
+            ],
+            "lighthouse-core/config/default-config.js | seoCrawlingGroupDescription": [
+                "categoryGroups[seo-crawl].description"
+            ],
+            "lighthouse-core/config/default-config.js | bestPracticesTrustSafetyGroupTitle": [
+                "categoryGroups[best-practices-trust-safety].title"
+            ],
+            "lighthouse-core/config/default-config.js | bestPracticesUXGroupTitle": [
+                "categoryGroups[best-practices-ux].title"
+            ],
+            "lighthouse-core/config/default-config.js | bestPracticesBrowserCompatGroupTitle": [
+                "categoryGroups[best-practices-browser-compat].title"
+            ],
+            "lighthouse-core/config/default-config.js | bestPracticesGeneralGroupTitle": [
+                "categoryGroups[best-practices-general].title"
+            ],
+            "node_modules/lighthouse-stack-packs/packs/react.js | unminified-css": [
+                "stackPacks[0].descriptions[unminified-css]"
+            ],
+            "node_modules/lighthouse-stack-packs/packs/react.js | unminified-javascript": [
+                "stackPacks[0].descriptions[unminified-javascript]"
+            ],
+            "node_modules/lighthouse-stack-packs/packs/react.js | unused-javascript": [
+                "stackPacks[0].descriptions[unused-javascript]"
+            ],
+            "node_modules/lighthouse-stack-packs/packs/react.js | time-to-first-byte": [
+                "stackPacks[0].descriptions[time-to-first-byte]"
+            ],
+            "node_modules/lighthouse-stack-packs/packs/react.js | redirects": [
+                "stackPacks[0].descriptions.redirects"
+            ],
+            "node_modules/lighthouse-stack-packs/packs/react.js | user-timings": [
+                "stackPacks[0].descriptions[user-timings]"
+            ],
+            "node_modules/lighthouse-stack-packs/packs/react.js | dom-size": [
+                "stackPacks[0].descriptions[dom-size]"
+            ]
+        }
+    },
+    "stackPacks": [{
+        "id": "react",
+        "title": "React",
+        "iconDataURL": "data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 841.9 595.3\"%3E %3Cg fill=\"%2361DAFB\"%3E%3Cpath d=\"M666.3 296.5c0-32.5-40.7-63.3-103.1-82.4 14.4-63.6 8-114.2-20.2-130.4-6.5-3.8-14.1-5.6-22.4-5.6v22.3c4.6 0 8.3.9 11.4 2.6 13.6 7.8 19.5 37.5 14.9 75.7-1.1 9.4-2.9 19.3-5.1 29.4-19.6-4.8-41-8.5-63.5-10.9-13.5-18.5-27.5-35.3-41.6-50 32.6-30.3 63.2-46.9 84-46.9V78c-27.5 0-63.5 19.6-99.9 53.6-36.4-33.8-72.4-53.2-99.9-53.2v22.3c20.7 0 51.4 16.5 84 46.6-14 14.7-28 31.4-41.3 49.9-22.6 2.4-44 6.1-63.6 11-2.3-10-4-19.7-5.2-29-4.7-38.2 1.1-67.9 14.6-75.8 3-1.8 6.9-2.6 11.5-2.6V78.5c-8.4 0-16 1.8-22.6 5.6-28.1 16.2-34.4 66.7-19.9 130.1-62.2 19.2-102.7 49.9-102.7 82.3 0 32.5 40.7 63.3 103.1 82.4-14.4 63.6-8 114.2 20.2 130.4 6.5 3.8 14.1 5.6 22.5 5.6 27.5 0 63.5-19.6 99.9-53.6 36.4 33.8 72.4 53.2 99.9 53.2 8.4 0 16-1.8 22.6-5.6 28.1-16.2 34.4-66.7 19.9-130.1 62-19.1 102.5-49.9 102.5-82.3zm-130.2-66.7c-3.7 12.9-8.3 26.2-13.5 39.5-4.1-8-8.4-16-13.1-24-4.6-8-9.5-15.8-14.4-23.4 14.2 2.1 27.9 4.7 41 7.9zm-45.8 106.5c-7.8 13.5-15.8 26.3-24.1 38.2-14.9 1.3-30 2-45.2 2-15.1 0-30.2-.7-45-1.9-8.3-11.9-16.4-24.6-24.2-38-7.6-13.1-14.5-26.4-20.8-39.8 6.2-13.4 13.2-26.8 20.7-39.9 7.8-13.5 15.8-26.3 24.1-38.2 14.9-1.3 30-2 45.2-2 15.1 0 30.2.7 45 1.9 8.3 11.9 16.4 24.6 24.2 38 7.6 13.1 14.5 26.4 20.8 39.8-6.3 13.4-13.2 26.8-20.7 39.9zm32.3-13c5.4 13.4 10 26.8 13.8 39.8-13.1 3.2-26.9 5.9-41.2 8 4.9-7.7 9.8-15.6 14.4-23.7 4.6-8 8.9-16.1 13-24.1zM421.2 430c-9.3-9.6-18.6-20.3-27.8-32 9 .4 18.2.7 27.5.7 9.4 0 18.7-.2 27.8-.7-9 11.7-18.3 22.4-27.5 32zm-74.4-58.9c-14.2-2.1-27.9-4.7-41-7.9 3.7-12.9 8.3-26.2 13.5-39.5 4.1 8 8.4 16 13.1 24 4.7 8 9.5 15.8 14.4 23.4zM420.7 163c9.3 9.6 18.6 20.3 27.8 32-9-.4-18.2-.7-27.5-.7-9.4 0-18.7.2-27.8.7 9-11.7 18.3-22.4 27.5-32zm-74 58.9c-4.9 7.7-9.8 15.6-14.4 23.7-4.6 8-8.9 16-13 24-5.4-13.4-10-26.8-13.8-39.8 13.1-3.1 26.9-5.8 41.2-7.9zm-90.5 125.2c-35.4-15.1-58.3-34.9-58.3-50.6 0-15.7 22.9-35.6 58.3-50.6 8.6-3.7 18-7 27.7-10.1 5.7 19.6 13.2 40 22.5 60.9-9.2 20.8-16.6 41.1-22.2 60.6-9.9-3.1-19.3-6.5-28-10.2zM310 490c-13.6-7.8-19.5-37.5-14.9-75.7 1.1-9.4 2.9-19.3 5.1-29.4 19.6 4.8 41 8.5 63.5 10.9 13.5 18.5 27.5 35.3 41.6 50-32.6 30.3-63.2 46.9-84 46.9-4.5-.1-8.3-1-11.3-2.7zm237.2-76.2c4.7 38.2-1.1 67.9-14.6 75.8-3 1.8-6.9 2.6-11.5 2.6-20.7 0-51.4-16.5-84-46.6 14-14.7 28-31.4 41.3-49.9 22.6-2.4 44-6.1 63.6-11 2.3 10.1 4.1 19.8 5.2 29.1zm38.5-66.7c-8.6 3.7-18 7-27.7 10.1-5.7-19.6-13.2-40-22.5-60.9 9.2-20.8 16.6-41.1 22.2-60.6 9.9 3.1 19.3 6.5 28.1 10.2 35.4 15.1 58.3 34.9 58.3 50.6-.1 15.7-23 35.6-58.4 50.6zM320.8 78.4z\"/%3E %3Ccircle cx=\"420.9\" cy=\"296.5\" r=\"45.7\"/%3E %3Cpath d=\"M520.5 78.1z\"/%3E%3C/g%3E%3C/svg%3E",
+        "descriptions": {
+            "unminified-css": "If your build system minifies CSS files automatically, ensure that you are deploying the production build of your application. You can check this with the React Developer Tools extension. [Learn more](https://reactjs.org/docs/optimizing-performance.html#use-the-production-build).",
+            "unminified-javascript": "If your build system minifies JS files automatically, ensure that you are deploying the production build of your application. You can check this with the React Developer Tools extension. [Learn more](https://reactjs.org/docs/optimizing-performance.html#use-the-production-build).",
+            "unused-javascript": "If you are not server-side rendering, [split your JavaScript bundles](https://web.dev/code-splitting-suspense/) with `React.lazy()`. Otherwise, code-split using a third-party library such as [loadable-components](https://www.smooth-code.com/open-source/loadable-components/docs/getting-started/).",
+            "time-to-first-byte": "If you are server-side rendering any React components, consider using `renderToNodeStream()` or `renderToStaticNodeStream()` to allow the client to receive and hydrate different parts of the markup instead of all at once. [Learn more](https://reactjs.org/docs/react-dom-server.html#rendertonodestream).",
+            "redirects": "If you are using React Router, minimize usage of the `<Redirect>` component for [route navigations](https://reacttraining.com/react-router/web/api/Redirect).",
+            "user-timings": "Use the React DevTools Profiler, which makes use of the Profiler API, to measure the rendering performance of your components. [Learn more.](https://reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html)",
+            "dom-size": "Consider using a \"windowing\" library like `react-window` to minimize the number of DOM nodes created if you are rendering many repeated elements on the page. [Learn more](https://web.dev/virtualize-long-lists-react-window/). Also, minimize unnecessary re-renders using [`shouldComponentUpdate`](https://reactjs.org/docs/optimizing-performance.html#shouldcomponentupdate-in-action), [`PureComponent`](https://reactjs.org/docs/react-api.html#reactpurecomponent), or [`React.memo`](https://reactjs.org/docs/react-api.html#reactmemo) and [skip effects](https://reactjs.org/docs/hooks-effect.html#tip-optimizing-performance-by-skipping-effects) only until certain dependencies have changed if you are using the `Effect` hook to improve runtime performance."
+        }
+    }]
+}

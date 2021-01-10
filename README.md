@@ -1,13 +1,15 @@
-<p align="center"><img src="./examples/OSAT.png" width="180px" /></p>
+<p align="center"><img src="./docs/images/OSAT.png" width="180px" /></p>
 
 
-# Open source SEO Audits Toolkit
+# Open source Audits Toolkit
 
-**OSAT** is a collection of tools created help you in your quest for a better SEO. All of these tools have been grouped into a single web app.
+**OSAT** is a collection of tools created help you in your quest for a better website. All of these tools have been grouped into a single web app.
 
 I've grown tired of SEO agencies making us pay hundreds of euros for simple tools. I decided to develop **OSAT** to help users find issues on their website and increase their SEO for free. 
 
-<p align="center"><img src="./examples/seotoolkit.gif" width="600px" /></p>
+After implementing the first features of **OSAT** I decided to introduced other features such as Security.
+
+<p align="center"><img src="./docs/images/osat-demo.gif" width="700px" /></p>
 
 ## Why you need it
 
@@ -18,163 +20,112 @@ I've grown tired of SEO agencies making us pay hundreds of euros for simple tool
 
 ## Features
 
-
-- **Lighthouse Score**: Run [Lighthouse](https://developers.google.com/web/tools/lighthouse) Audits and keep track of your scores
+- **Authentification** - A fully featured authentification system for the front & back
+- **RBAC/Organizations** - Create different organizations and give different access to each org to your users.
+- **Lighthouse Score** -  Run [Lighthouse](https://developers.google.com/web/tools/lighthouse) Audits and keep track of your scores
 - **SERP Rank** - Get the rank of your website on google for specific queries
-- **Keywords Finder** - Finds all the Mono,Bi and Trigrams associated to a specific request. Helps you write content faster.
-- **Internal Links Graphs** - Creates a graph of your website showing all the connections between your pages.
+- **Keywords Finder** - Find all the keywords of an article.
 - **Extract Headers/Links/Images** - Easily extract all the links on your website and their status codes, the headers of a page and all the images.
+- **Sitemap Extractor** - Extract all the urls of a website from its sitemap
+- **Summarizer** - Summarize any text from any length. Awesome for excerpt ! 
+- **Security Audit** - Audit Headers, Redirect, etc to make sure you website is secure.
 
 
 
 ## Installation
-
-You need to get a Google API Key from [here](https://developers.google.com/speed/docs/insights/v5/get-started) and paste it in your `.env`
-### Docker
-
-You can use **Docker**
-- Install Docker
-
-### Manual
-
-You need: 
-- **Python3**
-- **[Redis Server](https://redis.io/topics/quickstart)**
-
 
 
 ```Bash
 git clone https://github.com/StanGirard/SEOToolkit
 cd SEOToolkit
 ```
-
-Then install dependencies
-
-```Bash
-pip install -r requirements.txt
-```
-
 ## Running
 
 ### Docker
 ```Bash
-docker-compose up -d
+docker-compose --env-file .env-example up
 ```
-
-**OR**
-
-### Flask
-```Bash
-python3 run.py
-```
-
-### Redis Server
-```Bash
-redis-server
-```
-
-### Celery Worker
-```Bash
-celery worker -A celery_worker.celery --loglevel=info
-```
-
-
-
 ## Dashboard
 
-You can access the dashboard by going to [localhost:5000](http://localhost:5000)
+You can access the dashboard by going to [localhost:3000](http://localhost:3000)
 
 ## Config
 
-If needed create a `.env` file with information that you would like to overload from config.py
+If needed create a `.env` file with information that you would like to change
 
-## Screenshots
+## Initialisation
 
-### SERP Rank
+### Create super admin
+You need to create a superuser in order to get started. Type the following command
 
-![](examples/SERP-rank.png)
+```Bash
+docker-compose run osat_server python manage.py createsuperuser
+```
 
-### Internal Links Graphs
+Once this is done, you need to go to [localhost:8000/admin](http://localhost:8000/admin)
 
-![](examples/graphs.png)
+Connect using the super user that you have created.
 
-### Keywords Finder
+### Create organization
 
-![](examples/keywords-finder.png)
+You need to go to `Org -> Organization` and create a new organization. You can create as many as you want. Organization are used in order to implement RBAC in the project and only display information about an organization to users of this organization. Here is a quicklinkg to access it [http://localhost:8000/admin/org/website/](http://localhost:8000/admin/org/website/)
 
-### Lighthouse Audit
 
-![](examples/lighthouse-primates.png)
+### Add user to organization
 
-### Images Extractor
+Once your organization is created. You need to add your user to this organization. 
+Go to `Organizations -> Organizations Users` and add your user to the organization created before. [http://localhost:8000/admin/organizations/organizationuser/](http://localhost:8000/admin/organizations/organizationuser/)
 
-![](examples/images.png)
+### Create periodic task
 
-## API
+We have implemented multiple periodic task in osat such as lighthouse audit and security audit. 
+The parameters are all saved inside the DB. Therefore you need to instantiate your crawlers.
 
-### Lighthouse
+Go to `Periodic Tasks -> Periodic Tasks` and click on **ADD PERIODIC TASK**.
 
-| METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
-| :-------------: |-------------| -----|-----|
-| **GET**     | All Audits | `/api/audit/lighthouse/score` | `None` |
-| **GET**     | Audit by Id | `/api/audit/lighthouse/score/<id>` | `id` |
-| **POST**     | Generates an Audit | `/api/audit/lighthouse/score` | `url` |
+You need to create two periodick task:
+- One for `lighthouse_crawler`
+- One for `security_crawler` 
 
-### Extract
-#### Headers
-| METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
-| :-------------: |-------------| -----|-----|
-| **GET**     | All Extracted Headers | `/api/extract/headers` | `None` |
-| **GET**     | Headers by Id | `/api/extract/headers/<id>` | `id` |
-| **POST**     | Extract Header from URL | `/api/extract/headers` | `url` |
-| **POST**     | Deletes Headers by Id | `/api/extract/headers/delete` | `id` |
+My settings for lighthouse and security are as follows
 
-#### Status Code Links
-| METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
-| :-------------: |-------------| -----|-----|
-| **GET**     | All Links status extracted from pages| `/api/extract/links` | `None` |
-| **GET**     | Links Status by ID | `/api/extract/links/<id>` | `id` |
-| **POST**     | Extracts link status from URL | `/api/extract/links` | `url` |
-| **POST**     | Delete Link status by ID | `/api/extract/links/delete` | `id` |
+<p align="center"><img src="./docs/images/lighthouse-crawler.png" width="400px" /></p>
 
-#### Internal & External Links
-| METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
-| :-------------: |-------------| -----|-----|
-| **GET**     | All Internal & External links extracted from pages | `/api/extract/links/website` | `None` |
-| **GET**     | Internal & External by ID | `/api/extract/links/website/<id>` | `id` |
-| **POST**     | Extracts Internal & External links from URL | `/api/extract/links/website` | `url` |
-| **POST**     | Deletes Internal & External links by ID | `/api/extract/links/website/delete` | `id` |
+I'm using a cronjob that runs every day for both security and lighthouse. But feel free to crawl more often or less :)
 
-#### Images
-| METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
-| :-------------: |-------------| -----|-----|
-| **GET**     | All Images extracted from pages | `/api/extract/images` | `None` |
-| **GET**     | Images by ID | `/api/extract/images/<id>` | `id` |
-| **POST**     | Extracts Images from URL | `/api/extract/images` | `url` |
-| **POST**     | Deletes Images by ID | `/api/extract/images/delete` | `id` |
+Once you've done all the above, you are ready to go.
+You can create as many organizations as you'd like. You can add users and you can access all the database from the admin panel.
 
-### Internal Linking Graphs
-| METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
-| :-------------: |-------------| -----|-----|
-| **GET**     | All Internal Linking Graphs generated | `/api/graphs` | `None` |
-| **GET**     | Graphs by ID | `/api/graphs/<id>` | `id` |
-| **POST**     | Extracts graph from domain | `/api/graphs` | `domain` |
-| **POST**     | Deletes Graphs by ID | `/api/graphs/delete` | `id` |
+## Links
 
-### Query Keywords Generator
-| METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
-| :-------------: |-------------| -----|-----|
-| **GET**     | All Keywords generated | `/api/keywords` | `None` |
-| **GET**     | Keywords by ID | `/api/keywords/<id>` | `id` |
-| **POST**     | Extracts keywords from query | `/api/keywords` | `query` |
-| **POST**     | Deletes Keywords by ID | `/api/keywords/delete` | `id` |
+- **Webapp** [http://localhost:3000](http://localhost:3000)
+- **Admin Dashboard** [http://localhost:8000](http://localhost:8000/admin)
+- **Swagger like interface** [http://localhost:8000](http://localhost:8000)
 
-### Search Engine Result Page Rank
-| METHOD       | DESCRIPTION           | ENDPOINT           | PARAMS  | 
-| :-------------: |-------------| -----|-----|
-| **GET**     | All Ranks | `/api/rank` | `None` |
-| **POST**     | Extracts ranks from query and domain | `/api/rank` | `query` & `domain` |
-| **POST**     | Deletes ranks by ID | `/api/rank/delete` | `id` |
+
+## Contributions
+
+Please feel free to add any contribution.
+If you want to contribute a project that you did, I've documented the code as much as I could.
+
+### Backend 
+You can just add a django module and I'll take care of intregrating it in the front. I know how hard it can be :D
+
+### Frontend
+I've used React Admin to build the front-end. If you want to help me improve the UI or add new functionnalites. Please feel free to contribute.
+
+
+## Disclaimers
+
+I'm not a python nor a frontend developer but I'll keep working on it.
+
+
+
+
+
+
+
+
 
 
 

@@ -3,6 +3,7 @@ from rest_framework import filters, permissions, viewsets
 
 from org.models import Website
 from org.serializers import WebsiteSerializer
+from .pagination import PageNumberWithPageSizePagination
 
 
 ## https://docs.djangoproject.com/en/3.1/topics/http/views/
@@ -11,6 +12,8 @@ class WebsiteViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to manage organizations
     """
+    pagination_class = PageNumberWithPageSizePagination
+
     ## Serializer defines how we respond to REST request
     serializer_class = WebsiteSerializer
     

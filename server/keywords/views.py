@@ -4,6 +4,8 @@ from rest_framework import filters, permissions, viewsets
 
 from keywords.models import Yake
 from keywords.serializers import KeywordsSerializer
+from .pagination import PageNumberWithPageSizePagination
+
 
 ## https://docs.djangoproject.com/en/3.1/topics/http/views/
 ## Don't forget to register the view inside core/urls.py
@@ -12,6 +14,8 @@ class YakeViewSet(viewsets.ModelViewSet):
     API endpoint that allows users to extract keywords
     """
     
+    pagination_class = PageNumberWithPageSizePagination
+
     ## User has to be authenticated
     permission_classes = [permissions.IsAuthenticated]
     

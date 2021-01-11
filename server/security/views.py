@@ -6,12 +6,14 @@ from rest_framework.response import Response
 
 from .models import Security, Security_Result
 from .serializers import SecurityResultSerializer, SecuritySerializer
+from .pagination import PageNumberWithPageSizePagination
 
 
 class SecurityViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to view security
     """
+    pagination_class = PageNumberWithPageSizePagination
 
     ## User has to be authenticated
     permission_classes = [permissions.IsAuthenticated]
@@ -33,6 +35,7 @@ class SecurityResultViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to view security results
     """
+    pagination_class = PageNumberWithPageSizePagination
 
     ## User has to be authenticated
     permission_classes = [permissions.IsAuthenticated]

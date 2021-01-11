@@ -6,6 +6,7 @@ from rest_framework import filters, permissions, viewsets
 
 from extractor.models import Extractor, Sitemap
 from extractor.serializers import ExtractorSerializer, SitemapSerializer
+from .pagination import PageNumberWithPageSizePagination
 
 
 ## https://docs.djangoproject.com/en/3.1/topics/http/views/
@@ -14,6 +15,7 @@ class ExtractorViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to extract information about a webpage
     """
+    pagination_class = PageNumberWithPageSizePagination
     ## User has to be authenticated
     permission_classes = [permissions.IsAuthenticated]
     

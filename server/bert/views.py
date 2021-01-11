@@ -6,6 +6,8 @@ from rest_framework import filters, permissions, viewsets
 
 from .serializers import BertSerializer
 from .models import Bert
+from .pagination import PageNumberWithPageSizePagination
+
 
 ## https://docs.djangoproject.com/en/3.1/topics/http/views/
 ## Don't forget to register the view inside core/urls.py
@@ -14,7 +16,7 @@ class BertViewSet(viewsets.ModelViewSet):
     API endpoint that allows users to summarize text
     GPU needed for better performance
     """
-
+    pagination_class = PageNumberWithPageSizePagination
     ## User has to be authenticated
     permission_classes = [permissions.IsAuthenticated]
 

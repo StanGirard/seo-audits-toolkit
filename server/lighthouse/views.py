@@ -6,15 +6,16 @@ from rest_framework.response import Response
 
 from .models import Lighthouse, Lighthouse_Result
 from .serializers import LighthouseResultSerializer, LighthouseSerializer
-
+from .pagination import PageNumberWithPageSizePagination
 
 class LighthouseViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     """
     API endpoint that allows users to be viewed or edited.
     """
+    pagination_class = PageNumberWithPageSizePagination
     serializer_class = LighthouseSerializer
-    filter_backends = [filters.OrderingFilter]
+    filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
     ordering_fields = ['url', 'last_updated']
 
     filterset_fields = ['url', 'scheduled']
@@ -28,6 +29,7 @@ class LighthouseResultViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
+    pagination_class = PageNumberWithPageSizePagination
     serializer_class = LighthouseResultSerializer
     filter_backends = [DjangoFilterBackend,filters.OrderingFilter]
     ordering_fields = ['url', 'timestamp']

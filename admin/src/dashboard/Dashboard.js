@@ -1,6 +1,8 @@
 import { useMediaQuery } from '@material-ui/core';
 import React, {
-    useState
+    useState,
+    useEffect,
+    useCallback,
 } from 'react';
 import { useDataProvider, useVersion } from 'react-admin';
 import Welcome from './Welcome';
@@ -33,7 +35,22 @@ export const Dashboard = () => {
     );
 
 
-    // const { } = state;
+    const fetchLighthouse = useCallback(async () => {
+        const { data } = await dataProvider.getList(
+            'lighthouse',
+            {
+                filter: { scheduled: 'true' },
+                sort: { field: 'date', order: 'DESC' },
+                pagination: { page: 1, perPage: 100 },
+            }
+        );
+        console.log(data)
+    })
+
+    useEffect(() => {
+        fetchLighthouse();
+    }, [version]);
+
     return isXSmall ? (
         <div>
             <div style={styles.flexColumn}>

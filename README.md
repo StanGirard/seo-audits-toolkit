@@ -59,7 +59,7 @@ If needed create a `.env` file with information that you would like to change
 You need to create a superuser in order to get started. Type the following command
 
 ```Bash
-docker-compose run osat_server python manage.py createsuperuser
+docker exec -it osat-server python manage.py createsuperuser
 ```
 
 Once this is done, you need to go to [localhost:8000/admin](http://localhost:8000/admin)

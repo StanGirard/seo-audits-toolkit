@@ -52,6 +52,8 @@ docker exec -it osat-server python manage.py loaddata init_data.json
 
 You can access the dashboard by going to [localhost:3000](http://localhost:3000)
 
+**Login**: admin
+**Password**: admin
 ## Config
 
 If needed create a `.env` file with information that you would like to change

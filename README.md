@@ -37,9 +37,16 @@ After implementing the first features of **OSAT** I decided to introduced other 
 ```Bash
 git clone https://github.com/StanGirard/seo-audits-toolkit
 cd seo-audits-toolkit
+docker-compose --env-file .env-example build
 docker-compose --env-file .env-example up -d
+```
+
+Init the project
+
+```Bash
 docker exec -it osat-server python manage.py loaddata init_data.json
 ```
+
 
 ## Dashboard
 

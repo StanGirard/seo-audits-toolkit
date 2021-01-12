@@ -34,17 +34,13 @@ After implementing the first features of **OSAT** I decided to introduced other 
 
 ## Installation
 
-
 ```Bash
-git clone https://github.com/StanGirard/SEOToolkit
-cd SEOToolkit
+git clone https://github.com/StanGirard/seo-audits-toolkit
+cd seo-audits-toolkit
+docker-compose --env-file .env-example up -d
+docker exec -it osat-server python manage.py loaddata init_data.json
 ```
-## Running
 
-### Docker
-```Bash
-docker-compose --env-file .env-example up
-```
 ## Dashboard
 
 You can access the dashboard by going to [localhost:3000](http://localhost:3000)
@@ -55,16 +51,6 @@ If needed create a `.env` file with information that you would like to change
 
 ## Initialisation
 
-### Create super admin
-You need to create a superuser in order to get started. Type the following command
-
-```Bash
-docker exec -it osat-server python manage.py createsuperuser
-```
-
-Once this is done, you need to go to [localhost:8000/admin](http://localhost:8000/admin)
-
-Connect using the super user that you have created.
 
 ### Create organization
 
@@ -73,28 +59,8 @@ You need to go to `Org -> Organization` and create a new organization. You can c
 
 ### Add user to organization
 
-Once your organization is created. You need to add your user to this organization. 
-Go to `Organizations -> Organizations Users` and add your user to the organization created before. [http://localhost:8000/admin/organizations/organizationuser/](http://localhost:8000/admin/organizations/organizationuser/)
-
-### Create periodic task
-
-We have implemented multiple periodic task in osat such as lighthouse audit and security audit. 
-The parameters are all saved inside the DB. Therefore you need to instantiate your crawlers.
-
-Go to `Periodic Tasks -> Periodic Tasks` and click on **ADD PERIODIC TASK**.
-
-You need to create two periodick task:
-- One for `lighthouse_crawler`
-- One for `security_crawler` 
-
-My settings for lighthouse and security are as follows
-
-<p align="center"><img src="./docs/images/lighthouse-crawler.png" width="400px" /></p>
-
-I'm using a cronjob that runs every day for both security and lighthouse. But feel free to crawl more often or less :)
-
-Once you've done all the above, you are ready to go.
-You can create as many organizations as you'd like. You can add users and you can access all the database from the admin panel.
+Once your organization is created. You need to add your users to this organization. 
+Go to `Organizations -> Organizations Users` and add your users to the organization you want. [http://localhost:8000/admin/organizations/organizationuser/](http://localhost:8000/admin/organizations/organizationuser/)
 
 ## Links
 
@@ -106,18 +72,16 @@ You can create as many organizations as you'd like. You can add users and you ca
 ## Contributions
 
 Please feel free to add any contribution.
-If you want to contribute a project that you did, I've documented the code as much as I could.
+If you've been working on a script that could be integrated in this app. Please feel free to do it. Don't hesitate to open issues to ask questions. I've tried to document the code as much as I could to ease the integration
 
 ### Backend 
-You can just add a django module and I'll take care of intregrating it in the front. I know how hard it can be :D
-
+You can just add a django module and I'll take care of intregrating it in the front.
 ### Frontend
 I've used React Admin to build the front-end. If you want to help me improve the UI or add new functionnalites. Please feel free to contribute.
 
-
 ## Disclaimers
 
-I'm not a python nor a frontend developer but I'll keep working on it.
+I'm not a python nor a frontend developer.
 
 
 

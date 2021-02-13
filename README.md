@@ -7,8 +7,6 @@
 
 I've grown tired of SEO agencies making us pay hundreds of euros for simple tools. I decided to develop **OSAT** to help users find issues on their website and increase their SEO for free. 
 
-After implementing the first features of **OSAT** I decided to introduced other features such as Security.
-
 <p align="center"><img src="./docs/images/osat-demo.gif" width="700px" /></p>
 
 ## Why you need it
@@ -58,7 +56,7 @@ You can access the dashboard by going to [localhost:3000](http://localhost:3000)
 
 If needed create a `.env` file with information that you would like to change
 
-## Initialisation
+## Configuration
 
 
 ### Create organization
@@ -71,10 +69,10 @@ You need to go to `Org -> Organization` and create a new organization. You can c
 Once your organization is created. You need to add your users to this organization. 
 Go to `Organizations -> Organizations Users` and add your users to the organization you want. [http://localhost:8000/admin/organizations/organizationuser/](http://localhost:8000/admin/organizations/organizationuser/)
 
-## Links
+## Useful Links
 
 - **Webapp** [http://localhost:3000](http://localhost:3000)
-- **Admin Dashboard** [http://localhost:8000](http://localhost:8000/admin)
+- **Admin Dashboard** [http://localhost:8000/admin](http://localhost:8000/admin)
 - **Swagger like interface** [http://localhost:8000](http://localhost:8000)
 
 

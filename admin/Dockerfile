@@ -6,8 +6,9 @@ FROM mhart/alpine-node:${NODE_VERSION} AS front-builder
 WORKDIR /app
 
 COPY package.json ./
+COPY yarn.lock ./
 
-RUN yarn install --network-timeout 1000000000
+RUN yarn install  --network-timeout 1000000000
 
 # Copy source files
 COPY . .
@@ -60,18 +61,18 @@ VOLUME /opt/osat/www
 
 # Set container labels
 LABEL name="osat-admin" \
-      version="$VERSION" \
-      build="$BUILD" \
-      architecture="x86_64" \
-      build_date="$NOW" \
-      vendor="osat" \
-      url="https://github.com/osat.io/osat-docker" \
-      summary="SeoZ project with Docker" \
-      description="SeoZ project with Docker" \
-      vcs-type="git" \
-      vcs-url="https://github.com/osat.io/osat-docker" \
-      vcs-ref="$VERSION" \
-      distribution-scope="public"
+    version="$VERSION" \
+    build="$BUILD" \
+    architecture="x86_64" \
+    build_date="$NOW" \
+    vendor="osat" \
+    url="https://github.com/osat.io/osat-docker" \
+    summary="SeoZ project with Docker" \
+    description="SeoZ project with Docker" \
+    vcs-type="git" \
+    vcs-url="https://github.com/osat.io/osat-docker" \
+    vcs-ref="$VERSION" \
+    distribution-scope="public"
 
 ENTRYPOINT ["/bin/parent", "caddy"]
 CMD ["run", "--config=/etc/Caddyfile", "--watch"]

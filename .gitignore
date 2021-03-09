@@ -7,9 +7,9 @@ __pycache__
 
 .env
 node_modules
-shared/logs/redis/*
+shared/logs/redis/*.log
 shared/logs/mysql/*
-shared/logs/server/*
+shared/logs/server/*.log
 shared/data/influxdb/imports/*
 Pipfile.lock
 celerybeat-schedule.db

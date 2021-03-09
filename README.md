@@ -35,7 +35,7 @@ I've grown tired of SEO agencies making us pay hundreds of euros for simple tool
 ```Bash
 git clone https://github.com/StanGirard/seo-audits-toolkit
 cd seo-audits-toolkit
-docker-compose --env-file .env-example build
+docker-compose pull ## docker-compose build if you want to build it on your own
 docker-compose --env-file .env-example up -d
 ```
 

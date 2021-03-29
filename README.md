@@ -42,6 +42,7 @@ docker-compose --env-file .env-example up -d
 Init the project
 
 ```Bash
+docker exec -it osat-server python manage.py flush
 docker exec -it osat-server python manage.py loaddata init_data.json
 ```
 

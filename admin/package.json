@@ -3,17 +3,17 @@
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "@material-ui/data-grid": "^4.0.0-alpha.19",
-        "@testing-library/jest-dom": "^5.11.9",
+        "@material-ui/data-grid": "^4.0.0-alpha.23",
+        "@testing-library/jest-dom": "^5.11.10",
         "@testing-library/react": "^11.2.5",
-        "@testing-library/user-event": "^12.7.1",
+        "@testing-library/user-event": "^13.1.0",
         "prop-types": "^15.7.2",
         "ra-data-django-rest-framework": "^0.1.5",
-        "react": "^17.0.1",
-        "react-admin": "^3.12.2",
-        "react-dom": "^17.0.1",
-        "react-scripts": "4.0.2",
-        "web-vitals": "^1.1.0"
+        "react": "^17.0.2",
+        "react-admin": "^3.14.1",
+        "react-dom": "^17.0.2",
+        "react-scripts": "4.0.3",
+        "web-vitals": "^1.1.1"
     },
     "scripts": {
         "start": "react-scripts start",

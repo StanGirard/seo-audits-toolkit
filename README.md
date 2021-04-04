@@ -28,7 +28,13 @@ I've grown tired of SEO agencies making us pay hundreds of euros for simple tool
 - **Summarizer** - Summarize any text from any length. Awesome for excerpt ! 
 - **Security Audit** - Audit Headers, Redirect, etc to make sure you website is secure.
 
+## Demo
 
+Go to [demo.primates.dev](https://demo.primates.dev) <br>
+**Login**: demo <br>
+**Password**: demodemo <br>
+
+Admin part is [api.primates.dev/admin](https://api.primates.dev/admin)
 
 ## Installation
 

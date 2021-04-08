@@ -142,7 +142,7 @@ services:
     restart: unless-stopped
 
   postgres:
-    image: postgres:${POSTGRES_VERSION}-alpine
+    image: postgres:13-alpine
     container_name: ${NAMESPACE}-postgres
     # ports:
     # - "${POSTGRES_PORT}:${POSTGRES_PORT}"

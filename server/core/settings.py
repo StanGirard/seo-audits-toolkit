@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'org.apps.OrgConfig',
     'bert.apps.BertConfig',
     'security.apps.SecurityConfig',
+    'backlinks.apps.BacklinksConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -95,6 +96,8 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL','redis://localhost:6379/0')
 CELERY_RESULT_BACKEND = os.environ.get('CELERY_RESULT_BACKEND','redis://localhost:6379/0')
+
+RANKPARSE_API_KEY = os.environ.get('RANKPARSE_API_KEY', '')
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 

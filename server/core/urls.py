@@ -1,3 +1,4 @@
+from backlinks.views import BacklinksViewSet
 from bert.views import BertViewSet
 from django.contrib import admin
 from django.urls import include, path
@@ -23,6 +24,7 @@ router.register(r'api/security', SecurityViewSet, basename='Security')
 router.register(r'api/internal_links', InternalLinksViewSet)
 router.register(r'api/summarize', BertViewSet, basename='Bert')
 router.register(r'api/keywords/yake', YakeViewSet, basename='Yake')
+router.register(r'api/backlinks', BacklinksViewSet, basename='Backlinks')
 router.register(r'api/website_user', WebsiteViewSet, basename='Website')
 
 urlpatterns = [
